@@ -12,5 +12,3 @@ class ClassE(object):
 class ClassF(object):
     def __init__(self):
         self.x = "C"
-
-
