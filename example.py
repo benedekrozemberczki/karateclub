@@ -1,5 +1,12 @@
-from karateclub import overlapping
+"""Example runs with Karate Club."""
 
-d = overlapping.ClassD()
+import networkx as nx
+from karateclub import EgoNetSplitter
 
-print(d.y)
+g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
+
+splitter = EgoNetSplitter(1.0)
+
+splitter.fit(g)
+
+print(splitter.overlapping_partitions)
