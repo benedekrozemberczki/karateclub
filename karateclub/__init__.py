@@ -1,3 +1,3 @@
-from KarateClub.NonOverlapping import ClassA, ClassB, ClassC
-from KarateClub.Overlapping import ClassD, ClassE, ClassF
+from karateclub.NonOverlapping import ClassA, ClassB, ClassC
+from karateclub.Overlapping import ClassD, ClassE, ClassF
 
