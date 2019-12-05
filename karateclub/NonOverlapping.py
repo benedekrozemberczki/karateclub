@@ -1,5 +1,3 @@
-
-
 class ClassA(object):
     def __init__(self):
         self.x = "D"
@@ -11,5 +9,3 @@ class ClassB(object):
 class ClassC(object):
     def __init__(self):
         self.x = "F"
-
-
