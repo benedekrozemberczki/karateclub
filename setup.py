@@ -12,6 +12,9 @@ setup(
   keywords = ["community", "detection", "networkx", "graph", "clustering"],
   install_requires=[
           "numpy",
+          "networkx",
+          "tqdm",
+          "python-louvain",
       ],
   classifiers=[
     "Development Status :: 3 - Alpha",
