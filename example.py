@@ -1,5 +1,5 @@
 from karateclub import overlapping
 
-d = Overlapping.ClassD()
+d = overlapping.ClassD()
 
 print(d.y)
