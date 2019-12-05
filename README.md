@@ -1,7 +1,7 @@
  ![GitHub stars](https://img.shields.io/github/stars/benedekrozemberczki/KarateClub.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/benedekrozemberczki/KarateClub.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/KarateClub.svg?color=blue&style=plastic)
 
 <p align="center">
-  <img width="70%" src="https://github.com/benedekrozemberczki/KarateClub/blob/master/karatelogo.jpg?sanitize=true" />
+  <img width="90%" src="https://github.com/benedekrozemberczki/KarateClub/blob/master/karatelogo.jpg?sanitize=true" />
 </p>
 
 --------------------------------------------------------------------------------
