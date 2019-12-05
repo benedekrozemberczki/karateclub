@@ -1,5 +1,4 @@
-
-from KarateClub import Overlapping
+from karateclub import Overlapping
 
 d = Overlapping.ClassD()
 
