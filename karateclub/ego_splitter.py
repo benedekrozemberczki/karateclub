@@ -10,12 +10,11 @@ class EgoNetSplitter(object):
     Paper: https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf
     Video: https://www.youtube.com/watch?v=xMGZo-F_jss
     Slides: https://epasto.org/papers/kdd2017-Slides.pdf
+
+    Args:
+        resolution (float): Resolution parameter of Python Louvain. Default 0.1.
     """
-    def __init__(self, resolution = 1.0):
-        """
-        Args:
-            resolution (float): Resolution parameter of Python Louvain. Default 0.1.
-        """
+    def __init__(self, resolution=1.0):
         self.resolution = resolution
 
     def _create_egonet(self, node):
