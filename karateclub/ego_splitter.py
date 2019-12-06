@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 class EgoNetSplitter(object):
     """
-    An implementation of "Ego-Splitting" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>
+    An implementation of "Ego-Splitting" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_
     from the KDD '17 paper "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters".
 
     Args:
