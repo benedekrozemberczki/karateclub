@@ -11,6 +11,9 @@ Overlapping Methods
     :members:
     :undoc-members:
 
+Non-Overlapping Methods
+--------------------
+
 .. automodule:: karateclub.edmot
     :members:
     :undoc-members:
