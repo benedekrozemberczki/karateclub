@@ -21,8 +21,8 @@ author = 'Benedek Rozemberczki'
 project = 'karateclub'
 copyright = '{}, {}'.format(datetime.datetime.now().year, author)
 
-version = karateclub.__version__
-release = karateclub.__version__
+#version = karateclub.__version__
+#release = karateclub.__version__
 
 html_theme = 'sphinx_rtd_theme'
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
