@@ -10,9 +10,9 @@ class EdMot(object):
 
     Args:
         component_count (int): Number of extracted motif hypergraph components. Default is 2.
-        cutoff (float): Motif edge cut-off value. Default is 0.5.
+        cutoff (int): Motif edge cut-off value. Default is 10.
     """
-    def __init__(self, component_count=2, cutoff=0.5):
+    def __init__(self, component_count=2, cutoff=10):
         self.component_count = component_count
         self.cutoff = cutoff
 
@@ -44,11 +44,9 @@ class EdMot(object):
         Extracting connected components from motif graph.
         """
         print("\nExtracting components.\n")
-        components = [self.motif_graph.subgraph(c) for c in connected_components(self.motif_graph)]
-        components = [[len(c), c] for c in components]
-        components.sort(key=lambda x: x[0], reverse=True)
-        important_components = [components[comp][1] for comp in range(self.component_count)]
-        self.blocks = [[node for node in graph.nodes()] for graph in important_components]
+        components = [c for c in sorted(nx.connected_components(self.motif_graph), key=len, reverse=True)]
+        important_components = components[:self.component_count]
+        self.blocks = [list(nodes) for nodes in important_components]
 
     def _fill_blocks(self):
         """
