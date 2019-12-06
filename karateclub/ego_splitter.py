@@ -51,12 +51,21 @@ class EgoNetSplitter(object):
         """
         self.personality_map = {p: n for n in self.graph.nodes() for p in self.personalities[n]}
 
+    def _get_new_edge_ids(self, edge):
+        """
+        Getting the new edge identifiers.
+
+        Args:
+            edge: Edge being mapped to the new identifiers.
+        """
+        return (self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]]) 
+
     def _create_persona_graph(self):
         """
         Create a persona graph using the egonet components.
         """
         print("Creating the persona graph.")
-        self.persona_graph_edges = [(self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]]) for edge in tqdm(self.graph.edges())]
+        self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in tqdm(self.graph.edges())]
         self.persona_graph = nx.from_edgelist(self.persona_graph_edges)
 
     def _create_partitions(self):
@@ -81,3 +90,11 @@ class EgoNetSplitter(object):
         self._map_personalities()
         self._create_persona_graph()
         self._create_partitions()
+
+    def get_memberships(self):
+        r"""Getting the node memberships.
+
+        Return types:
+            * **memberships** *(Dictionary of lists)* - Cluster memberships.
+        """
+        return self.overlapping_partitions
