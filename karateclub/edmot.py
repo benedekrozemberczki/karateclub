@@ -3,8 +3,10 @@ import networkx as nx
 from tqdm import tqdm
 
 class EdMot(object):
-    r"""
-    Edge Motif Clustering Class.
+    r"""An implementation of `"Edge Motif Clustering" <https://arxiv.org/abs/1906.04560>`_
+    from the KDD '19 paper "EdMot: An Edge Enhancement Approach for Motif-aware Community Detection". The tool first creates
+    the graph of higher order motifs. This graph is clustered by the Louvain method. The resulting
+    cluster memberships are stored as a dictionary.
 
     Args:
         component_count (int): Number of extract motif hypergraph components.
@@ -59,10 +61,21 @@ class EdMot(object):
 
     def fit(self, graph):
         """
-        Clustering the target graph.
+        Fitting an Edge Motif clustering model.
+        
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self.graph = graph
         self._calculate_motifs()
         self._extract_components()
         self._fill_blocks()
         self.partition = community.best_partition(self.graph)
+
+    def get_memberships(self):
+        r"""Getting the cluster membership of nodes.
+
+        Return types:
+            * **memberships** *(dictionary of ints)* - Cluster memberships.
+        """
+        return self.partition 
