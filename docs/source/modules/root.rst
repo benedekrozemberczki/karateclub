@@ -1,7 +1,7 @@
-torch_geometric
+karateclub
 ===============
 
-.. automodule:: torch_geometric.debug
+.. automodule:: karateclub.debug
     :members:
     :undoc-members:
     :exclude-members: set_debug_enabled
