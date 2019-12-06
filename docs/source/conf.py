@@ -36,7 +36,7 @@ html_theme_options = {
     'logo_only': True,
 }
 
-html_logo = '_static/img/karateclub_logo_text.jpg'
+html_logo = '_static/img/karate_logo_text.jpg'
 html_static_path = ['_static']
 html_context = {'css_files': ['_static/css/custom.css']}
 
