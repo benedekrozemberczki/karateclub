@@ -12,7 +12,7 @@ class EgoNetSplitter(object):
     Slides: https://epasto.org/papers/kdd2017-Slides.pdf
 
     Args:
-        resolution (float): Resolution parameter of Python Louvain. Default 0.1.
+        resolution (float): Resolution parameter of Python Louvain. Default 1.0.
     """
     def __init__(self, resolution=1.0):
         self.resolution = resolution
@@ -23,14 +23,14 @@ class EgoNetSplitter(object):
         :param node: Node ID for egonet (ego node).
         """
         ego_net_minus_ego = self.graph.subgraph(self.graph.neighbors(node))
-        components = {i: nodes for i, nodes in enumerate(nx.connected_components(ego_net_minus_ego))}
+        components = {i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))}
         new_mapping = {}
         personalities = []
         for k, v in components.items():
             personalities.append(self.index)
             for other_node in v:
                 new_mapping[other_node] = self.index 
-            self.index = self.index +1
+            self.index = self.index+1
         self.components[node] = new_mapping
         self.personalities[node] = personalities
 
@@ -49,7 +49,7 @@ class EgoNetSplitter(object):
         """
         Mapping the personas to new nodes.
         """
-        self.personality_map = {persona: node for node in self.graph.nodes() for persona in self.personalities[node]}
+        self.personality_map = {p: n for n in self.graph.nodes() for p in self.personalities[n]}
 
     def _create_persona_graph(self):
         """
