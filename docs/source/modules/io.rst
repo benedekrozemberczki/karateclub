@@ -1,7 +1,7 @@
-torch_geometric.io
+karateclub.io
 ==================
 
-.. automodule:: torch_geometric.io
+.. automodule:: karateclub.io
     :members:
     :undoc-members:
 
