@@ -16,8 +16,8 @@ Additional features.
 
    notes/installation
    notes/introduction
-   notes/create_gnn
    notes/create_dataset
+   notes/examples
    notes/resources
 
 .. toctree::
@@ -26,15 +26,3 @@ Additional features.
    :caption: Package Reference
 
    modules/root
-   modules/nn
-   modules/data
-   modules/datasets
-   modules/transforms
-   modules/utils
-   modules/io
-
-Indices and Tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
