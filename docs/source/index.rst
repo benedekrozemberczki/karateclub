@@ -26,3 +26,6 @@ Additional features.
    :caption: Package Reference
 
    modules/root
+   modules/io
+   modules/utils
+   modules/datasets
