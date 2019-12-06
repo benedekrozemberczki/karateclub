@@ -44,7 +44,7 @@ class EdMot(object):
         Extracting connected components from motif graph.
         """
         print("\nExtracting components.\n")
-        components = list(nx.connected_component_subgraphs(self.motif_graph))
+        components = [self.motif_graph.subgraph(c) for c in connected_components(self.motif_graph)]
         components = [[len(c), c] for c in components]
         components.sort(key=lambda x: x[0], reverse=True)
         important_components = [components[comp][1] for comp in range(self.component_count)]
