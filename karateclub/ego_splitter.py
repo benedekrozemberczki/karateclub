@@ -80,10 +80,10 @@ class EgoNetSplitter(object):
 
     def fit(self, graph):
         """
-        Fitting an Ego-Splitting clustering model.
+        Fitting an Ego-Splitter clustering model.
         
-        Args:
-            graph: A NetworkX graph. 
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self.graph = graph
         self._create_egonets()
@@ -92,9 +92,9 @@ class EgoNetSplitter(object):
         self._create_partitions()
 
     def get_memberships(self):
-        r"""Getting the node memberships.
+        r"""Getting the cluster membership of nodes.
 
         Return types:
-            * **memberships** *(Dictionary of lists)* - Cluster memberships.
+            * **memberships** *(dictionary of lists)* - Cluster memberships.
         """
         return self.overlapping_partitions
