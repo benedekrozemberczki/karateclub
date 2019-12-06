@@ -1,6 +1,6 @@
-torch_geometric.utils
+karateclub.utils
 =====================
 
-.. automodule:: torch_geometric.utils
+.. automodule:: karateclub.utils
     :members:
     :undoc-members:
