@@ -13,7 +13,8 @@ class EgoNetSplitter(object):
     """
     def __init__(self, resolution = 1.0):
         """
-        :param resolution: Resolution parameter of Python Louvain. Default 0.1.
+        Args:
+            resolution (float): Resolution parameter of Python Louvain. Default 0.1.
         """
         self.resolution = resolution
 
