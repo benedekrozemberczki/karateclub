@@ -16,7 +16,8 @@ class EgoNetSplitter(object):
     def _create_egonet(self, node):
         """
         Creating an ego net, extracting personas and partitioning it.
-        :param node: Node ID for egonet (ego node).
+        Args:
+            node: Node ID for egonet (ego node).
         """
         ego_net_minus_ego = self.graph.subgraph(self.graph.neighbors(node))
         components = {i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))}
@@ -67,7 +68,10 @@ class EgoNetSplitter(object):
 
     def fit(self, graph):
         """
-        Fitting an EgoNet clustering model.
+        Fitting an Ego-Splitting clustering model.
+        
+        Args:
+            graph: A NetworkX graph. 
         """
         self.graph = graph
         self._create_egonets()
