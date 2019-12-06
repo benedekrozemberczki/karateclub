@@ -1,6 +1,5 @@
-torch_geometric.datasets
+karateclub.datasets
 ========================
 
-.. automodule:: torch_geometric.datasets
+.. automodule:: karateclub.datasets
     :members:
-    :exclude-members: download, process, processed_file_names, raw_file_names, num_classes
