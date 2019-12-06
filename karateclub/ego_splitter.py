@@ -4,10 +4,8 @@ from tqdm import tqdm
 
 class EgoNetSplitter(object):
     """
-    An implementation of "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters". 
-    Paper: https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf
-    Video: https://www.youtube.com/watch?v=xMGZo-F_jss
-    Slides: https://epasto.org/papers/kdd2017-Slides.pdf
+    An implementation of "Ego-Splitting" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>
+    from the KDD '17 paper "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters".
 
     Args:
         resolution (float): Resolution parameter of Python Louvain. Default 1.0.
