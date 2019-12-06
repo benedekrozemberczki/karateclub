@@ -1,7 +1,12 @@
 karateclub
-===============
+==================
 
-.. automodule:: karateclub.debug
+.. contents:: Contents
+    :local:
+
+Overlapping Methods
+--------------------
+
+.. automodule:: karateclub.ego_splitter
     :members:
     :undoc-members:
-    :exclude-members: set_debug_enabled
