@@ -1,5 +1,3 @@
-"""Ego Net Splitting implementation."""
-
 import community
 import networkx as nx
 from tqdm import tqdm
