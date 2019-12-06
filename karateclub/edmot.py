@@ -9,10 +9,10 @@ class EdMot(object):
     cluster memberships are stored as a dictionary.
 
     Args:
-        component_count (int): Number of extract motif hypergraph components.
-        cutoff (float): Motif edge cut-off value.
+        component_count (int): Number of extracted motif hypergraph components. Default is 2.
+        cutoff (float): Motif edge cut-off value. Default is 0.5.
     """
-    def __init__(self, component_count, cutoff):
+    def __init__(self, component_count=2, cutoff=0.5):
         self.component_count = component_count
         self.cutoff = cutoff
 
