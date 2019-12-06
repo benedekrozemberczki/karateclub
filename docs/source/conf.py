@@ -2,6 +2,7 @@ import datetime
 import sphinx_rtd_theme
 import doctest
 import karateclub
+import community
 
 extensions = [
     'sphinx.ext.autodoc',
