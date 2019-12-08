@@ -3,3 +3,4 @@ numpy
 sphinx
 sphinx_rtd_theme
 python-louvain
+sklearn
