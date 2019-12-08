@@ -15,6 +15,10 @@ Overlapping Methods
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.mnmf
+    :members:
+    :undoc-members:
+
 Non-Overlapping Methods
 --------------------
 

@@ -1,7 +1,7 @@
 """Example runs with Karate Club."""
 
 import networkx as nx
-from karateclub import EgoNetSplitter, EdMot, DANMF
+from karateclub import EgoNetSplitter, EdMot, DANMF, M_NMF
 
 #------------------------------------
 # Splitter example
@@ -40,3 +40,19 @@ model = DANMF()
 model.fit(g)
 
 print(model.get_memberships())
+print(model.get_embedding())
+
+#------------------------------------
+# DANMF example
+#------------------------------------
+
+g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
+
+model = M_NMF()
+
+model.fit(g)
+
+print(model.get_memberships())
+print(model.get_embedding())
+print(model.get_cluster_centers())
+

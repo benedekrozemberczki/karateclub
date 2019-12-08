@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = "karateclub",
   packages = ["karateclub"],
-  version = "0.12",
+  version = "0.13",
   license = "MIT",
   description = "A general purpose library for community detection and graph clustering research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
-  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_012.tar.gz",
+  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_013.tar.gz",
   keywords = ["community", "detection", "networkx", "graph", "clustering"],
   install_requires=[
           "numpy",
@@ -17,6 +17,7 @@ setup(
           "tqdm",
           "python-louvain",
           "sklearn",
+          "scipy",
       ],
   classifiers=[
     "Development Status :: 3 - Alpha",
