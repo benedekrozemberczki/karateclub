@@ -4,9 +4,11 @@ import networkx as nx
 from sklearn.decomposition import NMF
 
 class DANMF(object):
-    r"""An implementation of `"DANMF" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_
-    from the KDD '17 paper "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters". The procedure 
-    creates 
+    r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
+    from the CIKM '19 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
+    Community Detection". The procedure uses telescopic non-negative matrix factorization
+    in order to learn a cluster memmbership distribution over nodes. The method can be 
+    used in an overlapping and non-overlapping way.
 
     Args:
         layers (list): Autoencoder layer sizes in a list of integers. Default [32, 8].
