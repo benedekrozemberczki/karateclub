@@ -38,7 +38,7 @@ In detail, the following methods are currently implemented:
 
 * **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
 
-* **[DANMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.danmf.DANMF)** from Li *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
+* **[DANMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.danmf.DANMF)** from Ye *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
 
 --------------------------------------------------------------------------------
 
