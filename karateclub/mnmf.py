@@ -1,30 +1,13 @@
-import community
 import numpy as np
 from tqdm import tqdm
 import networkx as nx
 from scipy.sparse import coo_matrix
 
-def modularity_generator(graph):
-    """Calculating the sparse modularity matrix.
-
-    Arg types:
-        * **graph** *(NetworkX graph)* - The graph to be clustered.
-    """
-    degs = nx.degree(graph)
-    e_count = graph.number_of_edges()
-    n_count = graph.number_of_nodes()
-    modularity_mat_shape = (n_count, n_count)
-    indices_1 = np.array([edge[0] for edge in graph.edges()])
-    indices_2 = np.array([edge[1] for edge in graph.edges()])
-    scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in graph.edges()]
-    mod_matrix = coo_matrix((scores, (indices_1, indices_2)), shape=modularity_mat_shape)
-    return mod_matrix
-
 class M_NMF:
     r"""An implementation of `"M-NMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
-    from the AAAI '17 paper "DCommunity Preserving Network Embedding". 
+    from the AAAI '17 paper "Community Preserving Network Embedding".
     The procedure uses joint non-negative matrix factorization with modularity
-    based regul;arization in order to learn a cluster memmbership distribution 
+    based regul;arization in order to learn a cluster memmbership distribution
     over nodes. The method can be used in an overlapping and non-overlapping way.
 
     Args:
@@ -37,7 +20,6 @@ class M_NMF:
         lower_control (float): Floating point overflow control. Default is 10**-15.
         eta (float): Similarity mixing parameter. Default is 5.0.
     """
-
     def __init__(self, dimensions=128, clusters=10, lambd=0.2, alpha=0.05,
                  beta=0.05, iteration_number=200, lower_control=10**-15, eta=5.0):
 
@@ -56,6 +38,22 @@ class M_NMF:
     def _optimization_print(self):
         print("Optimization started.\n")
 
+    def _modularity_generator(self, graph):
+        """Calculating the sparse modularity matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
+        """
+        degs = nx.degree(graph)
+        e_count = graph.number_of_edges()
+        n_count = graph.number_of_nodes()
+        modularity_mat_shape = (n_count, n_count)
+        indices_1 = np.array([edge[0] for edge in graph.edges()])
+        indices_2 = np.array([edge[1] for edge in graph.edges()])
+        scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in graph.edges()]
+        mod_matrix = coo_matrix((scores, (indices_1, indices_2)), shape=modularity_mat_shape)
+        return mod_matrix
+
     def _setup_matrices(self):
         """Creating parameter matrices and target matrices."""
         self.number_of_nodes = nx.number_of_nodes(self.graph)
@@ -64,38 +62,36 @@ class M_NMF:
         self.H = np.random.uniform(0, 1, (self.number_of_nodes, self.clusters))
         self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
         self.B1 = nx.adjacency_matrix(self.graph)
-        self.B2 = modularity_generator(self.graph)
+        self.B2 = self._modularity_generator(self.B1)
         self.X = np.transpose(self.U)
         overlaps = self.B1.dot(self.B1)
         self.S = self.B1 + self.eta*self.B1*(overlaps)
 
-
     def _update_M(self):
         """Update matrix M."""
         enum = self.S.dot(self.U)
-        denom = np.dot(self.M,np.dot(np.transpose(self.U),self.U))
-        denom[denom < self.lower_control] =  self.lower_control    
+        denom = np.dot(self.M, np.dot(np.transpose(self.U), self.U))
+        denom[denom < self.lower_control] = self.lower_control
         self.M = np.multiply(self.M, enum/denom)
         row_sums = self.M.sum(axis=1)
         self.M = self.M / row_sums[:, np.newaxis]
 
     def _update_U(self):
         """Update matrix U."""
-        enum = (self.S.transpose()).dot(self.M)+self.alpha*np.dot(self.H,self.C)
-        denom = np.dot(self.U,np.dot(np.transpose(self.M),self.M)+self.alpha*np.dot(np.transpose(self.C),self.C))
-        denom[denom < self.lower_control] =  self.lower_control
-
-        self.U = np.multiply(self.U,enum/denom)
+        enum = (self.S.transpose()).dot(self.M)+self.alpha*np.dot(self.H, self.C)
+        denom = np.dot(self.U, np.dot(np.transpose(self.M), self.M)+self.alpha*np.dot(np.transpose(self.C), self.C))
+        denom[denom < self.lower_control] = self.lower_control
+        self.U = np.multiply(self.U, enum/denom)
         row_sums = self.U.sum(axis=1)
         self.U = self.U / row_sums[:, np.newaxis]
 
     def _update_C(self):
         """Update matrix C."""
-        enum = np.dot(np.transpose(self.H),self.U)
-        denom = np.dot(self.C,np.dot(np.transpose(self.U),self.U))
-        denom[denom < self.lower_control] =  self.lower_control
-        frac = enum/denom 
-        self.C = np.multiply(self.C,frac)
+        enum = np.dot(np.transpose(self.H), self.U)
+        denom = np.dot(self.C, np.dot(np.transpose(self.U), self.U))
+        denom[denom < self.lower_control] = self.lower_control
+        frac = enum/denom
+        self.C = np.multiply(self.C, frac)
         row_sums = self.C.sum(axis=1)
         self.C = self.C / row_sums[:, np.newaxis]
 
@@ -103,18 +99,18 @@ class M_NMF:
         """Update matrix H."""
         B1H = self.B1.dot(self.H)
         B2H = self.B2.dot(self.H)
-        HHH = np.dot(self.H,(np.dot(np.transpose(self.H),self.H)))
-        UC = np.dot(self.U,np.transpose(self.C))
-        rooted = np.square(2*self.beta*B2H)+np.multiply(16*self.lambd*HHH,(2*self.beta*B1H+2*self.alpha*UC +(4*self.lambd-2*self.alpha)*self.H))
-        rooted[rooted<0] = 0
+        HHH = np.dot(self.H, (np.dot(np.transpose(self.H), self.H)))
+        UC = np.dot(self.U, np.transpose(self.C))
+        rooted = np.square(2*self.beta*B2H)+np.multiply(16*self.lambd*HHH, (2*self.beta*B1H+2*self.alpha*UC+(4*self.lambd-2*self.alpha)*self.H))
+        rooted[rooted < 0] = 0
         sqroot_1 = np.sqrt(rooted)
         enum = -2*self.beta*B2H+sqroot_1
         denom = 8*self.lambd*HHH
         denom[denom < self.lower_control] = self.lower_control
         rooted = enum/denom
-        rooted[rooted<0] = 0
+        rooted[rooted < 0] = 0
         sqroot_2 = np.sqrt(rooted)
-        self.H = np.multiply(self.H,sqroot_2)
+        self.H = np.multiply(self.H, sqroot_2)
         row_sums = self.H.sum(axis=1)
         self.H = self.H / row_sums[:, np.newaxis]
 
@@ -149,7 +145,7 @@ class M_NMF:
     def fit(self, graph):
         """
         Fitting an M-NMF clustering model.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
