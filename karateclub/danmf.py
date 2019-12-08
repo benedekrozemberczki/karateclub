@@ -5,7 +5,7 @@ from sklearn.decomposition import NMF
 
 class DANMF(object):
     r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
-    from the CIKM '19 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
+    from the CIKM '18 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
     Community Detection". The procedure uses telescopic non-negative matrix factorization
     in order to learn a cluster memmbership distribution over nodes. The method can be 
     used in an overlapping and non-overlapping way.
