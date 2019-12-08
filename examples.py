@@ -1,26 +1,42 @@
 """Example runs with Karate Club."""
 
 import networkx as nx
-from karateclub import EgoNetSplitter, EdMot
-
-g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
+from karateclub import EgoNetSplitter, EdMot, DANMF
 
 #------------------------------------
 # Splitter example
 #------------------------------------
 
-splitter = EgoNetSplitter(1.0)
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
-splitter.fit(g)
 
-print(splitter.get_memberships())
+model = EgoNetSplitter(1.0)
+
+model.fit(g)
+
+print(model.get_memberships())
 
 #------------------------------------
 # Edmot example
 #------------------------------------
 
-edmot = EdMot(2, 0.5)
+g = nx.newman_watts_strogatz_graph(100, 10, 0.9)
 
-edmot.fit(g)
+model = EdMot(3, 0.5)
 
-print(edmot.get_memberships())
+model.fit(g)
+
+print(model.get_memberships())
+
+
+#------------------------------------
+# DANMF example
+#------------------------------------
+
+g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
+
+model = DANMF()
+
+model.fit(g)
+
+print(model.get_memberships())

@@ -1,20 +1,22 @@
 from distutils.core import setup
+
 setup(
   name = "karateclub",
   packages = ["karateclub"],
-  version = "0.10",
+  version = "0.11",
   license = "MIT",
   description = "A general purpose library for community detection and graph clustering research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
-  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_010.tar.gz",
+  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_011.tar.gz",
   keywords = ["community", "detection", "networkx", "graph", "clustering"],
   install_requires=[
           "numpy",
           "networkx",
           "tqdm",
           "python-louvain",
+          "sklearn",
       ],
   classifiers=[
     "Development Status :: 3 - Alpha",
