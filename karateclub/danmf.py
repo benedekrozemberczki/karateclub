@@ -1,19 +1,21 @@
-"""DANMF class."""
-
 import numpy as np
 from tqdm import tqdm
 import networkx as nx
 from sklearn.decomposition import NMF
 
 class DANMF(object):
-    """
-    Deep autoencoder-like non-negative matrix factorization class.
+    r"""An implementation of `"DANMF" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_
+    from the KDD '17 paper "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters". The procedure 
+    creates 
+
+    Args:
+        layers (list): Autoencoder layer sizes in a list of integers. Default [32, 8].
+        pre_iterations (int): Number of pre-training epochs. Default 100.
+        iterations (int): Number of training epochs. Default 100.
+        seed (int): Random seed for weight initializations. Default 42.
+        lamb (float): Regularization parameter. Default 0.01.
     """
     def __init__(self, layers=[32, 8], pre_iterations=100, iterations=100, seed=42, lamb=0.01):
-        """
-        Initializing a DANMF object.
-
-        """
         self.layers = layers
         self.pre_iterations = pre_iterations
         self.iterations = iterations
@@ -121,24 +123,31 @@ class DANMF(object):
         self.A_sq = self.A.dot(self.A.T)
 
     def get_embedding(self):
-        """
-        Get embedding matrix.
+        r"""Getting the bottleneck layer embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The bottleneck layer embedding of nodes.
         """
         embedding = [np.array(range(self.P.shape[0])).reshape(-1, 1), self.P, self.V_s[-1].T]
         embedding = np.concatenate(embedding, axis=1)
         return embedding
 
     def get_memberships(self):
-        """
-        Get cluster membership.
+        r"""Getting the cluster membership of nodes.
+
+        Return types:
+            memberships (dict): Node cluster memberships.
         """
         index = np.argmax(self.P, axis=1)
-        membership = {int(i): int(index[i]) for i in range(len(index))}
-        return membership
+        memberships = {int(i): int(index[i]) for i in range(len(index))}
+        return memberships
 
     def fit(self, graph):
         """
-        Training process after pre-training.
+        Fitting a DANMF clustering model.
+        
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         print("\n\nTraining started. \n")
 
