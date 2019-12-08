@@ -39,18 +39,14 @@ class M_NMF:
         print("Optimization started.\n")
 
     def _modularity_generator(self, graph):
-        """Calculating the sparse modularity matrix.
-
-        Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be clustered.
-        """
-        degs = nx.degree(graph)
-        e_count = graph.number_of_edges()
-        n_count = graph.number_of_nodes()
+        """Calculating the sparse modularity matrix."""
+        degs = nx.degree(self.graph)
+        e_count = self.graph.number_of_edges()
+        n_count = self.graph.number_of_nodes()
         modularity_mat_shape = (n_count, n_count)
-        indices_1 = np.array([edge[0] for edge in graph.edges()])
-        indices_2 = np.array([edge[1] for edge in graph.edges()])
-        scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in graph.edges()]
+        indices_1 = np.array([edge[0] for edge in self.graph.edges()])
+        indices_2 = np.array([edge[1] for edge in self.graph.edges()])
+        scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in self.graph.edges()]
         mod_matrix = coo_matrix((scores, (indices_1, indices_2)), shape=modularity_mat_shape)
         return mod_matrix
 
@@ -62,7 +58,7 @@ class M_NMF:
         self.H = np.random.uniform(0, 1, (self.number_of_nodes, self.clusters))
         self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
         self.B1 = nx.adjacency_matrix(self.graph)
-        self.B2 = self._modularity_generator(self.B1)
+        self.B2 = self._modularity_generator(self.graph)
         self.X = np.transpose(self.U)
         overlaps = self.B1.dot(self.B1)
         self.S = self.B1 + self.eta*self.B1*(overlaps)
