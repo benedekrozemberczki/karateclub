@@ -12,7 +12,7 @@
 *karateclub* is a community detection extension library for [NetworkX](https://networkx.github.io/).
 
 
-Karate Club consists of state-of-the-art methods to do overlapping and non-overlapping clustering on graphs. The package also includes methods that can deal with bipartite, temporal and heterogeneous graphs. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences.  
+Karate Club consists of state-of-the-art methods to do overlapping and non-overlapping clustering on graphs. The package also includes methods that can deal with bipartite, temporal and heterogeneous graphs. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences and prominent pieces from journals.  
 
 --------------------------------------------------------------------------------
 
