@@ -25,3 +25,7 @@ Non-Overlapping Methods
 .. automodule:: karateclub.edmot
     :members:
     :undoc-members:
+
+.. automodule:: karateclub.label_propagation
+    :members:
+    :undoc-members:
