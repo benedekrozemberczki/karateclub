@@ -9,10 +9,10 @@
 
 **[Documentation](https://karateclub.readthedocs.io/)** | **[Paper](https://arxiv.org/abs/1802.03997)** 
 
-*karateclub* is a community detection extension library for [NetworkX](https://networkx.github.io/).
+*karateclub* is an unsupervised machine learning extension library for [NetworkX](https://networkx.github.io/).
 
 
-Karate Club consists of state-of-the-art methods to do overlapping and non-overlapping clustering on graphs. The package also includes methods that can deal with bipartite, temporal and heterogeneous graphs. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences and pieces from prominent journals.  
+Karate Club consists of state-of-the-art methods to do unsupervised learning on graph structured data. To put it simply it is the Swiss Army knife of graph mining research. First, it provides network embedding techniques at the node and graph level. Second, it includes a variety of overlapping and non-overlapping commmunity detection methods. The package also includes methods that can deal with bipartite, temporal and heterogeneous graphs. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences and pieces from prominent journals.  
 
 --------------------------------------------------------------------------------
 
@@ -32,7 +32,9 @@ splitter.fit(g)
 print(splitter.overlapping_partitions)
 ```
 
-In detail, the following methods are currently implemented:
+In detail, the following methods are currently implemented.
+
+### Community Detection
 
 * **[Ego-Splitting](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.ego_splitter.EgoNetSplitter)** from Epasto *et al.*: [Ego-splitting Framework: from Non-Overlapping to Overlapping Clusters](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf) (KDD 2017)
 
