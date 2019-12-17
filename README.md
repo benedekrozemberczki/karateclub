@@ -34,7 +34,7 @@ print(splitter.overlapping_partitions)
 
 In detail, the following methods are currently implemented.
 
-### Community Detection
+**Community Detection**
 
 * **[Ego-Splitting](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.ego_splitter.EgoNetSplitter)** from Epasto *et al.*: [Ego-splitting Framework: from Non-Overlapping to Overlapping Clusters](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf) (KDD 2017)
 
