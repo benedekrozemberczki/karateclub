@@ -19,7 +19,6 @@ class GraphWave:
         self.mechanism = mechanism
         self.switch = switch
 
-
     def _create_evaluation_points(self):
         """
         Calculating the grid points.
@@ -27,6 +26,9 @@ class GraphWave:
         self.steps = [x*self.step_size for x in range(self.sample_number)]
 
     def _check_size(self, graph):
+        """
+        Checking the size of the target graph. Switching based on size and settings.
+        """
         self.number_of_nodes = graph.number_of_nodes()
         if self.number_of_nodes > self.switch:
             self.mechanism = "approximate"
@@ -68,7 +70,7 @@ class GraphWave:
 
     def _approximate_wavelet_calculator(self):
         """
-        Given the Chebyshev polynomial, graph the approximate embedding is calculated.
+        Given the Chebyshev polynomial and graph the approximate embedding is calculated.
         """
         self.real_and_imaginary = []
         for node in tqdm(range(self.number_of_nodes)):
@@ -94,7 +96,10 @@ class GraphWave:
 
     def fit(self, graph):
         """
-        Depending the mechanism setting creating an exact or approximate embedding.
+        Fitting a GraphWave model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._create_evaluation_points()
         self._check_size(graph)
@@ -108,11 +113,11 @@ class GraphWave:
             print("Unknown procedure.")
 
     def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        Transforming the numpy array with real and imaginary values.
-        Creating a pandas dataframe and saving it as a csv.
-        """
-        print("\nSaving the embedding.")
         embedding = [self.real_and_imaginary.real, self.real_and_imaginary.imag]
         embedding = np.concatenate(embedding, axis=1)
         return embedding
