@@ -9,7 +9,7 @@ from sklearn.decomposition import TruncatedSVD
 
 class GraRep(object):
     r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
-    from the WWW '15 paper "GraRep: Learning Graph Representations with Global 
+    from the CIKM '15 paper "GraRep: Learning Graph Representations with Global 
     Structural Information". The procedure uses sparse truncated SVD to learm 
     embeddings for the powers of the PMI matrix computed from powers of the 
     normalized adjacency matrix.
