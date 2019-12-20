@@ -30,7 +30,7 @@ Non-Overlapping Community Detection
     :members:
     :undoc-members:
 
-Neighbourhood-based Node Embedding
+Neighbourhood-Based Node Embedding
 --------------------
 .. automodule:: karateclub.grarep
     :members:
