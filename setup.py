@@ -18,6 +18,7 @@ setup(
           "python-louvain",
           "sklearn",
           "scipy",
+          "pygsp",
       ],
   classifiers=[
     "Development Status :: 3 - Alpha",
