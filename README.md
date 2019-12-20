@@ -55,7 +55,7 @@ In detail, the following methods are currently implemented.
 
 **Structural Node Level Embedding**
 
-* **[GraRep](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.grarep.GraRep)** from Cao *et al.*: [GraRep: Learning Graph Representations with Global Structural Information](https://dl.acm.org/citation.cfm?id=2806512) (CIKM 2015)
+* **[GraphWave](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graphwave.GraphWave)** from Donnat *et al.*: [GraRep: Learning Graph Representations with Global Structural Information](https://dl.acm.org/citation.cfm?id=2806512) (KDD 2018)
 
 **Graph Level Embedding**
 
