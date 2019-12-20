@@ -4,7 +4,7 @@ karateclub
 .. contents:: Contents
     :local:
 
-Overlapping Methods
+Overlapping Community Detection
 --------------------
 
 .. automodule:: karateclub.ego_splitter
@@ -19,7 +19,7 @@ Overlapping Methods
     :members:
     :undoc-members:
 
-Non-Overlapping Methods
+Non-Overlapping Community Detection
 --------------------
 
 .. automodule:: karateclub.edmot
@@ -27,5 +27,11 @@ Non-Overlapping Methods
     :undoc-members:
 
 .. automodule:: karateclub.label_propagation
+    :members:
+    :undoc-members:
+
+Neighbourhood-based Node Embedding
+--------------------
+.. automodule:: karateclub.grarep
     :members:
     :undoc-members:
