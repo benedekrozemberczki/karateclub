@@ -3,6 +3,7 @@
 
 import networkx as nx
 from karateclub import EgoNetSplitter, EdMot, DANMF, M_NMF, LabelPropagation
+from karateclub import GraRep
 
 
 #------------------------------------
@@ -70,3 +71,19 @@ model = LabelPropagation()
 model.fit(g)
 
 print(model.get_memberships())
+
+
+
+#------------------------------------
+# GraRep example
+#------------------------------------
+
+
+g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
+
+model = GraRep()
+
+model.fit(g)
+embedding = model.get_embedding()
+
+print(embedding)
