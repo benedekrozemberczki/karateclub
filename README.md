@@ -35,19 +35,23 @@ print(splitter.overlapping_partitions)
 
 In detail, the following methods are currently implemented.
 
-**Community Detection**
+**Overlapping Community Detection**
 
 * **[Ego-Splitting](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.ego_splitter.EgoNetSplitter)** from Epasto *et al.*: [Ego-splitting Framework: from Non-Overlapping to Overlapping Clusters](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf) (KDD 2017)
-
-* **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
 
 * **[DANMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.danmf.DANMF)** from Ye *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
 
 * **[M-NMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.mnmf.M_NMF)** from Wang *et al.*: [Community Preserving Network Embedding](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14589) (AAAI 2017)
 
+**Non-overlapping Community Detection**
+
+* **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
+
 * **[Label Propagation](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.label_propagation.LabelPropagation)** from Raghavan *et al.*: [Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks](https://arxiv.org/abs/0709.2938) (Physics Review E 2007)
 
-**Node Level Embedding**
+**Neighbourhood-based Node Level Embedding**
+
+* **[GraRep](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.grarep.GraRep)** from Cao *et al.*: [GraRep: Learning Graph Representations with Global Structural Information](https://dl.acm.org/citation.cfm?id=2806512) (WWW 2015)
 
 **Graph Level Embedding**
 
