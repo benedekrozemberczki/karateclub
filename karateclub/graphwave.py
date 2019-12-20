@@ -4,8 +4,22 @@ from tqdm import tqdm
 import networkx as nx
 
 class GraphWave:
-    """
-    An implementation of "Learning Structural Node Embeddings Via Diffusion Wavelets".
+    r"""An implementation of `"GraphWave" <https://dl.acm.org/citation.cfm?id=2806512>`_
+    from the KDD '18 paper "Learning Structural Node Embeddings Via Diffusion Wavelets".
+    The procedure first calculates the graph wavelets using a heat kernel. The wavelets
+    are treated as probability distributions over nodes from a source node. Using these
+    the characteristic function is evaluated at certain gird points to learn structural
+    node embeddings of the vertices.
+    
+    Args:
+        sample_number (int): Number of evaluation points. Default is 200.
+        step_size (float): Grid point step size. Default is 0.1.
+        heat_coefficient (float): Heat kernel coefficient. Default is 1.0.
+        approximation (int): Chebyshev polynomial order. Default is 100.
+        mechanism (str): Wavelet calculation method 'exact' or 'approximate'. 
+        Default is 'approximate.' 
+        switch (int): Vertex cardinality when the wavelet calculation method
+        switches to approximation. Default is 1000.
     """
     def __init__(self, sample_number=200, step_size=0.1, heat_coefficient=1.0,
                  approximation=100, mechanism="approximate", switch=1000):
