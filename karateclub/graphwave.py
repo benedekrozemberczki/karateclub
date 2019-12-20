@@ -1,9 +1,7 @@
 import pygsp
-import random
 import numpy as np
 from tqdm import tqdm
 import networkx as nx
-from pydoc import locate
 
 class GraphWave:
     """
@@ -32,8 +30,7 @@ class GraphWave:
         self.number_of_nodes = graph.number_of_nodes()
         if self.number_of_nodes > self.switch:
             self.mechanism = "approximate"
-        
-        
+
     def _single_wavelet_generator(self, node):
         """
         Calculating the characteristic function for a given node, using the eigendecomposition.
