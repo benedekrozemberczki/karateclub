@@ -35,3 +35,10 @@ Neighbourhood-based Node Embedding
 .. automodule:: karateclub.grarep
     :members:
     :undoc-members:
+
+
+Structural Node Embedding
+--------------------
+.. automodule:: karateclub.graphwave
+    :members:
+    :undoc-members:
