@@ -5,21 +5,7 @@ from scipy import sparse
 from tqdm import tqdm
 from sklearn.decomposition import TruncatedSVD
 
-def create_D_inverse(graph):
-    """
-    Creating a sparse inverse degree matrix.
 
-    Arg types:
-        * **graph** *(NetworkX graph)* - The graph to be embedded.
-
-    Return types:
-        * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
-    """
-    index = np.arange(graph.number_of_nodes())
-    values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
-    shape = (graph.number_of_nodes(), graph.number_of_nodes())
-    D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
-    return D_inverse
 
 class GraRep(object):
     r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
@@ -40,6 +26,22 @@ class GraRep(object):
         self.order = order
         self.seed = seed
 
+    def _create_D_inverse(self, graph):
+        """
+        Creating a sparse inverse degree matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+
+        Return types:
+            * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
+        """
+        index = np.arange(graph.number_of_nodes())
+        values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
+        shape = (graph.number_of_nodes(), graph.number_of_nodes())
+        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        return D_inverse
+
     def _create_base_matrix(self, graph):
         """
         Creating a tuple with the normalized adjacency matrix.
@@ -48,7 +50,7 @@ class GraRep(object):
             * **(A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
         """
         A = nx.adjacency_matrix(graph)
-        D_inverse = create_D_inverse(graph)
+        D_inverse = self._create_D_inverse(graph)
         A_hat = D_inverse.dot(A)
         return (A_hat, A_hat)
 
