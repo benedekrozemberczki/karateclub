@@ -27,7 +27,7 @@ class NNSED(object):
         """
         Setup target matrix for pre-training process.
         """
-        number_of_nodes = graph.number_of_nodes()
+        number_of_nodes = graph.shape[0]
         self.W = np.random.uniform(0, 1, size=(number_of_nodes, self.dimensions))
         self.Z = np.random.uniform(0, 1, size=(self.dimensions, number_of_nodes))
 
