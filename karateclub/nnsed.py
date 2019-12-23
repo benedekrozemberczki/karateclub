@@ -32,11 +32,16 @@ class NNSED(object):
         self.Z = np.random.uniform(0, 1, size=(self.dimensions, number_of_nodes))
 
     def _update_W(self, A):
-        pass
+        enum = A.dot(self.Z.T)
+        denom_1 = self.W.dot(np.dot(self.Z,self.Z.T))
+        denom_2 = (A.dot(A.transpose())).dot(self.W)
+        denom = denom_1 + denom_2 
+        self.W = self.W*(enum/denom)
 
     def _update_Z(self, A):
-        pass
-
+        enum = A.dot(self.W).T
+        denom = np.dot(np.dot(self.W.T,self.W),self.Z) + self.Z
+        self.Z = self.Z *(enum/denom)
 
     def get_embedding(self):
         r"""Getting the bottleneck layer embedding.
