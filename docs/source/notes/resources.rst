@@ -21,6 +21,9 @@ Neighbourhood-based Node Embedding
 
 * Shaosheng Cao, Wei Lu, Qiongkai Xu: **GraRep: Learning Graph Representations with Global Structural Information** `Paper <https://dl.acm.org/citation.cfm?id=2806512>`_
 
+Structural Node Embedding
+--------------------
+
 Whole Graph Embedding
 --------------------
 
