@@ -3,14 +3,14 @@ from tqdm import tqdm
 import networkx as nx
 
 class NNSED(object):
-    r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
-    from the CIKM '18 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
-    Community Detection". The procedure uses telescopic non-negative matrix factorization
-    in order to learn a cluster memmbership distribution over nodes. The method can be 
-    used in an overlapping and non-overlapping way.
+    r"""An implementation of `"NNSED" <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
+    from the CIKM '17 paper "A Non-negative Symmetric Encoder-Decoder Approach
+    for Community Detection". The procedure uses non-negative matrix factorization
+    in order to learn an unnormalized cluster membership distribution over nodes.
+    The method can be used in an overlapping and non-overlapping way.
 
     Args:
-        layers (int): Autoencoder layer size. Default 32.
+        layers (int): Embedding layer size. Default is 32.
         iterations (int): Number of training epochs. Default 100.
         seed (int): Random seed for weight initializations. Default 42.
     """
@@ -20,6 +20,9 @@ class NNSED(object):
         self.seed = seed
 
     def _setup_target_matrix(self, graph):
+        """
+        Creating a sparse adjacency matrix.
+        """
         A = nx.adjacency_matrix(graph)
         return A
 
