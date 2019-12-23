@@ -15,9 +15,7 @@ Overlapping Community Detection
 Non-overlapping Community Detection
 --------------------
 
-
 * Pei-Zhen Li, Ling Huang, Chang-Dong Wang, and Jian-Huang Lai: **EdMot: An Edge Enhancement Approach for Motif-aware Community Detection** `Paper <https://arxiv.org/abs/1906.04560>`_, `Video <https://www.youtube.com/watch?v=6fEGMHJSsq0>`_
-
 
 * Usha Nandini Raghavan, Reka Albert, Soundar Kumara: **Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks** `Paper <https://arxiv.org/abs/0709.2938>`_
 
