@@ -130,7 +130,7 @@ class DANMF(object):
         Return types:
             * **embedding** *(Numpy array)* - The bottleneck layer embedding of nodes.
         """
-        embedding = [np.array(range(self.P.shape[0])).reshape(-1, 1), self.P, self.V_s[-1].T]
+        embedding = [self.P, self.V_s[-1].T]
         embedding = np.concatenate(embedding, axis=1)
         return embedding
 
