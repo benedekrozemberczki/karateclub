@@ -15,6 +15,10 @@ Overlapping Community Detection
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.nnsed
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.mnmf
     :members:
     :undoc-members:
