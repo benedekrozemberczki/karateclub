@@ -80,8 +80,6 @@ In detail, the following methods are currently implemented.
 
 **Graph Level Embedding**
 
---------------------------------------------------------------------------------
-
 Head over to our [documentation](https://karateclub.readthedocs.io) to find out more about installation and data handling, a full list of implemented methods, and datasets.
 For a quick start, check out our [examples](https://github.com/benedekrozemberczki/karateclub/tree/master/examples.py).
 
@@ -89,7 +87,11 @@ If you notice anything unexpected, please open an [issue](https://github.com/ben
 If you are missing a specific method, feel free to open a [feature request](https://github.com/benedekrozemberczki/karateclub/issues).
 We are motivated to constantly make Karate Club even better.
 
-## Installation
+
+--------------------------------------------------------------------------------
+
+
+**Installation**
 
 ```sh
 $ pip install karateclub
@@ -97,7 +99,7 @@ $ pip install karateclub
 
 --------------------------------------------------------------------------------
 
-## Running examples
+**Running examples**
 
 ```
 $ python examples.py
