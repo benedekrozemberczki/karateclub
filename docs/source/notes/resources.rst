@@ -16,7 +16,7 @@ Community Detection
 
 * Bing-Jie Sun, Huawei Shen, Jinhua Gao, Wentao Ouyang, Xueqi Cheng: **A Non-negative Symmetric Encoder-Decoder Approach for Community Detection** `Paper <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
 
-Node Embedding
+Neighbourhood-based Node Embedding
 --------------------
 
 * Shaosheng Cao, Wei Lu, Qiongkai Xu: **GraRep: Learning Graph Representations with Global Structural Information** `Paper <https://dl.acm.org/citation.cfm?id=2806512>`_
