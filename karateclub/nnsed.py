@@ -27,10 +27,15 @@ class DANMF(object):
         """
         Setup target matrix for pre-training process.
         """
-        if i == 0:
-            self.Z = self.A
-        else:
-            self.Z = self.V_s[i-1]
+        number_of_nodes = graph.number_of_nodes()
+        self.W = np.random.uniform(0, 1, size=(number_of_nodes, self.dimensions))
+        self.Z = np.random.uniform(0, 1, size=(self.dimensions, number_of_nodes))
+
+    def _update_W(self, A):
+        pass
+
+    def _update_Z(self, A):
+        pass
 
 
     def get_embedding(self):
@@ -55,5 +60,5 @@ class DANMF(object):
         A = self._setup_target_matrix(graph)
         self._setup_embeddings(A)
         for _ in tqdm(range(self.iterations), desc="Training pass: ", leave=True):
-            self._update_U()
-            self._update_P()
+            self._update_W(A)
+            self._update_Z(A)
