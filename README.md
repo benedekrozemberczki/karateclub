@@ -16,7 +16,7 @@ Karate Club consists of state-of-the-art methods to do unsupervised learning on 
 
 --------------------------------------------------------------------------------
 
-*Citing*
+**Citing**
 
 If you find Karate Club useful in your research, please consider citing the following paper:
 
