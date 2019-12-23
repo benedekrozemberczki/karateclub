@@ -48,6 +48,18 @@ class NNSED(object):
         embedding = np.concatenate(embedding, axis=1)
         return embedding
 
+
+    def get_memberships(self):
+        r"""Getting the cluster membership of nodes.
+
+        Return types:
+            memberships (dict): Node cluster memberships.
+        """
+        embedding = [self.W, self.Z.T]
+        index = np.argmax(self.embedding, axis=1)
+        memberships = {int(i): int(index[i]) for i in range(len(index))}
+        return memberships
+
     def fit(self, graph):
         """
         Fitting an NNSED clustering model.
