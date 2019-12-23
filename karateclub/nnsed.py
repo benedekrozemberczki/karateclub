@@ -28,13 +28,15 @@ class NNSED(object):
 
     def _setup_embeddings(self, graph):
         """
-        Setup target matrix for pre-training process.
+        Setup the node embedding matrices.
         """
         number_of_nodes = graph.shape[0]
         self.W = np.random.uniform(0, 1, size=(number_of_nodes, self.dimensions))
         self.Z = np.random.uniform(0, 1, size=(self.dimensions, number_of_nodes))
 
     def _update_W(self, A):
+        """
+        """
         enum = A.dot(self.Z.T)
         denom_1 = self.W.dot(np.dot(self.Z,self.Z.T))
         denom_2 = (A.dot(A.transpose())).dot(self.W)
