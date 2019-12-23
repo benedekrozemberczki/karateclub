@@ -14,6 +14,8 @@ Community Detection
 
 * Usha Nandini Raghavan, Reka Albert, Soundar Kumara: **Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks** `Paper <https://arxiv.org/abs/0709.2938>`_
 
+* Bing-Jie Sun, Huawei Shen, Jinhua Gao, Wentao Ouyang, Xueqi Cheng: **A Non-negative Symmetric Encoder-Decoder Approach for Community Detection** `Paper <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
+
 Node Embedding
 --------------------
 
