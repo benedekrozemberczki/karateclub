@@ -5,3 +5,4 @@ from karateclub.danmf import DANMF
 from karateclub.mnmf import M_NMF
 from karateclub.grarep import GraRep
 from karateclub.graphwave import GraphWave
+from karateclub.nnsed import NNSED

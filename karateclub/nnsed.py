@@ -2,7 +2,7 @@ import numpy as np
 from tqdm import tqdm
 import networkx as nx
 
-class DANMF(object):
+class NNSED(object):
     r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
     from the CIKM '18 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
     Community Detection". The procedure uses telescopic non-negative matrix factorization
