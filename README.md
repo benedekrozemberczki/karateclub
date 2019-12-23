@@ -46,6 +46,10 @@ splitter.fit(g)
 print(splitter.overlapping_partitions)
 ```
 
+--------------------------------------------------------------------------------
+
+**Models included**
+
 In detail, the following methods are currently implemented.
 
 **Overlapping Community Detection**
@@ -89,6 +93,7 @@ We are motivated to constantly make Karate Club even better.
 $ pip install karateclub
 ```
 
+--------------------------------------------------------------------------------
 
 ## Running examples
 
