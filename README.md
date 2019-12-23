@@ -14,13 +14,13 @@
 *Karate Club* is an unsupervised machine learning extension library for [NetworkX](https://networkx.github.io/).
 
 
-Karate Club consists of state-of-the-art methods to do unsupervised learning on graph structured data. To put it simply it is a Swiss Army knife for small-scale graph mining research. First, it provides network embedding techniques at the node and graph level. Second, it includes a variety of overlapping and non-overlapping commmunity detection methods. The package also includes methods that can deal with bipartite, temporal and heterogeneous graphs. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences and pieces from prominent journals.  
+*Karate Club* consists of state-of-the-art methods to do unsupervised learning on graph structured data. To put it simply it is a Swiss Army knife for small-scale graph mining research. First, it provides network embedding techniques at the node and graph level. Second, it includes a variety of overlapping and non-overlapping commmunity detection methods. The package also includes methods that can deal with bipartite, temporal and heterogeneous graphs. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences and pieces from prominent journals.  
 
 --------------------------------------------------------------------------------
 
 **Citing**
 
-If you find Karate Club useful in your research, please consider citing the following paper:
+If you find *Karate Club* useful in your research, please consider citing the following paper:
 
 >@misc{rozemberczki2020karateclub,    
        title = {Karate Club: A tool for unsupervised learning on graph structured data.},   
@@ -32,7 +32,7 @@ If you find Karate Club useful in your research, please consider citing the foll
 
 **A simple example**
 
-Karate Club makes the use of modern community detection tecniques quite easy (see [here](link_here) for the accompanying tutorial).
+*Karate Club* makes the use of modern community detection tecniques quite easy (see [here](link_here) for the accompanying tutorial).
 For example, this is all it takes to use on a Watts-Strogatz graph [Ego-splitting](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf):
 
 ```python
@@ -89,7 +89,6 @@ We are motivated to constantly make Karate Club even better.
 
 
 --------------------------------------------------------------------------------
-
 
 **Installation**
 
