@@ -45,6 +45,9 @@ class NNSED(object):
         self.W = self.W*(enum/denom)
 
     def _update_Z(self, A):
+        """
+        Updating the horizontal basis matrix.
+        """
         enum = A.dot(self.W).T
         denom = np.dot(np.dot(self.W.T,self.W),self.Z) + self.Z
         self.Z = self.Z *(enum/denom)
