@@ -117,3 +117,7 @@ model.fit(g)
 embedding = model.get_embedding()
 
 print(embedding)
+
+memberships = model.get_memberships()
+
+print(memberships)
