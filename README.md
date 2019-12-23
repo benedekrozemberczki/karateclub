@@ -1,3 +1,5 @@
+
+ ![Version](https://badge.fury.io/py/karateclub.svg?style=plastic)
  ![GitHub stars](https://img.shields.io/github/stars/benedekrozemberczki/karateclub.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic)
 
 <p align="center">
