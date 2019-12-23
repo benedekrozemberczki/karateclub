@@ -36,6 +36,7 @@ class NNSED(object):
 
     def _update_W(self, A):
         """
+        Updating the vertical basis matrix.
         """
         enum = A.dot(self.Z.T)
         denom_1 = self.W.dot(np.dot(self.Z,self.Z.T))
