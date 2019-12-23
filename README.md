@@ -43,13 +43,15 @@ In detail, the following methods are currently implemented.
 
 * **[M-NMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.mnmf.M_NMF)** from Wang *et al.*: [Community Preserving Network Embedding](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14589) (AAAI 2017)
 
-**Non-overlapping Community Detection**
+* **[NNSED](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.nnsed.NNSED)** from Sun *et al.*: [A Non-negative Symmetric Encoder-Decoder Approach for Community Detection](http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf) (CIKM 2017)
+
+**Non-Overlapping Community Detection**
 
 * **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
 
 * **[Label Propagation](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.label_propagation.LabelPropagation)** from Raghavan *et al.*: [Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks](https://arxiv.org/abs/0709.2938) (Physics Review E 2007)
 
-**Neighbourhood-based Node Level Embedding**
+**Neighbourhood-Based Node Level Embedding**
 
 * **[GraRep](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.grarep.GraRep)** from Cao *et al.*: [GraRep: Learning Graph Representations with Global Structural Information](https://dl.acm.org/citation.cfm?id=2806512) (CIKM 2015)
 
