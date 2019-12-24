@@ -3,7 +3,8 @@ from tqdm import tqdm
 import networkx as nx
 
 class NNSED(object):
-    r"""An implementation of `"NNSED" <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
+    r"""An implementation of `"NNSED"
+    <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
     from the CIKM '17 paper "A Non-negative Symmetric Encoder-Decoder Approach
     for Community Detection". The procedure uses non-negative matrix factorization
     in order to learn an unnormalized cluster membership distribution over nodes.
@@ -39,9 +40,9 @@ class NNSED(object):
         Updating the vertical basis matrix.
         """
         enum = A.dot(self.Z.T)
-        denom_1 = self.W.dot(np.dot(self.Z,self.Z.T))
+        denom_1 = self.W.dot(np.dot(self.Z, self.Z.T))
         denom_2 = (A.dot(A.transpose())).dot(self.W)
-        denom = denom_1 + denom_2 
+        denom = denom_1 + denom_2
         self.W = self.W*(enum/denom)
 
     def _update_Z(self, A):
@@ -49,8 +50,8 @@ class NNSED(object):
         Updating the horizontal basis matrix.
         """
         enum = A.dot(self.W).T
-        denom = np.dot(np.dot(self.W.T,self.W),self.Z) + self.Z
-        self.Z = self.Z *(enum/denom)
+        denom = np.dot(np.dot(self.W.T, self.W), self.Z) + self.Z
+        self.Z = self.Z*(enum/denom)
 
     def get_embedding(self):
         r"""Getting the bottleneck layer embedding.
@@ -76,7 +77,7 @@ class NNSED(object):
     def fit(self, graph):
         """
         Fitting an NNSED clustering model.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
