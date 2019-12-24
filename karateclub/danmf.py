@@ -147,7 +147,7 @@ class DANMF(object):
     def fit(self, graph):
         """
         Fitting a DANMF clustering model.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
