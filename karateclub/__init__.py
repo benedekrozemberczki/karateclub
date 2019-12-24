@@ -1,3 +1,7 @@
-from .community import *
-from .node_embedding import *
+from karateclub.community import *
+from karateclub.node_embedding import *
 
+
+__all__ = [
+    'karateclub',
+]
