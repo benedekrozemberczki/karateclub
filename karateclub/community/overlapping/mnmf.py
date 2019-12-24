@@ -3,7 +3,7 @@ from tqdm import tqdm
 import networkx as nx
 from scipy.sparse import coo_matrix
 
-class M_NMF:
+class MNMF:
     r"""An implementation of `"M-NMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
     from the AAAI '17 paper "Community Preserving Network Embedding".
     The procedure uses joint non-negative matrix factorization with modularity

@@ -1,9 +1,11 @@
 """Example runs with Karate Club."""
 
-
 import networkx as nx
-from karateclub import EgoNetSplitter, EdMot, DANMF, M_NMF, LabelPropagation, NNSED
-from karateclub import GraRep, GraphWave
+
+from karateclub.community.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF
+from karateclub.community.non_overlapping import EdMot, LabelPropagation
+from karateclub.node_embedding.neighbourhood import GraRep
+from karateclub.node_embedding.structural import GraphWave
 
 
 #------------------------------------
@@ -51,7 +53,7 @@ print(model.get_embedding())
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 
-model = M_NMF()
+model = MNMF()
 
 model.fit(g)
 
@@ -65,7 +67,6 @@ print(model.get_cluster_centers())
 
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
-
 model = LabelPropagation()
 
 model.fit(g)
@@ -78,7 +79,6 @@ print(model.get_memberships())
 # GraRep example
 #------------------------------------
 
-
 g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 
 model = GraRep()
@@ -87,7 +87,6 @@ model.fit(g)
 embedding = model.get_embedding()
 
 print(embedding)
-
 
 #------------------------------------
 # GraphWave example
@@ -119,5 +118,4 @@ embedding = model.get_embedding()
 print(embedding)
 
 memberships = model.get_memberships()
-
 print(memberships)
