@@ -60,7 +60,7 @@ class EdMot(object):
     def fit(self, graph):
         """
         Fitting an Edge Motif clustering model.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
@@ -76,4 +76,4 @@ class EdMot(object):
         Return types:
             * **memberships** *(dictionary of ints)* - Cluster memberships.
         """
-        return self.partition 
+        return self.partition
