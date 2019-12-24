@@ -18,7 +18,7 @@ class EgoNetSplitter(object):
     def _create_egonet(self, node):
         """
         Creating an ego net, extracting personas and partitioning it.
-        
+
         Args:
             node: Node ID for egonet (ego node).
         """
@@ -29,7 +29,7 @@ class EgoNetSplitter(object):
         for k, v in components.items():
             personalities.append(self.index)
             for other_node in v:
-                new_mapping[other_node] = self.index 
+                new_mapping[other_node] = self.index
             self.index = self.index+1
         self.components[node] = new_mapping
         self.personalities[node] = personalities
@@ -58,7 +58,7 @@ class EgoNetSplitter(object):
         Args:
             edge: Edge being mapped to the new identifiers.
         """
-        return (self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]]) 
+        return (self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]])
 
     def _create_persona_graph(self):
         """
@@ -81,7 +81,7 @@ class EgoNetSplitter(object):
     def fit(self, graph):
         """
         Fitting an Ego-Splitter clustering model.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
