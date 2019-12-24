@@ -39,7 +39,7 @@ class LabelPropagation:
         new_labels = {}
         for node in tqdm(self.nodes):
             neighbors = [neb for neb in nx.neighbors(self.graph, node)]
-            pick = self._make_a_pick(node, neighbors)
+            pick = self._make_a_pick(neighbors)
             new_labels[node] = pick
         self.labels = new_labels
 
