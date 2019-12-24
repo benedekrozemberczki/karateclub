@@ -16,10 +16,9 @@ class LabelPropagation:
         self.seed = seed
         self.rounds = rounds
 
-    def _make_a_pick(self, source, neighbors):
+    def _make_a_pick(self, neighbors):
         """
         Choosing a neighbor from a propagation source node.
-        :param source: Source node.
         :param neigbors: Neighboring nodes.
         """
         scores = {}
@@ -47,7 +46,7 @@ class LabelPropagation:
     def fit(self, graph):
         """
         Fitting a Label Propagation clustering model.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
@@ -66,4 +65,3 @@ class LabelPropagation:
         """
         memberships = self.labels
         return memberships
-
