@@ -1,3 +1,3 @@
-import karateclub.community
-import karateclub.node_embedding
+from .community import *
+from .node_embedding import *
 
