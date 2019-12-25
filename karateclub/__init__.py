@@ -1,4 +1,4 @@
-from karateclub.community import *
+from karateclub.community_detection import *
 from karateclub.node_embedding import *
 
 

@@ -2,8 +2,8 @@
 
 import networkx as nx
 
-from karateclub.community.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF
-from karateclub.community.non_overlapping import EdMot, LabelPropagation
+from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF
+from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.neighbourhood import GraRep
 from karateclub.node_embedding.structural import GraphWave
 
