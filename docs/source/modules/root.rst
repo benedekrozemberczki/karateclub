@@ -7,30 +7,30 @@ karateclub
 Overlapping Community Detection
 --------------------
 
-.. automodule:: karateclub.community.overlapping.ego_splitter
+.. automodule:: karateclub.community_detection.overlapping.ego_splitter
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.community.overlapping.danmf
+.. automodule:: karateclub.community_detection.overlapping.danmf
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.community.overlapping.nnsed
+.. automodule:: karateclub.community_detection.overlapping.nnsed
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.community.overlapping.mnmf
+.. automodule:: karateclub.community_detection.overlapping.mnmf
     :members:
     :undoc-members:
 
 Non-Overlapping Community Detection
 --------------------
 
-.. automodule:: karateclub.community.non_overlapping.edmot
+.. automodule:: karateclub.community_detection.non_overlapping.edmot
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.community.non_overlapping.label_propagation
+.. automodule:: karateclub.community_detection.non_overlapping.label_propagation
     :members:
     :undoc-members:
 
