@@ -1,5 +1,5 @@
-import networkx as nx
 import numpy as np
+import networkx as nx
 from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
