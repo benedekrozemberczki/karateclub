@@ -19,6 +19,12 @@ class DeepWalk(object):
 
 
     def fit(self, graph):
+        """
+        Fitting a GraRep model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+        """
         walker = RandomWalker(self.walk_number, self.walk_length)
         walker.do_walks(graph)
 
@@ -32,9 +38,13 @@ class DeepWalk(object):
                          workers=self.workers)
 
         num_of_nodes = graph.number_of_nodes()
-
         self._embedding = [model[str(n)] for n in range(num_of_nodes)]
 
 
     def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
         return np.array(self._embedding)
