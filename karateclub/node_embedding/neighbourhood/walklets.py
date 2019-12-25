@@ -52,6 +52,7 @@ class Walklets(object):
         walker = RandomWalker(self.walk_number, self.walk_length)
         walker.do_walks(graph)
         num_of_nodes = graph.number_of_nodes()
+
         self._embedding = []
         for power in range(1, self.window_size+1):
             walklets = self._select_walklets(walker.walks, power)
@@ -74,4 +75,4 @@ class Walklets(object):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        return np.concatenate(self._embedding,axis=1)
+        return np.concatenate(self._embedding, axis=1)
