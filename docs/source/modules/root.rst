@@ -26,11 +26,11 @@ Overlapping Community Detection
 Non-Overlapping Community Detection
 --------------------
 
-.. automodule:: karateclub.edmot
+.. automodule:: karateclub.community.non_overlapping.edmot
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.label_propagation
+.. automodule:: karateclub.community.non_overlapping.label_propagation
     :members:
     :undoc-members:
 
