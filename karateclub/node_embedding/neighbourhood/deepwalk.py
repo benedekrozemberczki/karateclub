@@ -25,7 +25,7 @@ class DeepWalk(object):
         model = Word2Vec(walker.walks,
                          hs=1,
                          alpha=self.learning_rate,
-                         iter=self.epochs
+                         iter=self.epochs,
                          size=self.dimensions,
                          window=self.window_size,
                          min_count=self.min_count,
