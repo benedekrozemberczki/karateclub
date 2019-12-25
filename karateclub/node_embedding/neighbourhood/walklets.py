@@ -4,11 +4,12 @@ from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
 class Walklets(object):
-    r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
-    from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
-    The procedure uses random walks to approximate the pointwise mutual information
-    matrix obtained by pooling normalized adjacency matrix powers. This matrix
-    is decomposed by an approximate factorization technique.
+    r"""An implementation of `"Walklets" <https://arxiv.org/abs/1605.02115>`_
+    from the ASONAM '17 paper "Don't Walk, Skip! Online Learning of Multi-scale
+    Network Embeddings". The procedure uses random walks to approximate the 
+    pointwise mutual information matrix obtained by individual normalized 
+    adjacency matrix powers. These are all decomposed by an approximate 
+    factorization technique and the embeddings are concatenated together.
 
     Args:
         walk_number (int): Number of random walks. Default is 10.
