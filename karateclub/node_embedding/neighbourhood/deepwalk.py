@@ -28,7 +28,6 @@ class DeepWalk(object):
         self.learning_rate = learning_rate
         self.min_count = min_count
 
-
     def fit(self, graph):
         """
         Fitting a GraRep model.
