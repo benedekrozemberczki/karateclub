@@ -6,9 +6,9 @@ from karateclub.utils.walker import RandomWalker
 class DeepWalk(object):
     r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
     from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
-    The procedure uses sparse truncated SVD to learn
-    embeddings for the powers of the PMI matrix computed from powers of the
-    normalized adjacency matrix.
+    The procedure uses random walks to approximate the pointwise mutual information
+    matrix obtained by pooling normalized adjacency matrix powers. This matrix
+    is decomposed by an approximate factorization technique.
 
     Args:
         dimensions (int): Number of individual embedding dimensions. Default is 32.
@@ -30,7 +30,7 @@ class DeepWalk(object):
 
     def fit(self, graph):
         """
-        Fitting a GraRep model.
+        Fitting a DeepWalk model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
