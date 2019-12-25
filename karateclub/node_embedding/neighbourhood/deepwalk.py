@@ -13,7 +13,7 @@ class DeepWalk(object):
     Args:
         walk_number (int): Number of random walks. Default is 10.
         walk_length (int): Length of random walks. Default is 80.
-        dimensions (int): Dimensionality of embedding. Default is 128
+        dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 5.
         epochs (int): Number of epochs.
