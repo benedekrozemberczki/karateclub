@@ -45,6 +45,9 @@ Neighbourhood-Based Node Embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.neighbourhood.walklets
+    :members:
+    :undoc-members:
 
 Structural Node Embedding
 --------------------
