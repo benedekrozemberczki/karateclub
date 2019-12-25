@@ -15,9 +15,13 @@ class DeepWalk(object):
         walk_length (int): Length of random walks. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 128
         workers (int): Number of cores. Default is 4.
+        window_size (int): Matrix power order. Default is 5.
+        epochs (int): Number of epochs.
+        learning_rate (float): HogWild! learning rate.
+        min_count (int): Minimal count of node occurences.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
-                 window_size=10, epochs=1, learning_rate=0.05, min_count=1):
+                 window_size=5, epochs=1, learning_rate=0.05, min_count=1):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
