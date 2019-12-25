@@ -5,7 +5,7 @@ setup(
   packages = find_packages(),
   version = "0.25",
   license = "MIT",
-  description = "A general purpose library for community detection and graph clustering research.",
+  description = "A general purpose library for community detection and graph embedding research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
