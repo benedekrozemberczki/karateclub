@@ -4,7 +4,18 @@ from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
 class DeepWalk(object):
+    r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
+    from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
+    The procedure uses sparse truncated SVD to learn
+    embeddings for the powers of the PMI matrix computed from powers of the
+    normalized adjacency matrix.
 
+    Args:
+        dimensions (int): Number of individual embedding dimensions. Default is 32.
+        iteration (int): Number of SVD iterations. Default is 10.
+        order (int): Number of PMI matrix powers. Default is 5
+        seed (int): SVD random seed. Default is 42.
+    """
     def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
                  window_size=10, epochs=1, learning_rate=0.05, min_count=1):
 
