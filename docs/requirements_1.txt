@@ -6,3 +6,4 @@ python-louvain
 sklearn
 scipy
 pygsp
+gensim
