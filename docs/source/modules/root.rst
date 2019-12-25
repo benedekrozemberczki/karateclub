@@ -7,19 +7,19 @@ karateclub
 Overlapping Community Detection
 --------------------
 
-.. automodule:: karateclub.ego_splitter
+.. automodule:: karateclub.community.overlapping.ego_splitter
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.danmf
+.. automodule:: karateclub.community.overlapping.danmf
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.nnsed
+.. automodule:: karateclub.community.overlapping.nnsed
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.mnmf
+.. automodule:: karateclub.community.overlapping.mnmf
     :members:
     :undoc-members:
 
