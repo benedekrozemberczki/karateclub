@@ -11,10 +11,10 @@ class DeepWalk(object):
     is decomposed by an approximate factorization technique.
 
     Args:
-        dimensions (int): Number of individual embedding dimensions. Default is 32.
-        iteration (int): Number of SVD iterations. Default is 10.
-        order (int): Number of PMI matrix powers. Default is 5
-        seed (int): SVD random seed. Default is 42.
+        walk_number (int): Number of random walks. Default is 10.
+        walk_length (int): Length of random walks. Default is 80.
+        dimensions (int): Dimensionality of embedding. Default is 128
+        workers (int): Number of cores. Default is 4.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
                  window_size=10, epochs=1, learning_rate=0.05, min_count=1):
