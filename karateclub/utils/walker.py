@@ -33,6 +33,8 @@ class RandomWalker:
     def do_walks(self, graph):
         """
         Doing a fixed number of truncated random walk from every node in the graph.
+        :param graph: NetworkX graph.
+        :return : Random walks.
         """
         self.graph = graph
         for node in tqdm(self.graph.nodes()):
