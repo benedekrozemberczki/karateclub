@@ -66,9 +66,9 @@ In detail, the following methods are currently implemented.
 
 **Non-Overlapping Community Detection**
 
-* **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
+* **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community.non_overlapping.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
 
-* **[Label Propagation](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.label_propagation.LabelPropagation)** from Raghavan *et al.*: [Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks](https://arxiv.org/abs/0709.2938) (Physics Review E 2007)
+* **[Label Propagation](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community.non_overlapping.label_propagation.LabelPropagation)** from Raghavan *et al.*: [Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks](https://arxiv.org/abs/0709.2938) (Physics Review E 2007)
 
 **Neighbourhood-Based Node Level Embedding**
 
