@@ -57,7 +57,7 @@ class MNMF:
         self.U = np.random.uniform(0, 1, (self.number_of_nodes, self.dimensions))
         self.H = np.random.uniform(0, 1, (self.number_of_nodes, self.clusters))
         self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
-        self.B1 = nx.adjacency_matrix(self.graph)
+        self.B1 = nx.adjacency_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
         self.B2 = self._modularity_generator(self.graph)
         self.X = np.transpose(self.U)
         overlaps = self.B1.dot(self.B1)
