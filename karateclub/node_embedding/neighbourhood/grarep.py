@@ -49,7 +49,7 @@ class GraRep(object):
         Return types:
             * **(A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
         """
-        A = nx.adjacency_matrix(graph)
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
         A_hat = D_inverse.dot(A)
         return (A_hat, A_hat)
