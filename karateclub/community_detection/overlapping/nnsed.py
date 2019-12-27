@@ -24,7 +24,7 @@ class NNSED(object):
         """
         Creating a sparse adjacency matrix.
         """
-        A = nx.adjacency_matrix(graph)
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         return A
 
     def _setup_embeddings(self, graph):
