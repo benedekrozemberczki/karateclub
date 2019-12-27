@@ -28,8 +28,8 @@ class DANMF(object):
 
     def _setup_target_matrices(self, graph):
         self.graph = graph
-        self.A = nx.adjacency_matrix(self.graph)
-        self.L = nx.laplacian_matrix(self.graph)
+        self.A = nx.adjacency_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
+        self.L = nx.laplacian_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
         self.D = self.L+self.A
 
     def _setup_z(self, i):
