@@ -23,7 +23,7 @@ class BigClam(object):
 
     def _initialize_features(self, number_of_nodes):
         """
-        Creating the community embedding.
+        Creating the community embedding and gradient sum.
         """
         self._embedding = np.random.uniform(0, 1, (number_of_nodes, self.dimensions))
         normalizer = self._embedding.sum(axis=1).reshape(-1, 1)
