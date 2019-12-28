@@ -3,11 +3,25 @@
 import networkx as nx
 
 import community
+import numpy as np
 
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets
 from karateclub.node_embedding.structural import GraphWave
+from karateclub.node_embedding.attributed import BANE
+
+
+#-----------------------------------
+# BANE example
+#-----------------------------------
+
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+x = np.random.uniform(0,1,(100,2000))
+model = BANE()
+
+model.fit(g, x)
 
 #------------------------------------
 # BigClam example
