@@ -12,16 +12,19 @@ class BigClam(object):
     used in an overlapping and non-overlapping way.
 
     Args:
-        dimensions (int): Number of embedding dimensions. Default 32.
-        iterations (int): Number of training iterations. Default 10.
+        dimensions (int): Number of embedding dimensions. Default 8.
+        iterations (int): Number of training iterations. Default 50.
+        learning_rate (float): Gradient ascent learning rate.
     """
     def __init__(self, dimensions=8, iterations=50, learning_rate=0.005):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
 
-
     def _initialize_features(self, number_of_nodes):
+        """
+        Creating the community embedding.
+        """
         self._embedding = np.random.uniform(0, 1, (number_of_nodes, self.dimensions))
         normalizer = self._embedding.sum(axis=1).reshape(-1, 1)
         self._embedding = self._embedding / normalizer
