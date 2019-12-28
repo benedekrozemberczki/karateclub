@@ -15,7 +15,7 @@ class BigClam(object):
         dimensions (int): Number of embedding dimensions. Default 32.
         iterations (int): Number of training iterations. Default 10.
     """
-    def __init__(self, dimensions=128, iterations=50, learning_rate=0.00005):
+    def __init__(self, dimensions=8, iterations=50, learning_rate=0.005):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
@@ -52,6 +52,15 @@ class BigClam(object):
         memberships = {i: membership for i, membership in enumerate(indices)}
         return memberships
 
+    def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
+        embedding = self._embedding
+        return embedding
+
     def fit(self, graph):
         number_of_nodes = graph.number_of_nodes()
         self._initialize_features(number_of_nodes)
@@ -64,6 +73,3 @@ class BigClam(object):
                 node_feature = self._embedding[node, :]
                 gradient = self._calculate_gradient(node_feature, neb_features)
                 self._do_updates(node, gradient, node_feature)
-            mems = self.get_memberships()
-            mod = community.modularity(mems, graph)
-            print(mod)

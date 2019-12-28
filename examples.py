@@ -11,7 +11,7 @@ from karateclub.node_embedding.structural import GraphWave
 # BigClam example
 #------------------------------------
 
-g = nx.newman_watts_strogatz_graph(10000, 20, 0.05)
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
 model = BigClam()
 
