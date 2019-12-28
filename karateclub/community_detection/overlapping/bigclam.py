@@ -47,7 +47,7 @@ class BigClam(object):
         Updating the embedding and the feature sum.
         """
         self._embedding[node] = self._embedding[node]+self.learning_rate*gradient
-        self._embedding[node] = self._embedding[node]/np.sum(self._embedding[node])
+        self._embedding[node] = np.clip(self._embedding[node], 0, 1)
         self._global_features = self._global_features - node_feature + self._embedding[node]
 
     def get_memberships(self):
