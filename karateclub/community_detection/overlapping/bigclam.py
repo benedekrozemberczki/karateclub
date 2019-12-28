@@ -31,6 +31,9 @@ class BigClam(object):
         self._global_features = np.sum(self._embedding, axis=0)
 
     def _calculate_gradient(self, node_feature, neb_features):
+        """
+        Calculating the feature gradient.
+        """
         raw_scores = node_feature.dot(neb_features.T)
         raw_scores = np.clip(raw_scores, -15, 15)
         scores = np.exp(-raw_scores)/(1-np.exp(-raw_scores))
@@ -41,6 +44,9 @@ class BigClam(object):
         return grad
 
     def _do_updates(self, node, gradient, node_feature):
+        """
+        Updating the embedding and the feature sum.
+        """
         self._embedding[node] = self._embedding[node]+self.learning_rate*gradient
         self._embedding[node] = self._embedding[node]/np.sum(self._embedding[node])
         self._global_features = self._global_features - node_feature + self._embedding[node]
