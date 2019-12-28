@@ -3,7 +3,7 @@ import networkx as nx
 from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
-class DeepWalk(object):
+class BANE(object):
     r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
     from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
     The procedure uses random walks to approximate the pointwise mutual information
