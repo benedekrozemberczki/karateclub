@@ -39,7 +39,7 @@ Structural Node Embedding
 Attributed Node Embedding
 --------------------
 
-* Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Binarized Attributed Network Embedding** `Paper <https://ieeexplore.ieee.org/document/8626170>`_
+*  Hong Yang, Shirui Pan, Peng Zhang, Ling Chen, Defu Lian, Chengqi Zhang: **Binarized Attributed Network Embedding** `Paper <https://ieeexplore.ieee.org/document/8626170>`_
 
 Whole Graph Embedding
 --------------------
