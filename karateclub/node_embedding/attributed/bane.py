@@ -21,12 +21,15 @@ class BANE(object):
 
 
     def create_target_matrix(self, graph):
+        """
+        Creating a noramlized sparse adjacency matrix target. 
+        """
         weighted_graph = nx.Graph()
         for (u, v) in graph.edges():
             weighted_graph.add_edge(u, v, weight=1.0/graph.degree(u))
             weighted_graph.add_edge(v, u, weight=1.0/graph.degree(v))
         P = nx.adjacency_matrix(weighted_graph,
-                                nodelist=range(weighted_graph.number_of_nodes()))
+                                nodelist=range(graph.number_of_nodes()))
         return P
 
     def fit(self, graph, X):
