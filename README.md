@@ -87,7 +87,7 @@ In detail, the following methods are currently implemented.
 
 **Attributed Node Level Embedding**
 
-* **[BANE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.bane.BANE)** from Donnat *et al.*: [Learning Structural Node Embeddings via Diffusion Wavelets](https://arxiv.org/abs/1710.10321) (KDD 2018)
+* **[BANE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.bane.BANE)** from Yang *et al.*: [Binarized Attributed Network Embedding](https://ieeexplore.ieee.org/document/8626170) (ICDM 2018)
 
 **Graph Level Embedding**
 
