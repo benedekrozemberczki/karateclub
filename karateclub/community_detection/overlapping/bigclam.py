@@ -5,11 +5,10 @@ from tqdm import tqdm
 import networkx as nx
 
 class BigClam(object):
-    r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
-    from the CIKM '18 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
-    Community Detection". The procedure uses telescopic non-negative matrix factorization
-    in order to learn a cluster memmbership distribution over nodes. The method can be 
-    used in an overlapping and non-overlapping way.
+    r"""An implementation of `"BigClam" <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_
+    from the WSDM '13 paper "Overlapping Community Detection at Scale: A Nonnegative Matrix
+    Factorization Approach". The procedure uses gradient ascent to create an embedding which is
+    used for deciding the node-cluster affiliations.
 
     Args:
         dimensions (int): Number of embedding dimensions. Default 8.
