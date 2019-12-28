@@ -13,7 +13,7 @@ class BigClam(object):
     Args:
         dimensions (int): Number of embedding dimensions. Default 8.
         iterations (int): Number of training iterations. Default 50.
-        learning_rate (float): Gradient ascent learning rate.
+        learning_rate (float): Gradient ascent learning rate. Default is 0.005.
     """
     def __init__(self, dimensions=8, iterations=50, learning_rate=0.005):
         self.dimensions = dimensions
