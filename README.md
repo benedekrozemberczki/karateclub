@@ -64,7 +64,7 @@ In detail, the following methods are currently implemented.
 
 * **[NNSED](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.nnsed.NNSED)** from Sun *et al.*: [A Non-negative Symmetric Encoder-Decoder Approach for Community Detection](http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf) (CIKM 2017)
 
-* **[BigClam](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.bigclam.BigClam)** from Sun *et al.*: [A Non-negative Symmetric Encoder-Decoder Approach for Community Detection](http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf) (CIKM 2017)
+* **[BigClam](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.bigclam.BigClam)** from Yang and Leskovec: [Overlapping Community Detection at Scale:A Nonnegative Matrix Factorization Approach](http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf) (WSDM 2013)
 
 **Non-Overlapping Community Detection**
 
