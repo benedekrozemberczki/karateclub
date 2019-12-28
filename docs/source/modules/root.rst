@@ -23,6 +23,10 @@ Overlapping Community Detection
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.community_detection.overlapping.bigclam
+    :members:
+    :undoc-members:
+
 Non-Overlapping Community Detection
 --------------------
 
