@@ -27,7 +27,7 @@ class BANE(object):
         self.binarization_rounds = binarization_rounds 
 
 
-    def create_target_matrix(self, graph):
+    def _create_target_matrix(self, graph):
         """
         Creating a normalized sparse adjacency matrix target. 
         """
@@ -46,7 +46,7 @@ class BANE(object):
         2. Running power iterations and CDC.
         """
  
-        self.P = self.create_target_matrix(graph)
+        self.P = self._create_target_matrix(graph)
         self.X = X
         print("\nFitting BANE model.\nBase SVD fitting started.")
         self._fit_base_SVD_model()
