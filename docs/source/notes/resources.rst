@@ -39,7 +39,7 @@ Structural Node Embedding
 Attributed Node Embedding
 --------------------
 
-* Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **GraRep: Learning Graph Representations with Global Structural Information** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_
+* Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Binarized Attributed Network Embedding** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_
 
 Whole Graph Embedding
 --------------------
