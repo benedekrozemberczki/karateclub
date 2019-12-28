@@ -1,5 +1,3 @@
-"""BANE procedure class. """
-
 import numpy as np
 import networkx as nx
 from tqdm import tqdm
@@ -9,6 +7,15 @@ from sklearn.decomposition import TruncatedSVD
 class BANE(object):
     """
     Binarized Attributed Network Embedding Class (ICDM 2018).
+    """
+    r"""An implementation of `"BANE" <https://arxiv.org/abs/1403.6652>`_
+    from the ICDM '18 paper "Binarized Attributed Network Embedding Class".
+
+    Args:
+        walk_number (int): Number of random walks. Default is 10.
+        walk_length (int): Length of random walks. Default is 80.
+        dimensions (int): Dimensionality of embedding. Default is 128.
+        workers (int): Number of cores. Default is 4.
     """
     def __init__(self, dimensions=32, svd_iterations=70, seed=42, alpha=0.3,
                  approximation_rounds=100, binarization_rounds=20):
