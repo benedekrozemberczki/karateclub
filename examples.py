@@ -2,14 +2,27 @@
 
 import networkx as nx
 
-from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF
+from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets
 from karateclub.node_embedding.structural import GraphWave
 
 #------------------------------------
+# BigClam example
+#------------------------------------
+
+g = nx.newman_watts_strogatz_graph(10000, 20, 0.05)
+
+model = BigClam()
+
+model.fit(g)
+
+quit()
+
+#------------------------------------
 # Walklets example
 #------------------------------------
+
 
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)

@@ -1,3 +1,5 @@
+import random
+import community
 import numpy as np
 from tqdm import tqdm
 import networkx as nx
@@ -10,12 +12,58 @@ class BigClam(object):
     used in an overlapping and non-overlapping way.
 
     Args:
-        layers (list): Autoencoder layer sizes in a list of integers. Default [32, 8].
-        pre_iterations (int): Number of pre-training epochs. Default 100.
-        iterations (int): Number of training epochs. Default 100.
-        seed (int): Random seed for weight initializations. Default 42.
-        lamb (float): Regularization parameter. Default 0.01.
+        dimensions (int): Number of embedding dimensions. Default 32.
+        iterations (int): Number of training iterations. Default 10.
     """
-    def __init__(self, dimensions=32, iterations=10):
+    def __init__(self, dimensions=128, iterations=50, learning_rate=0.00005):
         self.dimensions = dimensions
         self.iterations = iterations
+        self.learning_rate = learning_rate
+
+
+    def _initialize_features(self, number_of_nodes):
+        self._embedding = np.random.uniform(0, 1, (number_of_nodes, self.dimensions))
+        normalizer = self._embedding.sum(axis=1).reshape(-1, 1)
+        self._embedding = self._embedding / normalizer
+        self._global_features = np.sum(self._embedding, axis=0)
+
+    def _calculate_gradient(self, node_feature, neb_features):
+        raw_scores = node_feature.dot(neb_features.T)
+        raw_scores = np.clip(raw_scores, -15, 15)
+        scores = np.exp(-raw_scores)/(1-np.exp(-raw_scores))
+        scores = scores.reshape(-1, 1)
+        neb_grad = np.sum(scores * neb_features, axis=0)
+        without_grad = self._global_features-node_feature-np.sum(neb_features, axis=0)
+        grad = neb_grad-without_grad
+        return grad
+
+    def _do_updates(self, node, gradient, node_feature):
+        self._embedding[node] = self._embedding[node]+self.learning_rate*gradient
+        self._embedding[node] = self._embedding[node]/np.sum(self._embedding[node])
+        self._global_features = self._global_features - node_feature + self._embedding[node]
+
+    def get_memberships(self):
+        r"""Getting the cluster membership of nodes.
+
+        Return types:
+            memberships (dict): Node cluster memberships.
+        """
+        indices = np.argmax(self._embedding, axis=1)
+        memberships = {i: membership for i, membership in enumerate(indices)}
+        return memberships
+
+    def fit(self, graph):
+        number_of_nodes = graph.number_of_nodes()
+        self._initialize_features(number_of_nodes)
+        nodes = [node for node in graph.nodes()]
+        for i in range(self.iterations):
+            random.shuffle(nodes)
+            for node in tqdm(nodes):
+                nebs = [neb for neb in graph.neighbors(node)]
+                neb_features = self._embedding[nebs, :]
+                node_feature = self._embedding[node, :]
+                gradient = self._calculate_gradient(node_feature, neb_features)
+                self._do_updates(node, gradient, node_feature)
+            mems = self.get_memberships()
+            mod = community.modularity(mems, graph)
+            print(mod)
