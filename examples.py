@@ -2,6 +2,8 @@
 
 import networkx as nx
 
+import community
+
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets
@@ -16,6 +18,10 @@ g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 model = BigClam()
 
 model.fit(g)
+
+membership = model.get_memberships()
+
+print(community.modularity(membership, g))
 
 quit()
 
