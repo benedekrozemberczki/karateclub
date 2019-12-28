@@ -65,6 +65,12 @@ class BigClam(object):
         return embedding
 
     def fit(self, graph):
+        """
+        Fitting a BigClam clustering model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
+        """
         number_of_nodes = graph.number_of_nodes()
         self._initialize_features(number_of_nodes)
         nodes = [node for node in graph.nodes()]
