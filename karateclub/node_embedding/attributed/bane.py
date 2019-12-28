@@ -22,7 +22,7 @@ class BANE(object):
 
     def create_target_matrix(self, graph):
         """
-        Creating a noramlized sparse adjacency matrix target. 
+        Creating a normalized sparse adjacency matrix target. 
         """
         weighted_graph = nx.Graph()
         for (u, v) in graph.edges():
@@ -92,3 +92,12 @@ class BANE(object):
             self._update_G()
             self._update_Q()
             self._update_B()
+
+    def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
+        embedding = self.B
+        return embedding
