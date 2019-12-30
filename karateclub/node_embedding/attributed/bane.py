@@ -12,10 +12,12 @@ class BANE(object):
     from the ICDM '18 paper "Binarized Attributed Network Embedding Class".
 
     Args:
-        walk_number (int): Number of random walks. Default is 10.
-        walk_length (int): Length of random walks. Default is 80.
-        dimensions (int): Dimensionality of embedding. Default is 128.
-        workers (int): Number of cores. Default is 4.
+        dimensions (int): Number of random walks. Default is 10.
+        svd_iterations (int): Length of random walks. Default is 80.
+        seed (int): Dimensionality of embedding. Default is 128.
+        alpha (float): Number of cores. Default is 4.
+        approximation_rounds (int):
+        binarization_rounds (int):
     """
     def __init__(self, dimensions=32, svd_iterations=70, seed=42, alpha=0.3,
                  approximation_rounds=100, binarization_rounds=20):
