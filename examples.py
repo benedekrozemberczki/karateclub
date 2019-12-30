@@ -19,6 +19,10 @@ from karateclub.node_embedding.attributed import BANE
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
 x = np.random.uniform(0,1,(100,2000))
+
+p  = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+x = nx.adjacency_matrix(p)
 model = BANE()
 
 model.fit(g, x)
