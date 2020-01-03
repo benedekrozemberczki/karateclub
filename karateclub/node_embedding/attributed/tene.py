@@ -79,7 +79,7 @@ class TENE(object):
         self.X = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         self.T = T
         self._init_weights()
-        for _ in range(self.args.iterations):
+        for _ in range(self.iterations):
             self._update_M()
             self._update_V()
             self._update_C()
