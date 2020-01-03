@@ -80,7 +80,6 @@ model = EgoNetSplitter(1.0)
 
 model.fit(g)
 
-quit()
 
 #------------------------------------
 # Edmot example
@@ -103,6 +102,9 @@ g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 model = DANMF()
 
 model.fit(g)
+
+
+quit()
 
 #------------------------------------
 # M-NMF example

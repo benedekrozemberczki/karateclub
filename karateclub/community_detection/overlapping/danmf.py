@@ -1,5 +1,4 @@
 import numpy as np
-from tqdm import tqdm
 import networkx as nx
 from sklearn.decomposition import NMF
 
@@ -62,7 +61,7 @@ class DANMF(object):
         print("\nLayer pre-training started. \n")
         self.U_s = []
         self.V_s = []
-        for i in tqdm(range(self.p), desc="Layers trained: ", leave=True):
+        for i in range(self.p):
             self._setup_z(i)
             U, V = self._sklearn_pretrain(i)
             self.U_s.append(U)
@@ -156,7 +155,7 @@ class DANMF(object):
         self._setup_target_matrices(graph)
         self._pre_training()
         self._setup_Asq()
-        for iteration in tqdm(range(self.iterations), desc="Training pass: ", leave=True):
+        for iteration in range(self.iterations):
             self._setup_Q()
             self._setup_VpVpT()
             for i in range(self.p):
