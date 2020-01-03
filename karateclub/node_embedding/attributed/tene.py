@@ -7,19 +7,17 @@ from karateclub.estimator import Estimator
 class TENE(object):
     r"""An implementation of `"TENE" <https://ieeexplore.ieee.org/document/8545577>`_
     from the ICASSP '18 paper "Enhanced Network Embedding with Text Information". The 
-    procedure first calculates the truncated SVD of an adjcacency - feature matrix
-    product. This matrix is further decomposed by a binary CCD based technique. 
+    procedure jointly factorizes the adjacency and node feature matrices using alternating
+    least squares.
        
-
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
-        svd_iterations (int): SVD iteration count. Default is 20.
-        seed (int): Random seed. Default is 42.
-        alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
-        approximation_rounds (int): Matrix decomoposition iterations. Default is 100.
-        binarization_rounds (int): Binarization iterations. Default is 20.
+        lower_control (float): Embedding score minimal value. Default is 10**-15.
+        alpha (float): Adjacency matrix regularizer coefficient. Default is 0.1. 
+        beta (float): Feature matrix regularizer coefficient. Default is 0.1.
+        iterations (int): ALS iterations. Default is 200.
     """
-    def __init__(self, dimensions=32, lower_countrol=10**-15,
+    def __init__(self, dimensions=32, lower_control=10**-15,
                  alpha=0.1, beta=0.1, iterations=200):
         self.dimensions = dimensions
         self.lower_control = lower_control

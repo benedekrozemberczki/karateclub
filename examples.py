@@ -9,8 +9,28 @@ from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DA
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets
 from karateclub.node_embedding.structural import GraphWave
-from karateclub.node_embedding.attributed import BANE
+from karateclub.node_embedding.attributed import BANE, TENE
 
+#-----------------------------------
+# TENE example
+#-----------------------------------
+
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+t = np.random.uniform(0,1,(100,2000))
+
+tp = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+tp = nx.adjacency_matrix(tp)
+
+model = TENE()
+
+model.fit(g, t)
+model.get_embedding()
+
+model.fit(g, tp)
+model.get_embedding()
+quit()
 
 #-----------------------------------
 # BANE example
