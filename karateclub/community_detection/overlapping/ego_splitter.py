@@ -40,7 +40,6 @@ class EgoNetSplitter(object):
         self.components = {}
         self.personalities = {}
         self.index = 0
-        print("Creating egonets.")
         for node in self.graph.nodes():
             self._create_egonet(node)
 
@@ -63,7 +62,6 @@ class EgoNetSplitter(object):
         """
         Create a persona graph using the egonet components.
         """
-        print("Creating the persona graph.")
         self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in self.graph.edges()]
         self.persona_graph = nx.from_edgelist(self.persona_graph_edges)
 
@@ -71,7 +69,6 @@ class EgoNetSplitter(object):
         """
         Creating a non-overlapping clustering of nodes in the persona graph.
         """
-        print("Clustering the persona graph.")
         self.partitions = community.best_partition(self.persona_graph, resolution=self.resolution)
         self.overlapping_partitions = {node: [] for node in self.graph.nodes()}
         for node, membership in self.partitions.items():
