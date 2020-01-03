@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 
 class TENE(object):
     r"""An implementation of `"TENE" <https://ieeexplore.ieee.org/document/8545577>`_
-    from the ICASSP '18 paper "Enhanced Network Embedding with Text Information". The 
+    from the ICPR '18 paper "Enhanced Network Embedding with Text Information". The 
     procedure jointly factorizes the adjacency and node feature matrices using alternating
     least squares.
        
