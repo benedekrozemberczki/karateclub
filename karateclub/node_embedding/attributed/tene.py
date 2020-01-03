@@ -9,29 +9,24 @@ class TENE(object):
     Enhanced Network Embedding with Text Information Abstract Class.
     For details see https://ieeexplore.ieee.org/document/8545577.
     """
-    def __init__(self, X, T, args):
-        """
-        Set up model and weights.
-        :param X: Adjacency target matrix. (Sparse Scipy matrix.)
-        :param T: Feature matrix.
-        :param args: Arguments object for model.
-        """
-        self.X = X
-        self.T = T
-        self.args = args
-        self.init_weights()
+    def __init__(self):
+        self.dimensions = dimensions
+        self.lower_control = lower_control
+        self.alpha = alpha
+        self.beta = beta
+        self.iterations = iterations
 
-    def init_weights(self):
+    def _init_weights(self):
         """
         Setup basis and feature matrices.
         """
-        self.M = np.random.uniform(0, 1, (self.X.shape[0], self.args.dimensions))
-        self.U = np.random.uniform(0, 1, (self.X.shape[0], self.args.dimensions))
-        self.Q = np.random.uniform(0, 1, (self.X.shape[0], self.args.dimensions))
-        self.V = np.random.uniform(0, 1, (self.T.shape[1], self.args.dimensions))
-        self.C = np.random.uniform(0, 1, (self.args.dimensions, self.args.dimensions))
+        self.M = np.random.uniform(0, 1, (self.X.shape[0], self.dimensions))
+        self.U = np.random.uniform(0, 1, (self.X.shape[0], self.dimensions))
+        self.Q = np.random.uniform(0, 1, (self.X.shape[0], self.dimensions))
+        self.V = np.random.uniform(0, 1, (self.T.shape[1], self.dimensions))
+        self.C = np.random.uniform(0, 1, (self.dimensions, self.dimensions))
 
-    def update_M(self):
+    def _update_M(self):
         """
         Update node bases.
         """
@@ -40,7 +35,7 @@ class TENE(object):
         self.M = np.multiply(self.M, enum/denom)
         self.M[self.M < self.args.lower_control] = self.args.lower_control
 
-    def update_V(self):
+    def _update_V(self):
         """
         Update node features.
         """
@@ -49,7 +44,7 @@ class TENE(object):
         self.V = np.multiply(self.V, enum/denom)
         self.V[self.V < self.args.lower_control] = self.args.lower_control
 
-    def update_C(self):
+    def _update_C(self):
         """
         Update transformation matrix.
         """
@@ -58,7 +53,7 @@ class TENE(object):
         self.C = np.multiply(self.C, enum/denom)
         self.C[self.C < self.args.lower_control] = self.args.lower_control
 
-    def update_U(self):
+    def _update_U(self):
         """
         Update features.
         """
@@ -67,7 +62,7 @@ class TENE(object):
         self.U = np.multiply(self.U, enum/denom)
         self.U[self.U < self.args.lower_control] = self.args.lower_control
 
-    def update_Q(self):
+    def _update_Q(self):
         """
         Update feature bases.
         """
@@ -80,7 +75,9 @@ class TENE(object):
         """
         Run updates.
         """
-        
+        self.X = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        self.T = T
+        self.init_weights()
         for _ in tqdm(range(self.args.iterations)):
             self.update_M()
             self.update_V()
