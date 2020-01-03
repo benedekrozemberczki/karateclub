@@ -57,8 +57,6 @@ model.fit(g)
 
 emb = model.get_embedding()
 
-print(emb.shape)
-
 
 #------------------------------------
 # DeepWalk example
@@ -72,7 +70,6 @@ model = DeepWalk()
 
 model.fit(g)
 
-print(model.get_embedding())
 
 
 #------------------------------------

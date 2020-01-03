@@ -37,7 +37,7 @@ class RandomWalker:
         :return : Random walks.
         """
         self.graph = graph
-        for node in tqdm(self.graph.nodes()):
+        for node in self.graph.nodes():
             for _ in range(self.walk_number):
                 walk_from_node = self.do_walk(node)
                 self.walks.append(walk_from_node)

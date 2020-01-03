@@ -1,7 +1,6 @@
 import random
 import community
 import numpy as np
-from tqdm import tqdm
 import networkx as nx
 
 class BigClam(object):
@@ -81,7 +80,7 @@ class BigClam(object):
         nodes = [node for node in graph.nodes()]
         for i in range(self.iterations):
             random.shuffle(nodes)
-            for node in tqdm(nodes):
+            for node in nodes:
                 nebs = [neb for neb in graph.neighbors(node)]
                 neb_features = self._embedding[nebs, :]
                 node_feature = self._embedding[node, :]
