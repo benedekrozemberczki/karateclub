@@ -135,8 +135,6 @@ model.fit(g)
 
 embedding = model.get_embedding()
 
-quit()
-
 #------------------------------------
 # NNSED example
 #------------------------------------

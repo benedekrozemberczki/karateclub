@@ -1,5 +1,4 @@
 import numpy as np
-from tqdm import tqdm
 import networkx as nx
 
 class NNSED(object):
@@ -81,10 +80,9 @@ class NNSED(object):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
-        print("\n\nTraining started. \n")
 
         A = self._setup_target_matrix(graph)
         self._setup_embeddings(A)
-        for _ in tqdm(range(self.iterations), desc="Training pass: ", leave=True):
+        for _ in range(self.iterations):
             self._update_W(A)
             self._update_Z(A)
