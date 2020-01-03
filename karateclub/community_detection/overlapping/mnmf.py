@@ -1,5 +1,4 @@
 import numpy as np
-from tqdm import tqdm
 import networkx as nx
 from scipy.sparse import coo_matrix
 
@@ -149,7 +148,7 @@ class MNMF:
         self.graph = graph
         self._setup_matrices()
         self._optimization_print()
-        for _ in tqdm(range(self.iteration_number)):
+        for _ in range(self.iteration_number):
             self._update_M()
             self._update_U()
             self._update_C()
