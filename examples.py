@@ -20,13 +20,12 @@ g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
 x = np.random.uniform(0,1,(100,2000))
 
-p  = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+p = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
 x = nx.adjacency_matrix(p)
 model = BANE()
 
 model.fit(g, x)
-
 
 
 #------------------------------------
@@ -45,7 +44,6 @@ membership = model.get_memberships()
 #------------------------------------
 # Walklets example
 #------------------------------------
-
 
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
@@ -69,7 +67,6 @@ g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 model = DeepWalk()
 
 model.fit(g)
-
 
 
 #------------------------------------
