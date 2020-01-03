@@ -27,7 +27,7 @@ model = BANE()
 
 model.fit(g, x)
 
-quit()
+
 
 #------------------------------------
 # BigClam example
@@ -41,9 +41,6 @@ model.fit(g)
 
 membership = model.get_memberships()
 
-print(community.modularity(membership, g))
-
-quit()
 
 #------------------------------------
 # Walklets example
