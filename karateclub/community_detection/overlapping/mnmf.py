@@ -31,12 +31,6 @@ class MNMF:
         self.lower_control = lower_control
         self.eta = eta
 
-    def _model_init_print(self):
-        print("Model initialization started.\n")
-
-    def _optimization_print(self):
-        print("Optimization started.\n")
-
     def _modularity_generator(self, graph):
         """Calculating the sparse modularity matrix."""
         degs = nx.degree(self.graph)
@@ -144,10 +138,8 @@ class MNMF:
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
-        self._model_init_print()
         self.graph = graph
         self._setup_matrices()
-        self._optimization_print()
         for _ in range(self.iteration_number):
             self._update_M()
             self._update_U()

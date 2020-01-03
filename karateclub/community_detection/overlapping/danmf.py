@@ -58,7 +58,6 @@ class DANMF(object):
         """
         Pre-training each NMF layer.
         """
-        print("\nLayer pre-training started. \n")
         self.U_s = []
         self.V_s = []
         for i in range(self.p):
@@ -150,7 +149,7 @@ class DANMF(object):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
-        print("\n\nTraining started. \n")
+
 
         self._setup_target_matrices(graph)
         self._pre_training()
