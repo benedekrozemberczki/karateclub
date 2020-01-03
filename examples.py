@@ -27,7 +27,6 @@ model = BANE()
 
 model.fit(g, x)
 
-
 #------------------------------------
 # BigClam example
 #------------------------------------
@@ -40,14 +39,11 @@ model.fit(g)
 
 membership = model.get_memberships()
 
-
 #------------------------------------
 # Walklets example
 #------------------------------------
 
-
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
-
 
 model = Walklets()
 
@@ -55,19 +51,15 @@ model.fit(g)
 
 emb = model.get_embedding()
 
-
 #------------------------------------
 # DeepWalk example
 #------------------------------------
 
-
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
-
 
 model = DeepWalk()
 
 model.fit(g)
-
 
 #------------------------------------
 # Splitter example
@@ -75,23 +67,19 @@ model.fit(g)
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
-
 model = EgoNetSplitter(1.0)
 
 model.fit(g)
 
-
 #------------------------------------
 # Edmot example
 #------------------------------------
-
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.9)
 
 model = EdMot(3, 0.5)
 
 model.fit(g)
-
 
 #------------------------------------
 # DANMF example
@@ -103,9 +91,6 @@ model = DANMF()
 
 model.fit(g)
 
-
-quit()
-
 #------------------------------------
 # M-NMF example
 #------------------------------------
@@ -116,9 +101,7 @@ model = MNMF()
 
 model.fit(g)
 
-print(model.get_memberships())
-print(model.get_embedding())
-print(model.get_cluster_centers())
+quit()
 
 #------------------------------------
 # Label Propagation example
