@@ -2,8 +2,9 @@ import numpy as np
 import networkx as nx
 from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
+from karateclub.estimator import Estimator
 
-class Walklets(object):
+class Walklets(Estimator):
     r"""An implementation of `"Walklets" <https://arxiv.org/abs/1605.02115>`_
     from the ASONAM '17 paper "Don't Walk, Skip! Online Learning of Multi-scale
     Network Embeddings". The procedure uses random walks to approximate the

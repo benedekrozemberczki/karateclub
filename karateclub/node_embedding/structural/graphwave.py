@@ -1,8 +1,9 @@
 import pygsp
 import numpy as np
 import networkx as nx
+from karateclub.estimator import Estimator
 
-class GraphWave:
+class GraphWave(Estimator):
     r"""An implementation of `"GraphWave" <https://dl.acm.org/citation.cfm?id=2806512>`_
     from the KDD '18 paper "Learning Structural Node Embeddings Via Diffusion Wavelets".
     The procedure first calculates the graph wavelets using a heat kernel. The wavelets

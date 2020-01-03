@@ -2,8 +2,9 @@ import numpy as np
 import networkx as nx
 from numpy.linalg import inv
 from sklearn.decomposition import TruncatedSVD
+from karateclub.estimator import Estimator
 
-class BANE(object):
+class BANE(Estimator):
     r"""An implementation of `"BANE" <https://arxiv.org/abs/1403.6652>`_
     from the ICDM '18 paper "Binarized Attributed Network Embedding Class".
 
