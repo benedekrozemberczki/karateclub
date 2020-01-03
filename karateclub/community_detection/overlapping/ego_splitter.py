@@ -1,6 +1,5 @@
 import community
 import networkx as nx
-from tqdm import tqdm
 
 
 class EgoNetSplitter(object):
@@ -42,7 +41,7 @@ class EgoNetSplitter(object):
         self.personalities = {}
         self.index = 0
         print("Creating egonets.")
-        for node in tqdm(self.graph.nodes()):
+        for node in self.graph.nodes():
             self._create_egonet(node)
 
     def _map_personalities(self):
@@ -65,7 +64,7 @@ class EgoNetSplitter(object):
         Create a persona graph using the egonet components.
         """
         print("Creating the persona graph.")
-        self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in tqdm(self.graph.edges())]
+        self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in self.graph.edges()]
         self.persona_graph = nx.from_edgelist(self.persona_graph_edges)
 
     def _create_partitions(self):

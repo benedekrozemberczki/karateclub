@@ -80,20 +80,18 @@ model = EgoNetSplitter(1.0)
 
 model.fit(g)
 
-print(model.get_memberships())
+quit()
 
 #------------------------------------
 # Edmot example
 #------------------------------------
 
-print("EdMot.")
+
 g = nx.newman_watts_strogatz_graph(100, 10, 0.9)
 
 model = EdMot(3, 0.5)
 
 model.fit(g)
-
-#print(model.get_memberships())
 
 
 #------------------------------------
@@ -105,9 +103,6 @@ g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 model = DANMF()
 
 model.fit(g)
-
-print(model.get_memberships())
-print(model.get_embedding())
 
 #------------------------------------
 # M-NMF example
