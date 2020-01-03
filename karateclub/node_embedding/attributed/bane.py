@@ -43,11 +43,12 @@ class BANE(Estimator):
 
     def fit(self, graph, X):
         """
-        Creating a BANE embedding.
-        1. Running SVD.
-        2. Running power iterations and CDC.
+        Fitting a BANE model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **X** *(Scipy COO or Numpy matrix)* - The matrix of node features.
         """
- 
         self.P = self._create_target_matrix(graph)
         self.X = X
         self._fit_base_SVD_model()
