@@ -9,14 +9,14 @@ class BANE(Estimator):
     from the ICDM '18 paper "Binarized Attributed Network Embedding Class".
 
     Args:
-        dimensions (int): Number of random walks. Default is 10.
-        svd_iterations (int): Length of random walks. Default is 80.
-        seed (int): Dimensionality of embedding. Default is 128.
-        alpha (float): Number of cores. Default is 4.
-        approximation_rounds (int):
-        binarization_rounds (int):
+        dimensions (int): Number of embedding dimensions. Default is 32.
+        svd_iterations (int): SVD iteration count. Default is 50.
+        seed (int): Random seed. Default is 42.
+        alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
+        approximation_rounds (int): Matrix decomoposition iterations. Defailt is 100.
+        binarization_rounds (int): Binarization iterations. Default is 20.
     """
-    def __init__(self, dimensions=32, svd_iterations=70, seed=42, alpha=0.3,
+    def __init__(self, dimensions=32, svd_iterations=50, seed=42, alpha=0.3,
                  approximation_rounds=100, binarization_rounds=20):
         self.dimensions = dimensions
         self.svd_iterations = svd_iterations
