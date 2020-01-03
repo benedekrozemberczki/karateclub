@@ -30,7 +30,6 @@ model.get_embedding()
 
 model.fit(g, tp)
 model.get_embedding()
-quit()
 
 #-----------------------------------
 # BANE example
