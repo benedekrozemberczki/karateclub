@@ -6,7 +6,10 @@ from karateclub.estimator import Estimator
 
 class BANE(Estimator):
     r"""An implementation of `"BANE" <https://arxiv.org/abs/1403.6652>`_
-    from the ICDM '18 paper "Binarized Attributed Network Embedding Class".
+    from the ICDM '18 paper "Binarized Attributed Network Embedding Class". The 
+    procedure first calculates the truncated SVD of an adjcacency - feature matrix
+    product. This matrix is further decomposed by a binary CCD based technique. 
+       
 
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
