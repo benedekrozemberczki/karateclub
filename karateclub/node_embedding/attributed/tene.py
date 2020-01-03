@@ -74,7 +74,11 @@ class TENE(object):
 
     def fit(self, graph, T):
         """
-        Run updates.
+        Fitting a BANE model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **T** *(Scipy COO or Numpy matrix)* - The matrix of node features.
         """
         self.X = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         self.T = T
