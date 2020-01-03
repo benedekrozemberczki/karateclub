@@ -47,7 +47,7 @@ class BANE(Estimator):
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
-            * **X** *(Scipy COO or Numpy matrix)* - The matrix of node features.
+            * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self.P = self._create_target_matrix(graph)
         self.X = X

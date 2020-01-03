@@ -113,7 +113,7 @@ class TENE(object):
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
-            * **T** *(Scipy COO or Numpy matrix)* - The matrix of node features.
+            * **T** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self.X = self._create_base_matrix(graph)
         self.T = T
