@@ -9,7 +9,8 @@ class TENE(object):
     Enhanced Network Embedding with Text Information Abstract Class.
     For details see https://ieeexplore.ieee.org/document/8545577.
     """
-    def __init__(self):
+    def __init__(self, dimensions=32, lower_countrol=10**-15,
+                 alpha=0.1, beta=0.1, iterations=200):
         self.dimensions = dimensions
         self.lower_control = lower_control
         self.alpha = alpha
@@ -33,7 +34,7 @@ class TENE(object):
         enum = self.X.dot(self.U)
         denom = self.M.dot(self.U.T.dot(self.U))
         self.M = np.multiply(self.M, enum/denom)
-        self.M[self.M < self.args.lower_control] = self.args.lower_control
+        self.M[self.M < self.lower_control] = self.lower_control
 
     def _update_V(self):
         """
@@ -42,7 +43,7 @@ class TENE(object):
         enum = self.T.T.dot(self.Q)
         denom = self.V.dot(self.Q.T.dot(self.Q))
         self.V = np.multiply(self.V, enum/denom)
-        self.V[self.V < self.args.lower_control] = self.args.lower_control
+        self.V[self.V < self.lower_control] = self.lower_control
 
     def _update_C(self):
         """
@@ -51,25 +52,25 @@ class TENE(object):
         enum = self.Q.T.dot(self.U)
         denom = self.C.dot(self.U.T.dot(self.U))
         self.C = np.multiply(self.C, enum/denom)
-        self.C[self.C < self.args.lower_control] = self.args.lower_control
+        self.C[self.C < self.lower_control] = self.lower_control
 
     def _update_U(self):
         """
         Update features.
         """
-        enum = self.X.T.dot(self.M)+self.args.alpha*self.Q.dot(self.C)
-        denom = self.U.dot((self.M.T.dot(self.M)+self.args.alpha*self.C.T.dot(self.C)))
+        enum = self.X.T.dot(self.M)+self.alpha*self.Q.dot(self.C)
+        denom = self.U.dot((self.M.T.dot(self.M)+self.alpha*self.C.T.dot(self.C)))
         self.U = np.multiply(self.U, enum/denom)
-        self.U[self.U < self.args.lower_control] = self.args.lower_control
+        self.U[self.U < self.lower_control] = self.lower_control
 
     def _update_Q(self):
         """
         Update feature bases.
         """
-        enum = self.args.alpha*self.U.dot(self.C.T)+self.args.beta*self.T.dot(self.V)
-        denom = self.args.alpha*self.Q+self.args.beta*self.Q.dot(self.V.T.dot(self.V))
+        enum = self.alpha*self.U.dot(self.C.T)+self.beta*self.T.dot(self.V)
+        denom = self.alpha*self.Q+self.beta*self.Q.dot(self.V.T.dot(self.V))
         self.Q = np.multiply(self.Q, enum/denom)
-        self.Q[self.Q < self.args.lower_control] = self.args.lower_control
+        self.Q[self.Q < self.lower_control] = self.lower_control
 
     def fit(self, graph, T):
         """
@@ -77,13 +78,13 @@ class TENE(object):
         """
         self.X = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         self.T = T
-        self.init_weights()
-        for _ in tqdm(range(self.args.iterations)):
-            self.update_M()
-            self.update_V()
-            self.update_C()
-            self.update_U()
-            self.update_Q()
+        self._init_weights()
+        for _ in range(self.args.iterations):
+            self._update_M()
+            self._update_V()
+            self._update_C()
+            self._update_U()
+            self._update_Q()
 
     def get_embedding(self):
         r"""Getting the node embedding.
