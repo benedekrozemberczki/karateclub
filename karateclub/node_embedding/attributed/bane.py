@@ -4,9 +4,6 @@ from numpy.linalg import inv
 from sklearn.decomposition import TruncatedSVD
 
 class BANE(object):
-    """
-    Binarized Attributed Network Embedding Class (ICDM 2018).
-    """
     r"""An implementation of `"BANE" <https://arxiv.org/abs/1403.6652>`_
     from the ICDM '18 paper "Binarized Attributed Network Embedding Class".
 
