@@ -1,7 +1,8 @@
 import numpy as np
 import networkx as nx
+from karateclub.estimator import Estimator
 
-class NNSED(object):
+class NNSED(Estimator):
     r"""An implementation of `"NNSED"
     <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
     from the CIKM '17 paper "A Non-negative Symmetric Encoder-Decoder Approach

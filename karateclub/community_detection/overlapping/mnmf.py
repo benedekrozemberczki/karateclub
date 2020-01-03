@@ -1,8 +1,9 @@
 import numpy as np
 import networkx as nx
 from scipy.sparse import coo_matrix
+from karateclub.estimator import Estimator
 
-class MNMF:
+class MNMF(Estimator):
     r"""An implementation of `"M-NMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
     from the AAAI '17 paper "Community Preserving Network Embedding".
     The procedure uses joint non-negative matrix factorization with modularity
