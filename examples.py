@@ -112,6 +112,7 @@ model = LabelPropagation()
 model.fit(g)
 
 quit()
+
 #------------------------------------
 # GraRep example
 #------------------------------------

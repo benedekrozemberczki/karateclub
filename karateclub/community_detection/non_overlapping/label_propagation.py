@@ -1,6 +1,5 @@
 import random
 import networkx as nx
-from tqdm import tqdm
 
 class LabelPropagation:
     r"""An implementation of `"Label Propagation Clustering" <https://arxiv.org/abs/0709.2938>`_
@@ -37,7 +36,7 @@ class LabelPropagation:
         """
         random.shuffle(self.nodes)
         new_labels = {}
-        for node in tqdm(self.nodes):
+        for node in self.nodes:
             neighbors = [neb for neb in nx.neighbors(self.graph, node)]
             pick = self._make_a_pick(neighbors)
             new_labels[node] = pick
@@ -54,7 +53,7 @@ class LabelPropagation:
         self.nodes = [node for node in self.graph.nodes()]
         self.labels = {node: i for i, node in enumerate(self.graph.nodes())}
         random.seed(self.seed)
-        for _ in tqdm(range(self.rounds)):
+        for _ in range(self.rounds):
             self._do_a_propagation()
 
     def get_memberships(self):
