@@ -65,4 +65,9 @@ Attributed Node Embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.attributed.tene
+    :members:
+    :undoc-members:
+
+
 
