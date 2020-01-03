@@ -74,7 +74,7 @@ class TENE(object):
 
     def fit(self, graph, T):
         """
-        Fitting a BANE model.
+        Fitting a TENE model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
