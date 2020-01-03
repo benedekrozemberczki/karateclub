@@ -1,8 +1,9 @@
 import numpy as np
 import networkx as nx
 from sklearn.decomposition import NMF
+from karateclub.estimator import Estimator
 
-class DANMF(object):
+class DANMF(Estimator):
     r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
     from the CIKM '18 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
     Community Detection". The procedure uses telescopic non-negative matrix factorization
