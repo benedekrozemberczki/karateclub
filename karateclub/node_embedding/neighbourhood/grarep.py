@@ -2,9 +2,7 @@ import math
 import numpy as np
 import networkx as nx
 from scipy import sparse
-from tqdm import tqdm
 from sklearn.decomposition import TruncatedSVD
-
 
 
 class GraRep(object):
@@ -95,7 +93,7 @@ class GraRep(object):
         self.embeddings = []
         target_matrix = self._create_target_matrix()
         self._create_single_embedding(target_matrix)
-        for step in tqdm(range(self.order-1)):
+        for step in range(self.order-1):
             target_matrix = self._create_target_matrix()
             self._create_single_embedding(target_matrix)
 
