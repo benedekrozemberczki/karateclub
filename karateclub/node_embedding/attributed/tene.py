@@ -1,7 +1,6 @@
 import numpy as np
 import networkx as nx
-from numpy.linalg import inv
-from sklearn.decomposition import TruncatedSVD
+from scipy import sparse
 from karateclub.estimator import Estimator
 
 class TENE(object):
@@ -98,14 +97,15 @@ class TENE(object):
 
     def _create_base_matrix(self, graph):
         """
-        Creating a tuple with the normalized adjacency matrix.
+        Creating a normalized adjacency matrix.
 
         Return types:
-            * **(A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
+            * **A_hat* - Normalized adjacency matrix.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
         A_hat = D_inverse.dot(A)
+        return A_hat
 
     def fit(self, graph, T):
         """
