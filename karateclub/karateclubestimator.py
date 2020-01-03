@@ -1,7 +1,6 @@
 
 
 class Estimator(object):
-
     """Estimator meta class with constructor and public methods."""
 
     def __init__(self):
@@ -13,7 +12,7 @@ class Estimator(object):
         pass
 
     def get_embedding(self):
-        """Getting the embeddings."""
+        """Getting the embeddings (graph or node level)."""
         return None
 
     def get_memberships(self):
