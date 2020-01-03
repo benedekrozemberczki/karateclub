@@ -121,9 +121,8 @@ g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 model = GraRep()
 
 model.fit(g)
-embedding = model.get_embedding()
 
-print(embedding)
+embedding = model.get_embedding()
 
 #------------------------------------
 # GraphWave example
