@@ -34,7 +34,6 @@ class EdMot(object):
         """
         Enumerating pairwise motif counts.
         """
-        print("\nCalculating overlaps.\n")
         edges = [e for e in self.graph.edges() if self._overlap(e[0], e[1]) >= self.cutoff]
         self.motif_graph = nx.from_edgelist(edges)
 
@@ -42,7 +41,6 @@ class EdMot(object):
         """
         Extracting connected components from motif graph.
         """
-        print("\nExtracting components.\n")
         components = [c for c in sorted(nx.connected_components(self.motif_graph), key=len, reverse=True)]
         important_components = components[:self.component_count]
         self.blocks = [list(nodes) for nodes in important_components]
@@ -51,7 +49,6 @@ class EdMot(object):
         """
         Filling the dense blocks of the adjacency matrix.
         """
-        print("Adding edge blocks.\n")
         new_edges = [(n_1, n_2) for nodes in self.blocks for n_1 in nodes for n_2 in nodes]
         new_graph = nx.from_edgelist(new_edges)
         self.graph = nx.disjoint_union(self.graph, new_graph)
