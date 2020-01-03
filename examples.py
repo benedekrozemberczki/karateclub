@@ -95,13 +95,14 @@ print(model.get_memberships())
 # Edmot example
 #------------------------------------
 
+print("EdMot.")
 g = nx.newman_watts_strogatz_graph(100, 10, 0.9)
 
 model = EdMot(3, 0.5)
 
 model.fit(g)
 
-print(model.get_memberships())
+#print(model.get_memberships())
 
 
 #------------------------------------

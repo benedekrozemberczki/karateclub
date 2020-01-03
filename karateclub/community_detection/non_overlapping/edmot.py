@@ -1,6 +1,5 @@
 import community
 import networkx as nx
-from tqdm import tqdm
 
 class EdMot(object):
     r"""An implementation of `"Edge Motif Clustering" <https://arxiv.org/abs/1906.04560>`_
@@ -36,7 +35,7 @@ class EdMot(object):
         Enumerating pairwise motif counts.
         """
         print("\nCalculating overlaps.\n")
-        edges = [e for e in tqdm(self.graph.edges()) if self._overlap(e[0], e[1]) >= self.cutoff]
+        edges = [e for e in self.graph.edges() if self._overlap(e[0], e[1]) >= self.cutoff]
         self.motif_graph = nx.from_edgelist(edges)
 
     def _extract_components(self):
@@ -53,7 +52,7 @@ class EdMot(object):
         Filling the dense blocks of the adjacency matrix.
         """
         print("Adding edge blocks.\n")
-        new_edges = [(n_1, n_2) for nodes in tqdm(self.blocks) for n_1 in nodes for n_2 in nodes]
+        new_edges = [(n_1, n_2) for nodes in self.blocks for n_1 in nodes for n_2 in nodes]
         new_graph = nx.from_edgelist(new_edges)
         self.graph = nx.disjoint_union(self.graph, new_graph)
 
