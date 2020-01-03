@@ -1,6 +1,5 @@
 import pygsp
 import numpy as np
-from tqdm import tqdm
 import networkx as nx
 
 class GraphWave:
@@ -61,7 +60,7 @@ class GraphWave:
         Calculates the structural role embedding using the exact eigenvalue decomposition.
         """
         self.real_and_imaginary = []
-        for node in tqdm(range(self.number_of_nodes)):
+        for node in range(self.number_of_nodes):
             wave = self._single_wavelet_generator(node)
             wavelet_coefficients = [np.mean(np.exp(wave*1.0*step*1j)) for step in self.steps]
             self.real_and_imaginary.append(wavelet_coefficients)
@@ -82,7 +81,7 @@ class GraphWave:
         Given the Chebyshev polynomial and graph the approximate embedding is calculated.
         """
         self.real_and_imaginary = []
-        for node in tqdm(range(self.number_of_nodes)):
+        for node in range(self.number_of_nodes):
             impulse = np.zeros((self.number_of_nodes))
             impulse[node] = 1
             wave_coeffs = pygsp.filters.approximations.cheby_op(self.G, self.chebyshev, impulse)
@@ -119,7 +118,7 @@ class GraphWave:
         elif self.mechanism == "approximate":
             self._approximate_structural_wavelet_embedding()
         else:
-            print("Unknown procedure.")
+            pass
 
     def get_embedding(self):
         r"""Getting the node embedding.
