@@ -80,6 +80,33 @@ class TENE(object):
         self.Q = np.multiply(self.Q, enum/denom)
         self.Q[self.Q < self.lower_control] = self.lower_control
 
+    def _create_D_inverse(self, graph):
+        """
+        Creating a sparse inverse degree matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+
+        Return types:
+            * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
+        """
+        index = np.arange(graph.number_of_nodes())
+        values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
+        shape = (graph.number_of_nodes(), graph.number_of_nodes())
+        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        return D_inverse
+
+    def _create_base_matrix(self, graph):
+        """
+        Creating a tuple with the normalized adjacency matrix.
+
+        Return types:
+            * **(A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
+        """
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        D_inverse = self._create_D_inverse(graph)
+        A_hat = D_inverse.dot(A)
+
     def fit(self, graph, T):
         """
         Fitting a TENE model.
@@ -88,7 +115,7 @@ class TENE(object):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **T** *(Scipy COO or Numpy matrix)* - The matrix of node features.
         """
-        self.X = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        self.X = self._create_base_matrix(graph)
         self.T = T
         self._init_weights()
         for _ in range(self.iterations):
