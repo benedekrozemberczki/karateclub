@@ -101,22 +101,17 @@ model = MNMF()
 
 model.fit(g)
 
-quit()
-
 #------------------------------------
 # Label Propagation example
 #------------------------------------
 
-
 g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
+
 model = LabelPropagation()
 
 model.fit(g)
 
-print(model.get_memberships())
-
-
-
+quit()
 #------------------------------------
 # GraRep example
 #------------------------------------
