@@ -1,6 +1,5 @@
 import numpy as np
 import networkx as nx
-from tqdm import tqdm
 from numpy.linalg import inv
 from sklearn.decomposition import TruncatedSVD
 
@@ -50,9 +49,7 @@ class BANE(object):
  
         self.P = self._create_target_matrix(graph)
         self.X = X
-        print("\nFitting BANE model.\nBase SVD fitting started.")
         self._fit_base_SVD_model()
-        print("SVD completed.\nFitting binary model.\n")
         self._binary_optimize()
 
     def _fit_base_SVD_model(self):
@@ -86,7 +83,7 @@ class BANE(object):
         """
         Updating the embedding matrix.
         """
-        for _ in tqdm(range(self.approximation_rounds), desc="Inner approximation:"):
+        for _ in range(self.approximation_rounds):
             for d in range(self.dimensions):
                 sel = [x for x in range(self.dimensions) if x != d]
                 self.B[:, d] = self.Q[:, d]-self.B[:, sel].dot(self.G[sel, :]).dot(self.G[:, d]).transpose()
@@ -97,7 +94,7 @@ class BANE(object):
         Starting 2nd optimization phase with power iterations and CCD.
         """
         self.B = np.sign(np.random.normal(size=(self.P.shape[0], self.dimensions)))
-        for _ in tqdm(range(self.binarization_rounds), desc="Iteration", leave=True):
+        for _ in range(self.binarization_rounds):
             self._update_G()
             self._update_Q()
             self._update_B()
