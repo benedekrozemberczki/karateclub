@@ -1,7 +1,8 @@
 import community
 import networkx as nx
+from karateclub.estimator import Estimator
 
-class EdMot(object):
+class EdMot(Estimator):
     r"""An implementation of `"Edge Motif Clustering" <https://arxiv.org/abs/1906.04560>`_
     from the KDD '19 paper "EdMot: An Edge Enhancement Approach for Motif-aware Community Detection". The tool first creates
     the graph of higher order motifs. This graph is clustered by the Louvain method. The resulting

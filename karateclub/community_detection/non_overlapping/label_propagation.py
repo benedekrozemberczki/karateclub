@@ -1,7 +1,8 @@
 import random
 import networkx as nx
+from karateclub.estimator import Estimator
 
-class LabelPropagation:
+class LabelPropagation(Estimator):
     r"""An implementation of `"Label Propagation Clustering" <https://arxiv.org/abs/0709.2938>`_
     from the Physical Review '07 paper "Near Linear Time Algorithm to Detect Community Structures
     in Large-Scale Networks". The tool executes a series of label propagations wiht unique labels.
