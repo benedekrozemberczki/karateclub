@@ -10,13 +10,13 @@ class BANE(Estimator):
 
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
-        svd_iterations (int): SVD iteration count. Default is 50.
+        svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
         alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
         approximation_rounds (int): Matrix decomoposition iterations. Defailt is 100.
         binarization_rounds (int): Binarization iterations. Default is 20.
     """
-    def __init__(self, dimensions=32, svd_iterations=50, seed=42, alpha=0.3,
+    def __init__(self, dimensions=32, svd_iterations=20, seed=42, alpha=0.3,
                  approximation_rounds=100, binarization_rounds=20):
         self.dimensions = dimensions
         self.svd_iterations = svd_iterations
