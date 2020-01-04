@@ -24,6 +24,8 @@ Non-Overlapping Community Detection
 Neighbourhood-Based Node Embedding
 --------------------
 
+* Jundong Li, Liang Wu, and Huan Liu: **Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation** `Paper <https://arxiv.org/abs/1808.08627>`_
+
 * Benedek Rozemberczki and Rik Sarkar: **Fast Sequence Based Embedding with Diffusion Graphs** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
 
 * Bryan Perozzi, Vivek Kulkarni, Haochen Chen, Steven Skiena: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <https://arxiv.org/abs/1605.02115>`_
