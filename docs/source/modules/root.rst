@@ -53,6 +53,10 @@ Neighbourhood-Based Node Embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.neighbourhood.nmfadmm
+    :members:
+    :undoc-members:
+
 Structural Node Embedding
 --------------------
 .. automodule:: karateclub.node_embedding.structural.graphwave
