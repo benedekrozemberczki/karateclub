@@ -25,14 +25,14 @@ class NMFADMM(Estimator):
         """
         Initializing model weights.
         """
-        self.W = np.random.uniform(-0.1, 0.1, (self.V.shape[0], self.args.dimensions))
-        self.H = np.random.uniform(-0.1, 0.1, (self.args.dimensions, self.V.shape[1]))
+        self.W = np.random.uniform(-0.1, 0.1, (self.V.shape[0], self.dimensions))
+        self.H = np.random.uniform(-0.1, 0.1, (self.dimensions, self.V.shape[1]))
         X_i, Y_i = sp.nonzero(self.V)
-        scores = self.W[X_i]*self.H[:, Y_i].T+np.random.uniform(0, 1, (self.args.dimensions, ))
+        scores = self.W[X_i]*self.H[:, Y_i].T+np.random.uniform(0, 1, (self.dimensions, ))
         values = np.sum(scores, axis=-1)
         self.X = sp.sparse.coo_matrix((values, (X_i, Y_i)), shape=self.V.shape)
-        self.W_plus = np.random.uniform(0, 0.1, (self.V.shape[0], self.args.dimensions))
-        self.H_plus = np.random.uniform(0, 0.1, (self.args.dimensions, self.V.shape[1]))
+        self.W_plus = np.random.uniform(0, 0.1, (self.V.shape[0], self.dimensions))
+        self.H_plus = np.random.uniform(0, 0.1, (self.dimensions, self.V.shape[1]))
         self.alpha_X = sp.sparse.coo_matrix(([0]*len(values), (X_i, Y_i)), shape=self.V.shape)
         self.alpha_W = np.zeros(self.W.shape)
         self.alpha_H = np.zeros(self.H.shape)
@@ -41,18 +41,18 @@ class NMFADMM(Estimator):
         """
         Updating user matrix.
         """
-        left = np.linalg.pinv(self.H.dot(self.H.T)+np.eye(self.args.dimensions))
+        left = np.linalg.pinv(self.H.dot(self.H.T)+np.eye(self.dimensions))
         right_1 = self.X.dot(self.H.T).T+self.W_plus.T
-        right_2 = (1.0/self.args.rho)*(self.alpha_X.dot(self.H.T).T-self.alpha_W.T)
+        right_2 = (1.0/self.rho)*(self.alpha_X.dot(self.H.T).T-self.alpha_W.T)
         self.W = left.dot(right_1+right_2).T
 
     def _update_H(self):
         """
         Updating item matrix.
         """
-        left = np.linalg.pinv(self.W.T.dot(self.W)+np.eye(self.args.dimensions))
+        left = np.linalg.pinv(self.W.T.dot(self.W)+np.eye(self.dimensions))
         right_1 = self.X.T.dot(self.W).T+self.H_plus
-        right_2 = (1.0/self.args.rho)*(self.alpha_X.T.dot(self.W).T-self.alpha_H)
+        right_2 = (1.0/self.rho)*(self.alpha_X.T.dot(self.W).T-self.alpha_H)
         self.H = left.dot(right_1+right_2)
 
     def _update_X(self):
@@ -62,21 +62,21 @@ class NMFADMM(Estimator):
         iX, iY = sp.nonzero(self.V)
         values = np.sum(self.W[iX]*self.H[:, iY].T, axis=-1)
         scores = sp.sparse.coo_matrix((values-1, (iX, iY)), shape=self.V.shape)
-        left = self.args.rho*scores-self.alpha_X
-        right = (left.power(2)+4.0*self.args.rho*self.V).power(0.5)
-        self.X = (left+right)/(2*self.args.rho)
+        left = self.rho*scores-self.alpha_X
+        right = (left.power(2)+4.0*self.rho*self.V).power(0.5)
+        self.X = (left+right)/(2*self.rho)
 
     def _update_W_plus(self):
         """
         Updating positive primal user factors.
         """
-        self.W_plus = np.maximum(self.W+(1/self.args.rho)*self.alpha_W, 0)
+        self.W_plus = np.maximum(self.W+(1/self.rho)*self.alpha_W, 0)
 
     def _update_H_plus(self):
         """
         Updating positive primal item factors.
         """
-        self.H_plus = np.maximum(self.H+(1/self.args.rho)*self.alpha_H, 0)
+        self.H_plus = np.maximum(self.H+(1/self.rho)*self.alpha_H, 0)
 
     def _update_alpha_X(self):
         """
@@ -85,19 +85,19 @@ class NMFADMM(Estimator):
         iX, iY = sp.nonzero(self.V)
         values = np.sum(self.W[iX]*self.H[:, iY].T, axis=-1)
         scores = sp.sparse.coo_matrix((values, (iX, iY)), shape=self.V.shape)
-        self.alpha_X = self.alpha_X+self.args.rho*(self.X-scores)
+        self.alpha_X = self.alpha_X+self.rho*(self.X-scores)
 
     def _update_alpha_W(self):
         """
         Updating user dual factors.
         """
-        self.alpha_W = self.alpha_W+self.args.rho*(self.W-self.W_plus)
+        self.alpha_W = self.alpha_W+self.rho*(self.W-self.W_plus)
 
     def _update_alpha_H(self):
         """
         Updating item dual factors.
         """
-        self.alpha_H = self.alpha_H+self.args.rho*(self.H-self.H_plus)
+        self.alpha_H = self.alpha_H+self.rho*(self.H-self.H_plus)
 
     def _create_D_inverse(self, graph):
         """
