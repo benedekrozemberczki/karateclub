@@ -67,12 +67,14 @@ Neighbourhood-Based Node Embedding
 
 Structural Node Embedding
 --------------------
+
 .. automodule:: karateclub.node_embedding.structural.graphwave
     :members:
     :undoc-members:
 
 Attributed Node Embedding
 --------------------
+
 .. automodule:: karateclub.node_embedding.attributed.bane
     :members:
     :undoc-members:
