@@ -1,7 +1,8 @@
 import numpy as np
 import networkx as nx
-from scipy import sparse
+import scipy as sp
 from karateclub.estimator import Estimator
+from tqdm import tqdm
 
 class NMFADMM(Estimator):
     r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
@@ -112,7 +113,7 @@ class NMFADMM(Estimator):
         index = np.arange(graph.number_of_nodes())
         values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
-        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        D_inverse = sp.sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
 
     def _create_base_matrix(self, graph):
@@ -133,16 +134,16 @@ class NMFADMM(Estimator):
         """
         self.V = self._create_base_matrix(graph)
         self._init_weights()
-        for _ in range(self.iterations):
-            self.update_W()
-            self.update_H()
-            self.update_X()
-            self.update_W_plus()
-            self.update_H_plus()
-            self.update_alpha_X()
-            self.update_alpha_W()
-            self.update_alpha_H()
+        for _ in tqdm(range(self.iterations)):
+            self._update_W()
+            self._update_H()
+            self._update_X()
+            self._update_W_plus()
+            self._update_H_plus()
+            self._update_alpha_X()
+            self._update_alpha_W()
+            self._update_alpha_H()
 
     def get_embedding(self):
-        return None
-
+        embedding = np.concatenate([self.W_plus, self.H_plus.T], axis=1)
+        return embedding
