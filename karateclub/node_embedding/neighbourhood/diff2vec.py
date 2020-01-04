@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
 from gensim.models.word2vec import Word2Vec
-from karateclub.utils.diffusion import DiffusionTree
+from karateclub.utils.diffuser import EulerianDiffuser
 from karateclub.estimator import Estimator
 
 class Diff2Vec(Estimator):
@@ -18,7 +18,7 @@ class Diff2Vec(Estimator):
         learning_rate (float): HogWild! learning rate.
         min_count (int): Minimal count of node occurences.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
+    def __init__(self, diffusion_number=10, diffusion_cover=80, dimensions=128, workers=4,
                  window_size=5, epochs=1, learning_rate=0.05, min_count=1):
 
         self.diffusion_number = diffusion_number

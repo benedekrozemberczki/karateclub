@@ -1,3 +1,3 @@
 from .walker import RandomWalker
-from .diffuser import DiffusionTree 
+from .diffuser import EulerianDiffuser
 
