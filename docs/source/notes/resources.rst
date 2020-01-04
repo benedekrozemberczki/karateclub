@@ -30,7 +30,7 @@ Neighbourhood-Based Node Embedding
 
 * Bryan Perozzi, Rami Al-Rfou, Steven Skiena: **DeepWalk: Online Learning of Social Representations** `Paper <https://arxiv.org/abs/1403.6652>`_, `Slides <https://www.slideshare.net/bperz/14-kdddeep-walk-2>`_, `Video <https://www.youtube.com/watch?v=n12HS-24CtA>`_, `Video <https://www.youtube.com/watch?v=aZNtHJwfIVg>`_
 
-* Dennis L. Sun and Cédric Févotte: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <https://arxiv.org/abs/1605.02115>`_
+* Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <https://arxiv.org/abs/1605.02115>`_
 
 Structural Node Embedding
 --------------------
