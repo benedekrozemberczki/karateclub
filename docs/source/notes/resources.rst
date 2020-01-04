@@ -24,7 +24,7 @@ Non-Overlapping Community Detection
 Neighbourhood-Based Node Embedding
 --------------------
 
-* Benedek Rozemberczki and Rik Sarkar: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <https://arxiv.org/abs/1605.02115>`_
+* Benedek Rozemberczki and Rik Sarkar: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
 
 * Bryan Perozzi, Vivek Kulkarni, Haochen Chen, Steven Skiena: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <https://arxiv.org/abs/1605.02115>`_
 
