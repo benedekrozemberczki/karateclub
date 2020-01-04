@@ -16,89 +16,96 @@ class NMFADMM(Estimator):
         order (int): Number of PMI matrix powers. Default is 5
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions=32, iteration=10, order=5, seed=42):
-        self.dimensions = dimensions
-        self.iterations = iteration
-        self.order = order
-        self.seed = seed
 
-    def _create_D_inverse(self, graph):
+    def _init_weights(self):
         """
-        Creating a sparse inverse degree matrix.
-
-        Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
-
-        Return types:
-            * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
+        Initializing model weights.
         """
-        index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
-        shape = (graph.number_of_nodes(), graph.number_of_nodes())
-        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
-        return D_inverse
+        self.W = np.random.uniform(-0.1, 0.1, (self.V.shape[0], self.args.dimensions))
+        self.H = np.random.uniform(-0.1, 0.1, (self.args.dimensions, self.V.shape[1]))
+        X_i, Y_i = sp.nonzero(self.V)
+        scores = self.W[X_i]*self.H[:, Y_i].T+np.random.uniform(0, 1, (self.args.dimensions, ))
+        values = np.sum(scores, axis=-1)
+        self.X = sp.sparse.coo_matrix((values, (X_i, Y_i)), shape=self.V.shape)
+        self.W_plus = np.random.uniform(0, 0.1, (self.V.shape[0], self.args.dimensions))
+        self.H_plus = np.random.uniform(0, 0.1, (self.args.dimensions, self.V.shape[1]))
+        self.alpha_X = sp.sparse.coo_matrix(([0]*len(values), (X_i, Y_i)), shape=self.V.shape)
+        self.alpha_W = np.zeros(self.W.shape)
+        self.alpha_H = np.zeros(self.H.shape)
 
-    def _create_base_matrix(self, graph):
+    def _update_W(self):
         """
-        Creating a tuple with the normalized adjacency matrix.
-
-        Return types:
-            * **(A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
+        Updating user matrix.
         """
-        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
-        D_inverse = self._create_D_inverse(graph)
-        A_hat = D_inverse.dot(A)
-        return (A_hat, A_hat)
+        left = np.linalg.pinv(self.H.dot(self.H.T)+np.eye(self.args.dimensions))
+        right_1 = self.X.dot(self.H.T).T+self.W_plus.T
+        right_2 = (1.0/self.args.rho)*(self.alpha_X.dot(self.H.T).T-self.alpha_W.T)
+        self.W = left.dot(right_1+right_2).T
 
-    def _create_target_matrix(self):
+    def _update_H(self):
         """
-        Creating a log transformed target matrix.
-
-        Return types:
-            * **target_matrix** *(SciPy array)* - The PMI matrix.
+        Updating item matrix.
         """
-        self.A_tilde = sparse.coo_matrix(self.A_tilde.dot(self.A_hat))
-        scores = np.log(self.A_tilde.data)-math.log(self.A_tilde.shape[0])
-        rows = self.A_tilde.row[scores < 0]
-        cols = self.A_tilde.col[scores < 0]
-        scores = scores[scores < 0]
-        target_matrix = sparse.coo_matrix((scores, (rows, cols)),
-                                          shape=self.A_tilde.shape,
-                                          dtype=np.float32)
+        left = np.linalg.pinv(self.W.T.dot(self.W)+np.eye(self.args.dimensions))
+        right_1 = self.X.T.dot(self.W).T+self.H_plus
+        right_2 = (1.0/self.args.rho)*(self.alpha_X.T.dot(self.W).T-self.alpha_H)
+        self.H = left.dot(right_1+right_2)
 
-        return target_matrix
-
-    def _create_single_embedding(self, target_matrix):
+    def _update_X(self):
         """
-        Fitting a single SVD embedding of a PMI matrix.
+        Updating user-item matrix.
         """
-        svd = TruncatedSVD(n_components=self.dimensions,
-                           n_iter=self.iterations,
-                           random_state=self.seed)
-        svd.fit(target_matrix)
-        embedding = svd.transform(target_matrix)
-        self.embeddings.append(embedding)
+        iX, iY = sp.nonzero(self.V)
+        values = np.sum(self.W[iX]*self.H[:, iY].T, axis=-1)
+        scores = sp.sparse.coo_matrix((values-1, (iX, iY)), shape=self.V.shape)
+        left = self.args.rho*scores-self.alpha_X
+        right = (left.power(2)+4.0*self.args.rho*self.V).power(0.5)
+        self.X = (left+right)/(2*self.args.rho)
 
-    def fit(self, graph):
+    def _update_W_plus(self):
         """
-        Fitting a GraRep model.
-
-        Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
+        Updating positive primal user factors.
         """
-        self.A_tilde, self.A_hat = self._create_base_matrix(graph)
-        self.embeddings = []
-        target_matrix = self._create_target_matrix()
-        self._create_single_embedding(target_matrix)
-        for step in range(self.order-1):
-            target_matrix = self._create_target_matrix()
-            self._create_single_embedding(target_matrix)
+        self.W_plus = np.maximum(self.W+(1/self.args.rho)*self.alpha_W, 0)
 
-    def get_embedding(self):
-        r"""Getting the node embedding.
-
-        Return types:
-            * **embedding** *(Numpy array)* - The embedding of nodes.
+    def _update_H_plus(self):
         """
-        embedding = np.concatenate(self.embeddings, axis=1)
-        return embedding
+        Updating positive primal item factors.
+        """
+        self.H_plus = np.maximum(self.H+(1/self.args.rho)*self.alpha_H, 0)
+
+    def _update_alpha_X(self):
+        """
+        Updating target matrix dual.
+        """
+        iX, iY = sp.nonzero(self.V)
+        values = np.sum(self.W[iX]*self.H[:, iY].T, axis=-1)
+        scores = sp.sparse.coo_matrix((values, (iX, iY)), shape=self.V.shape)
+        self.alpha_X = self.alpha_X+self.args.rho*(self.X-scores)
+
+    def _update_alpha_W(self):
+        """
+        Updating user dual factors.
+        """
+        self.alpha_W = self.alpha_W+self.args.rho*(self.W-self.W_plus)
+
+    def _update_alpha_H(self):
+        """
+        Updating item dual factors.
+        """
+        self.alpha_H = self.alpha_H+self.args.rho*(self.H-self.H_plus)
+
+    def _optimize(self):
+        """
+        Running ADMM steps.
+        """
+        for i in tqdm(range(self.args.epochs)):
+            self.update_W()
+            self.update_H()
+            self.update_X()
+            self.update_W_plus()
+            self.update_H_plus()
+            self.update_alpha_X()
+            self.update_alpha_W()
+            self.update_alpha_H()
+
