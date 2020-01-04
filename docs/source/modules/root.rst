@@ -45,6 +45,10 @@ Neighbourhood-Based Node Embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.neighbourhood.boostne
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.node_embedding.neighbourhood.walklets
     :members:
     :undoc-members:
