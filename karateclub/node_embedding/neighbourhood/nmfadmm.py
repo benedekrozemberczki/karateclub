@@ -5,7 +5,7 @@ from karateclub.estimator import Estimator
 from tqdm import tqdm
 
 class NMFADMM(Estimator):
-    r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
+    r"""An implementation of `"NMF ADMM" <https://dl.acm.org/citation.cfm?id=2806512>`_
     from the CIKM '15 paper "GraRep: Learning Graph Representations with Global
     Structural Information". The procedure uses sparse truncated SVD to learn
     embeddings for the powers of the PMI matrix computed from powers of the
@@ -13,11 +13,10 @@ class NMFADMM(Estimator):
 
     Args:
         dimensions (int): Number of individual embedding dimensions. Default is 32.
-        iteration (int): Number of SVD iterations. Default is 10.
-        order (int): Number of PMI matrix powers. Default is 5
-        seed (int): SVD random seed. Default is 42.
+        iterations (int): Number of ADMM iterations. Default is 100.
+        rho (float): ADMM Tuning parameter. Default is 1.0.
     """
-    def __init__(self, dimensions=32, iterations=100, rho=0.1):
+    def __init__(self, dimensions=32, iterations=100, rho=1.0):
         self.dimensions = dimensions
         self.iterations = iterations
         self.rho = rho
