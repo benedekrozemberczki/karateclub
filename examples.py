@@ -13,7 +13,7 @@ from karateclub.node_embedding.attributed import BANE, TENE
 
 
 #-----------------------------------
-# NMF ADMM example
+# Diff2Vec example
 #-----------------------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
