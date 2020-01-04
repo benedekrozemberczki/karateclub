@@ -7,9 +7,23 @@ import numpy as np
 
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
-from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM
+from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
+
+
+#-----------------------------------
+# NMF ADMM example
+#-----------------------------------
+
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+model = Diff2Vec()
+
+model.fit(g)
+model.get_embedding()
+
+quit()
 
 #-----------------------------------
 # NMF ADMM example
