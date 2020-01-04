@@ -81,6 +81,8 @@ In detail, the following methods are currently implemented.
 
 * **[DeepWalk](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.deepwalk.DeepWalk)** from Perozzi *et al.*: [DeepWalk: Online Learning of Social Representations](https://arxiv.org/abs/1403.6652) (KDD 2014)
 
+* **[NMF-ADMM](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nmfadmm.NMFADMM)** from Perozzi *et al.*: [DeepWalk: Online Learning of Social Representations](https://arxiv.org/abs/1403.6652) (ICASSP 2014)
+
 **Structural Node Level Embedding**
 
 * **[GraphWave](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.structural.graphwave.GraphWave)** from Donnat *et al.*: [Learning Structural Node Embeddings via Diffusion Wavelets](https://arxiv.org/abs/1710.10321) (KDD 2018)
