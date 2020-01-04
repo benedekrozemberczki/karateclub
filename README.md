@@ -81,7 +81,7 @@ In detail, the following methods are currently implemented.
 
 * **[DeepWalk](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.deepwalk.DeepWalk)** from Perozzi *et al.*: [DeepWalk: Online Learning of Social Representations](https://arxiv.org/abs/1403.6652) (KDD 2014)
 
-* **[NMF-ADMM](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nmfadmm.NMFADMM)** from Sun and Févotte: [DeepWalk: Online Learning of Social Representations](http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf) (ICASSP 2014)
+* **[NMF-ADMM](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nmfadmm.NMFADMM)** from Sun and Févotte: [Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence](http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf) (ICASSP 2014)
 
 **Structural Node Level Embedding**
 
