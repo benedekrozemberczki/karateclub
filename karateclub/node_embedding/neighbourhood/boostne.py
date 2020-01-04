@@ -2,7 +2,7 @@ import math
 import numpy as np
 import networkx as nx
 from scipy import sparse
-from sklearn.decomposition import TruncatedSVD
+from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
 
 class BoostNE(Estimator):
@@ -73,7 +73,7 @@ class BoostNE(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        target_matrix = self._create_target_matrix(graph)
+        self.residuals = self._create_target_matrix(graph)
 
 
 
