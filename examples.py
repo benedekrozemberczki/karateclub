@@ -12,7 +12,7 @@ from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
 
 #-----------------------------------
-# NMFADMM example
+# NMF ADMM example
 #-----------------------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)

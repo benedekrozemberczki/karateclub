@@ -130,7 +130,7 @@ class NMFADMM(Estimator):
 
     def fit(self, graph):
         """
-        Fitting a GraRep model.
+        Fitting an NMF model on the normalized adjacency matrix with ADMM.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
