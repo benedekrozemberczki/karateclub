@@ -23,8 +23,6 @@ model = Diff2Vec()
 model.fit(g)
 model.get_embedding()
 
-quit()
-
 #-----------------------------------
 # NMF ADMM example
 #-----------------------------------
