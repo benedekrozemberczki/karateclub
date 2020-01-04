@@ -7,6 +7,9 @@ from karateclub.estimator import Estimator
 class Diff2Vec(Estimator):
     r"""An implementation of `"Diff2Vec" <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
     from the CompleNet '18 paper "Diff2Vec: Fast Sequence Based Embedding with Diffusion Graphs".
+    The procedure creates diffusion trees from every source node in the graph. These graphs are linearized
+    by a directed Eulerian walk, the walks are used for running the skip-gram algorithm the learn node
+    level neighbourhood based embeddings.
 
     Args:
         diffusion_number (int): Number of diffusions. Default is 10.
