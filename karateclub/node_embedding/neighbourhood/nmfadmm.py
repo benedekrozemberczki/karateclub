@@ -16,7 +16,11 @@ class NMFADMM(Estimator):
         order (int): Number of PMI matrix powers. Default is 5
         seed (int): SVD random seed. Default is 42.
     """
-
+    def __init__(self, dimensions=32, iterations=100, rho=0.1):
+        self.dimensions = dimensions
+        self.iterations = iterations
+        self.rho = rho
+        
     def _init_weights(self):
         """
         Initializing model weights.
@@ -95,11 +99,41 @@ class NMFADMM(Estimator):
         """
         self.alpha_H = self.alpha_H+self.args.rho*(self.H-self.H_plus)
 
-    def _optimize(self):
+    def _create_D_inverse(self, graph):
+        """
+        Creating a sparse inverse degree matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+
+        Return types:
+            * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
+        """
+        index = np.arange(graph.number_of_nodes())
+        values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
+        shape = (graph.number_of_nodes(), graph.number_of_nodes())
+        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        return D_inverse
+
+    def _create_base_matrix(self, graph):
+        """
+        Creating a tuple with the normalized adjacency matrix.
+
+        Return types:
+            * **A_hat** *SciPy array* - Normalized adjacency matrix.
+        """
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        D_inverse = self._create_D_inverse(graph)
+        A_hat = D_inverse.dot(A)
+        return A_hat
+
+    def fit(self, graph):
         """
         Running ADMM steps.
         """
-        for i in tqdm(range(self.args.epochs)):
+        self.V = self._create_base_matrix(graph)
+        self._init_weights()
+        for _ in range(self.iterations):
             self.update_W()
             self.update_H()
             self.update_X()
@@ -108,4 +142,7 @@ class NMFADMM(Estimator):
             self.update_alpha_X()
             self.update_alpha_W()
             self.update_alpha_H()
+
+    def get_embedding(self):
+        return None
 
