@@ -5,8 +5,8 @@ from karateclub.estimator import Estimator
 from tqdm import tqdm
 
 class NMFADMM(Estimator):
-    r"""An implementation of `"NMF ADMM" <https://dl.acm.org/citation.cfm?id=2806512>`_
-    from the CIKM '15 paper "GraRep: Learning Graph Representations with Global
+    r"""An implementation of `"NMF ADMM" <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_
+    from the ICASSP '15 paper "GraRep: Learning Graph Representations with Global
     Structural Information". The procedure uses sparse truncated SVD to learn
     embeddings for the powers of the PMI matrix computed from powers of the
     normalized adjacency matrix.
