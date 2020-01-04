@@ -6,10 +6,10 @@ from tqdm import tqdm
 
 class NMFADMM(Estimator):
     r"""An implementation of `"NMF ADMM" <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_
-    from the ICASSP '15 paper "GraRep: Learning Graph Representations with Global
-    Structural Information". The procedure uses sparse truncated SVD to learn
-    embeddings for the powers of the PMI matrix computed from powers of the
-    normalized adjacency matrix.
+    from the ICASSP '14 paper "Alternating Direction Method of Multipliers for 
+    Non-Negative Matrix Factorization with the Beta-Divergence.". The procedure uses 
+    learns an embedding of the normalized adjacency matrix with by using the alternating
+    direction method mod multipliers.
 
     Args:
         dimensions (int): Number of individual embedding dimensions. Default is 32.
