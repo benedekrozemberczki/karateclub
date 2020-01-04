@@ -5,15 +5,13 @@ from karateclub.utils.diffusion import DiffusionTree
 from karateclub.estimator import Estimator
 
 class Diff2Vec(Estimator):
-    r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
-    from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
-    The procedure uses random walks to approximate the pointwise mutual information
-    matrix obtained by pooling normalized adjacency matrix powers. This matrix
-    is decomposed by an approximate factorization technique.
+    r"""An implementation of `"Diff2Vec" <https://arxiv.org/abs/1403.6652>`_
+    from the CompleNet '18 paper "Diff2Vec: Online Learning of Social Representations".
+
 
     Args:
-        walk_number (int): Number of random walks. Default is 10.
-        walk_length (int): Length of random walks. Default is 80.
+        diffusion_number (int): Number of diffusions. Default is 10.
+        diffusion_cover (int): Number of nodes in diffusion. Default is 40.
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 5.
