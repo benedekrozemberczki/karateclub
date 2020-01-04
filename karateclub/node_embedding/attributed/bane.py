@@ -28,7 +28,6 @@ class BANE(Estimator):
         self.approximation_rounds = approximation_rounds
         self.binarization_rounds = binarization_rounds 
 
-
     def _create_target_matrix(self, graph):
         """
         Creating a normalized sparse adjacency matrix target. 
