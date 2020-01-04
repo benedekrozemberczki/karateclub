@@ -148,5 +148,10 @@ class NMFADMM(Estimator):
             self._update_alpha_H()
 
     def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
         embedding = np.concatenate([self.W_plus, self.H_plus.T], axis=1)
         return embedding
