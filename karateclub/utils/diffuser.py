@@ -10,10 +10,13 @@ class EulerianDiffuser:
 
     def _run_diffusion_process(self, node):
         """
-        Generating a diffusion tree from a given source node.
-        Linearizing it with an Eulerian tour.
-        :param node: Source of diffusion.
-        :return euler: Eulerian linear node sequence.
+        Generating a diffusion tree from a given source node and linearizing it
+        with a directed Eulerian tour.
+
+        Arg types:
+            * **node** *(int)* - The source node of the diffusion.
+        Return types:
+            * **euler** *(list of strings)* - The list of nodes in the walk.
         """
         infected = [node]
         sub_graph = nx.DiGraph()
@@ -39,7 +42,7 @@ class EulerianDiffuser:
         Running diffusions from every node.
 
         Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **graph** *(NetworkX graph)* - The graph to run diffusions on.
         """
         self.graph = graph
         self.diffusions = []
