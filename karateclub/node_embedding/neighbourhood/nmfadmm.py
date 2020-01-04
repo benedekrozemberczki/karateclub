@@ -1,8 +1,7 @@
 import numpy as np
-import networkx as nx
 import scipy as sp
+import networkx as nx
 from karateclub.estimator import Estimator
-from tqdm import tqdm
 
 class NMFADMM(Estimator):
     r"""An implementation of `"NMF-ADMM" <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_
