@@ -130,7 +130,10 @@ class NMFADMM(Estimator):
 
     def fit(self, graph):
         """
-        Running ADMM steps.
+        Fitting a GraRep model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self.V = self._create_base_matrix(graph)
         self._init_weights()
