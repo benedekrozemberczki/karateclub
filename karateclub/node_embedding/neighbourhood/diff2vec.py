@@ -37,7 +37,7 @@ class Diff2Vec(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        diffuser = DiffusionTree(self.diffusion_number, self.diffusion_cover)
+        diffuser = EulerianDiffuser(self.diffusion_number, self.diffusion_cover)
         diffuser.do_diffusions(graph)
 
         model = Word2Vec(diffuser.diffusions,
