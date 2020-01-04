@@ -41,7 +41,7 @@ class EulerianDiffuser:
             euler = [str(u) for u, v in nx.eulerian_circuit(graph, infected[0])]
         return euler
 
-    def run_diffusions(self, graph):
+    def do_diffusions(self, graph):
         """
         Running diffusions from every node.
 
