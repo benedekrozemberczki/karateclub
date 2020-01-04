@@ -76,10 +76,6 @@ class BoostNE(Estimator):
         self.residuals = self._create_target_matrix(graph)
 
 
-
-
-
-
     def get_embedding(self):
         r"""Getting the node embedding.
 
