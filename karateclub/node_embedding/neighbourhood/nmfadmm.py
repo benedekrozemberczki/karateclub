@@ -33,7 +33,7 @@ class NMFADMM(Estimator):
         self.X = sp.sparse.coo_matrix((values, (X_i, Y_i)), shape=self.V.shape)
         self.W_plus = np.random.uniform(0, 0.1, (self.V.shape[0], self.dimensions))
         self.H_plus = np.random.uniform(0, 0.1, (self.dimensions, self.V.shape[1]))
-        self.alpha_X = sp.sparse.coo_matrix(([0]*len(values), (X_i, Y_i)), shape=self.V.shape)
+        self.alpha_X = sp.sparse.coo_matrix((np.zeros(values.shape[0]), (X_i, Y_i)), shape=self.V.shape) ###
         self.alpha_W = np.zeros(self.W.shape)
         self.alpha_H = np.zeros(self.H.shape)
 
