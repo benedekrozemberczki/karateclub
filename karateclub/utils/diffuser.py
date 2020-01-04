@@ -1,8 +1,12 @@
+import random
 
 class EulerianDiffuser:
     """
     Class to make diffusions for a given graph.
-    
+
+    Args:
+        diffusion_number (int): Number of diffusions. Default is 10.
+        diffusion_cover (int): Number of nodes in diffusion. Default is 40.
     """
     def __init__(self, diffusion_number, diffusion_cover):
         self.diffusion_number = diffusion_number
