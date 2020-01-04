@@ -6,11 +6,10 @@ import community
 import numpy as np
 
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
-from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec
+from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
-
 
 #-----------------------------------
 # Diff2Vec example
