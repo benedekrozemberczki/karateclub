@@ -5,9 +5,8 @@ from karateclub.utils.diffusion import DiffusionTree
 from karateclub.estimator import Estimator
 
 class Diff2Vec(Estimator):
-    r"""An implementation of `"Diff2Vec" <https://arxiv.org/abs/1403.6652>`_
-    from the CompleNet '18 paper "Diff2Vec: Online Learning of Social Representations".
-
+    r"""An implementation of `"Diff2Vec" <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
+    from the CompleNet '18 paper "Diff2Vec: Fast Sequence Based Embedding with Diffusion Graphs".
 
     Args:
         diffusion_number (int): Number of diffusions. Default is 10.
@@ -22,8 +21,8 @@ class Diff2Vec(Estimator):
     def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
                  window_size=5, epochs=1, learning_rate=0.05, min_count=1):
 
-        self.walk_number = walk_number
-        self.walk_length = walk_length
+        self.diffusion_number = diffusion_number
+        self.diffusion_cover = diffusion_cover
         self.dimensions = dimensions
         self.workers = workers
         self.window_size = window_size
@@ -33,15 +32,15 @@ class Diff2Vec(Estimator):
 
     def fit(self, graph):
         """
-        Fitting a DeepWalk model.
+        Fitting a Diff2Vec model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        walker = RandomWalker(self.walk_number, self.walk_length)
-        walker.do_walks(graph)
+        diffuser = DiffusionTree(self.diffusion_number, self.diffusion_cover)
+        diffuser.do_diffusions(graph)
 
-        model = Word2Vec(walker.walks,
+        model = Word2Vec(diffuser.diffusions,
                          hs=1,
                          alpha=self.learning_rate,
                          iter=self.epochs,
