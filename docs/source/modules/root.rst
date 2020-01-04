@@ -41,7 +41,11 @@ Non-Overlapping Community Detection
 Neighbourhood-Based Node Embedding
 --------------------
 
-.. automodule:: karateclub.node_embedding.neighbourhood.deepwalk
+.. automodule:: karateclub.node_embedding.neighbourhood.diff2vec
+    :members:
+    :undoc-members:
+
+.. automodule:: karateclub.node_embedding.neighbourhood.walklets
     :members:
     :undoc-members:
 
@@ -49,7 +53,7 @@ Neighbourhood-Based Node Embedding
     :members:
     :undoc-members:
 
-.. automodule:: karateclub.node_embedding.neighbourhood.walklets
+.. automodule:: karateclub.node_embedding.neighbourhood.deepwalk
     :members:
     :undoc-members:
 
