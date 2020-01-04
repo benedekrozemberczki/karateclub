@@ -74,7 +74,7 @@ class BoostNE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         target_matrix = self._create_target_matrix(graph)
-        self._create_single_embedding(target_matrix)
+
 
 
 
