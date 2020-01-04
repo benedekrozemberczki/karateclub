@@ -8,9 +8,9 @@ class EulerianDiffuser:
 
     Args:
         diffusion_number (int): Number of diffusions. Default is 10.
-        diffusion_cover (int): Number of nodes in diffusion. Default is 40.
+        diffusion_cover (int): Number of nodes in diffusion. Default is 80.
     """
-    def __init__(self, diffusion_number, diffusion_cover):
+    def __init__(self, diffusion_number=10, diffusion_cover=80):
         self.diffusion_number = diffusion_number
         self.diffusion_cover = diffusion_cover
 

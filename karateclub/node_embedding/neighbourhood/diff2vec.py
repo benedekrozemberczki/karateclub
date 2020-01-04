@@ -13,7 +13,7 @@ class Diff2Vec(Estimator):
 
     Args:
         diffusion_number (int): Number of diffusions. Default is 10.
-        diffusion_cover (int): Number of nodes in diffusion. Default is 40.
+        diffusion_cover (int): Number of nodes in diffusion. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 5.
