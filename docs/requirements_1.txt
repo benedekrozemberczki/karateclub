@@ -7,3 +7,4 @@ sklearn
 scipy
 pygsp
 gensim
+hashlib
