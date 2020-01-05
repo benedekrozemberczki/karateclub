@@ -92,12 +92,12 @@ class BoostNE(Estimator):
         Rescaling the target matrix with the anchor row and column.
 
         Arg types:
-            * **X** *(Numpy array)* - The target matrix.
+            * **X** *(COO Scipy matrix)* - The target matrix.
             * **chosen_row** *(int)* - The row anchor.
             * **choswen_col** *(int)* - The column anchor.
 
         Return types:
-            * **X** *(Numpy array)* - The rescaled target matrix.
+            * **X** *(COO Scipy matrix)* - The rescaled target matrix.
         """
         row_sims = X.dot(chosen_row.transpose())
         column_sims = chosen_col.transpose().dot(X)
@@ -107,10 +107,14 @@ class BoostNE(Estimator):
 
     def _fit_and_score_NMF(self, new_residuals):
         """
-        Factorizing a residual matrix, returning the approximate target and an embedding.
-        :param new_residuals: Input target matrix.
-        :return scores: Approximate target matrix.
-        :return W: Embedding matrix.
+        Factorizing a residual matrix, returning the approximate target, and an embedding.
+
+        Arg types:
+            * **new_residuals** *(COO Scipy matrix)* - The residual matrix.
+
+        Return types:
+            * **scores** *(COO Scipy matrix)* - The residual scores.
+            * **W** *(Numpy array)* - The embedding matrix.
         """
         model = NMF(n_components=self.dimensions,
                     init="random",
