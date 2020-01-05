@@ -82,3 +82,10 @@ Attributed node embedding
 .. automodule:: karateclub.node_embedding.attributed.tene
     :members:
     :undoc-members:
+
+Graph embedding
+--------------------
+
+.. automodule:: karateclub.graph_embedding.graph2vec
+    :members:
+    :undoc-members:
