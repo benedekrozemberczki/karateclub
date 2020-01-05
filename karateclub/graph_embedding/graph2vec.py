@@ -3,6 +3,7 @@ import networkx as nx
 from gensim.models.word2vec import Word2Vec
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 from karateclub.estimator import Estimator
+from tqdm import tqdm
 
 class Graph2Vec(Estimator):
     r"""An implementation of `"Diff2Vec" <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
@@ -40,7 +41,7 @@ class Graph2Vec(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        pass
+        docs = [WeisfeilerLehmanHashing(graph, 2, False) for graph in tqdm(graphs)]
 
         #diffuser = EulerianDiffuser(self.diffusion_number, self.diffusion_cover)
         #diffuser.do_diffusions(graph)
