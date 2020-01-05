@@ -38,7 +38,7 @@ class Graph2Vec(Estimator):
         Fitting a Diff2Vec model.
 
         Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed) for graph in graphs]
         documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
@@ -57,7 +57,7 @@ class Graph2Vec(Estimator):
 
 
     def get_embedding(self):
-        r"""Getting the node embedding.
+        r"""Getting the graph embedding.
 
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
