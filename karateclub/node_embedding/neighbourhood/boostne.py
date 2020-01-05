@@ -17,7 +17,7 @@ class BoostNE(Estimator):
         dimensions (int): Number of individual embedding dimensions. Default is 4.
         iterations (int): Number of boosting iterations. Default is 10.
         order (int): Number of adjacency matrix powers. Default is 5.
-        alpha (float): NMF regularization parameter. 0.01.
+        alpha (float): NMF regularization parameter. Default is 0.01.
     """
     def __init__(self, dimensions=4, iterations=10, order=5, alpha=0.01):
         self.dimensions = dimensions
