@@ -5,11 +5,11 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
 class Graph2Vec(Estimator):
-    r"""An implementation of `"Diff2Vec" <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
-    from the CompleNet '18 paper "Diff2Vec: Fast Sequence Based Embedding with Diffusion Graphs".
-    The procedure creates diffusion trees from every source node in the graph. These graphs are linearized
-    by a directed Eulerian walk, the walks are used for running the skip-gram algorithm the learn node
-    level neighbourhood based embeddings.
+    r"""An implementation of `"Graph2Vec" <https://arxiv.org/abs/1707.05005>`_
+    from the MLGWorkshop '17 paper "Graph2Vec: Learning Distributed Representations of Graphs".
+    The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
+    these features a document (graph) - feature co-occurence matrix is decomposed in order
+    to generate representations for the graphs.
 
     Args:
         wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
