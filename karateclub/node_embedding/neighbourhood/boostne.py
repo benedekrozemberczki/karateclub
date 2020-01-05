@@ -128,6 +128,9 @@ class BoostNE(Estimator):
         return scores, W
 
     def _setup_base_model(self):
+        """
+        Fitting NMF on the starting matrix.
+        """
         self.shape = self.residuals.shape
         indices = self.residuals.nonzero()
         self.index_1 = indices[0]
