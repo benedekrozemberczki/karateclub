@@ -16,19 +16,19 @@ class MNMF(Estimator):
         lambd (float): KKT penalty. Default is 0.2
         alpha (float): Clustering penalty. Default is 0.05.
         beta (float): Modularity regularization penalty. Default is 0.05.
-        iteration_number (int): Number of power iterations. Default is 200.
+        iterations (int): Number of power iterations. Default is 200.
         lower_control (float): Floating point overflow control. Default is 10**-15.
         eta (float): Similarity mixing parameter. Default is 5.0.
     """
     def __init__(self, dimensions=128, clusters=10, lambd=0.2, alpha=0.05,
-                 beta=0.05, iteration_number=200, lower_control=10**-15, eta=5.0):
+                 beta=0.05, iterations=200, lower_control=10**-15, eta=5.0):
 
         self.dimensions = dimensions
         self.clusters = clusters
         self.lambd = lambd
         self.alpha = alpha
         self.beta = beta
-        self.iteration_number = iteration_number
+        self.iterations = iterations
         self.lower_control = lower_control
         self.eta = eta
 
@@ -141,7 +141,7 @@ class MNMF(Estimator):
         """
         self.graph = graph
         self._setup_matrices()
-        for _ in range(self.iteration_number):
+        for _ in range(self.iterations):
             self._update_M()
             self._update_U()
             self._update_C()
