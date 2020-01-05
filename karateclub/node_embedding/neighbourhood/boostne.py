@@ -8,8 +8,8 @@ from karateclub.estimator import Estimator
 
 class BoostNE(Estimator):
     r"""An implementation of `"BoostNE" <https://dl.acm.org/citation.cfm?id=2806512>`_
-    from the ASONAM '19 paper "GraRep: Learning Graph Representations with Global
-    Structural Information". The procedure uses sparse truncated SVD to learn
+    from the ASONAM '19 paper "Multi-Level Network Embedding with Boosted Low-Rank
+    Matrix Approximation". The procedure uses sparse truncated SVD to learn
     embeddings for the powers of the PMI matrix computed from powers of the
     normalized adjacency matrix.
 
@@ -149,7 +149,6 @@ class BoostNE(Estimator):
         """
         row = self._sampler(1)
         column = self._sampler(0)
-
         chosen_row = self.residuals[row, :]
         chosen_column = self.residuals[:, column]
         new_residuals = self._reweighting(self.residuals, chosen_row, chosen_column)
