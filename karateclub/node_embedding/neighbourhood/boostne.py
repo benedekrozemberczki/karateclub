@@ -14,8 +14,8 @@ class BoostNE(Estimator):
     normalized adjacency matrix.
 
     Args:
-        dimensions (int): Number of individual embedding dimensions. Default is 32.
-        iteration (int): Number of SVD iterations. Default is 10.
+        dimensions (int): Number of individual embedding dimensions. Default is 4.
+        iteration (int): Number of boosting iterations. Default is 10.
         order (int): Number of PMI matrix powers. Default is 5.
         alpha (float): NMF regularization parameter. 0.01.
     """
