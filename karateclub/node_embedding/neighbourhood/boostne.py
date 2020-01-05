@@ -80,8 +80,7 @@ class BoostNE(Estimator):
         sums = np.sum(np.sum(row_weights))
         to_pick_from = row_weights.reshape(-1)
         to_pick_from = (to_pick_from/np.sum(to_pick_from)).tolist()[0]
-
-        sample = self.binary_search(to_pick_from)
+        sample = self._binary_search(to_pick_from)
         return sample
 
     def _reweighting(self, X, chosen_row, chosen_column):
