@@ -1,8 +1,8 @@
 import numpy as np
 import networkx as nx
+from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
-from karateclub.estimator import Estimator
 
 class Graph2Vec(Estimator):
     r"""An implementation of `"Diff2Vec" <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
