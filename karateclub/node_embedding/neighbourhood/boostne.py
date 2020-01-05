@@ -9,9 +9,9 @@ from karateclub.estimator import Estimator
 class BoostNE(Estimator):
     r"""An implementation of `"BoostNE" <https://arxiv.org/abs/1808.08627>`_
     from the ASONAM '19 paper "Multi-Level Network Embedding with Boosted Low-Rank
-    Matrix Approximation". The procedure uses sparse truncated SVD to learn
-    embeddings for the powers of the PMI matrix computed from powers of the
-    normalized adjacency matrix.
+    Matrix Approximation". The procedure uses non-negative matrix factorization 
+    iteratively to decompose the residuals obtained by previous factorization models.
+    The base target matrix is a pooled sum of adjacency matrix powers. 
 
     Args:
         dimensions (int): Number of individual embedding dimensions. Default is 4.
@@ -71,8 +71,12 @@ class BoostNE(Estimator):
     def _sampler(self, index):
         """
         Anchor sampling procedure.
-        :param index: Matrix axis row/column chosen for anchor sampling.
-        :return sample: Chosen sampled row/column id.
+
+        Arg types:
+            * **index** *(int)* - The axis for marginalization.
+
+        Return types:
+            * **sample** *(int)* - Anchor point index.
         """
         row_weights = self.residuals.sum(axis=index)
         if len(row_weights.shape) > 1:
