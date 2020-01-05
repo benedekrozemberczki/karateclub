@@ -98,6 +98,10 @@ In detail, the following methods are currently implemented.
 
 **Graph Level Embedding**
 
+* **[Graph2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.graph2vec.Graph2Vec)** from Yang *et al.*: [Graph2Vec: Learning Distributed Representations of Graphs](https://ieeexplore.ieee.org/document/8545577) (MLGWorkshop 2017)
+
+
+
 Head over to our [documentation](https://karateclub.readthedocs.io) to find out more about installation and data handling, a full list of implemented methods, and datasets.
 For a quick start, check out our [examples](https://github.com/benedekrozemberczki/karateclub/tree/master/examples.py).
 
