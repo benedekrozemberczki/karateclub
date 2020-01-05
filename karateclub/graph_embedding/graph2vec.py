@@ -12,8 +12,8 @@ class Graph2Vec(Estimator):
     level neighbourhood based embeddings.
 
     Args:
-        wl_iterations (int): Number of diffusions. Default is 10.
-        attributed (int): Number of nodes in diffusion. Default is 80.
+        wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
+        attributed (bool): Number of nodes in diffusion. Default is False.
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         down_sampling (float): Down sampling frequency. Default is 0.0001.
