@@ -87,16 +87,20 @@ class BoostNE(Estimator):
         sample = self._binary_search(to_pick_from)
         return sample
 
-    def _reweighting(self, X, chosen_row, chosen_column):
+    def _reweighting(self, X, chosen_row, chosen_col):
         """
         Rescaling the target matrix with the anchor row and column.
-        :param X: The target matrix rescaled.
-        :param chosen_row: Anchor row.
-        :param chosen_column: Anchor column.
-        :return X: The rescaled residual.
+
+        Arg types:
+            * **X** *(Numpy array)* - The target matrix.
+            * **chosen_row** *(int)* - The row anchor.
+            * **choswen_col** *(int)* - The column anchor.
+
+        Return types:
+            * **X** *(Numpy array)* - The rescaled target matrix.
         """
         row_sims = X.dot(chosen_row.transpose())
-        column_sims = chosen_column.transpose().dot(X)
+        column_sims = chosen_col.transpose().dot(X)
         X = sparse.csr_matrix(row_sims).multiply(X)
         X = X.multiply(sparse.csr_matrix(column_sims))
         return X
