@@ -57,9 +57,9 @@ class Graph2Vec(Estimator):
 
 
     def get_embedding(self):
-        r"""Getting the graph embedding.
+        r"""Getting the embedding of graphs.
 
         Return types:
-            * **embedding** *(Numpy array)* - The embedding of nodes.
+            * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
