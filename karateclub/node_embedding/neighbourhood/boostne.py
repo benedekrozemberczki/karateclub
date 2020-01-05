@@ -7,8 +7,8 @@ from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
 
 class BoostNE(Estimator):
-    r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
-    from the CIKM '15 paper "GraRep: Learning Graph Representations with Global
+    r"""An implementation of `"BoostNE" <https://dl.acm.org/citation.cfm?id=2806512>`_
+    from the ASONAM '19 paper "GraRep: Learning Graph Representations with Global
     Structural Information". The procedure uses sparse truncated SVD to learn
     embeddings for the powers of the PMI matrix computed from powers of the
     normalized adjacency matrix.
