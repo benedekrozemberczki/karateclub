@@ -1,7 +1,7 @@
 External Resources
 ==================
 
-Overlapping Community Detection
+Overlapping community detection
 --------------------
 
 * Alessandro Epasto, Silvio Lattanzi, Renato Paes Leme: **Ego-splitting Framework: from Non-Overlapping to Overlapping Clusters** `Paper <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_, `Slides <https://epasto.org/papers/kdd2017-Slides.pdf>`_, `Video <https://www.youtube.com/watch?v=xMGZo-F_jss>`_
@@ -14,14 +14,14 @@ Overlapping Community Detection
 
 * Jaewon Yang and Jure Leskovec: **Overlapping Community Detection at Scale: A Nonnegative Matrix Factorization Approach** `Paper <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_, `Slides <http://snap.stanford.edu/class/cs224w-2017/slides/18-overlapping.pdf>`_, `Video <https://www.youtube.com/watch?v=Y78Kugdq24I>`_, `Video <https://www.youtube.com/watch?v=cuDDBfvK71g>`_
 
-Non-Overlapping Community Detection
+Non-overlapping community detection
 --------------------
 
 * Pei-Zhen Li, Ling Huang, Chang-Dong Wang, and Jian-Huang Lai: **EdMot: An Edge Enhancement Approach for Motif-aware Community Detection** `Paper <https://arxiv.org/abs/1906.04560>`_, `Video <https://www.youtube.com/watch?v=6fEGMHJSsq0>`_
 
 * Usha Nandini Raghavan, Reka Albert, Soundar Kumara: **Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks** `Paper <https://arxiv.org/abs/0709.2938>`_
 
-Neighbourhood-Based Node Embedding
+Neighbourhood-based node embedding
 --------------------
 
 * Jundong Li, Liang Wu, and Huan Liu: **Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation** `Paper <https://arxiv.org/abs/1808.08627>`_
@@ -36,19 +36,19 @@ Neighbourhood-Based Node Embedding
 
 * Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_
 
-Structural Node Embedding
+Structural node embedding
 --------------------
 
 * Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Learning Structural Node Embeddings Via Diffusion Wavelets** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_
 
 
-Attributed Node Embedding
+Attributed node embedding
 --------------------
 
 * Hong Yang, Shirui Pan, Peng Zhang, Ling Chen, Defu Lian, Chengqi Zhang: **Binarized Attributed Network Embedding** `Paper <https://ieeexplore.ieee.org/document/8626170>`_
 
 * Shuang Yang, Bo Yang : **Enhanced Network Embedding with Text Information** `Paper <https://ieeexplore.ieee.org/document/8545577>`_
 
-Whole Graph Embedding
+Whole graph embedding
 --------------------
 
