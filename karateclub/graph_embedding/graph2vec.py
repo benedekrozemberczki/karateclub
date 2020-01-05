@@ -35,7 +35,7 @@ class Graph2Vec(Estimator):
 
     def fit(self, graphs):
         """
-        Fitting a Diff2Vec model.
+        Fitting a Graph2Vec model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
