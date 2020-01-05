@@ -34,7 +34,6 @@ class Walklets(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
 
-
     def _select_walklets(self, walks, power):
         walklets = []
         for walk in walks:
