@@ -53,14 +53,13 @@ class Graph2Vec(Estimator):
                         epochs=self.epochs,
                         alpha=self.learning_rate)
 
-        self.embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
 
     def get_embedding(self):
         r"""Getting the node embedding.
-    
+
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        pass
-    #    return np.array(self._embedding)
+        return np.array(self._embedding)
