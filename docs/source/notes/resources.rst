@@ -52,3 +52,5 @@ Attributed node embedding
 Whole graph embedding
 --------------------
 
+* Annamalai Narayanan, Mahinthan Chandramohan, Rajasekar Venkatesan, Lihui Chen, Yang Liu, Shantanu Jaiswal: **graph2vec: Learning Distributed Representations of Graphs** `Paper <https://ieeexplore.ieee.org/document/8626170>`_
+
