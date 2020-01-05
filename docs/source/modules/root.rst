@@ -4,7 +4,7 @@ karateclub
 .. contents:: Contents
     :local:
 
-Overlapping Community Detection
+Overlapping community detection
 --------------------
 
 .. automodule:: karateclub.community_detection.overlapping.ego_splitter
@@ -27,7 +27,7 @@ Overlapping Community Detection
     :members:
     :undoc-members:
 
-Non-Overlapping Community Detection
+Non-overlapping community detection
 --------------------
 
 .. automodule:: karateclub.community_detection.non_overlapping.edmot
@@ -38,7 +38,7 @@ Non-Overlapping Community Detection
     :members:
     :undoc-members:
 
-Neighbourhood-Based Node Embedding
+Neighbourhood-based node embedding
 --------------------
 
 .. automodule:: karateclub.node_embedding.neighbourhood.diff2vec
@@ -65,14 +65,14 @@ Neighbourhood-Based Node Embedding
     :members:
     :undoc-members:
 
-Structural Node Embedding
+Structural node embedding
 --------------------
 
 .. automodule:: karateclub.node_embedding.structural.graphwave
     :members:
     :undoc-members:
 
-Attributed Node Embedding
+Attributed node embedding
 --------------------
 
 .. automodule:: karateclub.node_embedding.attributed.bane
