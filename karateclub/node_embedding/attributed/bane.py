@@ -16,17 +16,17 @@ class BANE(Estimator):
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
         alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
-        approximation_rounds (int): Matrix decomoposition iterations. Default is 100.
-        binarization_rounds (int): Binarization iterations. Default is 20.
+        iterations (int): Matrix decomoposition iterations. Default is 100.
+        binarization_iterations (int): Binarization iterations. Default is 20.
     """
     def __init__(self, dimensions=32, svd_iterations=20, seed=42, alpha=0.3,
-                 approximation_rounds=100, binarization_rounds=20):
+                 iterations=100, binarization_iterations=20):
         self.dimensions = dimensions
         self.svd_iterations = svd_iterations
         self.seed = seed
         self.alpha = alpha
-        self.approximation_rounds = approximation_rounds
-        self.binarization_rounds = binarization_rounds 
+        self.iterations = iterations
+        self.binarization_iterations = binarization_iterations
 
     def _create_target_matrix(self, graph):
         """
@@ -84,7 +84,7 @@ class BANE(Estimator):
         """
         Updating the embedding matrix.
         """
-        for _ in range(self.approximation_rounds):
+        for _ in range(self.iterations):
             for d in range(self.dimensions):
                 sel = [x for x in range(self.dimensions) if x != d]
                 self.B[:, d] = self.Q[:, d]-self.B[:, sel].dot(self.G[sel, :]).dot(self.G[:, d]).transpose()
@@ -95,7 +95,7 @@ class BANE(Estimator):
         Starting 2nd optimization phase with power iterations and CCD.
         """
         self.B = np.sign(np.random.normal(size=(self.P.shape[0], self.dimensions)))
-        for _ in range(self.binarization_rounds):
+        for _ in range(self.binarization_iterations):
             self._update_G()
             self._update_Q()
             self._update_B()
