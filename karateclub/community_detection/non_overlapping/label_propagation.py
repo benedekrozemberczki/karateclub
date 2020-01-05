@@ -9,12 +9,12 @@ class LabelPropagation(Estimator):
     The final labels are used as cluster memberships.
 
     Args:
-        seed (int): Random seed. Default is 22.
-        rounds (int): Propagation rounds. Default is 100.
+        seed (int): Random seed. Default is 42.
+        rounds (int): Propagation iterations. Default is 100.
     """
-    def __init__(self, seed=42, rounds=100):
+    def __init__(self, seed=42, iterations=100):
         self.seed = seed
-        self.rounds = rounds
+        self.iterations = iterations
 
     def _make_a_pick(self, neighbors):
         """
