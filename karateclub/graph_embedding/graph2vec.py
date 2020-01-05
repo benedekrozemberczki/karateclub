@@ -16,8 +16,8 @@ class Graph2Vec(Estimator):
         attributed (int): Number of nodes in diffusion. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
-        down_sampling (int): Matrix power order. Default is 5.
-        epochs (int): Number of epochs.
+        down_sampling (float): Down sampling frequency. Default is 0.0001.
+        epochs (int): Number of epochs. Default is 10.
         learning_rate (float): HogWild! learning rate. Deefault is 0.025.
         min_count (int): Minimal count of graph feature occurences. Default is 5.
     """
