@@ -18,8 +18,8 @@ class Graph2Vec(Estimator):
         workers (int): Number of cores. Default is 4.
         down_sampling (int): Matrix power order. Default is 5.
         epochs (int): Number of epochs.
-        learning_rate (float): HogWild! learning rate.
-        min_count (int): Minimal count of node occurences.
+        learning_rate (float): HogWild! learning rate. Deefault is 0.025.
+        min_count (int): Minimal count of graph feature occurences. Default is 5.
     """
     def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
                  down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5):
