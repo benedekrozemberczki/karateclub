@@ -41,7 +41,7 @@ class Graph2Vec(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         documents = [WeisfeilerLehmanHashing(graph, self.wil_iterations, self.attributed) for graph in graphs]
-        documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in dociments.items()]
+        documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
 
         model = Doc2Vec(documents,
                         vector_size=self.dimensions,
@@ -52,6 +52,8 @@ class Graph2Vec(Estimator):
                         workers=self.workers,
                         epochs=self.epochs,
                         alpha=self.learning_rate)
+
+        self.embedding = [model.docvecs[str(i)]) for i, _  in enumerate(documents)]
 
 
     def get_embedding(self):
