@@ -6,22 +6,6 @@ from scipy import sparse
 from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
 
-
-def binary_search(weights):
-    running_totals = np.cumsum(weights)
-    target_distance = np.random.uniform(0,1)
-    low, high = 0, len(weights)
-    while low < high:
-        mid = int((low + high) / 2)
-        distance = running_totals[mid]
-        if distance < target_distance:
-            low = mid + 1
-        elif distance > target_distance:
-            high = mid
-        else:
-            return mid
-    return low
-
 class BoostNE(Estimator):
     r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
     from the CIKM '15 paper "GraRep: Learning Graph Representations with Global
@@ -97,7 +81,7 @@ class BoostNE(Estimator):
         to_pick_from = row_weights.reshape(-1)
         to_pick_from = (to_pick_from/np.sum(to_pick_from)).tolist()[0]
 
-        sample = binary_search(to_pick_from)
+        sample = self.binary_search(to_pick_from)
         return sample
 
     def _reweighting(self, X, chosen_row, chosen_column):
@@ -143,6 +127,22 @@ class BoostNE(Estimator):
         self.index_2 = indices[1]
         base_score, embedding = self._fit_and_score_NMF(self.residuals)
         self.embeddings = [embedding]
+
+
+    def _binary_search(self, weights):
+        running_totals = np.cumsum(weights)
+        target_distance = np.random.uniform(0,1)
+        low, high = 0, len(weights)
+        while low < high:
+            mid = int((low + high) / 2)
+            distance = running_totals[mid]
+            if distance < target_distance:
+                low = mid + 1
+            elif distance > target_distance:
+                high = mid
+            else:
+                return mid
+        return low
 
     def _single_boosting_round(self):
         """
