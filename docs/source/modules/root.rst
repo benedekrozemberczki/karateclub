@@ -83,7 +83,7 @@ Attributed node embedding
     :members:
     :undoc-members:
 
-Graph embedding
+Whole graph embedding
 --------------------
 
 .. automodule:: karateclub.graph_embedding.graph2vec
