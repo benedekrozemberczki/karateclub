@@ -40,7 +40,7 @@ class Graph2Vec(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        documents = [WeisfeilerLehmanHashing(graph, self.wil_iterations, self.attributed) for graph in graphs]
+        documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed) for graph in graphs]
         documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
 
         model = Doc2Vec(documents,
