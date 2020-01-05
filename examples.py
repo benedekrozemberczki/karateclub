@@ -10,6 +10,20 @@ from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, 
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
+from karateclub.graph_embedding import Graph2Vec
+
+#-----------------------------------
+# Graph2Vec example
+#-----------------------------------
+
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(1000)]
+
+model = Graph2Vec()
+
+model.fit(graphs)
+model.get_embedding()
+
+quit()
 
 #-----------------------------------
 # BoostNE example
