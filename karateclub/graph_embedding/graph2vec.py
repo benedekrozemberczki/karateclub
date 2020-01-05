@@ -1,9 +1,8 @@
 import numpy as np
 import networkx as nx
-from gensim.models.word2vec import Word2Vec
+from gensim.models.doc2vec import Doc2Vec
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 from karateclub.estimator import Estimator
-from tqdm import tqdm
 
 class Graph2Vec(Estimator):
     r"""An implementation of `"Diff2Vec" <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
@@ -22,14 +21,14 @@ class Graph2Vec(Estimator):
         learning_rate (float): HogWild! learning rate.
         min_count (int): Minimal count of node occurences.
     """
-    def __init__(self, diffusion_number=10, diffusion_cover=80, dimensions=128, workers=4,
+    def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
                  window_size=5, epochs=1, learning_rate=0.05, min_count=1):
 
         self.diffusion_number = diffusion_number
         self.diffusion_cover = diffusion_cover
         self.dimensions = dimensions
         self.workers = workers
-        self.window_size = window_size
+        self.down_sampling = down_sampling
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.min_count = min_count
@@ -41,22 +40,18 @@ class Graph2Vec(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        docs = [WeisfeilerLehmanHashing(graph, 2, False) for graph in tqdm(graphs)]
+        documents = [WeisfeilerLehmanHashing(graph, self.wil_iterations, self.attributed) for graph in graphs]
+        documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in dociments.items()]
 
-        #diffuser = EulerianDiffuser(self.diffusion_number, self.diffusion_cover)
-        #diffuser.do_diffusions(graph)
-
-        #model = Word2Vec(diffuser.diffusions,
-        #                 hs=1,
-        #                 alpha=self.learning_rate,
-        #                 iter=self.epochs,
-        #                 size=self.dimensions,
-        #                 window=self.window_size,
-        #                 min_count=self.min_count,
-        #                 workers=self.workers)
-        #
-        #num_of_nodes = graph.number_of_nodes()
-        #self._embedding = [model[str(n)] for n in range(num_of_nodes)]
+        model = Doc2Vec(documents,
+                        vector_size=self.dimensions,
+                        window=0,
+                        min_count=self.min_count,
+                        dm=0,
+                        sample=self.down_sampling,
+                        workers=self.workers,
+                        epochs=self.epochs,
+                        alpha=self.learning_rate)
 
 
     def get_embedding(self):
