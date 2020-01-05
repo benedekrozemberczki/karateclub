@@ -54,7 +54,7 @@ class LabelPropagation(Estimator):
         self.nodes = [node for node in self.graph.nodes()]
         self.labels = {node: i for i, node in enumerate(self.graph.nodes())}
         random.seed(self.seed)
-        for _ in range(self.rounds):
+        for _ in range(self.iterations):
             self._do_a_propagation()
 
     def get_memberships(self):
