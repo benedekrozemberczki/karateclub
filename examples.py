@@ -22,8 +22,6 @@ model = BoostNE()
 model.fit(g)
 model.get_embedding()
 
-quit()
-
 #-----------------------------------
 # Diff2Vec example
 #-----------------------------------
