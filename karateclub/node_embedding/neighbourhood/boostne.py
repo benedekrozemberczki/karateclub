@@ -144,6 +144,15 @@ class BoostNE(Estimator):
 
 
     def _binary_search(self, weights):
+        """
+        Weighted search procedure. Choosing a random index.
+
+        Arg types:
+            * **weights** *(Numpy array)* - The weights for choosing an index.
+
+        Return types:
+            * **low/mid** *(int)* - Sampled index.
+        """
         running_totals = np.cumsum(weights)
         target_distance = np.random.uniform(0,1)
         low, high = 0, len(weights)
