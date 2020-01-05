@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
 from gensim.models.word2vec import Word2Vec
-from karateclub.utils.diffuser import EulerianDiffuser
+from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 from karateclub.estimator import Estimator
 
 class Graph2Vec(Estimator):
