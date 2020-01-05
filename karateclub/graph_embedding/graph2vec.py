@@ -22,7 +22,7 @@ class Graph2Vec(Estimator):
         min_count (int): Minimal count of node occurences.
     """
     def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
-                 down_sampling=0.0001, epochs=1, learning_rate=0.05, min_count=1):
+                 down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5):
 
         self.wl_iterations = wl_iterations
         self.attributed = attributed
