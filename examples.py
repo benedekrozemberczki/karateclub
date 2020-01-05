@@ -23,8 +23,6 @@ model = Graph2Vec()
 model.fit(graphs)
 model.get_embedding()
 
-quit()
-
 #-----------------------------------
 # BoostNE example
 #-----------------------------------
