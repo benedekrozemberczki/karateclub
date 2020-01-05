@@ -17,7 +17,7 @@ class BoostNE(Estimator):
         dimensions (int): Number of individual embedding dimensions. Default is 32.
         iteration (int): Number of SVD iterations. Default is 10.
         order (int): Number of PMI matrix powers. Default is 5.
-
+        alpha (float): NMF regularization parameter. 0.01.
     """
     def __init__(self, dimensions=4, iteration=10, order=5, alpha=0.01):
         self.dimensions = dimensions
