@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 import networkx as nx
@@ -13,10 +14,13 @@ class LargeGraphReader(object):
         graph = self.get_graph()
         features = self.get_features()
         target = self.get_target()
-        return (graph, features, target)    
+        return (graph, features, target) 
+   
     def _get_graph():
-        pass
+        graph_path = os.path.join(self.base_url, self.dataset, "edges.csv")
+
     def _get_features():
-        pass
+        features_path = os.path.join(self.base_url, self.dataset, "features.json")
+
     def _get_target():
-        pass
+        target_path = os.path.join(self.base_url, self.dataset, "target.csv")
