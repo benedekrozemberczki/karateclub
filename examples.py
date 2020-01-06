@@ -11,7 +11,7 @@ from karateclub.community_detection.non_overlapping import EdMot, LabelPropagati
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
-from karateclub.io import GraphReader
+from karateclub.dataset import GraphReader
 
 dataset = "facebook"
 reader = GraphReader(d)
