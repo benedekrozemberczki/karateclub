@@ -1,2 +1,2 @@
-from .datasetreader import GraphReader
+from .dataset_reader import GraphReader
 
