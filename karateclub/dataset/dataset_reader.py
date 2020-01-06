@@ -7,14 +7,7 @@ import networkx as nx
 from six.moves import urllib
 from scipy.sparse import coo_matrix
 
-def pandas_reader(bytes):
-    """
-    """
-    tab = pd.read_csv(io.BytesIO(bytes),
-                      encoding="utf8",
-                      sep=",",
-                      dtype={"switch": np.int32})
-    return tab
+
 
 class GraphReader(object):
     r"""Class to read benchmark datasets for the community detection or node embedding task.
@@ -33,6 +26,16 @@ class GraphReader(object):
         path = os.path.join(self.base_url, self.dataset, end)
         data = urllib.request.urlopen(path)
         return data
+
+    def pandas_reader(self, bytes):
+        """
+        Reading bytes as a Pandas dataframe.
+        """
+        tab = pd.read_csv(io.BytesIO(bytes),
+                          encoding="utf8",
+                          sep=",",
+                          dtype={"switch": np.int32})
+        return tab
    
     def get_graph(self):
         r"""Getting the graph.
@@ -41,7 +44,7 @@ class GraphReader(object):
             * **graph** *(NetworkX graph)* - Graph of interest.
         """
         data = self._dataset_reader("edges.csv")
-        data = pandas_reader(data.read())
+        data = self._pandas_reader(data.read())
         graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
         return graph
 
@@ -69,6 +72,6 @@ class GraphReader(object):
             * **target** *(Numpy array)* - Class membership vector.
         """
         data = self._dataset_reader("target.csv")
-        data = pandas_reader(data.read())
+        data = self._pandas_reader(data.read())
         target = np.array(data["target"])
         return target
