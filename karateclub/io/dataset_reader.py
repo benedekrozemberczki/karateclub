@@ -20,26 +20,23 @@ class GraphReader(object):
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 
-    def get_dataset(self):
-        graph = self._get_graph()
-        features = self._get_features()
-        target = self._get_target()
-        return (graph, features, target) 
+    def _dataset_reader(self, end):
+        path = os.path.join(self.base_url, self.dataset, end)
+        data = urllib.request.urlopen(path)
+        return data
    
     def _get_graph(self):
-        graph_path = os.path.join(self.base_url, self.dataset, "edges.csv")
-        data = urllib.request.urlopen(graph_path)
+        data = self._dataset_reader("edges.csv")
         data = pandas_reader(data.read())
         graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
+        print(nx.density(graph))
         return graph
 
     def _get_features(self):
-        features_path = os.path.join(self.base_url, self.dataset, "features.json")
+        data = self._dataset_reader("features.json")
 
     def _get_target(self):
-        target_path = os.path.join(self.base_url, self.dataset, "target.csv")
-        data = urllib.request.urlopen(target_path)
+        data = self._dataset_reader("target.csv")
         data = pandas_reader(data.read())
         target = np.array(data["target"])
-        print(target)
         return target
