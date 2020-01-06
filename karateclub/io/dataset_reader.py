@@ -2,9 +2,9 @@ import os
 import numpy as np
 import pandas as pd
 import networkx as nx
+from six.moves import urllib
 
-
-class LargeGraphReader(object):
+class GraphReader(object):
 
     def __init__(self, dataset):
         self.dataset = dataset
@@ -18,6 +18,8 @@ class LargeGraphReader(object):
    
     def _get_graph():
         graph_path = os.path.join(self.base_url, self.dataset, "edges.csv")
+        data = urllib.request.urlopen(url)
+        print(data)
 
     def _get_features():
         features_path = os.path.join(self.base_url, self.dataset, "features.json")
