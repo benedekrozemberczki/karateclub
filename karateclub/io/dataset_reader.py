@@ -25,18 +25,19 @@ class GraphReader(object):
         data = urllib.request.urlopen(path)
         return data
    
-    def _get_graph(self):
+    def get_graph(self):
         data = self._dataset_reader("edges.csv")
         data = pandas_reader(data.read())
         graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
         print(nx.density(graph))
         return graph
 
-    def _get_features(self):
+    def get_features(self):
         data = self._dataset_reader("features.json")
 
-    def _get_target(self):
+    def get_target(self):
         data = self._dataset_reader("target.csv")
         data = pandas_reader(data.read())
         target = np.array(data["target"])
+        print(np.mean(target))
         return target
