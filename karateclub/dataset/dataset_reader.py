@@ -8,7 +8,6 @@ from six.moves import urllib
 from scipy.sparse import coo_matrix
 
 
-
 class GraphReader(object):
     r"""Class to read benchmark datasets for the community detection or node embedding task.
 

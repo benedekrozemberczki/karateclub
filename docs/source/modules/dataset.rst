@@ -1,6 +1,6 @@
 karateclub.datasets
 ========================
 
-.. automodule:: karateclub.dataset.datasetreader
+.. automodule:: karateclub.dataset.dataset_reader
     :members:
     :undoc-members:
