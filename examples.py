@@ -13,10 +13,11 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
 from karateclub.io import GraphReader
 
-for d in ["facebook","wikipedia","twitch","github"]:
+for d in ["facebook"]:
     reader = GraphReader(d)
-    reader.get_graph()
-    reader.get_target()
+    graph = reader.get_graph()
+    target = reader.get_target()
+    features = reader.get_features()
 quit()
 
 #-----------------------------------

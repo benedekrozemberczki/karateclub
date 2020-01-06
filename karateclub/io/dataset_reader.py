@@ -4,6 +4,8 @@ import pandas as pd
 import networkx as nx
 from six.moves import urllib
 import io
+import json
+from scipy.sparse import coo_matrix
 
 def pandas_reader(bytes):
     """
@@ -29,15 +31,23 @@ class GraphReader(object):
         data = self._dataset_reader("edges.csv")
         data = pandas_reader(data.read())
         graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
-        print(nx.density(graph))
+
         return graph
 
     def get_features(self):
         data = self._dataset_reader("features.json")
+        data = json.loads(data.read().decode())
+        row = [int(k) for k, v in data.items() for val in v]
+        col = [val for k, v in data.items() for val in v]
+        values = np.ones(len(row))
+        node_count = max(row) + 1
+        feature_count = max(col) + 1
+        shape = (node_count, feature_count)
+        features = coo_matrix((values, (row, col)), shape=shape)
+        return features
 
     def get_target(self):
         data = self._dataset_reader("target.csv")
         data = pandas_reader(data.read())
         target = np.array(data["target"])
-        print(np.mean(target))
         return target
