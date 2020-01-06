@@ -28,4 +28,4 @@ Additional features.
    modules/root
    modules/io
    modules/utils
-   modules/datasets
+   modules/dataset
