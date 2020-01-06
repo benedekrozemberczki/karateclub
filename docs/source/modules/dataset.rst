@@ -1,4 +1,4 @@
-karateclub.datasets
+karateclub.dataset
 ========================
 
 .. automodule:: karateclub.dataset.dataset_reader
