@@ -1,6 +1,6 @@
 karateclub.datasets
 ========================
 
-.. automodule:: karateclub.community_detection.non_overlapping.edmot
+.. automodule:: karateclub.dataset.datasetreader
     :members:
     :undoc-members:

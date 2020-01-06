@@ -14,7 +14,7 @@ from karateclub.graph_embedding import Graph2Vec
 from karateclub.dataset import GraphReader
 
 dataset = "facebook"
-reader = GraphReader(d)
+reader = GraphReader(dataset)
 graph = reader.get_graph()
 target = reader.get_target()
 features = reader.get_features()
