@@ -4,13 +4,13 @@ from setuptools import find_packages
 setup(
   name = "karateclub",
   packages = find_packages(),
-  version = "0.31",
+  version = "0.32",
   license = "MIT",
   description = "A general purpose library for community detection and graph embedding research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
-  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_031.tar.gz",
+  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_032.tar.gz",
   keywords = ["community", "detection", "networkx", "graph", "clustering"],
   install_requires=[
           "numpy",
@@ -20,7 +20,9 @@ setup(
           "sklearn",
           "scipy",
           "pygsp",
-          "gensim"
+          "gensim",
+          "pandas",
+          "six",
       ],
   classifiers=[
     "Development Status :: 3 - Alpha",
