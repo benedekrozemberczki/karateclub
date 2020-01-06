@@ -27,7 +27,7 @@ class GraphReader(object):
         data = urllib.request.urlopen(path)
         return data
 
-    def pandas_reader(self, bytes):
+    def _pandas_reader(self, bytes):
         """
         Reading bytes as a Pandas dataframe.
         """
