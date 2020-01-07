@@ -59,6 +59,17 @@ We use the ground truth about the cluster memberships for calculating the NMI.
     print('NMI: {:.4f}'.format(nmi))
     >>> NMI: 0.34374
 
+It is worth noting that the clustering methods in Karate Club work on arbitrary NetworkX graphs that follow the 
+dataset requirements. One could simply cluster a randomly generated Watts-Strogatz graph just like this.
+
+.. code-block:: python
+
+    from karateclub.community_detection.non_overlapping import LabelPropagation
+    
+    model = LabelPropagation()
+    model.fit(graph)
+    cluster_membership = model.get_memberships()  
+
 
 Node Embedding
 --------------
