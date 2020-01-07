@@ -32,8 +32,7 @@ page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` a
 
 The constructor defines the graphreader object and the methods ``get_graph`` and ``get_target`` read the data.
 
-Now let's use the ``Label Propagation`` community detection method from `Near Linear Time Algorithm to Detect
- Community Structures in Large-Scale Networks <https://arxiv.org/abs/0709.2938>`_. 
+Now let's use the ``Label Propagation`` community detection method from `Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks <https://arxiv.org/abs/0709.2938>`_. 
 .. code-block:: python
 
     from karateclub.community_detection.non_overlapping import LabelPropagation
