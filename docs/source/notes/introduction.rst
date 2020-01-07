@@ -15,7 +15,7 @@ have categories and we will look how well the cluster and group memberships are 
 about the dataset `see this paper <https://arxiv.org/abs/1909.13021>`_.
 
 We first need to load the Facebook page-page network dataset. We will use the page-page graph and the 
-page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` array respectively.
+page category vector. These are returned as a NetworkX graph and numpy array respectively.
 
 .. code-block:: python
 
