@@ -13,11 +13,20 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
 from karateclub.dataset import GraphReader
 
-dataset = "twitch"
-reader = GraphReader(dataset)
+
+
+reader = GraphReader("facebook")
+
 graph = reader.get_graph()
 target = reader.get_target()
-features = reader.get_features()
+
+
+    
+model = NSSED(dimensions=4)
+model.fit(graph)
+cluster_memberships = model.get_memberships()
+
+
 quit()
 
 #-----------------------------------
