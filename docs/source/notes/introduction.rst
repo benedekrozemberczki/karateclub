@@ -46,6 +46,7 @@ with the ``get_memberships`` method as a dictionary.
 
 
 Finally we can evaluate the clustering using normalized mutual information. First we need to create an ordered list of the node memberships.
+We use the ground truth about the cluster memberships for calculating the NMI.
 
 
 .. code-block:: python
