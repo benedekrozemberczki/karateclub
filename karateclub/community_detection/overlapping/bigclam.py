@@ -9,13 +9,12 @@ class BigClam(Estimator):
     from the WSDM '13 paper "Overlapping Community Detection at Scale: A Nonnegative Matrix
     Factorization Approach". The procedure uses gradient ascent to create an embedding which is
     used for deciding the node-cluster affiliations.
-
     Args:
         dimensions (int): Number of embedding dimensions. Default 8.
         iterations (int): Number of training iterations. Default 50.
         learning_rate (float): Gradient ascent learning rate. Default is 0.005.
     """
-    def __init__(self, dimensions=8, iterations=50, learning_rate=0.005):
+    def __init__(self, dimensions=8, iterations=50, learning_rate=0.0005):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
@@ -25,8 +24,6 @@ class BigClam(Estimator):
         Creating the community embedding and gradient sum.
         """
         self._embedding = np.random.uniform(0, 1, (number_of_nodes, self.dimensions))
-        normalizer = self._embedding.sum(axis=1).reshape(-1, 1)
-        self._embedding = self._embedding / normalizer
         self._global_features = np.sum(self._embedding, axis=0)
 
     def _calculate_gradient(self, node_feature, neb_features):
@@ -47,12 +44,11 @@ class BigClam(Estimator):
         Updating the embedding and the feature sum.
         """
         self._embedding[node] = self._embedding[node]+self.learning_rate*gradient
-        self._embedding[node] = np.clip(self._embedding[node], 0, 1)
+        self._embedding[node] = np.clip(self._embedding[node], 0.00001, 10)
         self._global_features = self._global_features - node_feature + self._embedding[node]
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
-
         Return types:
             memberships (dict): Node cluster memberships.
         """
@@ -62,7 +58,6 @@ class BigClam(Estimator):
 
     def get_embedding(self):
         r"""Getting the node embedding.
-
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
@@ -72,7 +67,6 @@ class BigClam(Estimator):
     def fit(self, graph):
         """
         Fitting a BigClam clustering model.
-
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
@@ -87,3 +81,4 @@ class BigClam(Estimator):
                 node_feature = self._embedding[node, :]
                 gradient = self._calculate_gradient(node_feature, neb_features)
                 self._do_updates(node, gradient, node_feature)
+        print(self._embedding)
