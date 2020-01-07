@@ -18,14 +18,6 @@ class GraphReader(object):
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 
-    def _dataset_reader(self, end):
-        """
-        Reading the dataset from the web.
-        """
-        path = os.path.join(self.base_url, self.dataset, end)
-        data = urllib.request.urlopen(path)
-        return data
-
     def _pandas_reader(self, bytes):
         """
         Reading bytes as a Pandas dataframe.
@@ -35,6 +27,15 @@ class GraphReader(object):
                           sep=",",
                           dtype={"switch": np.int32})
         return tab
+
+    def _dataset_reader(self, end):
+        """
+        Reading the dataset from the web.
+        """
+        path = os.path.join(self.base_url, self.dataset, end)
+        data = urllib.request.urlopen(path).read()
+        data = self._pandas_reader(data)
+        return data
    
     def get_graph(self):
         r"""Getting the graph.
@@ -43,7 +44,6 @@ class GraphReader(object):
             * **graph** *(NetworkX graph)* - Graph of interest.
         """
         data = self._dataset_reader("edges.csv")
-        data = self._pandas_reader(data.read())
         graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
         return graph
 
@@ -53,11 +53,10 @@ class GraphReader(object):
         Return types:
             * **features** *(COO Scipy array)* - Node feature matrix.
         """
-        data = self._dataset_reader("features.json")
-        data = json.loads(data.read().decode())
-        row = [int(k) for k, v in data.items() for val in v]
-        col = [val for k, v in data.items() for val in v]
-        values = np.ones(len(row))
+        data = self._dataset_reader("features.csv")
+        row = np.array(data["node_id"])
+        col = np.array(data["feature_id"])
+        values = np.array(data["value"])
         node_count = max(row) + 1
         feature_count = max(col) + 1
         shape = (node_count, feature_count)
@@ -71,6 +70,5 @@ class GraphReader(object):
             * **target** *(Numpy array)* - Class membership vector.
         """
         data = self._dataset_reader("target.csv")
-        data = self._pandas_reader(data.read())
         target = np.array(data["target"])
         return target
