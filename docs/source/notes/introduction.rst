@@ -12,7 +12,7 @@ Community Detection
 The first machine learning task that we will do is the clustering of pages on Facebook. In this network
 nodes represent official verified Facebook pages and the links between them are mutual likes. The pages
 have categories and we will look how well the cluster and group memberships are aligned. For details
-about the dataset `see <https://arxiv.org/abs/1909.13021>`_.
+about the dataset `see this paper <https://arxiv.org/abs/1909.13021>`_.
 
 We first need to load the Facebook page-page network dataset. We will use the page-page graph and the 
 page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` array respectively.
