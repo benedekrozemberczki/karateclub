@@ -14,7 +14,7 @@ nodes represent official verified Facebook pages and the links between them are 
 have categories and we will look how well the cluster and group memberships are aligned. 
 
 We first need to load the Facebook page-page network dataset. We will use the page-page graph and the 
-page category vector. 
+page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` array respectively.
 
 .. code-block:: python
 
