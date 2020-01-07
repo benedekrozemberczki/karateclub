@@ -26,30 +26,18 @@ page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` a
     graph = reader.get_graph()
     target = reader.get_target()
 
+The constructor defines the graphreader object and the methods ``get_graph`` and ``get_target`` read the data.
+
 Now let's use the ``NNSED`` community detection method from `A Non-negative Symmetric Encoder-Decoder Approach for Community Detection <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_  which allows for controlling the number of clusters. We
-will create 4 clusters according the number of page categories.
+will create 4 clusters which is the same as the number of page categories.
 
 .. code-block:: python
 
-    import torch
-    import torch.nn.functional as F
-    from torch_geometric.nn import GCNConv
-
-    class Net(torch.nn.Module):
-        def __init__(self):
-            super(Net, self).__init__()
-            self.conv1 = GCNConv(dataset.num_node_features, 16)
-            self.conv2 = GCNConv(16, dataset.num_classes)
-
-        def forward(self, data):
-            x, edge_index = data.x, data.edge_index
-
-            x = self.conv1(x, edge_index)
-            x = F.relu(x)
-            x = F.dropout(x, training=self.training)
-            x = self.conv2(x, edge_index)
-
-            return F.log_softmax(x, dim=1)
+    from karateclub.community_detection.overlapping import NNSED
+    
+    model = NSSED(dimensions=4)
+    model.fit(graph)
+    cluster_memberships = model.get_memberships()
 
 The constructor defines two ``GCNConv`` layers which get called in the forward pass of our network.
 Note that the non-linearity is not integrated in the ``conv`` calls and hence needs to be applied afterwards (something which is consistent accross all operators in PyTorch Geometric).
