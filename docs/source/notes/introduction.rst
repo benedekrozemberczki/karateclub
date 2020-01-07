@@ -1,7 +1,7 @@
 Introduction by Example
 =======================
 
-In the following we overview the fundamental concepts and features of KarateClub through simple examples. These are the following:
+We shortly overview the fundamental concepts and features of KarateClub through simple examples. These are the following:
 
 .. contents::
     :local:
@@ -9,12 +9,12 @@ In the following we overview the fundamental concepts and features of KarateClub
 Community Detection
 -------------------
 
-After learning about data handling, datasets, loader and transforms in PyTorch Geometric, it's time to implement our first graph neural network!
+The first machine learning task that we will do is the clustering of pages on Facebook. In this network
+nodes represent official verified Facebook pages and the links between them are mutual likes. The pages
+have categories and we will look how well the cluster and group memberships are aligned. 
 
-We will use a simple GCN layer and replicate the experiments on the Cora citation dataset.
-For a high-level explanation on GCN, have a look at its `blog post <http://tkipf.github.io/graph-convolutional-networks/>`_.
-
-We first need to load the Cora dataset:
+We first need to load the Facebook page-page network dataset. We will use the page-page graph and the 
+page category vector. 
 
 .. code-block:: python
 
