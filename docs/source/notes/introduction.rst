@@ -1,7 +1,7 @@
 Introduction by Example
 =======================
 
-We shortly overview the fundamental concepts and features of KarateClub through simple examples. These are the following:
+We shortly overview the fundamental concepts and features of Karate Club through simple examples. These are the following:
 
 .. contents::
     :local:
@@ -33,6 +33,7 @@ page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` a
 The constructor defines the graphreader object and the methods ``get_graph`` and ``get_target`` read the data.
 
 Now let's use the ``Label Propagation`` community detection method from `Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks <https://arxiv.org/abs/0709.2938>`_. 
+
 .. code-block:: python
 
     from karateclub.community_detection.non_overlapping import LabelPropagation
@@ -60,12 +61,15 @@ We use the ground truth about the cluster memberships for calculating the NMI.
     >>> NMI: 0.34374
 
 It is worth noting that the clustering methods in Karate Club work on arbitrary NetworkX graphs that follow the 
-dataset requirements. One could simply cluster a randomly generated Watts-Strogatz graph just like this.
+dataset formatting requirements. One could simply cluster a randomly generated Watts-Strogatz graph just like this.
 
 .. code-block:: python
 
+    import networkx as nx
     from karateclub.community_detection.non_overlapping import LabelPropagation
     
+    graph = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
     model = LabelPropagation()
     model.fit(graph)
     cluster_membership = model.get_memberships()  
