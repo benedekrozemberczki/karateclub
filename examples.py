@@ -19,7 +19,7 @@ graph = reader.get_graph()
 target = reader.get_target()
 
 
-model = LabelPropagation()
+model = NNSED(dimensions=4, iterations=3)
 model.fit(graph)
 cluster_membership = model.get_memberships()
 

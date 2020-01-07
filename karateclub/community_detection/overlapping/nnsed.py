@@ -49,7 +49,7 @@ class NNSED(Estimator):
         """
         Updating the horizontal basis matrix.
         """
-        enum = A.dot(self.W).T
+        enum = self.W.T.dot(A)
         denom = np.dot(np.dot(self.W.T, self.W), self.Z) + self.Z
         self.Z = self.Z*(enum/denom)
 
