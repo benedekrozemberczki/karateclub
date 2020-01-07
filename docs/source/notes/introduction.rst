@@ -9,6 +9,11 @@ We shortly overview the fundamental concepts and features of Karate Club through
 Standardized Dataset Ingestion
 ------------------------------
 
+Karate Club assumes that the NetworkX graph provided by the user for node embedding and community detection has the following important properties:
+
+- Nodes are indexed with integers.
+- There are no orphaned nodes in the graph.
+- The node indexing starts with zero and the indices are consecutive.
 
 Community Detection
 -------------------
