@@ -26,8 +26,8 @@ page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` a
     graph = reader.get_graph()
     target = reader.get_target()
 
-Note that we do not need to use transforms or a dataloader.
-Now let's implement a two-layer GCN:
+Now let's use the ```` community detection method which allows for controlling the number of clusters. We
+will create 4 clusters according the number of page categories.
 
 .. code-block:: python
 
