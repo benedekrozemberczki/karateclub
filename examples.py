@@ -13,19 +13,23 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
 from karateclub.dataset import GraphReader
 
-
-
 reader = GraphReader("facebook")
 
 graph = reader.get_graph()
 target = reader.get_target()
 
 
-    
-model = NSSED(dimensions=4)
+model = LabelPropagation()
 model.fit(graph)
-cluster_memberships = model.get_memberships()
+cluster_membership = model.get_memberships()
 
+from sklearn.metrics.cluster import normalized_mutual_info_score
+
+cluster_membership = [cluster_membership[node] for node in range(len(cluster_membership))]
+
+score = normalized_mutual_info_score(target, cluster_membership)
+
+print(score)
 
 quit()
 

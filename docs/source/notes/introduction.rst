@@ -6,6 +6,10 @@ We shortly overview the fundamental concepts and features of KarateClub through 
 .. contents::
     :local:
 
+Standardized Dataset Ingestion
+------------------------------
+
+
 Community Detection
 -------------------
 
@@ -28,47 +32,32 @@ page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` a
 
 The constructor defines the graphreader object and the methods ``get_graph`` and ``get_target`` read the data.
 
-Now let's use the ``NNSED`` community detection method from `A Non-negative Symmetric Encoder-Decoder Approach for Community Detection <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_  which allows for controlling the number of clusters. We
-will create 4 clusters which is the same as the number of page categories.
-
+Now let's use the ``Label Propagation`` community detection method from `Near Linear Time Algorithm to Detect
+ Community Structures in Large-Scale Networks <https://arxiv.org/abs/0709.2938>`_. 
 .. code-block:: python
 
-    from karateclub.community_detection.overlapping import NNSED
+    from karateclub.community_detection.non_overlapping import LabelPropagation
     
-    model = NSSED(dimensions=4)
+    model = LabelPropagation()
     model.fit(graph)
-    cluster_memberships = model.get_memberships()
+    cluster_membership = model.get_memberships()
 
-The constructor defines two ``GCNConv`` layers which get called in the forward pass of our network.
-Note that the non-linearity is not integrated in the ``conv`` calls and hence needs to be applied afterwards (something which is consistent accross all operators in PyTorch Geometric).
-Here, we chose to use ReLU as our intermediate non-linearity between and finally output a softmax distribution over the number of classes.
-Let's train this model on the train nodes for 200 epochs:
+The constructor defines a model, we fit the model on the Facebook graph with the ``fit`` method and return the cluster memberships
+with the ``get_memberships`` method as a dictionary.
 
-.. code-block:: python
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = Net().to(device)
-    data = dataset[0].to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
+Finally we can evaluate the clustering using normalized mutual information. First we need to create an ordered list of the node memberships.
 
-    model.train()
-    for epoch in range(200):
-        optimizer.zero_grad()
-        out = model(data)
-        loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])
-        loss.backward()
-        optimizer.step()
-
-Finally we can evaluate our model on the test nodes:
 
 .. code-block:: python
 
-    model.eval()
-    _, pred = model(data).max(dim=1)
-    correct = float (pred[data.test_mask].eq(data.y[data.test_mask]).sum().item())
-    acc = correct / data.test_mask.sum().item()
-    print('Accuracy: {:.4f}'.format(acc))
-    >>> Accuracy: 0.8150
+    from sklearn.metrics.cluster import normalized_mutual_info_score
+
+    cluster_membership = [cluster_membership[node] for node in range(len(cluster_membership))]
+
+    nmi = normalized_mutual_info_score(target, cluster_membership)
+    print('NMI: {:.4f}'.format(nmi))
+    >>> NMI: 0.34374
 
 
 Node Embedding
