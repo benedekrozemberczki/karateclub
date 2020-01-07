@@ -18,10 +18,12 @@ page category vector.
 
 .. code-block:: python
 
-    from torch_geometric.datasets import Planetoid
+    from karateclub.dataset import GraphReader
 
-    dataset = Planetoid(root='/tmp/Cora', name='Cora')
-    >>> Cora()
+    reader = GraphReader("facebook")
+
+    graph = reader.get_graph()
+    target = reader.get_target()
 
 Note that we do not need to use transforms or a dataloader.
 Now let's implement a two-layer GCN:
