@@ -15,6 +15,8 @@ Karate Club assumes that the NetworkX graph provided by the user for node embedd
 - There are no orphaned nodes in the graph.
 - The node indexing starts with zero and the indices are consecutive.
 
+The returned community membership dictionaries and embedding matrices use the same numeric, consecutive indexing.
+
 Community Detection
 -------------------
 
@@ -82,6 +84,13 @@ dataset formatting requirements. One could simply cluster a randomly generated W
 
 Node Embedding
 --------------
+
+The second machine learning task that we look at is the identification of users from the UK who abuse the platform on Twitch. 
+In the social network of interest nodes represent users and the links are mutual friendships between the users. Our goal is
+to perform binary classification of the users (platform abusers and general good guy users).  For details
+about the dataset `see this paper <https://arxiv.org/abs/1909.13021>`_.
+
+
 
 Graph Embedding
 --------------
