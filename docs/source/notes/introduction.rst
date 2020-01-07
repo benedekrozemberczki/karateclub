@@ -15,7 +15,7 @@ have categories and we will look how well the cluster and group memberships are 
 about the dataset `see this paper <https://arxiv.org/abs/1909.13021>`_.
 
 We first need to load the Facebook page-page network dataset. We will use the page-page graph and the 
-page category vector. These are returned as a NetworkX graph and numpy array respectively.
+page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` array respectively.
 
 .. code-block:: python
 
@@ -26,7 +26,7 @@ page category vector. These are returned as a NetworkX graph and numpy array res
     graph = reader.get_graph()
     target = reader.get_target()
 
-Now let's use the ```` community detection method which allows for controlling the number of clusters. We
+Now let's use the ``NNSED`` community detection method from `A Non-negative Symmetric Encoder-Decoder Approach for Community Detection <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_  which allows for controlling the number of clusters. We
 will create 4 clusters according the number of page categories.
 
 .. code-block:: python
