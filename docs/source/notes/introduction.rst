@@ -6,8 +6,8 @@ In the following we overview the fundamental concepts and features of KarateClub
 .. contents::
     :local:
 
-Clustering Graphs
------------------
+Community Detection
+-------------------
 
 After learning about data handling, datasets, loader and transforms in PyTorch Geometric, it's time to implement our first graph neural network!
 
