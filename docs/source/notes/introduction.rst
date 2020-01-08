@@ -124,7 +124,7 @@ In the social network of interest nodes represent users and the links are mutual
 to perform binary classification of the users (platform abusers and general good guy users).  For details
 about the dataset `see this paper <https://arxiv.org/abs/1909.13021>`_.
 
-We first need to load the Twitch dataset. We will use the user friendship graph and the 
+We first need to load the Twitch UK dataset. We will use the user friendship graph and the 
 abusive user target vector. These are returned as a ``NetworkX`` graph and ``numpy`` array respectively.
 
 .. code-block:: python
@@ -134,7 +134,7 @@ abusive user target vector. These are returned as a ``NetworkX`` graph and ``num
     reader = GraphReader("twitch")
 
     graph = reader.get_graph()
-    target = reader.get_target()
+    y = reader.get_target()
 
 
 We fit a Diff2vec node embedding, with a low number of dimensions, diffusions per source node, and short Euler walks.
@@ -147,18 +147,30 @@ which is a numpy array.
 
     model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
     model.fit(graph)
-    embedding = model.get_embedding()
+    X = model.get_embedding()
 
 We use the node embedding features as predictors of the abusive behaviour. So let us create a train-test split of the explanatory variables
-and the target variable with Scikit-Learn. We will use a training data ratio of 80%. So here it is.
+and the target variable with Scikit-Learn. We will use a test data ratio of 20%. So here it is.
 
 
 .. code-block:: python
-    from karateclub import Diff2Vec
+    from sklearn.model_selection import train_test_split
 
-    model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
-    model.fit(graph)
-    embedding = model.get_embedding()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+Using the training data we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inferencet on the test 
+set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
+
+.. code-block:: python
+    from sklearn.metrics import roc_auc_score
+    from sklearn.linear_model import LogisticRegression
+    
+    downstream_model = LogisticRegression(random_state=0).fit(X_train, y_train)
+    y_hat = downstream_model.predict_proba(X_test)[:,1]
+    
+    auc = roc_auc_score(y_test, y_hat)
+    print('AUC: {:.4f}'.format(auc))
+    >>> AUC: 0.6069
 
 Graph Embedding
 --------------
