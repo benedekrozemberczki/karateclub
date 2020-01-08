@@ -25,8 +25,8 @@ is implemented as a class which inherits from ``Estimator``. The constructors of
 default hyperparameters that work well out of the box. This means that non expert users do not have to make decision about these in advance. For each class the ``fit`` method provided learns the embedding or clustering of nodes/graphs in the ``NetworkX`` graph. This method takes the data used for learng the embedding or clustering. Models provide the additional public methods ``get_embedding``, ``get_memberships``, ``get_cluster_centers``. This API driven design means that one can create a DeepWalk embedding just like this.
 
 .. code-block:: python
-
-    from karateclub.node_embedding.neighbourhood import DeepWalk
+    import networkx as nx
+    from karateclub import DeepWalk
     
     g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -37,7 +37,7 @@ default hyperparameters that work well out of the box. This means that non exper
 Which can be modified to create a Walklets embedding with minimal effort like this.
 
 .. code-block:: python
-
+    import networkx as nx
     from karateclub.node_embedding.neighbourhood import Walklets
     
     g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
@@ -64,7 +64,7 @@ page category vector. These are returned as a ``NetworkX`` graph and ``numpy`` a
 
 .. code-block:: python
 
-    from karateclub.dataset import GraphReader
+    from karateclub import GraphReader
 
     reader = GraphReader("facebook")
 
@@ -77,7 +77,7 @@ Now let's use the ``Label Propagation`` community detection method from `Near Li
 
 .. code-block:: python
 
-    from karateclub.community_detection.non_overlapping import LabelPropagation
+    from karateclub import LabelPropagation
     
     model = LabelPropagation()
     model.fit(graph)
@@ -107,7 +107,7 @@ dataset formatting requirements. One could simply cluster a randomly generated W
 .. code-block:: python
 
     import networkx as nx
-    from karateclub.community_detection.non_overlapping import LabelPropagation
+    from karateclub import LabelPropagation
     
     graph = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -136,6 +136,18 @@ abusive user target vector. These are returned as a ``NetworkX`` graph and ``num
     graph = reader.get_graph()
     target = reader.get_target()
 
+
+We fit a Diff2vec node embedding, with a low number of dimensions, diffusions per source node, and short Euler walks.
+First, we use the model constructor with custom parameters. Second, we fit the model to the graph. Third, we get the node embedding
+which is a numpy array.
+
+
+.. code-block:: python
+    from karateclub import Diff2Vec
+
+    model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
+    model.fit(graph)
+    embedding = model.get_embedding()
 
 Graph Embedding
 --------------
