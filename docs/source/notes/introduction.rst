@@ -136,11 +136,9 @@ abusive user target vector. These are returned as a ``NetworkX`` graph and ``num
     graph = reader.get_graph()
     y = reader.get_target()
 
-
 We fit a Diff2vec node embedding, with a low number of dimensions, diffusions per source node, and short Euler walks.
 First, we use the model constructor with custom parameters. Second, we fit the model to the graph. Third, we get the node embedding
-which is a numpy array.
-
+which is a ``numpy array``.
 
 .. code-block:: python
     from karateclub import Diff2Vec
@@ -150,15 +148,14 @@ which is a numpy array.
     X = model.get_embedding()
 
 We use the node embedding features as predictors of the abusive behaviour. So let us create a train-test split of the explanatory variables
-and the target variable with Scikit-Learn. We will use a test data ratio of 20%. So here it is.
-
+and the target variable with Scikit-Learn. We will use a test data ratio of 20%. Here it is.
 
 .. code-block:: python
     from sklearn.model_selection import train_test_split
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-Using the training data we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inferencet on the test 
+Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inferencet on the test 
 set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
 
 .. code-block:: python
