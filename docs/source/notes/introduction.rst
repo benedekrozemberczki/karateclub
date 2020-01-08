@@ -178,4 +178,13 @@ Graph Embedding
 Benchmark Datasets
 ------------------
 
+We included a number of datasets which can be used for comparing the performance of embedding and clustering algorithms. In case of node level learning these are as follows:
 
+- `Twitch users network of users from the UK. <https://arxiv.org/abs/1909.13021>`_
+- `Wikipedia page-page network about Crocodiles. <https://arxiv.org/abs/1909.13021>`_
+- `GitHub machine learning and web developers network. <https://arxiv.org/abs/1909.13021>`_
+- `Facebook page-page network. <https://arxiv.org/abs/1909.13021>`_
+
+We also added datasets for graph level embedding and graph statistical descriptors.
+
+ 
