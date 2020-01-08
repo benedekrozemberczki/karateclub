@@ -124,6 +124,17 @@ In the social network of interest nodes represent users and the links are mutual
 to perform binary classification of the users (platform abusers and general good guy users).  For details
 about the dataset `see this paper <https://arxiv.org/abs/1909.13021>`_.
 
+We first need to load the Twitch dataset. We will use the user friendship graph and the 
+abusive user target vector. These are returned as a ``NetworkX`` graph and ``numpy`` array respectively.
+
+.. code-block:: python
+
+    from karateclub.dataset import GraphReader
+
+    reader = GraphReader("twitch")
+
+    graph = reader.get_graph()
+    target = reader.get_target()
 
 
 Graph Embedding
