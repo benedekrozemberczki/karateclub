@@ -17,6 +17,43 @@ Karate Club assumes that the NetworkX graph provided by the user for node embedd
 
 The returned community membership dictionaries and embedding matrices use the same numeric, consecutive indexing.
 
+API Driven Design with Out-of-the-Box Hyperparameters
+------------------------------------------------------
+
+Karate Club uses the desing principles of Scikit-Learn which means that the algorithms in the package share the same API. Each machine learning model
+is implemented as a class which inherits from ``Estimator``. The constructors of the models are used to set the hyperparameters. Each model has 
+default hyperparameters that work well out of the box. This means that non expert users do not have to make decision about these in advance. For each
+ class the ``fit`` method provided learns the embedding or clustering of nodes/graphs in the ``NetworkX`` graph. This method takes the data used for learng the
+ embedding or clustering. Models provide the additional public methods ``get_embedding``, ``get_memberships``,``get_cluster_centers``. This API driven
+design means that one can create a DeepWalk embedding just like this.
+
+.. code-block:: python
+
+    from karateclub.node_embedding.neighbourhood import DeepWalk
+    
+    g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+    model = DeepWalk()
+    model.fit(g)
+    embedding = model.get_embedding()
+
+Which can be modified to create a Walklets embedding with minimal effort like this.
+
+.. code-block:: python
+
+    from karateclub.node_embedding.neighbourhood import Walklets
+    
+    g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+    model = Walklets()
+    model.fit(g)
+    embedding = model.get_embedding()
+
+Looking at these two snippets the advantage of the API driven design is evident. One had to change the import of the model. As the default hyperparameters
+are already set only the model construction was changed. The provided public methods are the same. And embedding is learned with ``fit`` and it is returned by
+``get_embedding``.
+
+
 Community Detection
 -------------------
 

@@ -1,7 +1,7 @@
 Installation
 ============
 
-Install the package:
+Install the package by using pip:
 
     .. code-block:: none
 
