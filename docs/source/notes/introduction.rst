@@ -49,8 +49,8 @@ Which can be modified to create a Walklets embedding with minimal effort like th
     model.fit(g)
     embedding = model.get_embedding()
 
-Looking at these two snippets the advantage of the API driven design is evident. One had to change the import of the model. As the default hyperparameters
-are already set only the model construction was changed. The provided public methods are the same. And embedding is learned with ``fit`` and it is returned by
+Looking at these two snippets the advantage of the API driven design is evident. One had to change the import of the model. Only the model construction was changed and the default hyperparameters
+are already set. The provided public methods are the same. An embedding is learned with ``fit`` and it is returned by
 ``get_embedding``.
 
 
