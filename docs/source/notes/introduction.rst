@@ -138,9 +138,10 @@ abusive user target vector. These are returned as a ``NetworkX`` graph and ``num
 
 We fit a Diff2vec node embedding, with a low number of dimensions, diffusions per source node, and short Euler walks.
 First, we use the model constructor with custom parameters. Second, we fit the model to the graph. Third, we get the node embedding
-which is a ``numpy array``.
+which is a ``numpy`` array.
 
 .. code-block:: python
+
     from karateclub import Diff2Vec
 
     model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
@@ -151,6 +152,7 @@ We use the node embedding features as predictors of the abusive behaviour. So le
 and the target variable with Scikit-Learn. We will use a test data ratio of 20%. Here it is.
 
 .. code-block:: python
+
     from sklearn.model_selection import train_test_split
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -159,6 +161,7 @@ Using the training data (``X_train`` and ``y_train``) we learn a logistic regres
 set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
 
 .. code-block:: python
+
     from sklearn.metrics import roc_auc_score
     from sklearn.linear_model import LogisticRegression
     
