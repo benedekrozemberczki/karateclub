@@ -17,8 +17,8 @@ Karate Club assumes that the NetworkX graph provided by the user for node embedd
 
 The returned community membership dictionaries and embedding matrices use the same numeric, consecutive indexing.
 
-API Driven Design with Out-of-the-Box Hyperparameters
-------------------------------------------------------
+API Driven Design with Out-of-the-Box Hyperparameter Values
+-----------------------------------------------------------
 
 Karate Club uses the desing principles of Scikit-Learn which means that the algorithms in the package share the same API. Each machine learning model
 is implemented as a class which inherits from ``Estimator``. The constructors of the models are used to set the hyperparameters. Each model has 
