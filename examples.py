@@ -18,19 +18,6 @@ reader = GraphReader("facebook")
 graph = reader.get_graph()
 target = reader.get_target()
 
-
-model = BigClam(iterations=1)
-model.fit(graph)
-cluster_membership = model.get_memberships()
-
-from sklearn.metrics.cluster import normalized_mutual_info_score
-
-cluster_membership = [cluster_membership[node] for node in range(len(cluster_membership))]
-
-nmi = normalized_mutual_info_score(target, cluster_membership)
-print('NMI: {:.4f}'.format(nmi))
-
-quit()
 #-----------------------------------
 # Graph2Vec example
 #-----------------------------------
