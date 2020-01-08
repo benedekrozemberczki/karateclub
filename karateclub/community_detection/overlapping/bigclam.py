@@ -81,4 +81,3 @@ class BigClam(Estimator):
                 node_feature = self._embedding[node, :]
                 gradient = self._calculate_gradient(node_feature, neb_features)
                 self._do_updates(node, gradient, node_feature)
-        print(self._embedding)
