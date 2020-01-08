@@ -149,6 +149,17 @@ which is a numpy array.
     model.fit(graph)
     embedding = model.get_embedding()
 
+We use the node embedding features as predictors of the abusive behaviour. So let us create a train-test split of the explanatory variables
+and the target variable with Scikit-Learn. We will use a training data ratio of 80%. So here it is.
+
+
+.. code-block:: python
+    from karateclub import Diff2Vec
+
+    model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
+    model.fit(graph)
+    embedding = model.get_embedding()
+
 Graph Embedding
 --------------
 
