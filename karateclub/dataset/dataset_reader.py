@@ -74,10 +74,10 @@ class GraphReader(object):
         return target
 
 class GraphSetReader(object):
-    r"""Class to read benchmark datasets for the community detection or node embedding task.
+    r"""Class to read benchmark datasets for the graph level embedding task.
 
     Args:
-        dataset (str): Dataset of interest  on of facebook/wikipedia/github/twitch. Default is 'wikipedia'.
+        dataset (str): Dataset of interest one of reddit10k. Default is 'reddit10k'.
     """
     def __init__(self, dataset="reddit10k"):
         self.dataset = dataset
