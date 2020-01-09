@@ -13,15 +13,15 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
-reader = GraphReader("facebook")
+reader = GraphSetReader("reddit10k")
 
-graphs = reader.get_graph()
+graphs = reader.get_graphs()
 target = reader.get_target()
 
 model = Graph2Vec()
 
 model.fit(graphs)
-model.get_embedding()
+embedding = model.get_embedding()
 
 
 quit()
@@ -29,11 +29,10 @@ quit()
 # Graph2Vec example
 #-----------------------------------
 
-reader = GraphSetReader("reddit10k")
+reader = GraphReader("facebook")
 
-graph = reader.get_graphs()
+graphs = reader.get_graph()
 target = reader.get_target()
-
 #-----------------------------------
 # Graph2Vec example
 #-----------------------------------
