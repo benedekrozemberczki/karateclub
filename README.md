@@ -48,7 +48,7 @@ splitter = EgoNetSplitter(1.0)
 
 splitter.fit(g)
 
-print(splitter.overlapping_partitions)
+print(splitter.get_memberships())
 ```
 
 --------------------------------------------------------------------------------
