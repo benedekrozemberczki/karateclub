@@ -113,7 +113,7 @@ class GraphSetReader(object):
         return graphs
 
     def get_target(self):
-        r"""Getting the class membership of nodes.
+        r"""Getting the class membership of graphs.
 
         Return types:
             * **target** *(Numpy array)* - Class membership vector.
