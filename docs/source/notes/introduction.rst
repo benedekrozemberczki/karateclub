@@ -187,20 +187,20 @@ These are returned as a list of ``NetworkX`` graphs and ``numpy`` array respecti
 
     from karateclub.dataset import GraphSetReader
 
-    reader = GraphSetReader("twitch")
+    reader = GraphSetReader("reddit10k")
 
     graph = reader.get_graphs()
     y = reader.get_target()
 
 We fit a Graph2Vec graph level embedding, with the standard hyperparameter settings. These are pretty widely used settings.
-First, we use the model constructor with custom parameters. Second, we fit the model to the graphs. Third, we get the graph embedding
+First, we use the model constructor without custom parameters. Second, we fit the model to the graphs. Third, we get the graph embedding
 which is a ``numpy`` array.
 
 .. code-block:: python
 
-    from karateclub import Diff2Vec
+    from karateclub import Graph2Vec
 
-    model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
+    model = Graph2Vec()
     model.fit(graphs)
     X = model.get_embedding()
 
