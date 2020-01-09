@@ -157,7 +157,7 @@ and the target variable with Scikit-Learn. We will use a test data ratio of 20%.
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inferencet on the test 
+Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inference on the test 
 set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
 
 .. code-block:: python
@@ -204,7 +204,7 @@ which is a ``numpy`` array.
     model.fit(graphs)
     X = model.get_embedding()
 
-We use the node embedding features as predictors of the abusive behaviour. So let us create a train-test split of the explanatory variables
+We use the graph embedding features as predictors of the thread type. So let us create a train-test split of the explanatory variables
 and the target variable with Scikit-Learn. We will use a test data ratio of 20%. Here it is.
 
 .. code-block:: python
@@ -213,7 +213,7 @@ and the target variable with Scikit-Learn. We will use a test data ratio of 20%.
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inferencet on the test 
+Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of a thread being discussion based. We perform inferencet on the test 
 set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
 
 .. code-block:: python
