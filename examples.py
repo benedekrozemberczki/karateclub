@@ -11,11 +11,20 @@ from karateclub.community_detection.non_overlapping import EdMot, LabelPropagati
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
-from karateclub.dataset import GraphReader
+from karateclub.dataset import GraphReader, GraphSetReader
 
 reader = GraphReader("facebook")
 
 graph = reader.get_graph()
+target = reader.get_target()
+
+#-----------------------------------
+# Graph2Vec example
+#-----------------------------------
+
+reader = GraphSetReader("reddit10k")
+
+graph = reader.get_graphs()
 target = reader.get_target()
 
 #-----------------------------------

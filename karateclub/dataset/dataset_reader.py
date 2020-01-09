@@ -104,12 +104,8 @@ class GraphSetReader(object):
     def get_graphs(self):
         graphs = self._dataset_reader(self, "graphs.json")
         graphs = json.loads(graphs.decode())
-
-    def get_features(self):
-        graphs = self._dataset_reader(self, "features.json")
-        graphs = json.loads(graphs.decode())
-
-
+        graphs = [nx.from_edgelist(graphs[str(i)]) for i in range(len(graphs))]
+        return graphs
 
     def get_target(self):
         r"""Getting the class membership of nodes.
