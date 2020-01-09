@@ -102,6 +102,11 @@ class GraphSetReader(object):
         return data
 
     def get_graphs(self):
+        r"""Getting the graphs.
+
+        Return types:
+            * **graphs** *(List of NetworkX graphs)* - Graphs of interest.
+        """
         graphs = self._dataset_reader("graphs.json")
         graphs = json.loads(graphs.decode())
         graphs = [nx.from_edgelist(graphs[str(i)]) for i in range(len(graphs))]
