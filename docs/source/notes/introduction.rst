@@ -174,6 +174,59 @@ set for this target. Finally, we evaluate the model performance by printing an a
 Graph Embedding
 --------------
 
+The third machine learning task that we look at is the classification of threads from the online forum Reddit. The threads
+can be of of two types - discussion and non-discussion based ones. Our goal is to predict the type of the thread based on
+the topological (structural) properties of the graphs. The specific dataset that we look a 10 thousand graph subsample of
+the Reddit 204K dataset which contains a large number of threads from the spring of 2018.
+For details about the dataset `see this paper <charnetpaper>`_.
+
+We first need to load the Reddit 10K dataset. We will use the use the graphs and the discussion/non-discussion target vector.
+These are returned as a list of ``NetworkX`` graphs and ``numpy`` array respectively.
+
+.. code-block:: python
+
+    from karateclub.dataset import GraphSetReader
+
+    reader = GraphSetReader("twitch")
+
+    graph = reader.get_graphs()
+    y = reader.get_target()
+
+We fit a Graph2Vec graph level embedding, with the standard hyperparameter settings. These are pretty widely used settings.
+First, we use the model constructor with custom parameters. Second, we fit the model to the graphs. Third, we get the graph embedding
+which is a ``numpy`` array.
+
+.. code-block:: python
+
+    from karateclub import Diff2Vec
+
+    model = Diff2Vec(diffusion_number=2, diffusion_cover=20, dimensions=16)
+    model.fit(graphs)
+    X = model.get_embedding()
+
+We use the node embedding features as predictors of the abusive behaviour. So let us create a train-test split of the explanatory variables
+and the target variable with Scikit-Learn. We will use a test data ratio of 20%. Here it is.
+
+.. code-block:: python
+
+    from sklearn.model_selection import train_test_split
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of someone being an abusive user. We perform inferencet on the test 
+set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
+
+.. code-block:: python
+
+    from sklearn.metrics import roc_auc_score
+    from sklearn.linear_model import LogisticRegression
+    
+    downstream_model = LogisticRegression(random_state=0).fit(X_train, y_train)
+    y_hat = downstream_model.predict_proba(X_test)[:,1]
+    auc = roc_auc_score(y_test, y_hat)
+    print('AUC: {:.4f}'.format(auc))
+    >>> AUC: 0.7127
+
 
 Benchmark Datasets
 ------------------
