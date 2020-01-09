@@ -101,6 +101,16 @@ class GraphSetReader(object):
         data = urllib.request.urlopen(path).read()
         return data
 
+    def get_graphs(self):
+        graphs = self._dataset_reader(self, "graphs.json")
+        graphs = json.loads(graphs.decode())
+
+    def get_features(self):
+        graphs = self._dataset_reader(self, "features.json")
+        graphs = json.loads(graphs.decode())
+
+
+
     def get_target(self):
         r"""Getting the class membership of nodes.
 
