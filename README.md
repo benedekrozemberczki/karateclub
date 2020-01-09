@@ -26,6 +26,9 @@ If you find *Karate Club* useful in your research, please consider citing the fo
        title = {Karate Club: A tool for unsupervised learning on graph structured data.},   
        author = {Benedek Rozemberczki and Rik Sarkar},   
        year = {2020}
+       publisher = {GitHub},
+       journal = {GitHub repository},
+       howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}},
        }
 
 --------------------------------------------------------------------------------
