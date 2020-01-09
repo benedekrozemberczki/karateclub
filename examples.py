@@ -15,9 +15,16 @@ from karateclub.dataset import GraphReader, GraphSetReader
 
 reader = GraphReader("facebook")
 
-graph = reader.get_graph()
+graphs = reader.get_graph()
 target = reader.get_target()
 
+model = Graph2Vec()
+
+model.fit(graphs)
+model.get_embedding()
+
+
+quit()
 #-----------------------------------
 # Graph2Vec example
 #-----------------------------------

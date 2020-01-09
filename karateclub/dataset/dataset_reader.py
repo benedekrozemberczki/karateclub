@@ -102,7 +102,7 @@ class GraphSetReader(object):
         return data
 
     def get_graphs(self):
-        graphs = self._dataset_reader(self, "graphs.json")
+        graphs = self._dataset_reader("graphs.json")
         graphs = json.loads(graphs.decode())
         graphs = [nx.from_edgelist(graphs[str(i)]) for i in range(len(graphs))]
         return graphs
