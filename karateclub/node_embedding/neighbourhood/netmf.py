@@ -6,10 +6,10 @@ from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
 class NetMF(Estimator):
-    r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
-    from the CIKM '15 paper "GraRep: Learning Graph Representations with Global
+    r"""An implementation of `"NetMF" <https://dl.acm.org/citation.cfm?id=2806512>`_
+    from the WSDM '18 paper "GraRep: Learning Graph Representations with Global
     Structural Information". The procedure uses sparse truncated SVD to learn
-    embeddings for the powers of the PMI matrix computed from powers of the
+    embeddings for the pooled powers of the PMI matrix computed from powers of the
     normalized adjacency matrix.
 
     Args:
