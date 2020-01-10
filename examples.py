@@ -13,6 +13,10 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
+#-----------------------------------
+# NetMF example
+#-----------------------------------
+
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
 model = NetMF()
