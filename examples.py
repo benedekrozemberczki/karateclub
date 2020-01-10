@@ -24,6 +24,7 @@ model = NetMF()
 model.fit(g)
 model.get_embedding()
 
+quit()
 
 #-----------------------------------
 # GraphSet reader example

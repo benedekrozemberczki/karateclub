@@ -46,6 +46,9 @@ class NetMF(Estimator):
         """
         Creating the normalized adjacency matrix.
 
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+
         Return types:
             * **(A_hat, A_hat, A_hat, D_inverse)** *(SciPy arrays)* - Normalized adjacencies.
         """
@@ -54,9 +57,12 @@ class NetMF(Estimator):
         A_hat = D_inverse.dot(A)
         return (A_hat, A_hat, A_hat, D_inverse)
 
-    def _create_target_matrix(self):
+    def _create_target_matrix(self, graph):
         """
         Creating a log transformed target matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
 
         Return types:
             * **target_matrix** *(SciPy array)* - The shifted PMI matrix.
@@ -66,14 +72,10 @@ class NetMF(Estimator):
             A_tilde = sparse.coo_matrix(A_tilde.dot(A_hat))
             A_pool = A_pool + A_tilde
         A_pool = (graph.number_of_nodes()*A_pool)/(self.order*self.negative_samples)
-        A_pool = A_pool.dot(D_inverse)
-        
-        scores = np.max(self.A_tilde.data, 1.0)
-
-        rows = self.A_tilde.row
-        cols = self.A_tilde.col
-        target_matrix = sparse.coo_matrix((scores, (rows, cols)),
-                                          shape=self.A_tilde.shape,
+        A_pool = sparse.coo_matrix(A_pool.dot(D_inverse))
+        A_pool.data[A_pool.data < 1.0] = 1.0
+        target_matrix = sparse.coo_matrix((np.log(A_pool.data), (A_pool.row, A_pool.col)),
+                                          shape=A_pool.shape,
                                           dtype=np.float32)
         return target_matrix
 
@@ -96,8 +98,8 @@ class NetMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
       
-        target_matrix = self._create_target_matrix()
-        self._embedding = self._create_single_embedding(target_matrix)
+        target_matrix = self._create_target_matrix(graph)
+        self._embedding = self._create_embedding(target_matrix)
 
     def get_embedding(self):
         r"""Getting the node embedding.
