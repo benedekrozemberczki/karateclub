@@ -19,7 +19,7 @@ graphs = reader.get_graphs()
 y = reader.get_target()
 
 #-----------------------------------
-# Graph2Vec example
+# Graph reader example
 #-----------------------------------
 
 reader = GraphReader("facebook")
