@@ -5,7 +5,7 @@ from scipy import sparse
 from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
-class GraRep(Estimator):
+class NetMF(Estimator):
     r"""An implementation of `"GraRep" <https://dl.acm.org/citation.cfm?id=2806512>`_
     from the CIKM '15 paper "GraRep: Learning Graph Representations with Global
     Structural Information". The procedure uses sparse truncated SVD to learn
