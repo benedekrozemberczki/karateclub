@@ -6,12 +6,24 @@ import community
 import numpy as np
 
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
-from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE
+from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
+
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+model = NetMF()
+
+model.fit(g)
+model.get_embedding()
+
+
+#-----------------------------------
+# GraphSet reader example
+#-----------------------------------
 
 reader = GraphSetReader("reddit10k")
 
