@@ -11,7 +11,7 @@ setup(
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
   download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_035.tar.gz",
-  keywords = ["community", "detection", "networkx", "graph", "clustering"],
+  keywords = ["community", "detection", "networkx", "graph", "clustering", "embedding","network","deepwalk","graph2vec","node2vec"],
   install_requires=[
           "numpy",
           "networkx",
