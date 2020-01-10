@@ -15,7 +15,7 @@ class GraRep(Estimator):
     Args:
         dimensions (int): Number of individual embedding dimensions. Default is 32.
         iteration (int): Number of SVD iterations. Default is 10.
-        order (int): Number of PMI matrix powers. Default is 5
+        order (int): Number of PMI matrix powers. Default is 5.
         seed (int): SVD random seed. Default is 42.
     """
     def __init__(self, dimensions=32, iteration=10, order=5, seed=42):
