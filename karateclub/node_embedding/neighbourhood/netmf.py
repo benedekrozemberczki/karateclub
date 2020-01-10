@@ -15,11 +15,11 @@ class NetMF(Estimator):
     Args:
         dimensions (int): Number of embedding dimension. Default is 32.
         iteration (int): Number of SVD iterations. Default is 10.
-        order (int): Number of PMI matrix powers. Default is 5.
-        negative_samples (in): Number of negative samples. Default is 10.
+        order (int): Number of PMI matrix powers. Default is 2.
+        negative_samples (in): Number of negative samples. Default is 1.
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions=32, iteration=10, order=5, negative_samples=10, seed=42):
+    def __init__(self, dimensions=32, iteration=10, order=2, negative_samples=1, seed=42):
         self.dimensions = dimensions
         self.iterations = iteration
         self.order = order
@@ -71,12 +71,15 @@ class NetMF(Estimator):
         for _ in range(self.order-1):
             A_tilde = sparse.coo_matrix(A_tilde.dot(A_hat))
             A_pool = A_pool + A_tilde
-        A_pool = (graph.number_of_nodes()*A_pool)/(self.order*self.negative_samples)
+        print(A_pool)
+        A_pool = (graph.number_of_edges()*A_pool)/(self.order*self.negative_samples)
         A_pool = sparse.coo_matrix(A_pool.dot(D_inverse))
+        print(A_pool)
         A_pool.data[A_pool.data < 1.0] = 1.0
         target_matrix = sparse.coo_matrix((np.log(A_pool.data), (A_pool.row, A_pool.col)),
                                           shape=A_pool.shape,
                                           dtype=np.float32)
+        print(target_matrix)
         return target_matrix
 
     def _create_embedding(self, target_matrix):
