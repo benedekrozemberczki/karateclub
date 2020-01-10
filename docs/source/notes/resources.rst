@@ -26,7 +26,7 @@ Neighbourhood-based node embedding
 
 * Jundong Li, Liang Wu, and Huan Liu: **Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation** `Paper <https://arxiv.org/abs/1808.08627>`_
 
-* Benedek Rozemberczki and Rik Sarkar: **Network Embedding as Matrix Factorization: UnifyingDeepWalk, LINE, PTE, and Node2Vec** `Paper <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
+* Jiezhong Qiu, Yuxiao Dong, Hao Ma, Jian Li, Kuansan Wang, and Jie Tang: **Network Embedding as Matrix Factorization: Unifying DeepWalk, LINE, PTE, and Node2Vec** `Paper <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
 
 * Benedek Rozemberczki and Rik Sarkar: **Fast Sequence Based Embedding with Diffusion Graphs** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
 
