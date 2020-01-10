@@ -47,62 +47,67 @@ class NetMF(Estimator):
         Creating the normalized adjacency matrix.
 
         Return types:
-            * **A_hat** *(SciPy array)* - Normalized adjacency.
+            * **(A_hat, A_hat, A_hat, D_inverse)** *(SciPy arrays)* - Normalized adjacencies.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
         A_hat = D_inverse.dot(A)
-        return A_hat
+        return (A_hat, A_hat, A_hat, D_inverse)
 
     def _create_target_matrix(self):
         """
         Creating a log transformed target matrix.
 
         Return types:
-            * **target_matrix** *(SciPy array)* - The PMI matrix.
+            * **target_matrix** *(SciPy array)* - The shifted PMI matrix.
         """
-        self.A_tilde = sparse.coo_matrix(self.A_tilde.dot(self.A_hat))
-        scores = np.log(self.A_tilde.data)-math.log(self.A_tilde.shape[0])
-        rows = self.A_tilde.row[scores < 0]
-        cols = self.A_tilde.col[scores < 0]
-        scores = scores[scores < 0]
-        target_matrix = sparse.coo_matrix((scores, (rows, cols)),
-                                          shape=self.A_tilde.shape,
-                                          dtype=np.float32)
+        A_pool, A_tilde, A_hat, D_inverse = self._create_base_matrix(graph)
+        for _ in range(self.order-1):
+            A_tilde = sparse.coo_matrix(A_tilde.dot(A_hat))
+            A_pool = A_pool + A_tilde
+        A_pool 
+        
+        #scores = np.log(self.A_tilde.data)-math.log(self.A_tilde.shape[0])
 
-        return target_matrix
+        #rows = self.A_tilde.row[scores < 0]
+        #cols = self.A_tilde.col[scores < 0]
+        #scores = scores[scores < 0]
+        #target_matrix = sparse.coo_matrix((scores, (rows, cols)),
+        #                                  shape=self.A_tilde.shape,
+        #                                  dtype=np.float32)
+        #
+        #return target_matrix
 
-    def _create_single_embedding(self, target_matrix):
-        """
-        Fitting a single SVD embedding of a PMI matrix.
-        """
-        svd = TruncatedSVD(n_components=self.dimensions,
-                           n_iter=self.iterations,
-                           random_state=self.seed)
-        svd.fit(target_matrix)
-        embedding = svd.transform(target_matrix)
-        self.embeddings.append(embedding)
+    #def _create_single_embedding(self, target_matrix):
+    #    """
+    #    Fitting a single SVD embedding of a PMI matrix.
+    #    """
+    #    svd = TruncatedSVD(n_components=self.dimensions,
+    #                       n_iter=self.iterations,
+    #                       random_state=self.seed)
+    #    svd.fit(target_matrix)
+    #    embedding = svd.transform(target_matrix)
+    #    self.embeddings.append(embedding)
 
-    def fit(self, graph):
-        """
-        Fitting a GraRep model.
+    #def fit(self, graph):
+    #    """
+    #    Fitting a GraRep model.
+    #
+    #    Arg types:
+    #        * **graph** *(NetworkX graph)* - The graph to be embedded.
+    #    """
+    #  
+    #    target_matrix = self._create_target_matrix()
+    #    self._create_single_embedding(target_matrix)
+    #    for step in range(self.order-1):
+    #        target_matrix = self._create_target_matrix()
+    #        self._create_single_embedding(target_matrix)
 
-        Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
-        """
-        self.A_tilde, self.A_hat = self._create_base_matrix(graph)
-        self.embeddings = []
-        target_matrix = self._create_target_matrix()
-        self._create_single_embedding(target_matrix)
-        for step in range(self.order-1):
-            target_matrix = self._create_target_matrix()
-            self._create_single_embedding(target_matrix)
-
-    def get_embedding(self):
-        r"""Getting the node embedding.
-
-        Return types:
-            * **embedding** *(Numpy array)* - The embedding of nodes.
-        """
-        embedding = np.concatenate(self.embeddings, axis=1)
-        return embedding
+    #def get_embedding(self):
+    #    r"""Getting the node embedding.
+    #
+    #    Return types:
+    #        * **embedding** *(Numpy array)* - The embedding of nodes.
+    #    """
+    #    embedding = np.concatenate(self.embeddings, axis=1)
+    #    return embedding
