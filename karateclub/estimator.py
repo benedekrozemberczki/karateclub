@@ -1,7 +1,7 @@
-
+"""General Estimator base class."""
 
 class Estimator(object):
-    """Estimator meta class with constructor and public methods."""
+    """Estimator base class with constructor and public methods."""
 
     def __init__(self):
         """Creatinng an estimator."""
