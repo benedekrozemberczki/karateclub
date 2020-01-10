@@ -6,22 +6,24 @@ from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
 class NetMF(Estimator):
-    r"""An implementation of `"NetMF" <https://dl.acm.org/citation.cfm?id=2806512>`_
-    from the WSDM '18 paper "GraRep: Learning Graph Representations with Global
-    Structural Information". The procedure uses sparse truncated SVD to learn
-    embeddings for the pooled powers of the PMI matrix computed from powers of the
-    normalized adjacency matrix.
+    r"""An implementation of `"NetMF" <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
+    from the WSDM '18 paper "Network Embedding as Matrix Factorization: Unifying
+    DeepWalk, LINE, PTE, and Node2Vec". The procedure uses sparse truncated SVD to
+    learn embeddings for the pooled powers of the PMI matrix computed from powers
+    of the normalized adjacency matrix.
 
     Args:
-        dimensions (int): Number of individual embedding dimensions. Default is 32.
+        dimensions (int): Number of embedding dimension. Default is 32.
         iteration (int): Number of SVD iterations. Default is 10.
-        order (int): Number of PMI matrix powers. Default is 5
+        order (int): Number of PMI matrix powers. Default is 5.
+        negative_samples (in): Number of negative samples. Default is 10.
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions=32, iteration=10, order=5, seed=42):
+    def __init__(self, dimensions=32, iteration=10, order=5, negative_samples=10, seed=42):
         self.dimensions = dimensions
         self.iterations = iteration
         self.order = order
+        self.negative_samples = negative_samples
         self.seed = seed
 
     def _create_D_inverse(self, graph):
@@ -42,15 +44,15 @@ class NetMF(Estimator):
 
     def _create_base_matrix(self, graph):
         """
-        Creating a tuple with the normalized adjacency matrix.
+        Creating the normalized adjacency matrix.
 
         Return types:
-            * **(A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
+            * **A_hat** *(SciPy array)* - Normalized adjacency.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
         A_hat = D_inverse.dot(A)
-        return (A_hat, A_hat)
+        return A_hat
 
     def _create_target_matrix(self):
         """
