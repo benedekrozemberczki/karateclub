@@ -4,7 +4,7 @@ from karateclub.estimator import Estimator
 from scipy import sparse
 
 class FGSD(Estimator):
-    r"""An implementation of `"FGSD" <https://arxiv.org/abs/1707.05005>`_
+    r"""An implementation of `"FGSD" <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
     from the NeurIPS '17 paper "Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs".
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
     these features a document (graph) - feature co-occurence matrix is decomposed in order
