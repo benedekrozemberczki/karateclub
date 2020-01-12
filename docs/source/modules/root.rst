@@ -90,6 +90,10 @@ Attributed node embedding
 Whole graph embedding
 --------------------
 
+.. automodule:: karateclub.graph_embedding.fgsd
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.graph_embedding.graph2vec
     :members:
     :undoc-members:
