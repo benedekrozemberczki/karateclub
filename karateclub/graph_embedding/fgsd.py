@@ -32,6 +32,9 @@ class FGSD(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
 
+    def calculate_fgsd(self,graph):
+        pass
+
     def fit(self, graphs):
         """
         Fitting a Graph2Vec model.
@@ -39,20 +42,7 @@ class FGSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed) for graph in graphs]
-        documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
-
-        model = Doc2Vec(documents,
-                        vector_size=self.dimensions,
-                        window=0,
-                        min_count=self.min_count,
-                        dm=0,
-                        sample=self.down_sampling,
-                        workers=self.workers,
-                        epochs=self.epochs,
-                        alpha=self.learning_rate)
-
-        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+        bla = [self._calculate_fgsd(graph) for graph in graphs]
 
 
     def get_embedding(self):
