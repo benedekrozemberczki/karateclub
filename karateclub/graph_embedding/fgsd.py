@@ -3,9 +3,9 @@ import networkx as nx
 from karateclub.estimator import Estimator
 from scipy import sparse
 
-class FSGD(Estimator):
-    r"""An implementation of `"Graph2Vec" <https://arxiv.org/abs/1707.05005>`_
-    from the MLGWorkshop '17 paper "Graph2Vec: Learning Distributed Representations of Graphs".
+class FGSD(Estimator):
+    r"""An implementation of `"FGSD" <https://arxiv.org/abs/1707.05005>`_
+    from the NeurIPS '17 paper "Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs".
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
     these features a document (graph) - feature co-occurence matrix is decomposed in order
     to generate representations for the graphs.

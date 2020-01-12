@@ -103,6 +103,8 @@ In detail, the following methods are currently implemented.
 
 **Graph Level Embedding**
 
+* **[FGSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.fgsd.FGSD)** from Verma and Zhang: [Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs](https://arxiv.org/abs/1707.05005) (NeurIPS 2017)
+
 * **[Graph2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.graph2vec.Graph2Vec)** from Narayanan *et al.*: [Graph2Vec: Learning Distributed Representations of Graphs](https://arxiv.org/abs/1707.05005) (MLGWorkshop 2017)
 
 
