@@ -54,7 +54,7 @@ Attributed node embedding
 Whole graph embedding
 --------------------
 
-* Annamalai Narayanan, Mahinthan Chandramohan, Rajasekar Venkatesan, Lihui Chen, Yang Liu, Shantanu Jaiswal: **Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs** `Paper <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
+* Saurabh Verma, Zhi-Li Zhang: **Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs** `Paper <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
 
 * Annamalai Narayanan, Mahinthan Chandramohan, Rajasekar Venkatesan, Lihui Chen, Yang Liu, Shantanu Jaiswal: **graph2vec: Learning Distributed Representations of Graphs** `Paper <https://arxiv.org/abs/1707.05005>`_
 
