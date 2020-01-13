@@ -1,6 +1,5 @@
 import numpy as np
 import networkx as nx
-from tqdm import tqdm
 from karateclub.estimator import Estimator
 
 class FGSD(Estimator):
@@ -44,7 +43,7 @@ class FGSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        self._embedding = [self._calculate_fgsd(graph) for graph in tqdm(graphs)]
+        self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
 
 
     def get_embedding(self):
