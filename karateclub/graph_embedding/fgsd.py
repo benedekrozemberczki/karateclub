@@ -29,7 +29,7 @@ class FGSD(Estimator):
         L = nx.laplacian_matrix(graph).todense()
         fL = np.linalg.pinv(L)
         ones = np.ones(L.shape[0])
-        S = np.outer(np.diag(fL), ones)+np.outer(ones_vector, np.diag(fL))-2*fL
+        S = np.outer(np.diag(fL), ones)+np.outer(ones, np.diag(fL))-2*fL
         hist, bin_edges = np.histogram(S.flatten(),bins=self.hist_bins,range=self.hist_range)
         return hist
 
