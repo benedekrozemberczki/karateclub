@@ -20,9 +20,6 @@ model = FGSD()
 model.fit(graphs)
 model.get_embedding()
 
-
-quit()
-
 #-----------------------------------
 # NetMF example
 #-----------------------------------
