@@ -20,27 +20,18 @@ class FGSD(Estimator):
         learning_rate (float): HogWild! learning rate. Deefault is 0.025.
         min_count (int): Minimal count of graph feature occurences. Default is 5.
     """
-    def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
-                 down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5):
+    def __init__(self, hist_bins=200, hist_range=20):
 
-        self.wl_iterations = wl_iterations
-        self.attributed = attributed
-        self.dimensions = dimensions
-        self.workers = workers
-        self.down_sampling = down_sampling
-        self.epochs = epochs
-        self.learning_rate = learning_rate
-        self.min_count = min_count
+        self.hist_bins = hist_bins
+        self.hist_range = (0, hist_range)
 
     def _calculate_fgsd(self, graph):
-        range_hist = (0,20)
         L = nx.laplacian_matrix(graph).todense()
         fL = np.linalg.pinv(L)
-        ones_vector=np.ones(L.shape[0])
-        S=np.outer(np.diag(fL),ones_vector)+np.outer(ones_vector,np.diag(fL))-2*fL
-
-        hist, bin_edges = np.histogram(S.flatten(),bins=200,range=range_hist)
-        print(hist)
+        ones = np.ones(L.shape[0])
+        S = np.outer(np.diag(fL), ones)+np.outer(ones_vector, np.diag(fL))-2*fL
+        hist, bin_edges = np.histogram(S.flatten(),bins=self.hist_bins,range=self.hist_range)
+        return hist
 
     def fit(self, graphs):
         """
