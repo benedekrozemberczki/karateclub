@@ -33,8 +33,14 @@ class FGSD(Estimator):
         self.min_count = min_count
 
     def _calculate_fgsd(self, graph):
+        range_hist = (0,20)
         L = nx.laplacian_matrix(graph).todense()
         fL = np.linalg.pinv(L)
+        ones_vector=np.ones(L.shape[0])
+        S=np.outer(np.diag(fL),ones_vector)+np.outer(ones_vector,np.diag(fL))-2*fL
+
+        hist, bin_edges = np.histogram(S.flatten(),bins=200,range=range_hist)
+        print(hist)
 
     def fit(self, graphs):
         """
