@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
-from karateclub.estimator import Estimator
 from scipy import sparse
+from karateclub.estimator import Estimator
 
 class FGSD(Estimator):
     r"""An implementation of `"FGSD" <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
@@ -32,7 +32,7 @@ class FGSD(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
 
-    def calculate_fgsd(self,graph):
+    def _calculate_fgsd(self, graph):
         pass
 
     def fit(self, graphs):
@@ -42,7 +42,7 @@ class FGSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        bla = [self._calculate_fgsd(graph) for graph in graphs]
+        self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
 
 
     def get_embedding(self):
