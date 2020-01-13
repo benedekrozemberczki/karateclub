@@ -20,13 +20,23 @@ class FGSD(Estimator):
         self.hist_range = (0, hist_range)
 
     def _calculate_fgsd(self, graph):
-        L = nx.laplacian_matrix(graph).todense()
+        """
+        Calculating the features.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - A graph to be embedded.
+
+        Return types:
+            * **hist** *(Numpy array)* - The embedding of a single graph.
+        """
+        L = nx.normalized_laplacian_matrix(graph).todense()
         fL = np.linalg.pinv(L)
         ones = np.ones(L.shape[0])
         S = np.outer(np.diag(fL), ones)+np.outer(ones, np.diag(fL))-2*fL
         hist, bin_edges = np.histogram(S.flatten(),
                                        bins=self.hist_bins,
                                        range=self.hist_range)
+        print(hist)
         return hist
 
     def fit(self, graphs):
