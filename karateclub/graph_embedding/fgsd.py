@@ -11,8 +11,8 @@ class FGSD(Estimator):
     to generate representations for the graphs.
 
     Args:
-        wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 200.
-        attributed (int): Number of nodes in diffusion. Default is 20.
+        hist_bins (int): Number of histogram bins. Default is 200.
+        hist_range (int): Histogram range considered. Default is 20.
     """
     def __init__(self, hist_bins=200, hist_range=20):
 
@@ -21,7 +21,7 @@ class FGSD(Estimator):
 
     def _calculate_fgsd(self, graph):
         """
-        Calculating the features.
+        Calculating the features of a graph.
 
         Arg types:
             * **graph** *(NetworkX graph)* - A graph to be embedded.
@@ -36,7 +36,6 @@ class FGSD(Estimator):
         hist, bin_edges = np.histogram(S.flatten(),
                                        bins=self.hist_bins,
                                        range=self.hist_range)
-        print(hist)
         return hist
 
     def fit(self, graphs):
