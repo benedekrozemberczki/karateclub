@@ -33,7 +33,9 @@ class FGSD(Estimator):
         self.min_count = min_count
 
     def _calculate_fgsd(self, graph):
-        pass
+        a = nx.laplacian_matrix(graph)
+        u, s, vt = svds(a,k=min(a.shape)-1)
+        fL = vt.T @ np.diag(1/s) @ u.T
 
     def fit(self, graphs):
         """
