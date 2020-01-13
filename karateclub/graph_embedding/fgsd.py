@@ -11,14 +11,8 @@ class FGSD(Estimator):
     to generate representations for the graphs.
 
     Args:
-        wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
-        attributed (bool): Number of nodes in diffusion. Default is False.
-        dimensions (int): Dimensionality of embedding. Default is 128.
-        workers (int): Number of cores. Default is 4.
-        down_sampling (float): Down sampling frequency. Default is 0.0001.
-        epochs (int): Number of epochs. Default is 10.
-        learning_rate (float): HogWild! learning rate. Deefault is 0.025.
-        min_count (int): Minimal count of graph feature occurences. Default is 5.
+        wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 200.
+        attributed (int): Number of nodes in diffusion. Default is 20.
     """
     def __init__(self, hist_bins=200, hist_range=20):
 
