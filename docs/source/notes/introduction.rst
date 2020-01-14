@@ -36,7 +36,7 @@ default hyperparameters that work well out of the box. This means that non exper
     model.fit(g)
     embedding = model.get_embedding()
 
-Which can be modified to create a Walklets embedding with minimal effort like this.
+Which can be modified to create a ``Walklets`` embedding with minimal effort like this.
 
 .. code-block:: python
     import networkx as nx
