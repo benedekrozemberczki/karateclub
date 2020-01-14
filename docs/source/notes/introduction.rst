@@ -15,6 +15,8 @@ Karate Club assumes that the NetworkX graph provided by the user for node embedd
 - There are no orphaned nodes in the graph.
 - The node indexing starts with zero and the indices are consecutive.
 
+Node attribute matrices can be provided as ``scipy sparse`` and ``numpy`` arrays. 
+
 The returned community membership dictionaries and embedding matrices use the same numeric, consecutive indexing.
 
 API Driven Design with Out-of-the-Box Hyperparameter Values
