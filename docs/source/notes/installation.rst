@@ -18,4 +18,4 @@ To check your current package version hit:
 
     .. code-block:: none
 
-        $ pip freeze |
+        $ pip freeze | grep karateclub
