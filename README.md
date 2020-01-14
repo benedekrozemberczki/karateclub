@@ -128,7 +128,9 @@ $ pip install karateclub
 
 As we create new releases frequently, upgrading the package casually might be beneficial.
 
-
+```sh
+$ pip install karateclub --upgrade
+```
 
 --------------------------------------------------------------------------------
 
