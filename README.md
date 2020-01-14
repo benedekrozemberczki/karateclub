@@ -136,7 +136,10 @@ $ pip install karateclub --upgrade
 
 **Running examples**
 
-We provide synthetic examples for each model. These can be tried out by running the examples script.
+As part of the documentation we provide a number of use cases to show how the clusterings and embeddings can be utilized for downstream learning. These can accessed [here]() with detailed explanations.
+
+
+Besides the case studies we provide synthetic examples for each model. These can be tried out by running the examples script.
 
 ```
 $ python examples.py
