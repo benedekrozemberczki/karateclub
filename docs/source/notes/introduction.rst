@@ -50,7 +50,7 @@ Which can be modified to create a Walklets embedding with minimal effort like th
 
 Looking at these two snippets the advantage of the API driven design is evident. First, one had to change the import of the model. Second, we needed to change the model construction and the default hyperparameters
 were already set. The provided public methods are the same. An embedding is learned with ``fit`` and it is returned by
-``get_embedding``. This allows for quick and minimal changes to the code when an unsupervised model performs poorly.
+``get_embedding``. This allows for quick and minimal changes to the code when a model performs poorly.
 
 
 Community Detection
