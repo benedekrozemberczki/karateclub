@@ -224,7 +224,7 @@ set for this target. Finally, we evaluate the model performance by printing an a
     from sklearn.linear_model import LogisticRegression
     
     downstream_model = LogisticRegression(random_state=0).fit(X_train, y_train)
-    y_hat = downstream_model.predict_proba(X_test)[:,1]
+    y_hat = downstream_model.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, y_hat)
     print('AUC: {:.4f}'.format(auc))
     >>> AUC: 0.7127
