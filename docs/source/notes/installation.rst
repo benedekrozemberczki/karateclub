@@ -14,7 +14,7 @@ Upgrade your outdate version by using:
         $ pip install karateclub --upgrade
 
 
-To check your current package version hit:
+To check your current package version run:
 
     .. code-block:: none
 
