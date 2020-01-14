@@ -136,7 +136,7 @@ $ pip install karateclub --upgrade
 
 **Running examples**
 
-As part of the documentation we provide a number of use cases to show how the clusterings and embeddings can be utilized for downstream learning. These can accessed [here]() with detailed explanations.
+As part of the documentation we provide a number of use cases to show how the clusterings and embeddings can be utilized for downstream learning. These can accessed [here](https://karateclub.readthedocs.io/en/latest/notes/introduction.html) with detailed explanations.
 
 
 Besides the case studies we provide synthetic examples for each model. These can be tried out by running the examples script.
