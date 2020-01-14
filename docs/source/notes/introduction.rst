@@ -138,7 +138,7 @@ abusive user target vector. These are returned as a ``NetworkX`` graph and ``num
     graph = reader.get_graph()
     y = reader.get_target()
 
-We fit a Diff2vec node embedding, with a low number of dimensions, diffusions per source node, and short Euler walks.
+We fit a `Diff2vec node embedding <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_, with a low number of dimensions, diffusions per source node, and short Euler walks.
 First, we use the model constructor with custom parameters. Second, we fit the model to the graph. Third, we get the node embedding
 which is a ``numpy`` array.
 
