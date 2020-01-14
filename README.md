@@ -136,6 +136,8 @@ $ pip install karateclub --upgrade
 
 **Running examples**
 
+We provide synthetic examples for each model. These can be tried out by running the examples script.
+
 ```
 $ python examples.py
 ```
