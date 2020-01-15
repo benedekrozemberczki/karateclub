@@ -91,7 +91,7 @@ class NetMF(Estimator):
 
     def fit(self, graph):
         """
-        Fitting a GraRep model.
+        Fitting a NetMF model.
     
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
