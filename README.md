@@ -55,7 +55,7 @@ print(splitter.get_memberships())
 
 **Models included**
 
-In detail, the following methods are currently implemented.
+In detail, the following community detection and embedding methods were implemented.
 
 **Overlapping Community Detection**
 
