@@ -182,7 +182,7 @@ class BoostNE(Estimator):
 
     def fit(self, graph):
         """
-        Fitting a GraRep model.
+        Fitting a BoostNE model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
