@@ -191,7 +191,7 @@ These are returned as a list of ``NetworkX`` graphs and ``numpy`` array respecti
 
     reader = GraphSetReader("reddit10k")
 
-    graph = reader.get_graphs()
+    graphs = reader.get_graphs()
     y = reader.get_target()
 
 We fit a Graph2Vec graph level embedding, with the standard hyperparameter settings. These are pretty widely used settings.
