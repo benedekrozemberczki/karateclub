@@ -10,7 +10,7 @@ from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, 
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.node_embedding.attributed import BANE, TENE
-from karateclub.graph_embedding import Graph2Vec, FGSD
+from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
