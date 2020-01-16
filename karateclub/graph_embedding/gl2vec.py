@@ -4,7 +4,7 @@ from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
-class Graph2Vec(Estimator):
+class GL2Vec(Estimator):
     r"""An implementation of `"GL2Vec" <https://arxiv.org/abs/1707.05005>`_
     from the ICONIP '19 paper "Graph2Vec: Learning Distributed Representations of Graphs".
     First, the algorithm creates the line graph of each graph in the graph dataset.
