@@ -61,7 +61,7 @@ class LabelPropagation(Estimator):
         r"""Getting the cluster membership of nodes.
 
         Return types:
-            memberships (dict): Node cluster memberships.
+            * **memberships** *(dict)* - Node cluster memberships.
         """
         memberships = self.labels
         return memberships
