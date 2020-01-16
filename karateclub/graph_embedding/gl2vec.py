@@ -34,6 +34,11 @@ class Graph2Vec(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
 
+
+    def _create_line_graph(self, graph):
+
+        return line_graph
+
     def fit(self, graphs):
         """
         Fitting a Graph2Vec model.
@@ -41,7 +46,7 @@ class Graph2Vec(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        graphs = 
+        graphs = [self._create_line_graph(graph) for graph in graphs]
         documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed) for graph in graphs]
         documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
 
