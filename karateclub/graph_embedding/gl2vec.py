@@ -35,7 +35,10 @@ class Graph2Vec(Estimator):
         self.min_count = min_count
 
     def _create_line_graph(self, graph):
-
+        graph = nx.line_graph(graph)
+        node_mapper = {node: i for i, node in enumerate(graph.nodes())}
+        edges = [[node_mapper[edge[0]], node_mapper[edge[1]]] for edge in graph.edges()]
+        line_graph = 
         return line_graph
 
     def fit(self, graphs):
