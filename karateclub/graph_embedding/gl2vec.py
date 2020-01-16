@@ -5,7 +5,7 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
 class GL2Vec(Estimator):
-    r"""An implementation of `"GL2Vec" <https://arxiv.org/abs/1707.05005>`_
+    r"""An implementation of `"GL2Vec" <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
     from the ICONIP '19 paper "GL2vec: Graph Embedding Enriched by Line Graphs with Edge Features".
     First, the algorithm creates the line graph of each graph in the graph dataset.
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
