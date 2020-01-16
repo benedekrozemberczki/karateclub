@@ -89,7 +89,7 @@ class NNSED(Estimator):
         r"""Getting the cluster membership of nodes.
 
         Return types:
-            memberships (dict): Node cluster memberships.
+            * **memberships** *(dict)* - Node cluster memberships.
         """
         index = np.argmax(self.Z, axis=0)
         memberships = {int(i): int(index[i]) for i in range(len(index))}
