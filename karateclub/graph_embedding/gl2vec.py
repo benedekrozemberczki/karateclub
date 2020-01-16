@@ -38,7 +38,7 @@ class GL2Vec(Estimator):
         graph = nx.line_graph(graph)
         node_mapper = {node: i for i, node in enumerate(graph.nodes())}
         edges = [[node_mapper[edge[0]], node_mapper[edge[1]]] for edge in graph.edges()]
-        line_graph = nx.from_edgelist()
+        line_graph = nx.from_edgelist(edges)
         return line_graph
 
     def fit(self, graphs):
