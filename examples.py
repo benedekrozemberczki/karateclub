@@ -21,7 +21,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 
 reader = GraphSetReader("reddit10k")
 
-graph = reader.get_graphs()
+graphs = reader.get_graphs()
 y = reader.get_target()
 
 model = GL2Vec()
