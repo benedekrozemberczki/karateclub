@@ -13,7 +13,6 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.dataset import GraphReader, GraphSetReader
 
-
 #-----------------------------------
 # GL2Vec example
 #-----------------------------------
@@ -30,7 +29,6 @@ quit()
 #-----------------------------------
 # FGSD example
 #-----------------------------------
-
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
