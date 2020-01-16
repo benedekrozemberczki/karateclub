@@ -7,6 +7,7 @@ from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 class Graph2Vec(Estimator):
     r"""An implementation of `"Graph2Vec" <https://arxiv.org/abs/1707.05005>`_
     from the MLGWorkshop '17 paper "Graph2Vec: Learning Distributed Representations of Graphs".
+    First the algorithm creates the line graph of each graph in the graph dataset.
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
     these features a document (graph) - feature co-occurence matrix is decomposed in order
     to generate representations for the graphs.
@@ -40,6 +41,7 @@ class Graph2Vec(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        graphs = 
         documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed) for graph in graphs]
         documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
 
