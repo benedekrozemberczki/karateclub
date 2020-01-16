@@ -13,6 +13,19 @@ from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+model = GL2Vec()
+
+model.fit(graphs)
+model.get_embedding()
+
+#-----------------------------------
+# FGSD example
+#-----------------------------------
+
+
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
 model = FGSD()
