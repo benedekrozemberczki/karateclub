@@ -25,6 +25,8 @@ model = GL2Vec()
 model.fit(graphs)
 model.get_embedding()
 
+quit()
+
 #-----------------------------------
 # FGSD example
 #-----------------------------------
