@@ -9,6 +9,7 @@ class BigClam(Estimator):
     from the WSDM '13 paper "Overlapping Community Detection at Scale: A Nonnegative Matrix
     Factorization Approach". The procedure uses gradient ascent to create an embedding which is
     used for deciding the node-cluster affiliations.
+
     Args:
         dimensions (int): Number of embedding dimensions. Default 8.
         iterations (int): Number of training iterations. Default 50.
@@ -49,6 +50,7 @@ class BigClam(Estimator):
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
+
         Return types:
             memberships (dict): Node cluster memberships.
         """
@@ -58,6 +60,7 @@ class BigClam(Estimator):
 
     def get_embedding(self):
         r"""Getting the node embedding.
+
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
@@ -67,6 +70,7 @@ class BigClam(Estimator):
     def fit(self, graph):
         """
         Fitting a BigClam clustering model.
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
