@@ -5,12 +5,12 @@ import networkx as nx
 import community
 import numpy as np
 
-from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
+from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
-from karateclub.node_embedding.structural import GraphWave
-from karateclub.node_embedding.attributed import BANE, TENE
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec
+from karateclub.node_embedding.attributed import BANE, TENE
+from karateclub.node_embedding.structural import GraphWave
 from karateclub.dataset import GraphReader, GraphSetReader
 
 
@@ -18,28 +18,12 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # GL2Vec example
 #-----------------------------------
 
-
-reader = GraphSetReader("reddit10k")
-
-graphs = reader.get_graphs()
-y = reader.get_target()
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
 model = GL2Vec()
 
 model.fit(graphs)
-X = model.get_embedding()
-
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-from sklearn.metrics import roc_auc_score
-from sklearn.linear_model import LogisticRegression
-
-downstream_model = LogisticRegression(random_state=0).fit(X_train, y_train)
-y_hat = downstream_model.predict_proba(X_test)[:, 1]
-auc = roc_auc_score(y_test, y_hat)
-print('AUC: {:.4f}'.format(auc))
+model.get_embedding()
 
 quit()
 
