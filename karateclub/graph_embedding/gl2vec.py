@@ -6,7 +6,7 @@ from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
 class GL2Vec(Estimator):
     r"""An implementation of `"GL2Vec" <https://arxiv.org/abs/1707.05005>`_
-    from the ICONIP '19 paper "Graph2Vec: Learning Distributed Representations of Graphs".
+    from the ICONIP '19 paper "GL2vec: Graph Embedding Enriched by Line Graphs with Edge Features".
     First, the algorithm creates the line graph of each graph in the graph dataset.
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
     these features a document (graph) - feature co-occurence matrix is decomposed in order
