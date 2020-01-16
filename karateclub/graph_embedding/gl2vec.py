@@ -34,7 +34,6 @@ class Graph2Vec(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
 
-
     def _create_line_graph(self, graph):
 
         return line_graph
