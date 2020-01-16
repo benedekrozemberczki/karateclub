@@ -54,7 +54,7 @@ Attributed node embedding
 Whole graph embedding
 --------------------
 
-* Saurabh Verma, Zhi-Li Zhang: **GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features** `Paper <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
+* Hong Chen, Hisashi Koga: **GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features** `Paper <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
 
 * Saurabh Verma, Zhi-Li Zhang: **Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs** `Paper <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
 
