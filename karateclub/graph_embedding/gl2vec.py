@@ -35,6 +35,14 @@ class GL2Vec(Estimator):
         self.min_count = min_count
 
     def _create_line_graph(self, graph):
+        r"""Getting the embedding of graphs.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph transformed to be a line graph.
+
+        Return types:
+            * **line_graph** *(NetworkX graph)* - The line graph of the source graph.
+        """
         graph = nx.line_graph(graph)
         node_mapper = {node: i for i, node in enumerate(graph.nodes())}
         edges = [[node_mapper[edge[0]], node_mapper[edge[1]]] for edge in graph.edges()]
