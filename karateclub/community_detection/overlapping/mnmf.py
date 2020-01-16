@@ -108,7 +108,7 @@ class MNMF(Estimator):
         r"""Getting the cluster membership of nodes.
 
         Return types:
-            memberships (dict): Node cluster memberships.
+            * **memberships** *(dict)* - Node cluster memberships.
         """
         indices = np.argmax(self.H, axis=1)
         memberships = {i: membership for i, membership in enumerate(indices)}
