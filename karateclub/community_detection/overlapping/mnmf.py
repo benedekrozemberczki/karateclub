@@ -4,7 +4,7 @@ from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 
 class MNMF(Estimator):
-    r"""An implementation of `"M-NMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
+    r"""An implementation of `"M-NMF" <https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14589/13763>`_
     from the AAAI '17 paper "Community Preserving Network Embedding".
     The procedure uses joint non-negative matrix factorization with modularity
     based regul;arization in order to learn a cluster memmbership distribution
