@@ -18,8 +18,8 @@ class EgoNetSplitter(Estimator):
         """
         Creating an ego net, extracting personas and partitioning it.
 
-        Args:
-            node: Node ID for egonet (ego node).
+        Arg types:
+            * **node** *(int)* - Node ID for egonet (ego node).
         """
         ego_net_minus_ego = self.graph.subgraph(self.graph.neighbors(node))
         components = {i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))}
@@ -53,8 +53,8 @@ class EgoNetSplitter(Estimator):
         """
         Getting the new edge identifiers.
 
-        Args:
-            edge: Edge being mapped to the new identifiers.
+        Arg types:
+            * **edge** *(list of ints)* - Edge being mapped to the new identifiers.
         """
         return (self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]])
 

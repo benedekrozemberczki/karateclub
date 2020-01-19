@@ -4,22 +4,24 @@ import networkx as nx
 class RandomWalker:
     """
     Class to do fast first-order random walks.
+
+    Args:
+        walk_length (int): Number of diffusions. Default is 10.
+        walk_number (int): Number of nodes in diffusion. Default is 80.
     """
     def __init__(self, walk_length, walk_number):
-        """
-        Constructor for FirstOrderRandomWalker.
-        :param graph: Nx graph object.
-        :param args: Arguments object.
-        """
         self.walk_length = walk_length
         self.walk_number = walk_number
-        self.walks = []
 
     def do_walk(self, node):
         """
         Doing a single truncated random walk from a source node.
-        :param node: Source node of the truncated random walk.
-        :return walk: A single random walk.
+
+        Arg types:
+            * **node** *(int)* - The source node of the diffusion.
+
+        Return types:
+            * **walk** *(list of strings)* - A single truncated random walk.
         """
         walk = [node]
         for _ in range(self.walk_length-1):
@@ -32,12 +34,13 @@ class RandomWalker:
     def do_walks(self, graph):
         """
         Doing a fixed number of truncated random walk from every node in the graph.
-        :param graph: NetworkX graph.
-        :return : Random walks.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to run the random walks on.
         """
+        self.walks = []
         self.graph = graph
         for node in self.graph.nodes():
             for _ in range(self.walk_number):
                 walk_from_node = self.do_walk(node)
                 self.walks.append(walk_from_node)
-        return self.walks

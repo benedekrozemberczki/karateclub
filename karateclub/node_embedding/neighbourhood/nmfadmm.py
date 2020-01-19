@@ -38,7 +38,7 @@ class NMFADMM(Estimator):
 
     def _update_W(self):
         """
-        Updating user matrix.
+        Updating user_1 matrix.
         """
         left = np.linalg.pinv(self.H.dot(self.H.T)+np.eye(self.dimensions))
         right_1 = self.X.dot(self.H.T).T+self.W_plus.T
@@ -47,7 +47,7 @@ class NMFADMM(Estimator):
 
     def _update_H(self):
         """
-        Updating item matrix.
+        Updating user_2 matrix.
         """
         left = np.linalg.pinv(self.W.T.dot(self.W)+np.eye(self.dimensions))
         right_1 = self.X.T.dot(self.W).T+self.H_plus
@@ -56,7 +56,7 @@ class NMFADMM(Estimator):
 
     def _update_X(self):
         """
-        Updating user-item matrix.
+        Updating user_1-user_2 matrix.
         """
         iX, iY = sp.nonzero(self.V)
         values = np.sum(self.W[iX]*self.H[:, iY].T, axis=-1)
@@ -67,13 +67,13 @@ class NMFADMM(Estimator):
 
     def _update_W_plus(self):
         """
-        Updating positive primal user factors.
+        Updating positive primal user_1 factors.
         """
         self.W_plus = np.maximum(self.W+(1/self.rho)*self.alpha_W, 0)
 
     def _update_H_plus(self):
         """
-        Updating positive primal item factors.
+        Updating positive primal user_2 factors.
         """
         self.H_plus = np.maximum(self.H+(1/self.rho)*self.alpha_H, 0)
 
@@ -117,6 +117,9 @@ class NMFADMM(Estimator):
     def _create_base_matrix(self, graph):
         """
         Creating a tuple with the normalized adjacency matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
 
         Return types:
             * **A_hat** *SciPy array* - Normalized adjacency matrix.

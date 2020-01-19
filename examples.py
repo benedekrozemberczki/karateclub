@@ -24,8 +24,6 @@ model = GL2Vec()
 model.fit(graphs)
 model.get_embedding()
 
-quit()
-
 #-----------------------------------
 # FGSD example
 #-----------------------------------
@@ -56,7 +54,6 @@ reader = GraphSetReader("reddit10k")
 
 graphs = reader.get_graphs()
 y = reader.get_target()
-
 #-----------------------------------
 # Graph reader example
 #-----------------------------------
@@ -65,6 +62,7 @@ reader = GraphReader("facebook")
 
 graphs = reader.get_graph()
 target = reader.get_target()
+
 #-----------------------------------
 # Graph2Vec example
 #-----------------------------------

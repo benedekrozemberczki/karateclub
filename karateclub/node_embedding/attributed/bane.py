@@ -10,7 +10,6 @@ class BANE(Estimator):
     procedure first calculates the truncated SVD of an adjcacency - feature matrix
     product. This matrix is further decomposed by a binary CCD based technique. 
        
-
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
         svd_iterations (int): SVD iteration count. Default is 20.
@@ -30,7 +29,13 @@ class BANE(Estimator):
 
     def _create_target_matrix(self, graph):
         """
-        Creating a normalized sparse adjacency matrix target. 
+        Creating a normalized sparse adjacency matrix target.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded. 
+
+        Return types:
+            * **P** *(Scipy COO matrix) - The target matrix.    
         """
         weighted_graph = nx.Graph()
         for (u, v) in graph.edges():

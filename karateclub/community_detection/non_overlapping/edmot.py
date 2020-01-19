@@ -20,11 +20,11 @@ class EdMot(Estimator):
         """
         Calculating the neighbourhood overlap for a pair of nodes.
 
-        Args:
-            node_1 (int): Source node 1.
-            node_2 (int): Source node 2.
-        Returns:
-            overlap (int): Neighbourhood overlap score.
+        Arg types:
+            * **node_1** *(int)* - Source node 1.
+            * **node_2** *(int)* - Source node 2.
+        Return types:
+            * **overlap** *(int)* - Neighbourhood overlap score.
         """
         nodes_1 = self.graph.neighbors(node_1)
         nodes_2 = self.graph.neighbors(node_2)

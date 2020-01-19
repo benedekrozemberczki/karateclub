@@ -38,6 +38,9 @@ class GraphWave(Estimator):
     def _check_size(self, graph):
         """
         Checking the size of the target graph. Switching based on size and settings.
+        
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph being embedded.
         """
         self.number_of_nodes = graph.number_of_nodes()
         if self.number_of_nodes > self.switch:
@@ -46,7 +49,12 @@ class GraphWave(Estimator):
     def _single_wavelet_generator(self, node):
         """
         Calculating the characteristic function for a given node, using the eigendecomposition.
-        :param node: Node that is being embedded.
+        
+        Arg types:
+            * **node** *(int)* - The node being embedded.
+
+        Return types:
+            * **wavelet_coefficients** *(Numpy array)* - The wavelet representation of the node.
         """
         impulse = np.zeros((self.number_of_nodes))
         impulse[node] = 1.0

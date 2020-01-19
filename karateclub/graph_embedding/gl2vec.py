@@ -72,7 +72,6 @@ class GL2Vec(Estimator):
 
         self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
-
     def get_embedding(self):
         r"""Getting the embedding of graphs.
 

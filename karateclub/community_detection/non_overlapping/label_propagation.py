@@ -19,7 +19,9 @@ class LabelPropagation(Estimator):
     def _make_a_pick(self, neighbors):
         """
         Choosing a neighbor from a propagation source node.
-        :param neigbors: Neighboring nodes.
+
+        Arg types:
+            * **neigbors** *(list)* - Neighboring nodes.
         """
         scores = {}
         for neighbor in neighbors:

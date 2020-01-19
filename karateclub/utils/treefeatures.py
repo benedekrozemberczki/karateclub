@@ -3,14 +3,16 @@ import networkx as nx
 
 class WeisfeilerLehmanHashing(object):
     """
-    Weisfeiler Lehman feature extractor class.
+    Weisfeiler-Lehman feature extractor class.
+
+    Args:
+        graph (NetworkX graph): NetworkX graph for which we do WL hashing.
+        features (dict of strings): Feature hash map.
+        iterations (int): Number of WL iterations.
     """
     def __init__(self, graph, wl_iterations, attributed):
         """
         Initialization method which also executes feature extraction.
-        :param graph: The NetworkX graph object.
-        :param features: Feature hash table.
-        :param iterations: Number of WL iterations.
         """
         self.wl_iterations = wl_iterations
         self.graph = graph
@@ -18,17 +20,21 @@ class WeisfeilerLehmanHashing(object):
         self._set_features()
         self._do_recursions()
 
-
     def _set_features(self):
+        """
+        Creating the features.
+        """
         if self.attributed:
-            self.features = nx.get_node_attributes(G, 'features')
+            self.features = nx.get_node_attributes(G, 'feature')
         else:
             self.features = {node: self.graph.degree(node) for node in self.graph.nodes()}
 
     def _do_a_recursion(self):
         """
         The method does a single WL recursion.
-        :return new_features: The hash table with extracted WL features.
+
+        Return types:
+            * **new_features** *(dict of strings)* - The hash table with extracted WL features.
         """
         self.extracted_features = [str(v) for k, v in self.features.items()]
         new_features = {}

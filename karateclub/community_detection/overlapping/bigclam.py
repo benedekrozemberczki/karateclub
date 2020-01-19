@@ -23,6 +23,9 @@ class BigClam(Estimator):
     def _initialize_features(self, number_of_nodes):
         """
         Creating the community embedding and gradient sum.
+
+        Arg types:
+            * **number_of_nodes** *(int)* - The number of nodes in the graph.
         """
         self._embedding = np.random.uniform(0, 1, (number_of_nodes, self.dimensions))
         self._global_features = np.sum(self._embedding, axis=0)
@@ -30,6 +33,10 @@ class BigClam(Estimator):
     def _calculate_gradient(self, node_feature, neb_features):
         """
         Calculating the feature gradient.
+
+        Arg types:
+            * **node_feature** *(Numpy array)* - The node representation.
+            * **neb_features** *(Numpy array)* - The representation of node neighbours.
         """
         raw_scores = node_feature.dot(neb_features.T)
         raw_scores = np.clip(raw_scores, -15, 15)
@@ -43,6 +50,11 @@ class BigClam(Estimator):
     def _do_updates(self, node, gradient, node_feature):
         """
         Updating the embedding and the feature sum.
+
+        Arg types:
+            * **node** *(int)* - The node identifier.
+            * **gradient** *(Numpy array)* - The gradient of the node representation.
+            * **node_feature** *(Numpy array)* - The node representation.
         """
         self._embedding[node] = self._embedding[node]+self.learning_rate*gradient
         self._embedding[node] = np.clip(self._embedding[node], 0.00001, 10)

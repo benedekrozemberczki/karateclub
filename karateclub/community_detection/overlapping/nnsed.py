@@ -52,6 +52,9 @@ class NNSED(Estimator):
     def _setup_embeddings(self, graph):
         """
         Setup the node embedding matrices.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         number_of_nodes = graph.shape[0]
         self.W = np.abs(np.random.normal(0, 10, size=(number_of_nodes, self.dimensions)))
@@ -60,6 +63,9 @@ class NNSED(Estimator):
     def _update_W(self, A):
         """
         Updating the vertical basis matrix.
+
+        Arg types:
+            * **A** *(Scipy COO matrix)* - The normalized adjacency matrix.
         """
         enum = A.dot(self.Z.T)
         denom_1 = self.W.dot(self.Z).dot(self.Z.T)
@@ -70,6 +76,9 @@ class NNSED(Estimator):
     def _update_Z(self, A):
         """
         Updating the horizontal basis matrix.
+
+        Arg types:
+            * **A** *(Scipy COO matrix)* - The normalized adjacency matrix.
         """
         enum = (A.dot(self.W)).transpose()
         denom = np.dot(np.dot(self.W.T, self.W), self.Z) + self.Z

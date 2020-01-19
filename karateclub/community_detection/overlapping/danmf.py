@@ -27,6 +27,12 @@ class DANMF(Estimator):
 
 
     def _setup_target_matrices(self, graph):
+        """
+        Setup target matrix for pre-training process.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph being clustered.
+        """
         self.graph = graph
         self.A = nx.adjacency_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
         self.L = nx.laplacian_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
@@ -35,6 +41,9 @@ class DANMF(Estimator):
     def _setup_z(self, i):
         """
         Setup target matrix for pre-training process.
+
+        Arg types:
+            * **i** *(int)* - The layer index.
         """
         if i == 0:
             self.Z = self.A
@@ -44,7 +53,9 @@ class DANMF(Estimator):
     def _sklearn_pretrain(self, i):
         """
         Pretraining a single layer of the model with sklearn.
-        :param i: Layer index.
+
+        Arg types:
+            * **i** *(int)* - The layer index.
         """
         nmf_model = NMF(n_components=self.layers[i],
                         init="random",
@@ -79,7 +90,9 @@ class DANMF(Estimator):
     def _update_U(self, i):
         """
         Updating left hand factors.
-        :param i: Layer index.
+
+        Arg types:
+            * **i** *(int)* - The layer index.
         """
         if i == 0:
             R = self.U_s[0].dot(self.Q_s[1].dot(self.VpVpT).dot(self.Q_s[1].T))
@@ -95,7 +108,9 @@ class DANMF(Estimator):
     def _update_P(self, i):
         """
         Setting up P matrices.
-        :param i: Layer index.
+
+        Arg types:
+            * **i** *(int)* - The layer index.
         """
         if i == 0:
             self.P = self.U_s[0]
@@ -105,7 +120,9 @@ class DANMF(Estimator):
     def _update_V(self, i):
         """
         Updating right hand factors.
-        :param i: Layer index.
+
+        Arg types:
+            * **i** *(int)* - The layer index.
         """
         if i < self.p-1:
             Vu = 2*self.A.dot(self.P).T
@@ -150,8 +167,6 @@ class DANMF(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
-
-
         self._setup_target_matrices(graph)
         self._pre_training()
         self._setup_Asq()
