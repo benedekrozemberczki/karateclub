@@ -5,17 +5,16 @@ from numpy.linalg import inv
 from karateclub.estimator import Estimator
 
 class FSCNMF(Estimator):
-    r"""An implementation of `"TENE" <https://arxiv.org/pdf/1804.05313.pdf.>`_
+    r"""An implementation of `"FCNMF" <https://arxiv.org/pdf/1804.05313.pdf.>`_
     from the Arxiv '18 paper "Fusing Structure and Content via Non-negative Matrix
     Factorization for Embedding Information Networks". The procedure uses a joint 
-    matrix factorization technique on the adjacency and feature matrices.
+    matrix factorization technique on the adjacency and feature matrices. The node
+    and feature embeddings are co-regularized for alignment of the embedding spaces.
        
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
         lower_control (float): Embedding score minimal value. Default is 10**-15.
-        alpha (float): Adjacency matrix regularizer coefficient. Default is 0.1. 
-        beta (float): Feature matrix regularizer coefficient. Default is 0.1.
-        iterations (int): ALS iterations. Default is 200.
+        iterations (int): Power iterations. Default is 200.
     """
     def __init__(self, dimensions=32, lower_control=10**-15, iterations=500,
                  alpha_1=1000.0, alpha_2=1.0, alpha_3=1.0, beta_1=1000.0,
