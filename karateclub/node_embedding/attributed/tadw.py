@@ -75,12 +75,22 @@ class TADW(Estimator):
         self.H[self.H < self.lower_control] = self.lower_control
 
     def _create_reduced_features(self, X):
+        """
+        Fitting a TADW model.
+
+        Arg types:
+            * **X** *(NetworkX graph)* - The graph to be embedded.
+
+        Return types:
+            * **T** *(Numpy array)* - The embedding of nodes.
+        """
         svd = TruncatedSVD(n_components=self.reduction_dimensions,
                            n_iter=self.svd_iterations,
                            random_state=self.seed)
         svd.fit(X)
         T = svd.transform(X)
-        return T.transpose()
+        T = T.transpose()
+        return T
 
     def fit(self, graph, X):
         """
