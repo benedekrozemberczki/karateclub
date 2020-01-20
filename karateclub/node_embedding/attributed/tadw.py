@@ -5,20 +5,21 @@ from karateclub.estimator import Estimator
 
 class TADW(Estimator):
     r"""An implementation of `"TADW" <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
-    from the IJCAI '19 paper "Network Representation Learning with Rich Text Information". The 
-    procedure first calculates the truncated SVD of an adjcacency - feature matrix
-    product. This matrix is further decomposed by a binary CCD based technique. 
+    from the IJCAI '15 paper "Network Representation Learning with Rich Text Information". The 
+    procedure uses the node attribute matrix with a factorization matrix to reproduce a power
+    of the adjacency matrix to create representations.
        
     Args:
+        order (int): Adjacency matrix power. Default is 2.
         dimensions (int): Number of embedding dimensions. Default is 32.
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
         alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
         iterations (int): Matrix decomoposition iterations. Default is 100.
     """
-    def __init__(self, dimensions=32, reduction_dimensions=128, svd_iterations=20,
+    def __init__(self, order=2, dimensions=32, reduction_dimensions=128, svd_iterations=20,
                  seed=42, alpha=0.3, iterations=100, lower_control=10**-15, lambd=1.0):
-
+        self.order = order
         self.dimensions = dimensions
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
@@ -36,15 +37,19 @@ class TADW(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded. 
 
         Return types:
-            * **P** *(Scipy COO matrix) - The target matrix.    
+            * **A_tilde** *(Scipy COO matrix) - The target matrix.    
         """
         weighted_graph = nx.Graph()
         for (u, v) in graph.edges():
             weighted_graph.add_edge(u, v, weight=1.0/graph.degree(u))
             weighted_graph.add_edge(v, u, weight=1.0/graph.degree(v))
-        P = nx.adjacency_matrix(weighted_graph,
+        A_hat = nx.adjacency_matrix(weighted_graph,
                                 nodelist=range(graph.number_of_nodes()))
-        return P
+
+        A_tilde = A_hat
+        for _ in range(self.order-1):
+            A_tilde = A_tilde.dot(A_hat)
+        return A_tilde
 
     def _init_weights(self):
         """
