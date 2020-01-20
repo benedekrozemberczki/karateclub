@@ -1,4 +1,4 @@
-Introduction by Example
+Introduction by example
 =======================
 
 We shortly overview the fundamental concepts and features of Karate Club through simple examples. These are the following:
@@ -6,7 +6,7 @@ We shortly overview the fundamental concepts and features of Karate Club through
 .. contents::
     :local:
 
-Standardized Dataset Ingestion
+Standardized dataset ingestion
 ------------------------------
 
 Karate Club assumes that the NetworkX graph provided by the user for node embedding and community detection has the following important properties:
@@ -19,7 +19,7 @@ Node attribute matrices can be provided as ``scipy sparse`` and ``numpy`` arrays
 
 The returned community membership dictionaries and embedding matrices use the same numeric, consecutive indexing.
 
-API Driven Design
+API driven design
 -----------------
 
 Karate Club uses the desing principles of Scikit-Learn which means that the algorithms in the package share the same API. Each machine learning model
@@ -53,7 +53,7 @@ were already set. The public methods provided by ``DeepWalk`` and ``Walklets`` a
 ``get_embedding``. This allows for quick and minimal changes to the code when a model performs poorly.
 
 
-Community Detection
+Community detection
 -------------------
 
 The first machine learning task that we will do is the clustering of pages on Facebook. In this network
@@ -118,7 +118,7 @@ dataset formatting requirements. One could simply cluster a randomly generated W
     cluster_membership = model.get_memberships()  
 
 
-Node Embedding
+Node embedding
 --------------
 
 The second machine learning task that we look at is the identification of users from the UK who abuse the platform on Twitch. 
@@ -173,7 +173,7 @@ set for this target. Finally, we evaluate the model performance by printing an a
     print('AUC: {:.4f}'.format(auc))
     >>> AUC: 0.6069
 
-Graph Embedding
+Graph embedding
 --------------
 
 The third machine learning task that we look at is the classification of threads from the online forum Reddit. The threads
@@ -231,7 +231,7 @@ set for this target. Finally, we evaluate the model performance by printing an a
     >>> AUC: 0.7127
 
 
-Benchmark Datasets
+Benchmark datasets
 ------------------
 
 We included a number of datasets which can be used for comparing the performance of embedding and clustering algorithms. In case of node level learning these are as follows:
