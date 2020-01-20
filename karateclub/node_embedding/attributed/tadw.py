@@ -62,12 +62,16 @@ class TADW(Estimator):
                            n_iter=self.svd_iterations,
                            random_state=self.seed)
         svd.fit(X)
-        T = svd.trransform(X)
+        T = svd.transform(X)
         return T.transpose()
 
     def fit(self, graph, X):
         """
-        Gradient descent updates for a given number of iterations.
+        Fitting a TADW model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self.A = nx.adjacency_matrix(graph, nodelist=[node for node in range(graph.number_of_nodes())])
         self.T = self._create_reduced_features(X)
