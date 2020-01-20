@@ -15,7 +15,7 @@ class BigClam(Estimator):
         iterations (int): Number of training iterations. Default 50.
         learning_rate (float): Gradient ascent learning rate. Default is 0.005.
     """
-    def __init__(self, dimensions=8, iterations=50, learning_rate=0.0005):
+    def __init__(self, dimensions=8, iterations=50, learning_rate=0.005):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
