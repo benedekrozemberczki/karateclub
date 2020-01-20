@@ -17,6 +17,8 @@ class TADW(Estimator):
         seed (int): Random seed. Default is 42.
         alpha (float): Learning rate. Default is 0.01. 
         iterations (int): Matrix decomposition iterations. Default is 100.
+        lower_control (float): Factor float value control. Default is 10**-15.
+        lambd (float): Regularization coefficient. Default is 1000.0.
     """
     def __init__(self, order=2, dimensions=32, reduction_dimensions=128, svd_iterations=20,
                  seed=42, alpha=0.3, iterations=100, lower_control=10**-15, lambd=1.0):
