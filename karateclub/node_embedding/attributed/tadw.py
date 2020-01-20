@@ -5,14 +5,14 @@ from sklearn.decomposition import TruncatedSVD
 
 class TADW(Estimator):
     r"""An implementation of `"TADW" <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
-    from the IJCAI '15 paper "Network Representation Learning with Rich Text Information". The 
+    from the IJCAI '15 paper "Network Representation Learning with Rich Text Information". The
     procedure uses the node attribute matrix with a factorization matrix to reproduce a power
     of the adjacency matrix to create representations.
-       
+
     Args:
-        order (int): Adjacency matrix power. Default is 1.
+        order (int): Adjacency matrix power. Default is 2.
         dimensions (int): Number of embedding dimensions. Default is 32.
-        reduction_dimensions (int): SVD reduction dimensions. Default is 128.
+        reduction_dimensions (int): SVD reduction dimensions. Default is 64.
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
         alpha (float): Learning rate. Default is 0.01. 
@@ -37,17 +37,17 @@ class TADW(Estimator):
         Creating a normalized sparse adjacency matrix power target.
 
         Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded. 
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
 
         Return types:
-            * **A_tilde** *(Scipy COO matrix) - The target matrix.    
+            * **A_tilde** *(Scipy COO matrix) - The target matrix.
         """
         weighted_graph = nx.Graph()
         for (u, v) in graph.edges():
             weighted_graph.add_edge(u, v, weight=1.0/graph.degree(u))
             weighted_graph.add_edge(v, u, weight=1.0/graph.degree(v))
         A_hat = nx.adjacency_matrix(weighted_graph,
-                                nodelist=range(graph.number_of_nodes()))
+                                    nodelist=range(graph.number_of_nodes()))
 
         A_tilde = A_hat
         for _ in range(self.order-1):

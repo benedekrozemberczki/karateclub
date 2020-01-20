@@ -101,7 +101,7 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[TENE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tene.TENE)** from Yang *et al.*: [Enhanced Network Embedding with Text Information](https://ieeexplore.ieee.org/document/8545577) (ICPR 2018)
 
-* **[TADW](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tadw.TADW)** from Yang *et al.*: [Network Representation Learning with Rich Text Information](https://ieeexplore.ieee.org/document/8545577) (IJCAI 2015)
+* **[TADW](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tadw.TADW)** from Yang *et al.*: [Network Representation Learning with Rich Text Information](https://www.ijcai.org/Proceedings/15/Papers/299.pdf) (IJCAI 2015)
 
 **Graph Level Embedding**
 
