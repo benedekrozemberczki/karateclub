@@ -76,13 +76,13 @@ class TADW(Estimator):
 
     def _create_reduced_features(self, X):
         """
-        Fitting a TADW model.
+        Creating a dense reduced node feature matrix.
 
         Arg types:
-            * **X** *(NetworkX graph)* - The graph to be embedded.
+            * **X** *(Scipy COO or Numpy array)* - The wide feature matrix.
 
         Return types:
-            * **T** *(Numpy array)* - The embedding of nodes.
+            * **T** *(Numpy array)* - The reduced feature matrix of nodes.
         """
         svd = TruncatedSVD(n_components=self.reduction_dimensions,
                            n_iter=self.svd_iterations,
