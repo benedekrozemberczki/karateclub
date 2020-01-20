@@ -4,8 +4,8 @@ from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
 class TADW(Estimator):
-    r"""An implementation of `"TADW" <https://arxiv.org/abs/1403.6652>`_
-    from the ICDM '18 paper "Binarized Attributed Network Embedding Class". The 
+    r"""An implementation of `"TADW" <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
+    from the IJCAI '19 paper "Network Representation Learning with Rich Text Information". The 
     procedure first calculates the truncated SVD of an adjcacency - feature matrix
     product. This matrix is further decomposed by a binary CCD based technique. 
        
