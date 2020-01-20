@@ -15,7 +15,7 @@ class BANE(Estimator):
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
         alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
-        iterations (int): Matrix decomoposition iterations. Default is 100.
+        iterations (int): Matrix decomposition iterations. Default is 100.
         binarization_iterations (int): Binarization iterations. Default is 20.
     """
     def __init__(self, dimensions=32, svd_iterations=20, seed=42, alpha=0.3,
