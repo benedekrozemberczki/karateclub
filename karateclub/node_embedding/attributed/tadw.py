@@ -30,13 +30,30 @@ class TADW(Estimator):
         self.lower_control = lower_control
         self.lambd = lambd
 
+    def _create_target_matrix(self, graph):
+        """
+        Creating a normalized sparse adjacency matrix target.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded. 
+
+        Return types:
+            * **P** *(Scipy COO matrix) - The target matrix.    
+        """
+        weighted_graph = nx.Graph()
+        for (u, v) in graph.edges():
+            weighted_graph.add_edge(u, v, weight=1.0/graph.degree(u))
+            weighted_graph.add_edge(v, u, weight=1.0/graph.degree(v))
+        P = nx.adjacency_matrix(weighted_graph,
+                                nodelist=range(graph.number_of_nodes()))
+        return P
+
     def _init_weights(self):
         """
         Initialization of weights and loss container.
         """
         self.W = np.random.uniform(0, 1, (self.dimensions, self.A.shape[0]))
         self.H = np.random.uniform(0, 1, (self.dimensions, self.T.shape[0]))
-        self.losses = []
 
     def _update_W(self):
         """
@@ -73,7 +90,7 @@ class TADW(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
-        self.A = nx.adjacency_matrix(graph, nodelist=[node for node in range(graph.number_of_nodes())])
+        self.A = self._create_target_matrix(graph)
         self.T = self._create_reduced_features(X)
         self._init_weights()
         for _ in range(self.iterations):
