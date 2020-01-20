@@ -240,7 +240,8 @@ We included a number of datasets which can be used for comparing the performance
 - `GitHub machine learning and web developers social network. <https://arxiv.org/abs/1909.13021>`_
 - `Facebook verified page-page network. <https://arxiv.org/abs/1909.13021>`_
 
-We also added datasets for graph level embedding and graph statistical descriptors.
+We also added datasets for graph level embedding and graph statistical descriptors. These datasets are as follows:
+
 
 - `Reddit discussion and non-discussion thread graphs. <https://arxiv.org/abs/1909.13021>`_
  
