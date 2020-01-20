@@ -179,7 +179,8 @@ Graph Embedding
 The third machine learning task that we look at is the classification of threads from the online forum Reddit. The threads
 can be of of two types - discussion and non-discussion based ones. Our goal is to predict the type of the thread based on
 the topological (structural) properties of the graphs. The specific dataset that we look a 10 thousand graph subsample of
-the Reddit 204K dataset which contains a large number of threads from the spring of 2018.
+the Reddit 204K dataset which contains a large number of threads from the spring of 2018. The graphs in the dataset do not
+have a specific feature. Because of this we use the degree centrality as a string feature.
 For details about the dataset `see this paper <charnetpaper>`_.
 
 We first need to load the Reddit 10K dataset. We will use the use the graphs and the discussion/non-discussion target vector.
