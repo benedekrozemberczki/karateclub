@@ -12,10 +12,11 @@ class TADW(Estimator):
     Args:
         order (int): Adjacency matrix power. Default is 2.
         dimensions (int): Number of embedding dimensions. Default is 32.
+        reduction_dimensions (int): SVD reduction dimensions. Default is 128.
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
-        alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
-        iterations (int): Matrix decomoposition iterations. Default is 100.
+        alpha (float): Learning rate. Default is 0.01. 
+        iterations (int): Matrix decomposition iterations. Default is 100.
     """
     def __init__(self, order=2, dimensions=32, reduction_dimensions=128, svd_iterations=20,
                  seed=42, alpha=0.3, iterations=100, lower_control=10**-15, lambd=1.0):
@@ -31,7 +32,7 @@ class TADW(Estimator):
 
     def _create_target_matrix(self, graph):
         """
-        Creating a normalized sparse adjacency matrix target.
+        Creating a normalized sparse adjacency matrix power target.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded. 
