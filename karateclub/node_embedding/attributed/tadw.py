@@ -81,8 +81,11 @@ class TADW(Estimator):
             self._update_H()
 
     def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        Saving the embedding on disk.
-        """
-        return np.concatenate([np.transpose(self.W), np.transpose(np.dot(self.H, self.T))], axis=1)
+        embedding = np.concatenate([np.transpose(self.W), np.transpose(np.dot(self.H, self.T))], axis=1)
+        return embedding
 
