@@ -87,6 +87,10 @@ Attributed node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.attributed.tadw
+    :members:
+    :undoc-members:
+
 Whole graph embedding
 --------------------
 
