@@ -91,6 +91,10 @@ Attributed node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.attributed.fscnmf
+    :members:
+    :undoc-members:
+
 Whole graph embedding
 --------------------
 
