@@ -9,9 +9,23 @@ from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, 
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec
-from karateclub.node_embedding.attributed import BANE, TENE
+from karateclub.node_embedding.attributed import BANE, TENE, TADW
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.dataset import GraphReader, GraphSetReader
+
+#-----------------------------------
+# TADW example
+#-----------------------------------
+
+g = nx.newman_watts_strogatz_graph(10000, 20, 0.05)
+
+x = np.random.uniform(0,1,(10000,200))
+
+model = TADW()
+
+model.fit(g, x)
+
+quit()
 
 #-----------------------------------
 # GL2Vec example
