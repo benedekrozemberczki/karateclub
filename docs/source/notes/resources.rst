@@ -1,4 +1,4 @@
-External Resources
+External resources
 ==================
 
 Overlapping community detection
