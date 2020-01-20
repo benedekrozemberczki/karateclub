@@ -16,10 +16,11 @@ class FSCNMF(Estimator):
         beta (float): Feature matrix regularizer coefficient. Default is 0.1.
         iterations (int): ALS iterations. Default is 200.
     """
-    def __init__(self, dimensions=32, lower_control=10**-15, alpha_1=1.0,
-                 alpha_2=1.0, beta_1=1.0, beta_2=1.0, gamma=1.0):
+    def __init__(self, dimensions=32, lower_control=10**-15, iterations=100,
+                 alpha_1=1.0, alpha_2=1.0, beta_1=1.0, beta_2=1.0, gamma=1.0):
         self.dimensions = dimensions
         self.lower_control = lower_control
+        self.iterations = iterations
         self.alpha_1 = alpha_1
         self.alpha_2 = alpha_2
         self.beta_1 = beta_1
