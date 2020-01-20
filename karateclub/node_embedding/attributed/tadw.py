@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 from tqdm import tqdm
 
 class TADW(Estimator):
-    r"""An implementation of `"BANE" <https://arxiv.org/abs/1403.6652>`_
+    r"""An implementation of `"TADW" <https://arxiv.org/abs/1403.6652>`_
     from the ICDM '18 paper "Binarized Attributed Network Embedding Class". The 
     procedure first calculates the truncated SVD of an adjcacency - feature matrix
     product. This matrix is further decomposed by a binary CCD based technique. 
@@ -76,7 +76,13 @@ class TADW(Estimator):
         self.A = nx.adjacency_matrix(graph, nodelist=[node for node in range(graph.number_of_nodes())])
         self.T = self._create_reduced_features(X)
         self._init_weights()
-        for _ in tqdm(range(self.iterations)):
+        for _ in range(self.iterations):
             self._update_W()
             self._update_H()
+
+    def get_embedding(self):
+        """
+        Saving the embedding on disk.
+        """
+        return np.concatenate([np.transpose(self.W), np.transpose(np.dot(self.H, self.T))], axis=1)
 
