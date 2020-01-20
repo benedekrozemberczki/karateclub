@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
-from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
+from sklearn.decomposition import TruncatedSVD
 
 class TADW(Estimator):
     r"""An implementation of `"TADW" <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
