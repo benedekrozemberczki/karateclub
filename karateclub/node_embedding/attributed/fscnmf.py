@@ -15,17 +15,15 @@ class FSCNMF(Estimator):
         dimensions (int): Number of embedding dimensions. Default is 32.
         lower_control (float): Embedding score minimal value. Default is 10**-15.
         iterations (int): Power iterations. Default is 200.
-        alpha_1 (float):  Default is 1000.0.
-        alpha_2 (float):  Default is 1.0.
-        alpha_3 (float):  Default is 1.0.
-        beta_1 (float):  Default is 1000.0.
-        beta_2 (float):  Default is 1.0.
-        beta_3 (float):  Default is 1.0.
-        gamma (float):  Default is 0.5.
+        alpha_1 (float): Alignment parameter for adjacency matrix. Default is 1000.0.
+        alpha_2 (float): Adjacency basis regularization. Default is 1.0.
+        alpha_3 (float): Adjacency features regularization. Default is 1.0.
+        beta_1 (float): Alignment parameter for feature matrix. Default is 1000.0.
+        beta_2 (float): Attribute basis regularization. Default is 1.0.
     """
     def __init__(self, dimensions=32, lower_control=10**-15, iterations=500,
-                 alpha_1=1000.0, alpha_2=1.0, alpha_3=1.0, beta_1=1000.0,
-                 beta_2=1.0, beta_3=1.0, gamma=0.5):
+                 alpha_1=1000.0, alpha_2=1.0, alpha_3=1.0,
+                 beta_1=1000.0, beta_2=1.0, beta_3=1.0):
 
         self.dimensions = dimensions
         self.lower_control = lower_control
@@ -36,7 +34,6 @@ class FSCNMF(Estimator):
         self.beta_1 = beta_1
         self.beta_2 = beta_2
         self.beta_3 = beta_3
-        self.gamma = gamma
 
     def _init_weights(self):
         """
