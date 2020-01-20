@@ -20,10 +20,8 @@ Karate Club Documentation
 
 .. toctree::
    :glob:
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Package Reference
 
    modules/root
-   modules/io
-   modules/utils
    modules/dataset
