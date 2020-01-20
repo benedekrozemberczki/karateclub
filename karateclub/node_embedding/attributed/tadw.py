@@ -18,9 +18,11 @@ class TADW(Estimator):
         alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
         iterations (int): Matrix decomoposition iterations. Default is 100.
     """
-    def __init__(self, dimensions=32, svd_iterations=20, seed=42, alpha=0.3,
-                 iterations=100, lower_control=10**-15, lambd=1.0):
+    def __init__(self, dimensions=32, reduction_dimensions=128, svd_iterations=20,
+                 seed=42, alpha=0.3, iterations=100, lower_control=10**-15, lambd=1.0):
+
         self.dimensions = dimensions
+        self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
         self.seed = seed
         self.alpha = alpha
@@ -55,12 +57,20 @@ class TADW(Estimator):
         self.H = self.H-self.alpha * grad
         self.H[self.H < self.lower_control] = self.lower_control
 
+    def _create_reduced_features(self, X):
+        svd = TruncatedSVD(n_components=self.reduction_dimensions,
+                           n_iter=self.svd_iterations,
+                           random_state=self.seed)
+        svd.fit(X)
+        T = svd.trransform(X)
+        return T.transpose()
+
     def fit(self, graph, X):
         """
         Gradient descent updates for a given number of iterations.
         """
         self.A = nx.adjacency_matrix(graph, nodelist=[node for node in range(graph.number_of_nodes())])
-        self.T = X.transpose()
+        self.T = self._create_reduced_features(X)
         self._init_weights()
         for _ in tqdm(range(self.iterations)):
             self._update_W()
