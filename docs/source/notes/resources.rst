@@ -51,6 +51,8 @@ Attributed node embedding
 
 * Shuang Yang, Bo Yang : **Enhanced Network Embedding with Text Information** `Paper <https://ieeexplore.ieee.org/document/8545577>`_
 
+* Cheng Yang, Zhiyuan Liu, Deli Zhao, Maosong Sun, Edward Y. Chang : **Network Representation Learning with Rich Text Information** `Paper <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
+
 Whole graph embedding
 --------------------
 
