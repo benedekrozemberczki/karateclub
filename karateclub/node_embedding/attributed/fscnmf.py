@@ -7,9 +7,8 @@ from karateclub.estimator import Estimator
 class FSCNMF(Estimator):
     r"""An implementation of `"TENE" <https://arxiv.org/pdf/1804.05313.pdf.>`_
     from the Arxiv '18 paper "Fusing Structure and Content via Non-negative Matrix
-    Factorization for Embedding Information Networks". The 
-    procedure jointly factorizes the adjacency and node feature matrices using alternating
-    least squares.
+    Factorization for Embedding Information Networks". The procedure uses a joint 
+    matrix factorization technique on the adjacency and feature matrices.
        
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
