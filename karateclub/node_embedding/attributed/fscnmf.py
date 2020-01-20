@@ -79,6 +79,33 @@ class FSCNMF(Estimator):
         self.V = np.dot(simi_term, covar_term).transpose()
         self.V[self.V < self.lower_control] = self.lower_control
 
+    def _create_D_inverse(self, graph):
+        """
+        Creating a sparse inverse degree matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+
+        Return types:
+            * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
+        """
+        index = np.arange(graph.number_of_nodes())
+        values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
+        shape = (graph.number_of_nodes(), graph.number_of_nodes())
+        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        return D_inverse
+
+    def _create_base_matrix(self, graph):
+        """
+        Creating a normalized adjacency matrix.
+
+        Return types:
+            * **A_hat* - Normalized adjacency matrix.
+        """
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        D_inverse = self._create_D_inverse(graph)
+        A_hat = D_inverse.dot(A)
+        return A_hat
 
     def fit(self, graph, X):
         """
@@ -97,12 +124,11 @@ class FSCNMF(Estimator):
             self._update_U()
             self._update_V()
 
-
     def get_embedding(self):
         r"""Getting the node embedding.
 
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = self.gamma*self.B_1+(1-self.gamma)*self.U
+        embedding = np.concatenate([self.B_1,self.U], axis=1)
         return embedding
