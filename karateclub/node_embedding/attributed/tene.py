@@ -90,7 +90,7 @@ class TENE(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[0] for node in range(graph.number_of_nodes())])
+        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
