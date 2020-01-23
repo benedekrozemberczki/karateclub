@@ -4,14 +4,14 @@ from setuptools import find_packages
 setup(
   name = "karateclub",
   packages = find_packages(),
-  version = "0.42",
+  version = "0.43",
   license = "MIT",
-  description = "A general purpose library for community detection and graph embedding research.",
+  description = "A general purpose library for community detection, network embedding, and graph mining research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
-  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_042.tar.gz",
-  keywords = ["community", "detection", "networkx", "graph", "clustering", "embedding","network","deepwalk","graph2vec","node2vec"],
+  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_043.tar.gz",
+  keywords = ["community", "detection", "networkx", "graph", "clustering", "embedding","network","deepwalk","graph2vec","node2vec","deep","learning"],
   install_requires=[
           "numpy",
           "networkx",
