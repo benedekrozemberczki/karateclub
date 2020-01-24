@@ -28,9 +28,9 @@ Neighbourhood-based node embedding
 
 * Jiezhong Qiu, Yuxiao Dong, Hao Ma, Jian Li, Kuansan Wang, and Jie Tang: **Network Embedding as Matrix Factorization: Unifying DeepWalk, LINE, PTE, and Node2Vec** `Paper <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
 
-* Benedek Rozemberczki and Rik Sarkar: **Fast Sequence Based Embedding with Diffusion Graphs** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf>`_
+* Benedek Rozemberczki and Rik Sarkar: **Fast Sequence Based Embedding with Diffusion Graphs** `Paper <https://arxiv.org/abs/2001.07463>`_, `Code <https://github.com/benedekrozemberczki/diff2vec>`_
 
-* Bryan Perozzi, Vivek Kulkarni, Haochen Chen, Steven Skiena: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <https://arxiv.org/abs/1605.02115>`_
+* Bryan Perozzi, Vivek Kulkarni, Haochen Chen, Steven Skiena: **Don't Walk, Skip! Online Learning of Multi-scale Network Embeddings** `Paper <https://arxiv.org/abs/1605.02115>`_, `Code <https://github.com/benedekrozemberczki/walklets>`_
 
 * Shaosheng Cao, Wei Lu, Qiongkai Xu: **GraRep: Learning Graph Representations with Global Structural Information** `Paper <https://dl.acm.org/citation.cfm?id=2806512>`_
 
