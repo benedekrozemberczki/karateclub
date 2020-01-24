@@ -53,7 +53,7 @@ Attributed node embedding
 
 * Cheng Yang, Zhiyuan Liu, Deli Zhao, Maosong Sun, Edward Y. Chang: **Network Representation Learning with Rich Text Information** `Paper <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_, `Code <https://github.com/benedekrozemberczki/TADW>`_
 
-* Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan, M N Murty: **Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks** `Paper <https://arxiv.org/pdf/1804.05313.pdf>`_
+* Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan, M N Murty: **Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks** `Paper <https://arxiv.org/pdf/1804.05313.pdf>`_, `Code <https://github.com/benedekrozemberczki/FSCNMF>`_
 
 Whole graph embedding
 --------------------
