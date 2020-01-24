@@ -49,7 +49,7 @@ Attributed node embedding
 
 * Hong Yang, Shirui Pan, Peng Zhang, Ling Chen, Defu Lian, Chengqi Zhang: **Binarized Attributed Network Embedding** `Paper <https://ieeexplore.ieee.org/document/8626170>`_, `Code <https://github.com/benedekrozemberczki/BANE>`_
 
-* Shuang Yang, Bo Yang: **Enhanced Network Embedding with Text Information** `Paper <https://ieeexplore.ieee.org/document/8545577>`_
+* Shuang Yang, Bo Yang: **Enhanced Network Embedding with Text Information** `Paper <https://ieeexplore.ieee.org/document/8545577>`_, `Code <https://github.com/benedekrozemberczki/TENE>`_
 
 * Cheng Yang, Zhiyuan Liu, Deli Zhao, Maosong Sun, Edward Y. Chang: **Network Representation Learning with Rich Text Information** `Paper <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
 
