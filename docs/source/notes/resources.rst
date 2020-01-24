@@ -36,12 +36,12 @@ Neighbourhood-based node embedding
 
 * Bryan Perozzi, Rami Al-Rfou, Steven Skiena: **DeepWalk: Online Learning of Social Representations** `Paper <https://arxiv.org/abs/1403.6652>`_, `Slides <https://www.slideshare.net/bperz/14-kdddeep-walk-2>`_, `Video <https://www.youtube.com/watch?v=n12HS-24CtA>`_, `Video <https://www.youtube.com/watch?v=aZNtHJwfIVg>`_
 
-* Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_
+* Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_, `Code <https://github.com/benedekrozemberczki/NMFADMM>`_
 
 Structural node embedding
 --------------------
 
-* Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Learning Structural Node Embeddings Via Diffusion Wavelets** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_
+* Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Learning Structural Node Embeddings Via Diffusion Wavelets** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_, `Code <https://github.com/benedekrozemberczki/GraphWaveMachine>`_
 
 
 Attributed node embedding
