@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from scipy.sparse.linalg import eigsh
 from karateclub.estimator import Estimator
 
 class SF(Estimator):
@@ -12,7 +13,6 @@ class SF(Estimator):
         dimensions (int): Number of lowest eigenvalues. Defauls is 128.
     """
     def __init__(self, dimensions=128):
-
         self.dimensions = dimensions
 
     def _calculate_sf(self, graph):
