@@ -23,7 +23,7 @@ class SF(Estimator):
             * **graph** *(NetworkX graph)* - A graph to be embedded.
 
         Return types:
-            * **hist** *(Numpy array)* - The embedding of a single graph.
+            * **embedding** *(Numpy array)* - The embedding of a single graph.
         """
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
