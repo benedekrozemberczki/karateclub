@@ -25,14 +25,14 @@ class SF(Estimator):
         Return types:
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
-        L = nx.normalized_laplacian_matrix(graph).todense()
-        fL = np.linalg.pinv(L)
-        ones = np.ones(L.shape[0])
-        S = np.outer(np.diag(fL), ones)+np.outer(ones, np.diag(fL))-2*fL
-        hist, bin_edges = np.histogram(S.flatten(),
-                                       bins=self.hist_bins,
-                                       range=self.hist_range)
-        return hist
+        number_of_nodes = g.number_of_nodes()
+        L_tilde = nx.normalized_laplacian_matrix(g, nodelist=range(number_of_nodes))
+        if number_of_nodes < self.dimensions:
+            embedding = eigsh(L_tilde, k=number_of_nodes, which='SM', return_eigenvectors=False)
+            embedding = np.pad(embedding, (1, self.dimensions), 'constant', constant_values=0)
+        else:
+            embedding = eigsh(L_tilde, k=self.dimensions, which='SM', return_eigenvectors=False)
+        return embedding
 
     def fit(self, graphs):
         """
