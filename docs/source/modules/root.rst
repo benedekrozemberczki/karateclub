@@ -102,6 +102,10 @@ Whole graph embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.graph_embedding.sf
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.graph_embedding.fgsd
     :members:
     :undoc-members:
