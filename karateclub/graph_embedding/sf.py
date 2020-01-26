@@ -41,7 +41,7 @@ class SF(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
+        self._embedding = [self._calculate_sf(graph) for graph in graphs]
 
 
     def get_embedding(self):
