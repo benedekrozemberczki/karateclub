@@ -5,14 +5,13 @@ from karateclub.estimator import Estimator
 class SF(Estimator):
     r"""An implementation of `"SF" <A Simple Baseline Algorithm for Graph Classification>`_
     from the NeurIPS Relational Representation Learning Workshop '18 paper A Simple Baseline Algorithm for Graph Classification".
-    The procedure calculates the Moore-Penrose spectrum of the normalized Laplacian.
-    Using hise spectrum the histogram of the spectral features is used as a whole graph representation. 
+    The procedure calculates the k lowest egeinvalues of the normalized Laplacian.
+    Using  
 
     Args:
-        hist_bins (int): Number of histogram bins. Default is 200.
-        hist_range (int): Histogram range considered. Default is 20.
+        dimensions (int): Number of histogram bins. Default is 200.
     """
-    def __init__(self, hist_bins=200, hist_range=20):
+    def __init__(self, dimensions=128):
 
         self.hist_bins = hist_bins
         self.hist_range = (0, hist_range)
