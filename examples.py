@@ -13,7 +13,6 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.dataset import GraphReader, GraphSetReader
 
-
 #-----------------------------------
 # SF example
 #-----------------------------------
