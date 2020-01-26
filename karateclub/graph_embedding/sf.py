@@ -25,8 +25,8 @@ class SF(Estimator):
         Return types:
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
-        number_of_nodes = g.number_of_nodes()
-        L_tilde = nx.normalized_laplacian_matrix(g, nodelist=range(number_of_nodes))
+        number_of_nodes = graph.number_of_nodes()
+        L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
         if number_of_nodes < self.dimensions:
             embedding = eigsh(L_tilde, k=number_of_nodes, which='SM', return_eigenvectors=False)
             embedding = np.pad(embedding, (1, self.dimensions), 'constant', constant_values=0)
