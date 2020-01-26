@@ -3,7 +3,7 @@ import networkx as nx
 from karateclub.estimator import Estimator
 
 class SF(Estimator):
-    r"""An implementation of `"SF" <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
+    r"""An implementation of `"SF" <A Simple Baseline Algorithm for Graph Classification>`_
     from the NeurIPS Relational Representation Learning Workshop '18 paper A Simple Baseline Algorithm for Graph Classification".
     The procedure calculates the Moore-Penrose spectrum of the normalized Laplacian.
     Using hise spectrum the histogram of the spectral features is used as a whole graph representation. 
