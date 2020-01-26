@@ -37,7 +37,7 @@ class SF(Estimator):
 
     def fit(self, graphs):
         """
-        Fitting a Graph2Vec model.
+        Fitting an SF model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
