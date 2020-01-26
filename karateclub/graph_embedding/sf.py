@@ -10,7 +10,7 @@ class SF(Estimator):
     If the graph has a lowe umber of eigenvalues than k the representation is padded with zeros.
 
     Args:
-        dimensions (int): Number of lowest eigenvalues. Defauls is 128.
+        dimensions (int): Number of lowest eigenvalues. Default is 128.
     """
     def __init__(self, dimensions=128):
         self.dimensions = dimensions
