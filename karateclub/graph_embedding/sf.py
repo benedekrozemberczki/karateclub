@@ -6,17 +6,16 @@ class SF(Estimator):
     r"""An implementation of `"SF" <A Simple Baseline Algorithm for Graph Classification>`_
     from the NeurIPS Relational Representation Learning Workshop '18 paper A Simple Baseline Algorithm for Graph Classification".
     The procedure calculates the k lowest egeinvalues of the normalized Laplacian.
-    Using  
+    If the graph has a lowe umber of eigenvalues than k the representation is padded with zeros.
 
     Args:
-        dimensions (int): Number of histogram bins. Default is 200.
+        dimensions (int): Number of lowest eigenvalues. Defauls is 128.
     """
     def __init__(self, dimensions=128):
 
-        self.hist_bins = hist_bins
-        self.hist_range = (0, hist_range)
+        self.dimensions = dimensions
 
-    def _calculate_fgsd(self, graph):
+    def _calculate_sf(self, graph):
         """
         Calculating the features of a graph.
 
