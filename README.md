@@ -79,7 +79,7 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[BoostNE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.boostne.BoostNE)** from Li *et al.*: [Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation](https://arxiv.org/abs/1808.08627) (ASONAM 2019)
 
-* **[Diff2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.diff2vec.Diff2Vec)** from Rozemberczki and Sarkar: [Fast Sequence Based Embedding with Diffusion Graphs](http://homepages.inf.ed.ac.uk/s1668259/papers/sequence.pdf) (CompleNet 2018)
+* **[Diff2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.diff2vec.Diff2Vec)** from Rozemberczki and Sarkar: [Fast Sequence Based Embedding with Diffusion Graphs](https://arxiv.org/abs/2001.07463) (CompleNet 2018)
 
 * **[NetMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.netmf.NetMF)** from Qui *et al.*: [Network Embedding as Matrix Factorization: Unifying DeepWalk, LINE, PTE, and Node2Vec](https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf) (WSDM 2018)
 
