@@ -23,9 +23,9 @@
 If you find *Karate Club* useful in your research, please consider citing the following paper:
 
 >@misc{rozemberczki2020karateclub,    
-       title = {Karate Club: A tool for unsupervised learning on graph structured data.},   
+       title = {Karate Club: A Python framework for unsupervised learning on graphs},   
        author = {Benedek Rozemberczki and Rik Sarkar},   
-       year = {2019},   
+       year = {2020},   
        publisher = {GitHub},   
        journal = {GitHub repository},   
        howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
