@@ -21,9 +21,11 @@ class GL2Vec(Estimator):
         epochs (int): Number of epochs. Default is 10.
         learning_rate (float): HogWild! learning rate. Deefault is 0.025.
         min_count (int): Minimal count of graph feature occurences. Default is 5.
+        seed (int): Random seed for the model. Default is 42.
     """
     def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
-                 down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5):
+                 down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5,
+                 seed=42):
 
         self.wl_iterations = wl_iterations
         self.attributed = attributed
@@ -33,6 +35,7 @@ class GL2Vec(Estimator):
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.min_count = min_count
+        self.seed = seed
 
     def _create_line_graph(self, graph):
         r"""Getting the embedding of graphs.
@@ -68,7 +71,8 @@ class GL2Vec(Estimator):
                         sample=self.down_sampling,
                         workers=self.workers,
                         epochs=self.epochs,
-                        alpha=self.learning_rate)
+                        alpha=self.learning_rate,
+                        seed=self.seed)
 
         self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
