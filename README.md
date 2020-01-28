@@ -23,7 +23,7 @@
 If you find *Karate Club* useful in your research, please consider citing the following paper:
 
 >@misc{rozemberczki2020karateclub,    
-       title = {Karate Club: A Python framework for unsupervised learning on graphs},   
+       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},   
        author = {Benedek Rozemberczki and Rik Sarkar},   
        year = {2020},   
        publisher = {GitHub},   
