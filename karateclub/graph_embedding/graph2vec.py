@@ -11,6 +11,10 @@ class Graph2Vec(Estimator):
     these features a document (graph) - feature co-occurence matrix is decomposed in order
     to generate representations for the graphs.
 
+    The procedure assumes that nodes have no string feature present and the WL-hashing
+    defaults to the degree centrality. However, if a node feature with the key "feature"
+    is supported for the nodes the feature extraction happens based on the values of this key.
+
     Args:
         wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
         attributed (bool): Presence of graph attributes. Default is False.
