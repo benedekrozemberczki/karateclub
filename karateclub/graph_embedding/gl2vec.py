@@ -18,7 +18,6 @@ class GL2Vec(Estimator):
 
     Args:
         wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
-        attributed (bool): Presence of graph attributes. Default is False.
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         down_sampling (float): Down sampling frequency. Default is 0.0001.
@@ -27,12 +26,10 @@ class GL2Vec(Estimator):
         min_count (int): Minimal count of graph feature occurences. Default is 5.
         seed (int): Random seed for the model. Default is 42.
     """
-    def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
-                 down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5,
-                 seed=42):
+    def __init__(self, wl_iterations=2, dimensions=128, workers=4, down_sampling=0.0001,
+                 epochs=10, learning_rate=0.025, min_count=5, seed=42):
 
         self.wl_iterations = wl_iterations
-        self.attributed = attributed
         self.dimensions = dimensions
         self.workers = workers
         self.down_sampling = down_sampling
