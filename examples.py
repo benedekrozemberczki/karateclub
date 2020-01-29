@@ -13,6 +13,7 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF
 from karateclub.node_embedding.structural import GraphWave
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
 #-----------------------------------
 # SF example
 #-----------------------------------
@@ -97,6 +98,23 @@ reader = GraphReader("facebook")
 
 graphs = reader.get_graph()
 target = reader.get_target()
+
+#----------------------------------
+# Graph2Vec attributed example
+#----------------------------------
+
+graphs = []
+
+for i in range(50):
+    graph = nx.newman_watts_strogatz_graph(50, 5, 0.3)
+    nx.set_node_attributes(graph, {j: "A" for j in range(50)}, "feature")
+    fet = nx.get_node_attributes(graph, "feature")
+
+model = Graph2Vec(attributed=True)
+
+model.fit(graphs)
+model.get_embedding()
+
 
 #-----------------------------------
 # Graph2Vec example

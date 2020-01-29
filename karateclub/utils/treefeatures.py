@@ -25,7 +25,8 @@ class WeisfeilerLehmanHashing(object):
         Creating the features.
         """
         if self.attributed:
-            self.features = nx.get_node_attributes(G, 'feature')
+            self.features = nx.get_node_attributes(self.graph, 'feature')
+            print(self.features)
         else:
             self.features = {node: self.graph.degree(node) for node in self.graph.nodes()}
 
