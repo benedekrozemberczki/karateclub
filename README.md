@@ -150,6 +150,6 @@ As part of the documentation we provide a number of use cases to show how the cl
 
 Besides the case studies we provide synthetic examples for each model. These can be tried out by running the examples script.
 
-```
+```sh
 $ python examples.py
 ```
