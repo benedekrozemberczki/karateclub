@@ -48,7 +48,7 @@ class Graph2Vec(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed) for graph in graphs]
-        documents = [TaggedDocument(words=doc.extracted_features, tags=[str(i)]) for i, doc in enumerate(documents)]
+        documents = [TaggedDocument(words=doc.get_graph_features(), tags=[str(i)]) for i, doc in enumerate(documents)]
 
         model = Doc2Vec(documents,
                         vector_size=self.dimensions,
