@@ -55,4 +55,15 @@ class WeisfeilerLehmanHashing(object):
         """
         for _ in range(self.wl_iterations):
             self.features = self._do_a_recursion()
-        self.graph_extracted_features = [feature for node, features in self.extracted_features.items() for feature in features]
+
+    def get_graph_features(self):
+        """
+        Return graph level features.
+        """
+        return = [feature for node, features in self.extracted_features.items() for feature in features]
+
+    def get_graph_features(self):
+        """
+        Return graph level features.
+        """
+        return = [feature for node, features in self.extracted_features.items() for feature in features]
