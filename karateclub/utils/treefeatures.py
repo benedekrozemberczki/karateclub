@@ -58,12 +58,12 @@ class WeisfeilerLehmanHashing(object):
 
     def get_graph_features(self):
         """
-        Return graph level features.
+        Return the node level features.
         """
-        return = [feature for node, features in self.extracted_features.items() for feature in features]
+        return self.extracted_features
 
     def get_graph_features(self):
         """
-        Return graph level features.
+        Return the graph level features.
         """
-        return = [feature for node, features in self.extracted_features.items() for feature in features]
+        return [feature for node, features in self.extracted_features.items() for feature in features]
