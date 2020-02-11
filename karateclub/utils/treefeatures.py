@@ -36,7 +36,7 @@ class WeisfeilerLehmanHashing(object):
         Return types:
             * **new_features** *(dict of strings)* - The hash table with extracted WL features.
         """
-        self.extracted_features = {K: [str(v)] for k, v in self.features.items()}
+        self.extracted_features = {k: [str(v)] for k, v in self.features.items()}
         new_features = {}
         for node in self.graph.nodes():
             nebs = self.graph.neighbors(node)
@@ -46,7 +46,7 @@ class WeisfeilerLehmanHashing(object):
             hash_object = hashlib.md5(features.encode())
             hashing = hash_object.hexdigest()
             new_features[node] = hashing
-        self.extracted_features = {k: self.extracted_features[k] + [v] for k, v in self.new_features.items()})
+        self.extracted_features = {k: self.extracted_features[k] + [v] for k, v in new_features.items()}
         return new_features
 
     def _do_recursions(self):
