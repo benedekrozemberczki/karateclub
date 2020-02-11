@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
 class Role2Vec(Estimator):
-    r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
+    r"""An implementation of `"Role2vec" <https://arxiv.org/abs/1403.6652>`_
     from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
     The procedure uses random walks to approximate the pointwise mutual information
     matrix obtained by pooling normalized adjacency matrix powers. This matrix
@@ -21,6 +21,7 @@ class Role2Vec(Estimator):
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurences. Default is 1.
+        wl_iterations (int): Number of Weisfeiler-Lehman hashing iterations. Default is 2.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
                  window_size=2, epochs=1, learning_rate=0.05, min_count=1, wl_iterations=2):
@@ -33,6 +34,8 @@ class Role2Vec(Estimator):
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.min_count = min_count
+        self.wl_iterations = wl_iterations
+       
 
     def fit(self, graph):
         """
