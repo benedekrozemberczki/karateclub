@@ -7,14 +7,14 @@ Install the package by using pip:
 
         $ pip install karateclub
 
-Upgrade your outdate version by using:
+Upgrade your outdated Karate Club version by using:
 
     .. code-block:: none
 
         $ pip install karateclub --upgrade
 
 
-To check your current package version run:
+To check your current package version just simply run:
 
     .. code-block:: none
 
