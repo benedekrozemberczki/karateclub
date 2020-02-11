@@ -40,10 +40,27 @@ class Role2Vec(Estimator):
         self.wl_iterations = wl_iterations
 
     def _transform_walks(self, walks):
+        """
+        Transforming the random walks.
+        
+        Arg types:
+            * **walks** *(list of lists)* - Random walks with string ids.
+
+        Return types:
+            * *(list of lists)* - The random walks as integers.
+        """
         return [[int(node) for node in walk] for walk in walks]
 
     def _create_documents(self, walks, features):
+        """
+        Accumulating the WL feature in neighbourhoods.
+        
+        Arg types:
+            * **walks** *(list of lists)* - Random walks with string ids.
 
+        Return types:
+            * **new_features** *(list of TaggedDocument objects)* - The pooled features of nodes.
+        """
         new_features = {node: [] for node, feature in features.items()}
         walks = self._transform_walks(walks)
         for walk in walks:
