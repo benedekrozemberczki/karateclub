@@ -43,6 +43,12 @@ class Role2Vec(Estimator):
         """
         walker = RandomWalker(self.walk_number, self.walk_length)
         walker.do_walks(graph)
+ 
+        hasher = WeisfeilerLehmanHashing(self.wl_iterations, attributed=False)
+      
+        node_features = hasher.get_node_features()
+
+        documents = create_documents(walker.walks, node_features)
 
         model = Word2Vec(walker.walks,
                          hs=1,
