@@ -96,6 +96,8 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[GraphWave](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.structural.graphwave.GraphWave)** from Donnat *et al.*: [Learning Structural Node Embeddings via Diffusion Wavelets](https://arxiv.org/abs/1710.10321) (KDD 2018)
 
+* **[GraphWave](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.structural.role2vec.Role2vec)** from Ahmed *et al.*: [Learning Role-based Graph Embeddings](https://arxiv.org/abs/1802.02896) (IJCAI StarAI 2018)
+
 **Attributed Node Level Embedding**
 
 * **[BANE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.bane.BANE)** from Yang *et al.*: [Binarized Attributed Network Embedding](https://ieeexplore.ieee.org/document/8626170) (ICDM 2018)
