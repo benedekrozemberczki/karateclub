@@ -24,8 +24,6 @@ model = Role2Vec()
 model.fit(g)
 model.get_embedding()
 
-quit()
-
 #-----------------------------------
 # SF example
 #-----------------------------------
