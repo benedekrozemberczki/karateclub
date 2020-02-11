@@ -7,7 +7,7 @@ class RandomWalker:
 
     Args:
         walk_length (int): Number of random walks. Default is 10.
-        walk_number (int): Number of nodes in diffusion. Default is 80.
+        walk_number (int): Number of nodes in truncated walk. Default is 80.
     """
     def __init__(self, walk_length, walk_number):
         self.walk_length = walk_length
