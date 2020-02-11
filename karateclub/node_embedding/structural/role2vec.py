@@ -9,8 +9,9 @@ class Role2Vec(Estimator):
     r"""An implementation of `"Role2vec" <https://arxiv.org/abs/1802.02896>`_
     from the IJCAI '18 paper "Learning Role-based Graph Embeddings".
     The procedure uses random walks to approximate the pointwise mutual information
-    matrix obtained by pooling normalized adjacency matrix powers. This matrix
-    is decomposed by an approximate factorization technique.
+    matrix obtained by multiplying the pooled adjacency power matrix with a 
+    structural feature matrix (in this case Weisfeiler-Lehman features). This way
+    one gets structural node embeddings.
 
     Args:
         walk_number (int): Number of random walks. Default is 10.
