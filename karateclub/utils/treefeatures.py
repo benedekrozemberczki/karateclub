@@ -56,7 +56,7 @@ class WeisfeilerLehmanHashing(object):
         for _ in range(self.wl_iterations):
             self.features = self._do_a_recursion()
 
-    def get_graph_features(self):
+    def get_node_features(self):
         """
         Return the node level features.
         """
