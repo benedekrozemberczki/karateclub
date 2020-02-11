@@ -6,8 +6,8 @@ from karateclub.estimator import Estimator
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
 class Role2Vec(Estimator):
-    r"""An implementation of `"Role2vec" <https://arxiv.org/abs/1403.6652>`_
-    from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
+    r"""An implementation of `"Role2vec" <https://arxiv.org/abs/1802.02896>`_
+    from the IJCAI '18 paper "Learning Role-based Graph Embeddings".
     The procedure uses random walks to approximate the pointwise mutual information
     matrix obtained by pooling normalized adjacency matrix powers. This matrix
     is decomposed by an approximate factorization technique.
