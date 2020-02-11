@@ -76,6 +76,10 @@ Structural node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.structural.role2vec
+    :members:
+    :undoc-members:
+
 Attributed node embedding
 --------------------
 
