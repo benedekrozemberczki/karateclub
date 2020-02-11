@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from gensim.models.word2vec import Word2Vec
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.walker import RandomWalker
 from karateclub.estimator import Estimator
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
@@ -20,11 +20,12 @@ class Role2Vec(Estimator):
         window_size (int): Matrix power order. Default is 2.
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
-        min_count (int): Minimal count of node occurences. Default is 1.
+        down_sampling (float): Down sampling frequency. Default is 0.0001.
+        min_count (int): Minimal count of feature occurences. Default is 10.
         wl_iterations (int): Number of Weisfeiler-Lehman hashing iterations. Default is 2.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
-                 window_size=2, epochs=1, learning_rate=0.05, min_count=1, wl_iterations=2):
+    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4, window_size=2,
+                 epochs=1, learning_rate=0.05, down_sampling=0.0001, min_count=10, wl_iterations=2):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -33,6 +34,7 @@ class Role2Vec(Estimator):
         self.window_size = window_size
         self.epochs = epochs
         self.learning_rate = learning_rate
+        self.down_sampling = down_sampling
         self.min_count = min_count
         self.wl_iterations = wl_iterations
 
@@ -43,7 +45,6 @@ class Role2Vec(Estimator):
 
         new_features = {node: [] for node, feature in features.items()}
         walks = self._transform_walks(walks)
-        print(walks)
         for walk in walks:
             for i in range(self.walk_length-self.window_size):
                 for j in range(self.window_size):
@@ -51,6 +52,9 @@ class Role2Vec(Estimator):
                     target = walk[i+j]
                     new_features[source].append(features[target])
                     new_features[target].append(features[source])
+
+        new_features = {node: [feature for features in new_features[node] for feature in features] for node, _ in new_features.items()}
+        new_features = [TaggedDocument(words=feature, tags=[str(node)]) for node, feature in new_features.items()]
         return new_features
 
 
@@ -69,18 +73,17 @@ class Role2Vec(Estimator):
         node_features = hasher.get_node_features()
         documents = self._create_documents(walker.walks, node_features)
 
-        model = Word2Vec(walker.walks,
-                         hs=1,
-                         alpha=self.learning_rate,
-                         iter=self.epochs,
-                         size=self.dimensions,
-                         window=self.window_size,
-                         min_count=self.min_count,
-                         workers=self.workers)
+        model = Doc2Vec(documents,
+                        vector_size=self.dimensions,
+                        window=0,
+                        min_count=self.min_count,
+                        dm=0,
+                        workers=self.workers,
+                        sample=self.down_sampling,
+                        epochs=self.epochs,
+                        alpha=self.learning_rate)
 
-        num_of_nodes = graph.number_of_nodes()
-        self._embedding = [model[str(n)] for n in range(num_of_nodes)]
-
+        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
     def get_embedding(self):
         r"""Getting the node embedding.
