@@ -10,8 +10,22 @@ from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DA
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF
-from karateclub.node_embedding.structural import GraphWave
+from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
+
+#-----------------------------------
+# Role2vec example
+#-----------------------------------
+
+g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
+model = Role2Vec()
+
+model.fit(g)
+model.get_embedding()
+
+quit()
+
 
 
 #-----------------------------------
