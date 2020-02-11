@@ -44,6 +44,10 @@ Structural node embedding
 * Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Learning Structural Node Embeddings Via Diffusion Wavelets** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_, `Code <https://github.com/benedekrozemberczki/GraphWaveMachine>`_
 
 
+* Nesreen K. Ahmed, Ryan Rossi, John Boaz Lee, Theodore L. Willke, Rong Zhou, Xiangnan Kong, Hoda Eldardiry: **Learning Role-based Graph Embeddings** `Paper <https://arxiv.org/abs/1710.10321>`_, `Code <https://github.com/benedekrozemberczki/Role2Vec>`_
+
+
+
 Attributed node embedding
 --------------------
 
