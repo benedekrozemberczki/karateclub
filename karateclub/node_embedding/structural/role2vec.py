@@ -35,7 +35,24 @@ class Role2Vec(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
         self.wl_iterations = wl_iterations
-       
+
+    def _transform_walks(self, walks):
+        return [[int(node) for node in walk] for walk in walks]
+
+    def _create_documents(self, walks, features):
+
+        new_features = {node: [] for node, feature in features.items()}
+        walks = self._transform_walks(walks)
+        print(walks)
+        for walk in walks:
+            for i in range(self.walk_length-self.window_size):
+                for j in range(self.window_size):
+                    source = walk[i]
+                    target = walk[i+j]
+                    new_features[source].append(features[target])
+                    new_features[target].append(features[source])
+        return new_features
+
 
     def fit(self, graph):
         """
@@ -44,14 +61,13 @@ class Role2Vec(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        walker = RandomWalker(self.walk_number, self.walk_length)
+        walker = RandomWalker(self.walk_length,self.walk_number)
         walker.do_walks(graph)
  
-        hasher = WeisfeilerLehmanHashing(self.wl_iterations, attributed=False)
+        hasher = WeisfeilerLehmanHashing(graph=graph, wl_iterations=self.wl_iterations, attributed=False)
       
         node_features = hasher.get_node_features()
-
-        documents = create_documents(walker.walks, node_features)
+        documents = self._create_documents(walker.walks, node_features)
 
         model = Word2Vec(walker.walks,
                          hs=1,

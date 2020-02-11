@@ -40,7 +40,7 @@ class DeepWalk(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        walker = RandomWalker(self.walk_number, self.walk_length)
+        walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
 
         model = Word2Vec(walker.walks,
