@@ -100,13 +100,14 @@ reader = GraphSetReader("reddit10k")
 
 graphs = reader.get_graphs()
 y = reader.get_target()
+
 #-----------------------------------
 # Graph reader example
 #-----------------------------------
 
 reader = GraphReader("facebook")
 
-graphs = reader.get_graph()
+graph = reader.get_graph()
 target = reader.get_target()
 
 #----------------------------------
