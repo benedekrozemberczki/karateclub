@@ -216,7 +216,7 @@ and the target variable with Scikit-Learn. We will use a test data ratio of 20%.
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of a thread being discussion based. We perform inferencet on the test 
+Using the training data (``X_train`` and ``y_train``) we learn a logistic regression model to predict the probability of a thread being discussion based. We perform inference on the test 
 set for this target. Finally, we evaluate the model performance by printing an area under the ROC curve value.
 
 .. code-block:: python
