@@ -13,6 +13,7 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
 #-----------------------------------
 # Role2vec example
 #-----------------------------------

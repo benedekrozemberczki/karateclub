@@ -19,7 +19,7 @@ class BoostNE(Estimator):
         order (int): Number of adjacency matrix powers. Default is 2.
         alpha (float): NMF regularization parameter. Default is 0.01.
     """
-    def __init__(self, dimensions=8, iterations=16, order=2, alpha=0.1):
+    def __init__(self, dimensions=8, iterations=16, order=2, alpha=0.01):
         self.dimensions = dimensions
         self.iterations = iterations
         self.order = order

@@ -3,6 +3,7 @@ import networkx as nx
 from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 
+
 class MNMF(Estimator):
     r"""An implementation of `"M-NMF" <https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14589/13763>`_
     from the AAAI '17 paper "Community Preserving Network Embedding".
@@ -68,7 +69,7 @@ class MNMF(Estimator):
 
     def _update_U(self):
         """Update matrix U."""
-        enum = (self.S.transpose()).dot(self.M)+self.alpha*np.dot(self.H, self.C)
+        enum = self.S.dot(self.M)+self.alpha*np.dot(self.H, self.C)
         denom = np.dot(self.U, np.dot(np.transpose(self.M), self.M)+self.alpha*np.dot(np.transpose(self.C), self.C))
         denom[denom < self.lower_control] = self.lower_control
         self.U = np.multiply(self.U, enum/denom)
