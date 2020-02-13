@@ -120,6 +120,7 @@ class GraphWave(Estimator):
         """
         self._create_evaluation_points()
         self._check_size(graph)
+        graph = graph.remove_edges_from(nx.selfloop_edges(graph))
         self.G = pygsp.graphs.Graph(nx.adjacency_matrix(graph))
 
         if self.mechanism == "exact":
