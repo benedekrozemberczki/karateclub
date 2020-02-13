@@ -14,12 +14,12 @@ class BoostNE(Estimator):
     The base target matrix is a pooled sum of adjacency matrix powers. 
 
     Args:
-        dimensions (int): Number of individual embedding dimensions. Default is 4.
-        iterations (int): Number of boosting iterations. Default is 10.
-        order (int): Number of adjacency matrix powers. Default is 5.
+        dimensions (int): Number of individual embedding dimensions. Default is 8.
+        iterations (int): Number of boosting iterations. Default is 16.
+        order (int): Number of adjacency matrix powers. Default is 2.
         alpha (float): NMF regularization parameter. Default is 0.01.
     """
-    def __init__(self, dimensions=4, iterations=10, order=5, alpha=0.01):
+    def __init__(self, dimensions=8, iterations=16, order=2, alpha=0.01):
         self.dimensions = dimensions
         self.iterations = iterations
         self.order = order
