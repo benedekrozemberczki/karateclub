@@ -6,7 +6,7 @@ class FGSD(Estimator):
     r"""An implementation of `"FGSD" <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
     from the NeurIPS '17 paper "Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs".
     The procedure calculates the Moore-Penrose spectrum of the normalized Laplacian.
-    Using th isspectrum the histogram of the spectral features is used as a whole graph representation. 
+    Using this spectrum the histogram of the spectral features is used as a whole graph representation. 
 
     Args:
         hist_bins (int): Number of histogram bins. Default is 200.
