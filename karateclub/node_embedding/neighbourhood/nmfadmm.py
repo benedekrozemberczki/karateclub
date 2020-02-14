@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 class NMFADMM(Estimator):
     r"""An implementation of `"NMF-ADMM" <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_
     from the ICASSP '14 paper "Alternating Direction Method of Multipliers for 
-    Non-Negative Matrix Factorization with the Beta-Divergence.". The procedure
+    Non-Negative Matrix Factorization with the Beta-Divergence". The procedure
     learns an embedding of the normalized adjacency matrix with by using the alternating
     direction method of multipliers to solve a non negative matrix factorization problem.
 
