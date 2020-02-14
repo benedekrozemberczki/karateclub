@@ -38,7 +38,7 @@ class SymmNMF(Estimator):
 
     def fit(self, graph):
         """
-        Fitting an M-NMF clustering model.
+        Fitting a Symm-NMF clustering model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
