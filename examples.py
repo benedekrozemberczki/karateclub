@@ -26,7 +26,9 @@ model.fit(g)
 
 model.get_embedding()
 
-model.get_memberships()
+membs = model.get_memberships()
+
+print(membs)
 
 quit()
 

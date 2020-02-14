@@ -13,11 +13,11 @@ class SymmNMF(Estimator):
     embedding factor in the created latent space.
 
     Args:
-        dimensions (int): Number of dimensions. Default is 128.
+        dimensions (int): Number of dimensions. Default is 16.
         iterations (int): Number of power iterations. Default is 200.
         rho (float): ADMM tuning parameter. Default is 1.0.
     """
-    def __init__(self, dimensions=128, iterations=200, rho=1.0):
+    def __init__(self, dimensions=16, iterations=200, rho=1.0):
 
         self.dimensions = dimensions
         self.iterations = iterations
