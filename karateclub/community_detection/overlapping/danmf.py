@@ -52,7 +52,7 @@ class DANMF(Estimator):
 
     def _sklearn_pretrain(self, i):
         """
-        Pretraining a single layer of the model with sklearn.
+        Pre-training a single layer of the model with sklearn.
 
         Arg types:
             * **i** *(int)* - The layer index.
