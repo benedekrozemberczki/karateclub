@@ -23,8 +23,7 @@ class SymmNMF(Estimator):
         Return types:
             * **memberships** *(dict)* - Node cluster memberships.
         """
-        indices = np.argmax(self.H, axis=1)
-        memberships = {i: membership for i, membership in enumerate(indices)}
+        membeships = None
         return memberships
 
     def get_embedding(self):
@@ -33,7 +32,7 @@ class SymmNMF(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = self.U
+        embedding = None
         return embedding
 
     def fit(self, graph):
