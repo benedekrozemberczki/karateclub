@@ -21,7 +21,7 @@ class LabelPropagation(Estimator):
         Choosing a neighbor from a propagation source node.
 
         Arg types:
-            * **neigbours** *(list)* - Neighboring nodes.
+            * **neigbours** *(list)* - Neighbouring nodes.
         """
         scores = {}
         for neighbor in neighbors:
