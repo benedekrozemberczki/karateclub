@@ -13,7 +13,7 @@ class TENE(Estimator):
         dimensions (int): Number of embedding dimensions. Default is 32.
         lower_control (float): Embedding score minimal value. Default is 10**-15.
         alpha (float): Adjacency matrix regularization coefficient. Default is 0.1. 
-        beta (float): Feature matrix regularizer coefficient. Default is 0.1.
+        beta (float): Feature matrix regularization coefficient. Default is 0.1.
         iterations (int): ALS iterations. Default is 200.
     """
     def __init__(self, dimensions=32, lower_control=10**-15,
