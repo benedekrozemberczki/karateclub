@@ -89,7 +89,7 @@ class BoostNE(Estimator):
 
     def _reweighting(self, X, chosen_row, chosen_col):
         """
-        Rescaling the target matrix with the anchor row and column.
+        Re-scaling the target matrix with the anchor row and column.
 
         Arg types:
             * **X** *(COO Scipy matrix)* - The target matrix.
