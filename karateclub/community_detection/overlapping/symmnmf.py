@@ -1,7 +1,6 @@
 import numpy as np
 import networkx as nx
 from scipy import sparse
-from tqdm import tqdm
 from karateclub.estimator import Estimator
 
 class SymmNMF(Estimator):
@@ -13,11 +12,11 @@ class SymmNMF(Estimator):
     embedding factor in the created latent space.
 
     Args:
-        dimensions (int): Number of dimensions. Default is 16.
+        dimensions (int): Number of dimensions. Default is 32.
         iterations (int): Number of power iterations. Default is 200.
-        rho (float): ADMM tuning parameter. Default is 1.0.
+        rho (float): ADMM tuning parameter. Default is 100.0.
     """
-    def __init__(self, dimensions=16, iterations=200, rho=1.0):
+    def __init__(self, dimensions=32, iterations=200, rho=100.0):
 
         self.dimensions = dimensions
         self.iterations = iterations
@@ -59,7 +58,8 @@ class SymmNMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         number_of_nodes = graph.shape[0]
-        self.H = np.abs(np.random.normal(0, 1, size=(number_of_nodes, self.dimensions)))
+        non_zero = graph.nonzero()[0].shape[0]
+        self.H = np.random.uniform(0, non_zero/(number_of_nodes**2), size=(number_of_nodes, self.dimensions))
         self.H_gamma = np.zeros((number_of_nodes, self.dimensions))
         self.I = np.identity(self.dimensions)
 
@@ -69,7 +69,7 @@ class SymmNMF(Estimator):
         Return types:
             * **memberships** *(dict)* - Node cluster memberships.
         """
-        index = np.argmax(self.W, axis=0)
+        index = np.argmax(self.W, axis=1)
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
@@ -82,18 +82,18 @@ class SymmNMF(Estimator):
         embedding = self.H
         return embedding
 
-    def _do_admm_update(self, A_hat, step):
+    def _do_admm_update(self, A_hat):
         """
         Doing a single ADMM update with the adjacency matrix.
         
         """
         H_covar = np.linalg.inv(self.H.T.dot(self.H) + self.rho*self.I)
-        self.W = (A_hat.dot(A_hat.dot(self.H)) + self.rho*self.H - self.H_gamma).dot(H_covar)
+        self.W = (A_hat.dot(A_hat.T.dot(self.H)) + self.rho*self.H - self.H_gamma).dot(H_covar)
         self.W = np.maximum(self.W, 0)
         W_covar = np.linalg.inv(self.W.T.dot(self.W) + self.rho*self.I)
-        self.H = (A_hat.dot(A_hat.dot(self.W)) + self.rho*self.H + self.H_gamma).dot(W_covar)
+        self.H = (A_hat.dot(A_hat.T.dot(self.W)) + self.rho*self.W + self.H_gamma).dot(W_covar)
         self.H = np.maximum(self.H, 0)
-        self.H_gamma = self.H_gamma + step*self.rho*(self.W-self.H)
+        self.H_gamma = self.H_gamma + self.rho*(self.W-self.H)
 
     def fit(self, graph):
         """
@@ -102,7 +102,8 @@ class SymmNMF(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        graph.remove_edges_from(nx.selfloop_edges(graph))
         A_hat = self._create_base_matrix(graph)
         self._setup_embeddings(A_hat)
-        for step in tqdm(range(self.iterations)):
-            self._do_admm_update(A_hat, step)
+        for step in range(self.iterations):
+            self._do_admm_update(A_hat)

@@ -18,7 +18,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # Symm-NMF example
 #------------------------------------
 
-g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
+g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
 model = SymmNMF()
 
@@ -26,11 +26,7 @@ model.fit(g)
 
 model.get_embedding()
 
-membs = model.get_memberships()
-
-print(membs)
-
-quit()
+model.get_memberships()
 
 #-----------------------------------
 # Role2vec example
