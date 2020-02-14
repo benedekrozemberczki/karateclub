@@ -5,7 +5,7 @@ from karateclub.estimator import Estimator
 class EgoNetSplitter(Estimator):
     r"""An implementation of `"Ego-Splitting" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_
     from the KDD '17 paper "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters". The tool first creates
-    the egonets of nodes. A persona-graph is created which is clustered by the Louvain method. The resulting overlapping
+    the ego-nets of nodes. A persona-graph is created which is clustered by the Louvain method. The resulting overlapping
     cluster memberships are stored as a dictionary.
 
     Args:
@@ -19,7 +19,7 @@ class EgoNetSplitter(Estimator):
         Creating an ego net, extracting personas and partitioning it.
 
         Arg types:
-            * **node** *(int)* - Node ID for egonet (ego node).
+            * **node** *(int)* - Node ID for ego-net (ego node).
         """
         ego_net_minus_ego = self.graph.subgraph(self.graph.neighbors(node))
         components = {i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))}
