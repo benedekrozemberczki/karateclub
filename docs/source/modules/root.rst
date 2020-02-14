@@ -27,6 +27,10 @@ Overlapping community detection
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.community_detection.overlapping.symmnmf
+    :members:
+    :undoc-members:
+
 Non-overlapping community detection
 --------------------
 
