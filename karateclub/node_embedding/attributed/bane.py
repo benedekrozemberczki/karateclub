@@ -7,7 +7,7 @@ from karateclub.estimator import Estimator
 class BANE(Estimator):
     r"""An implementation of `"BANE" <https://shiruipan.github.io/publication/yang-binarized-2018/yang-binarized-2018.pdf>`_
     from the ICDM '18 paper "Binarized Attributed Network Embedding Class". The 
-    procedure first calculates the truncated SVD of an adjcacency - feature matrix
+    procedure first calculates the truncated SVD of an adjacency - feature matrix
     product. This matrix is further decomposed by a binary CCD based technique. 
        
     Args:
