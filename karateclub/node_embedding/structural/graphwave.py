@@ -48,7 +48,7 @@ class GraphWave(Estimator):
 
     def _single_wavelet_generator(self, node):
         """
-        Calculating the characteristic function for a given node, using the eigendecomposition.
+        Calculating the characteristic function for a given node, using the eigen decomposition.
         
         Arg types:
             * **node** *(int)* - The node being embedded.
