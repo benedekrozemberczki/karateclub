@@ -6,13 +6,29 @@ import community
 import numpy as np
 
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
-from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam
+from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
+#------------------------------------
+# Symm-NMF example
+#------------------------------------
+
+g = nx.newman_watts_strogatz_graph(1000, 10, 0.02)
+
+model = SymmNMF()
+
+model.fit(g)
+
+model.get_embedding()
+
+model.get_memberships()
+
+quit()
 
 #-----------------------------------
 # Role2vec example
