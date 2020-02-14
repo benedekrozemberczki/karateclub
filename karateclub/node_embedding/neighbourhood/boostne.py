@@ -46,7 +46,7 @@ class BoostNE(Estimator):
         Creating a tuple with the normalized adjacency matrix.
 
         Return types:
-            * **(A_hat, A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacencies.
+            * **(A_hat, A_hat, A_hat)** *(Tuple of SciPy arrays)* - Normalized adjacency matrices.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
