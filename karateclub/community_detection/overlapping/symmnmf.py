@@ -7,8 +7,10 @@ from karateclub.estimator import Estimator
 class SymmNMF(Estimator):
 
     r"""An implementation of `"Symm-NMF" <https://www.cc.gatech.edu/~hpark/papers/DaDingParkSDM12.pdf>`_
-    from the SDM'12 paper "Symmetric Nonnegative Matrix Factorization for Graph Clustering".
-
+    from the SDM'12 paper "Symmetric Nonnegative Matrix Factorization for Graph Clustering". The procedure
+    decomposed the second power od the normalized adjacency matrix with an ADMM based non-negative matrix
+    factorization based technique. This results in a node embedding and each node is associated with an
+    embedding factor in the created latent space.
 
     Args:
         dimensions (int): Number of dimensions. Default is 128.
@@ -80,13 +82,18 @@ class SymmNMF(Estimator):
         embedding = self.H
         return embedding
 
-    def do_update(self, A_hat):
+    def _do_admm_update(self, A_hat, step):
+        """
+        Doing a single ADMM update with the adjacency matrix.
+        
+        """
         H_covar = np.linalg.inv(self.H.T.dot(self.H) + self.rho*self.I)
-        self.W = (A_hat.dot(self.H) + self.rho*self.H - self.H_gamma).dot(H_covar)
-        #W = np.maximum(W, 0)
-        #temp = np.linalg.inv(W.T.dot(W) + sigma * id_k)
-        #H = (A.dot(W) + sigma * W + Gamma).dot(temp)
-        #H = np.maximum(H, 0)
+        self.W = (A_hat.dot(A_hat.dot(self.H)) + self.rho*self.H - self.H_gamma).dot(H_covar)
+        self.W = np.maximum(self.W, 0)
+        W_covar = np.linalg.inv(self.W.T.dot(self.W) + self.rho*self.I)
+        self.H = (A_hat.dot(A_hat.dot(self.W)) + self.rho*self.H + self.H_gamma).dot(W_covar)
+        self.H = np.maximum(self.H, 0)
+        self.H_gamma = self.H_gamma + step*self.rho*(self.W-self.H)
 
     def fit(self, graph):
         """
@@ -97,5 +104,5 @@ class SymmNMF(Estimator):
         """
         A_hat = self._create_base_matrix(graph)
         self._setup_embeddings(A_hat)
-        for _ in tqdm(range(self.iterations)):
-            self.do_update(A_hat)
+        for step in tqdm(range(self.iterations)):
+            self._do_admm_update(A_hat, step)

@@ -18,7 +18,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # Symm-NMF example
 #------------------------------------
 
-g = nx.newman_watts_strogatz_graph(1000, 10, 0.02)
+g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 
 model = SymmNMF()
 
