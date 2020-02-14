@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 
 class BigClam(Estimator):
     r"""An implementation of `"BigClam" <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_
-    from the WSDM '13 paper "Overlapping Community Detection at Scale: A Nonnegative Matrix
+    from the WSDM '13 paper "Overlapping Community Detection at Scale: A Non-negative Matrix
     Factorization Approach". The procedure uses gradient ascent to create an embedding which is
     used for deciding the node-cluster affiliations.
 
