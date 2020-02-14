@@ -49,7 +49,7 @@ class NetMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
 
         Return types:
-            * **(A_hat, A_hat, A_hat, D_inverse)** *(SciPy arrays)* - Normalized adjacencies.
+            * **(A_hat, A_hat, A_hat, D_inverse)** *(SciPy arrays)* - Normalized adjacency matrices.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
