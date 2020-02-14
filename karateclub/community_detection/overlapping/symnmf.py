@@ -17,3 +17,30 @@ class SymmNMF(Estimator):
         self.iterations = iterations
         self.rho = rho
 
+    def get_memberships(self):
+        r"""Getting the cluster membership of nodes.
+
+        Return types:
+            * **memberships** *(dict)* - Node cluster memberships.
+        """
+        indices = np.argmax(self.H, axis=1)
+        memberships = {i: membership for i, membership in enumerate(indices)}
+        return memberships
+
+    def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
+        embedding = self.U
+        return embedding
+
+    def fit(self, graph):
+        """
+        Fitting an M-NMF clustering model.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be clustered.
+        """
+        self.graph = graph
