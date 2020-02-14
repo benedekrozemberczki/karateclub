@@ -8,7 +8,7 @@ class MNMF(Estimator):
     r"""An implementation of `"M-NMF" <https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14589/13763>`_
     from the AAAI '17 paper "Community Preserving Network Embedding".
     The procedure uses joint non-negative matrix factorization with modularity
-    based regul;arization in order to learn a cluster memmbership distribution
+    based regularization in order to learn a cluster memmbership distribution
     over nodes. The method can be used in an overlapping and non-overlapping way.
 
     Args:
