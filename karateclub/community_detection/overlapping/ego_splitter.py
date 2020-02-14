@@ -35,7 +35,7 @@ class EgoNetSplitter(Estimator):
 
     def _create_egonets(self):
         """
-        Creating an egonet for each node.
+        Creating an ego-net for each node.
         """
         self.components = {}
         self.personalities = {}
@@ -60,7 +60,7 @@ class EgoNetSplitter(Estimator):
 
     def _create_persona_graph(self):
         """
-        Create a persona graph using the egonet components.
+        Create a persona graph using the ego-net components.
         """
         self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in self.graph.edges()]
         self.persona_graph = nx.from_edgelist(self.persona_graph_edges)
