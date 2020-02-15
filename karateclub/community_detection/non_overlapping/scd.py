@@ -38,7 +38,7 @@ class SCD(Estimator):
                         neighbor_memberships[neighbor] = cluster_index
                 cluster_index = cluster_index + 1
 
-    def _do_refinements(self):
+    def _do_refinement(self):
         pass
 
 
