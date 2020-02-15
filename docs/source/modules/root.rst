@@ -38,6 +38,10 @@ Non-overlapping community detection
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.community_detection.non_overlapping.scd
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.community_detection.non_overlapping.label_propagation
     :members:
     :undoc-members:
