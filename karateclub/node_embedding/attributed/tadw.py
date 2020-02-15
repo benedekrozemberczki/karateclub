@@ -11,7 +11,6 @@ class TADW(Estimator):
     of the adjacency matrix to create representations.
 
     Args:
-        order (int): Adjacency matrix power. Default is 2.
         dimensions (int): Number of embedding dimensions. Default is 32.
         reduction_dimensions (int): SVD reduction dimensions. Default is 64.
         svd_iterations (int): SVD iteration count. Default is 20.
