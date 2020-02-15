@@ -39,6 +39,7 @@ class SCD(Estimator):
                 cluster_index = cluster_index + 1
 
     def _do_refinements(self):
+        pass
 
 
     def fit(self, graph):
