@@ -28,6 +28,8 @@ model.fit(g)
 
 membs = model.get_memberships()
 
+print(community.modularity(membs,g))
+
 quit()
 
 #------------------------------------
