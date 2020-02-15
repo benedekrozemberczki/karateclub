@@ -16,6 +16,12 @@ class SCD(Estimator):
         self.seed = seed
         self.iterations = iterations
 
+
+    def _create_initial_partition(self):
+        clustering_coefficient = nx.clustering(self.graph)
+        self.cc_pairs = [(node_cc, node) for node, node_cc in clustering_coefficient.items()]
+        print(cc_pairs)
+
     def fit(self, graph):
         """
         Fitting a Label Propagation clustering model.
@@ -24,6 +30,7 @@ class SCD(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self.graph = graph
+        self._create_initial_partition()
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
@@ -31,5 +38,5 @@ class SCD(Estimator):
         Return types:
             * **memberships** *(dict)* - Node cluster memberships.
         """
-        memberships = self.labels
+        memberships = self.cc_pairs
         return memberships
