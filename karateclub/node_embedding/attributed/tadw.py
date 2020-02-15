@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
@@ -16,20 +17,17 @@ class TADW(Estimator):
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
         alpha (float): Learning rate. Default is 0.01. 
-        iterations (int): Matrix decomposition iterations. Default is 100.
-        lower_control (float): Factor float value control. Default is 10**-15.
-        lambd (float): Regularization coefficient. Default is 1000.0.
+        iterations (int): Matrix decomposition iterations. Default is 10.
+        lambd (float): Regularization coefficient. Default is 10.0.
     """
-    def __init__(self, order=2, dimensions=32, reduction_dimensions=64, svd_iterations=20,
-                 seed=42, alpha=0.01, iterations=100, lower_control=10**-15, lambd=1000.0):
-        self.order = order
+    def __init__(self, dimensions=32, reduction_dimensions=64, svd_iterations=20,
+                 seed=42, alpha=0.01, iterations=10, lambd=10.0):
         self.dimensions = dimensions
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
         self.seed = seed
         self.alpha = alpha
         self.iterations = iterations
-        self.lower_control = lower_control
         self.lambd = lambd
 
     def _create_target_matrix(self, graph):
@@ -49,10 +47,8 @@ class TADW(Estimator):
         A_hat = nx.adjacency_matrix(weighted_graph,
                                     nodelist=range(graph.number_of_nodes()))
 
-        A_tilde = A_hat
-        for _ in range(self.order-1):
-            A_tilde = A_tilde.dot(A_hat)
-        return A_tilde
+        A_tilde = A_hat.dot(A_hat)
+        return coo_matrix(A_tilde)
 
     def _init_weights(self):
         """
@@ -65,20 +61,31 @@ class TADW(Estimator):
         """
         A single update of the node embedding matrix.
         """
-        H_T = self.T.transpose().dot(self.H.transpose()).transpose()
-        grad = self.lambd*self.W -np.dot(H_T, self.A-np.dot(np.transpose(H_T), self.W))
-        self.W = self.W-self.alpha * grad
-        self.W[self.W < self.lower_control] = self.lower_control
+        penalty = (self.lambd/np.linalg.norm(self.W))*self.W
+        transformed_features = self.H.dot(self.T)
+        scores = 0
+        for i in range(self.dimensions):
+            scores = scores + transformed_features[i,self.A.row] * self.W[i,self.A.col]
+        score_matrix = coo_matrix((scores, (self.A.row, self.A.col)), shape=self.A.shape)
+        diff_matrix = self.A-score_matrix
+        main_grad = diff_matrix.dot(transformed_features.T).T/np.sum(np.square(scores))
+        grad = penalty-main_grad
+        self.W = self.W-self.alpha*grad
 
     def _update_H(self):
         """
         A single update of the feature basis matrix.
         """
-        inside = self.A - self.T.transpose().dot(np.transpose(self.W).dot(self.H).transpose())
-        right = self.T.dot(np.dot(self.W, inside).transpose()).transpose()
-        grad = self.lambd*self.H-right
-        self.H = self.H-self.alpha * grad
-        self.H[self.H < self.lower_control] = self.lower_control
+        penalty = (self.lambd/np.linalg.norm(self.H))*self.H
+        transformed_features = self.H.dot(self.T)
+        scores = 0
+        for i in range(self.dimensions):
+            scores = scores + transformed_features[i,self.A.col] * self.W[i,self.A.row]
+        score_matrix = coo_matrix((scores, (self.A.row, self.A.col)), shape=self.A.shape)
+        diff_matrix = self.A-score_matrix
+        main_grad = self.W.dot(diff_matrix.dot(self.T.T))/np.sum(np.square(scores))
+        grad = penalty-main_grad
+        self.H = self.H-self.alpha*grad
 
     def _create_reduced_features(self, X):
         """
@@ -95,8 +102,7 @@ class TADW(Estimator):
                            random_state=self.seed)
         svd.fit(X)
         T = svd.transform(X)
-        T = T.transpose()
-        return T
+        return T.T
 
     def fit(self, graph, X):
         """

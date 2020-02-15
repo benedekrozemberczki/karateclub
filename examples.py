@@ -14,6 +14,20 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
 
+#-----------------------------------
+# TADW example
+#-----------------------------------
+
+g = nx.newman_watts_strogatz_graph(20000, 20, 0.05)
+
+x = np.random.uniform(0, 1, (20000, 200))
+
+model = TADW()
+
+model.fit(g, x)
+
+quit()
+
 #------------------------------------
 # Symm-NMF example
 #------------------------------------
