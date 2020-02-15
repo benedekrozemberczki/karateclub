@@ -18,9 +18,30 @@ class SCD(Estimator):
 
 
     def _create_initial_partition(self):
-        clustering_coefficient = nx.clustering(self.graph)
-        self.cc_pairs = [(node_cc, node) for node, node_cc in clustering_coefficient.items()]
-        print(cc_pairs)
+        self.clustering_coefficient = nx.clustering(self.graph)
+        self.cc_pairs = [(node_cc, node) for node, node_cc in self.clustering_coefficient.items()]
+        self.cc_pairs = sorted(self.cc_pairs, key=lambda tup: tup[0])[::-1]
+        self._do_initial_assignments()
+
+    def _do_initial_assignments(self):
+        self.cluster_memberships = {}
+        neighbor_memberships = {}
+        cluster_index = 0 
+        for pair in self.cc_pairs:
+            if pair[1] in neighbor_memberships:
+                self.cluster_memberships[pair[1]] = neighbor_memberships[pair[1]]
+                for neighbor in self.graph.neighbors(pair[1]):
+                    neighbor_memberships[neighbor] = neighbor_memberships[pair[1]]
+            else:
+                self.cluster_memberships[pair[1]] = cluster_index
+                for neighbor in self.graph.neighbors(pair[1]):
+                    neighbor_memberships[neighbor] = cluster_index
+                cluster_index = cluster_index + 1
+            
+            
+        
+
+
 
     def fit(self, graph):
         """
@@ -38,5 +59,5 @@ class SCD(Estimator):
         Return types:
             * **memberships** *(dict)* - Node cluster memberships.
         """
-        memberships = self.cc_pairs
+        memberships = self.cluster_memberships
         return memberships
