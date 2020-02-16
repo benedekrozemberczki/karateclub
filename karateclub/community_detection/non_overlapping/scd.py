@@ -12,8 +12,8 @@ class SCD(Estimator):
     community clustering metric.
 
     Args:
-        rounds (int): Refinemeent iterations. Default is 25.
-        seed (int): Random seed. Default is 42.
+        iterations (int): Refinemeent iterations. Default is 25.
+        eps (float): Epsilon score for zero division correction. Default is 10**-6.
     """
     def __init__(self, iterations=25, eps=10**-6):
         self.iterations = iterations
