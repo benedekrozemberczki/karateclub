@@ -4,7 +4,6 @@ import networkx as nx
 
 import community
 import numpy as np
-from tqdm import tqdm
 
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
@@ -17,8 +16,6 @@ from karateclub.dataset import GraphReader, GraphSetReader
 #------------------------------------
 # SCD example
 #------------------------------------
-
-reader = GraphReader("twitch")
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
