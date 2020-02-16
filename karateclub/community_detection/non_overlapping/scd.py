@@ -59,7 +59,6 @@ class SCD(Estimator):
         """
         Creating a community - node list index.
         """
- 
         inverse_community_index = {}
         for node, cluster_membership in self.cluster_memberships.items():
             if cluster_membership in inverse_community_index:
@@ -70,6 +69,9 @@ class SCD(Estimator):
 
 
     def _calculate_community_statistics(self, inverse_community_index):
+        """
+        Calculating the community level statistics used for refinement. 
+        """
         community_statistics = {}
         for comm, members in inverse_community_index.items():
             induced_graph = self.graph.subgraph(members)
