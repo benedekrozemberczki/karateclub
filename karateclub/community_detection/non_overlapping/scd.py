@@ -144,7 +144,6 @@ class SCD(Estimator):
             else:
                 new_memberships[node] = self.cluster_memberships[node]
         self.cluster_memberships = new_memberships
-        print(community.modularity(self.cluster_memberships,self.graph))
 
     def fit(self, graph):
         """
