@@ -67,7 +67,6 @@ class SCD(Estimator):
                 inverse_community_index[cluster_membership] = {node}
         return inverse_community_index
 
-
     def _calculate_community_statistics(self, inverse_community_index):
         """
         Calculating the community level statistics used for refinement. 
@@ -110,7 +109,6 @@ class SCD(Estimator):
         theta_3_left_denom = theta_3_left_enum + d_out*(d_out-1)*self.omega+d_out*d_in*self.omega+self.eps
         theta_3_right_enum = d_in+d_out
         theta_3_right_denom = r+d_out+self.eps
-
         theta_3 = (theta_3_left_enum/theta_3_left_denom)*(theta_3_right_enum/theta_3_right_denom)
         return theta_3
 
@@ -121,19 +119,17 @@ class SCD(Estimator):
         r = community_level_stats["r"]
         d = community_level_stats["d"]
         b = community_level_stats["b"]
-
         q = (b-d_in)/r
-
         theta_1 = self._calculate_theta_1(r, d, b, q, d_out, d_in)
         theta_2 = self._calculate_theta_2(r, d, b, q)
         theta_3 = self._calculate_theta_3(r, d, b, q, d_out, d_in)
-
         wcc = d_in*theta_1 + (r-d_in)*theta_2+theta_3
-
         return wcc
 
-
     def _find_community_index(self, community_statistics):
+        """
+        Finding the current community index.
+        """
         return max(community_statistics.keys())+1
 
     def _do_refinement(self):
