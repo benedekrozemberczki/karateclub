@@ -10,13 +10,11 @@ class EdMot(Estimator):
 
     Args:
         component_count (int): Number of extracted motif hypergraph components. Default is 2.
-        cutoff (int): Motif edge cut-off value. Default is 10.
-        seed (int): Louvain random seed. Default is 42.
+        cutoff (int): Motif edge cut-off value. Default is 50.
     """
-    def __init__(self, component_count=2, cutoff=50, seed=42):
+    def __init__(self, component_count=2, cutoff=50):
         self.component_count = component_count
         self.cutoff = cutoff
-        self.seed = seed
 
     def _overlap(self, node_1, node_2):
         """
