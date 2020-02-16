@@ -56,6 +56,10 @@ class SCD(Estimator):
                 cluster_index = cluster_index + 1
 
     def _create_inverse_community_index(self):
+        """
+        Creating a community - node list index.
+        """
+ 
         inverse_community_index = {}
         for node, cluster_membership in self.cluster_memberships.items():
             if cluster_membership in inverse_community_index:
