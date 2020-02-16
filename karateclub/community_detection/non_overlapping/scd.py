@@ -8,12 +8,12 @@ from tqdm import tqdm
 class SCD(Estimator):
     r"""An implementation of `"SCD" <https://arxiv.org/abs/0709.2938>`_ from the
     WWW '14 paper "High Quality, Scalable and Parallel Community Detection for 
-    Large Real Graphs". The procedure optimizes greedily the weighted community
-    clustering indirectly.
+    Large Real Graphs". The procedure greedily optimizes the approximate weighted
+    community clustering metric.
 
     Args:
+        rounds (int): Refinemeent iterations. Default is 25.
         seed (int): Random seed. Default is 42.
-        rounds (int): Propagation iterations. Default is 50.
     """
     def __init__(self, iterations=25, eps=10**-6):
         self.iterations = iterations
