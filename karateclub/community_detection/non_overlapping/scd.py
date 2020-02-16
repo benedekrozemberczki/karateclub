@@ -82,13 +82,19 @@ class SCD(Estimator):
         return community_statistics
 
     def _calculate_theta_1(self, r, d, b, q, d_out, d_in):
+        """
+        Calculating the 1st WCC component.
+        """
         theta_1_enum = (r-1)*d+1+q
         theta_1_denom = (r+q)*((r-1)*(r-2)*(d**3)+(d_in-1)*d+q*(q-1)*(d+1)*self.omega+d_out*self.omega)+self.eps
         theta_1_multi = (d_in-1)*d
         theta_1 = (theta_1_enum / theta_1_denom)*theta_1_multi
         return theta_1
 
-    def _calculate_theta_2(self, r, d, b, q):    
+    def _calculate_theta_2(self, r, d, b, q):
+        """
+        Calculating the 2nd WCC component.
+        """
         theta_2_left_enum = (r-1)*(r-2)*(d**3)
         theta_2_left_denom = theta_2_left_enum+q*(q-1)*self.omega+q*(r-1)*self.omega*d+self.eps
         theta_2_right_enum = (r-1)*d+q
