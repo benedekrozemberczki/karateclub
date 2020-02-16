@@ -103,6 +103,9 @@ class SCD(Estimator):
         return theta_2
 
     def _calculate_theta_3(self, r, d, b, q, d_out, d_in):
+        """
+        Calculating the 3rd WCC component.
+        """
         theta_3_left_enum = d_in*(d_in-1)*d
         theta_3_left_denom = theta_3_left_enum + d_out*(d_out-1)*self.omega+d_out*d_in*self.omega+self.eps
         theta_3_right_enum = d_in+d_out
