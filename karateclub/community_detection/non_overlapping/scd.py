@@ -1,9 +1,5 @@
-import math
-import random
-import community
 import networkx as nx
 from karateclub.estimator import Estimator
-from tqdm import tqdm
 
 class SCD(Estimator):
     r"""An implementation of `"SCD" <https://arxiv.org/abs/0709.2938>`_ from the
@@ -156,7 +152,7 @@ class SCD(Estimator):
         self._create_initial_partition()
         self._set_omega()
         self._set_nodes()
-        for _ in tqdm(range(self.iterations)):
+        for _ in range(self.iterations):
             self._do_refinement()
 
     def get_memberships(self):
