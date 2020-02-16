@@ -10,7 +10,7 @@ class LabelPropagation(Estimator):
 
     Args:
         seed (int): Random seed. Default is 42.
-        rounds (int): Propagation iterations. Default is 100.
+        iterations (int): Propagation iterations. Default is 100.
     """
     def __init__(self, seed=42, iterations=100):
         self.seed = seed
