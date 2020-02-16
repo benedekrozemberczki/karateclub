@@ -5,7 +5,9 @@ class SCD(Estimator):
     r"""An implementation of `"SCD" <https://arxiv.org/abs/0709.2938>`_ from the
     WWW '14 paper "High Quality, Scalable and Parallel Community Detection for 
     Large Real Graphs". The procedure greedily optimizes the approximate weighted
-    community clustering metric.
+    community clustering metric. First, clusters are built around highly clustered nodes.
+    Second, we refine the initial partition by using the approximate WCC. These refinements
+    happen for the whole vertex set.
 
     Args:
         iterations (int): Refinemeent iterations. Default is 25.
@@ -15,11 +17,15 @@ class SCD(Estimator):
         self.iterations = iterations
         self.eps = eps
 
-
     def _set_omega(self):
+        """
+        Calculating the graph level clustering coefficient.
+        """
         self.omega = nx.transitivity(self.graph)
 
     def _set_nodes(self):
+        """
+        """
         self.nodes = [node for node in self.graph.nodes()]
 
 
@@ -64,14 +70,14 @@ class SCD(Estimator):
             community_statistics[comm] = {"r":size, "d": density, "b": edge_out}
         return community_statistics
 
-    def calculate_theta_1(self, r, d, b, q, d_out, d_in):
+    def _calculate_theta_1(self, r, d, b, q, d_out, d_in):
         theta_1_enum = (r-1)*d+1+q
         theta_1_denom = (r+q)*((r-1)*(r-2)*(d**3)+(d_in-1)*d+q*(q-1)*(d+1)*self.omega+d_out*self.omega)+self.eps
         theta_1_multi = (d_in-1)*d
         theta_1 = (theta_1_enum / theta_1_denom)*theta_1_multi
         return theta_1
 
-    def calculate_theta_2(self, r, d, b, q):    
+    def _calculate_theta_2(self, r, d, b, q):    
         theta_2_left_enum = (r-1)*(r-2)*(d**3)
         theta_2_left_denom = theta_2_left_enum+q*(q-1)*self.omega+q*(r-1)*self.omega*d+self.eps
         theta_2_right_enum = (r-1)*d+q
@@ -79,7 +85,7 @@ class SCD(Estimator):
         theta_2 = -(theta_2_left_enum/theta_2_left_denom)*(theta_2_right_enum/theta_2_right_denom)
         return theta_2
 
-    def calculate_theta_3(self, r, d, b, q, d_out, d_in):
+    def _calculate_theta_3(self, r, d, b, q, d_out, d_in):
         theta_3_left_enum = d_in*(d_in-1)*d
         theta_3_left_denom = theta_3_left_enum + d_out*(d_out-1)*self.omega+d_out*d_in*self.omega+self.eps
         theta_3_right_enum = d_in+d_out
@@ -88,19 +94,18 @@ class SCD(Estimator):
         theta_3 = (theta_3_left_enum/theta_3_left_denom)*(theta_3_right_enum/theta_3_right_denom)
         return theta_3
 
-    def calculate_wcc(self, community_level_stats, d_out, d_in):
-
+    def _calculate_wcc(self, community_level_stats, d_out, d_in):
+        """
+        """
         r = community_level_stats["r"]
         d = community_level_stats["d"]
         b = community_level_stats["b"]
 
         q = (b-d_in)/r
 
-        theta_1 = self.calculate_theta_1(r, d, b, q, d_out, d_in)
-
-        theta_2 = self.calculate_theta_2(r, d, b, q)
-
-        theta_3 = self.calculate_theta_3(r, d, b, q, d_out, d_in)
+        theta_1 = self._calculate_theta_1(r, d, b, q, d_out, d_in)
+        theta_2 = self._calculate_theta_2(r, d, b, q)
+        theta_3 = self._calculate_theta_3(r, d, b, q, d_out, d_in)
 
         wcc = d_in*theta_1 + (r-d_in)*theta_2+theta_3
 
@@ -121,14 +126,14 @@ class SCD(Estimator):
             candidate_communities = [self.cluster_memberships[neighbor] for neighbor in neighbors]
             d_out = len(set(neighbors).difference(inverse_community_index[self.cluster_memberships[node]]))
             d_in = len(neighbors) - d_out
-            WCC_r = -self.calculate_wcc(community_level_stats, d_out, d_in)
+            WCC_r = -self._calculate_wcc(community_level_stats, d_out, d_in)
             WCC_t = 0
             best_community = None
             for comm in candidate_communities:
                  community_level_stats = community_statistics[comm]
                  d_out = len(set(neighbors).difference(inverse_community_index[comm]))
                  d_in = len(neighbors) - d_out
-                 WCC_aux = self.calculate_wcc(community_level_stats, d_out, d_in)+WCC_r
+                 WCC_aux = self._calculate_wcc(community_level_stats, d_out, d_in)+WCC_r
                  if WCC_aux > WCC_t:
                      WCC_t = WCC_aux
                      best_community = comm

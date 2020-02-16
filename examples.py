@@ -18,20 +18,15 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # SCD example
 #------------------------------------
 
-
 reader = GraphReader("twitch")
 
-g = reader.get_graph()
+g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
 model = SCD()
 
 model.fit(g)
 
-membs = model.get_memberships()
-
-print(community.modularity(membs,g))
-
-quit()
+model.get_memberships()
 
 #------------------------------------
 # Symm-NMF example
