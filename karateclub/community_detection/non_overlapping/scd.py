@@ -25,18 +25,23 @@ class SCD(Estimator):
 
     def _set_nodes(self):
         """
+        Creating a list of nodes.
         """
         self.nodes = [node for node in self.graph.nodes()]
 
-
     def _create_initial_partition(self):
+        """
+        Initial local clustering coefficient based cluster membership assignments.
+        """
         self.clustering_coefficient = nx.clustering(self.graph)
         self.cc_pairs = [(node_cc**0.5, node) for node, node_cc in self.clustering_coefficient.items()]
         self.cc_pairs = sorted(self.cc_pairs, key=lambda tup: tup[0])[::-1]
-        
         self._do_initial_assignments()
 
     def _do_initial_assignments(self):
+        """
+        Creating the cluster membership hash table.
+        """
         self.cluster_memberships = {}
         neighbor_memberships = {}
         cluster_index = 0 
