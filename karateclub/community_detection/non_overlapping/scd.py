@@ -116,6 +116,7 @@ class SCD(Estimator):
 
     def _calculate_wcc(self, community_level_stats, d_out, d_in):
         """
+        Calculating the WCC.
         """
         r = community_level_stats["r"]
         d = community_level_stats["d"]
