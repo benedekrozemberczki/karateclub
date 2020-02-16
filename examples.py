@@ -4,6 +4,7 @@ import networkx as nx
 
 import community
 import numpy as np
+from tqdm import tqdm
 
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
@@ -18,7 +19,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 #------------------------------------
 
 
-reader = GraphReader("wikipedia")
+reader = GraphReader("twitch")
 
 g = reader.get_graph()
 

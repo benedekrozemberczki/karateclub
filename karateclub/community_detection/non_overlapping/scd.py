@@ -1,7 +1,9 @@
 import math
 import random
+import community
 import networkx as nx
 from karateclub.estimator import Estimator
+from tqdm import tqdm
 
 class SCD(Estimator):
     r"""An implementation of `"SCD" <https://arxiv.org/abs/0709.2938>`_ from the
@@ -11,17 +13,25 @@ class SCD(Estimator):
 
     Args:
         seed (int): Random seed. Default is 42.
-        rounds (int): Propagation iterations. Default is 100.
+        rounds (int): Propagation iterations. Default is 50.
     """
-    def __init__(self, seed=42, iterations=100):
-        self.seed = seed
+    def __init__(self, iterations=25, eps=10**-6):
         self.iterations = iterations
+        self.eps = eps
+
+
+    def _set_omega(self):
+        self.omega = nx.transitivity(self.graph)
+
+    def _set_nodes(self):
+        self.nodes = [node for node in self.graph.nodes()]
 
 
     def _create_initial_partition(self):
         self.clustering_coefficient = nx.clustering(self.graph)
-        self.cc_pairs = [((node_cc**0.5)*self.graph.degree(node), node) for node, node_cc in self.clustering_coefficient.items()]
+        self.cc_pairs = [(node_cc**0.5, node) for node, node_cc in self.clustering_coefficient.items()]
         self.cc_pairs = sorted(self.cc_pairs, key=lambda tup: tup[0])[::-1]
+        
         self._do_initial_assignments()
 
     def _do_initial_assignments(self):
@@ -38,10 +48,103 @@ class SCD(Estimator):
                         neighbor_memberships[neighbor] = cluster_index
                 cluster_index = cluster_index + 1
 
-    def _do_refinement(self):
-        for node in self.nodes:
-            z = 2 
+    def _create_inverse_community_index(self):
+        inverse_community_index = {}
+        for node, cluster_membership in self.cluster_memberships.items():
+            if cluster_membership in inverse_community_index:
+                inverse_community_index[cluster_membership] = inverse_community_index[cluster_membership].union({node})
+            else:
+                inverse_community_index[cluster_membership] = {node}
+        return inverse_community_index
 
+
+    def _calculate_community_statistics(self, inverse_community_index):
+        community_statistics = {}
+        for comm, members in inverse_community_index.items():
+            induced_graph = self.graph.subgraph(members)
+            size = induced_graph.number_of_nodes()
+            density = nx.density(induced_graph)
+            edge_out = sum([0 if neighbor in induced_graph else 1 for node in members for neighbor in self.graph.neighbors(node)])
+            community_statistics[comm] = {"r":size, "d": density, "b": edge_out}
+        return community_statistics
+
+    def calculate_theta_1(self, r, d, b, q, d_out, d_in):
+        theta_1_enum = (r-1)*d+1+q
+        theta_1_denom = (r+q)*((r-1)*(r-2)*(d**3)+(d_in-1)*d+q*(q-1)*(d+1)*self.omega+d_out*self.omega)+self.eps
+        theta_1_multi = (d_in-1)*d
+        theta_1 = (theta_1_enum / theta_1_denom)*theta_1_multi
+        return theta_1
+
+    def calculate_theta_2(self, r, d, b, q):    
+        theta_2_left_enum = (r-1)*(r-2)*(d**3)
+        theta_2_left_denom = theta_2_left_enum+q*(q-1)*self.omega+q*(r-1)*self.omega*d+self.eps
+        theta_2_right_enum = (r-1)*d+q
+        theta_2_right_denom = (r+q)*(r-1+q)+self.eps
+        theta_2 = -(theta_2_left_enum/theta_2_left_denom)*(theta_2_right_enum/theta_2_right_denom)
+        return theta_2
+
+    def calculate_theta_3(self, r, d, b, q, d_out, d_in):
+        theta_3_left_enum = d_in*(d_in-1)*d
+        theta_3_left_denom = theta_3_left_enum + d_out*(d_out-1)*self.omega+d_out*d_in*self.omega+self.eps
+        theta_3_right_enum = d_in+d_out
+        theta_3_right_denom = r+d_out+self.eps
+
+        theta_3 = (theta_3_left_enum/theta_3_left_denom)*(theta_3_right_enum/theta_3_right_denom)
+        return theta_3
+
+    def calculate_wcc(self, community_level_stats, d_out, d_in):
+
+        r = community_level_stats["r"]
+        d = community_level_stats["d"]
+        b = community_level_stats["b"]
+
+        q = (b-d_in)/r
+
+        theta_1 = self.calculate_theta_1(r, d, b, q, d_out, d_in)
+
+        theta_2 = self.calculate_theta_2(r, d, b, q)
+
+        theta_3 = self.calculate_theta_3(r, d, b, q, d_out, d_in)
+
+        wcc = d_in*theta_1 + (r-d_in)*theta_2+theta_3
+
+        return wcc
+
+
+    def _find_community_index(self, community_statistics):
+        return max(community_statistics.keys())+1
+
+    def _do_refinement(self):
+        new_memberships = {}
+        inverse_community_index = self._create_inverse_community_index()
+        community_statistics = self._calculate_community_statistics(inverse_community_index)
+        community_index = self._find_community_index(community_statistics)
+        for node in self.nodes:
+            community_level_stats = community_statistics[self.cluster_memberships[node]]
+            neighbors = set([neighbor for neighbor in self.graph.neighbors(node)])
+            candidate_communities = [self.cluster_memberships[neighbor] for neighbor in neighbors]
+            d_out = len(set(neighbors).difference(inverse_community_index[self.cluster_memberships[node]]))
+            d_in = len(neighbors) - d_out
+            WCC_r = -self.calculate_wcc(community_level_stats, d_out, d_in)
+            WCC_t = 0
+            best_community = None
+            for comm in candidate_communities:
+                 community_level_stats = community_statistics[comm]
+                 d_out = len(set(neighbors).difference(inverse_community_index[comm]))
+                 d_in = len(neighbors) - d_out
+                 WCC_aux = self.calculate_wcc(community_level_stats, d_out, d_in)+WCC_r
+                 if WCC_aux > WCC_t:
+                     WCC_t = WCC_aux
+                     best_community = comm
+            if WCC_r > WCC_t and WCC_r > 0: 
+                new_memberships[node] = community_index
+                community_index = community_index + 1
+            elif WCC_t > WCC_r and WCC_t>0:
+                new_memberships[node] = best_community
+            else:
+                new_memberships[node] = self.cluster_memberships[node]
+        self.cluster_memberships = new_memberships
+        print(community.modularity(self.cluster_memberships,self.graph))
 
     def fit(self, graph):
         """
@@ -52,9 +155,9 @@ class SCD(Estimator):
         """
         self.graph = graph
         self._create_initial_partition()
-        self.nodes = [node for node in self.graph.nodes()]
-        for _ in range(self.iterations):
-            random.shuffle(self.nodes)
+        self._set_omega()
+        self._set_nodes()
+        for _ in tqdm(range(self.iterations)):
             self._do_refinement()
 
     def get_memberships(self):
