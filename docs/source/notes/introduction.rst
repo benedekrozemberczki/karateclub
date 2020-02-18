@@ -27,6 +27,7 @@ is implemented as a class which inherits from ``Estimator``. The constructors of
 default hyperparameters that work well out of the box. This means that non expert users do not have to make decisions about these in advance and only a little fine tuning is required. For each class the ``fit`` method provided learns the embedding or clustering of nodes/graphs in the ``NetworkX`` graph. This method takes the data used for learn the embedding or clustering. Models provide the additional public methods ``get_embedding``, ``get_memberships``, ``get_cluster_centers``. This API driven design means that one can create a ``DeepWalk`` embedding of a Watts-Strogatz graph just like this.
 
 .. code-block:: python
+
     import networkx as nx
     from karateclub import DeepWalk
     
@@ -39,6 +40,7 @@ default hyperparameters that work well out of the box. This means that non exper
 This can be modified to create a ``Walklets`` embedding with minimal effort like this.
 
 .. code-block:: python
+
     import networkx as nx
     from karateclub.node_embedding.neighbourhood import Walklets
     

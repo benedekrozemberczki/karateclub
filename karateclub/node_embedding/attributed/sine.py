@@ -6,10 +6,11 @@ from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
 class SINE(Estimator):
-    r"""An implementation of `"SINE" <https://shiruipan.github.io/publication/yang-binarized-2018/yang-binarized-2018.pdf>`_
-    from the ICDM '18 paper "Binarized Attributed Network Embedding Class". The 
-    procedure first calculates the truncated SVD of an adjacency - feature matrix
-    product. This matrix is further decomposed by a binary CCD based technique. 
+    r"""An implementation of `"SINE" <https://arxiv.org/pdf/1810.06768.pdf>`_
+    from the ICDM '18 paper "SINE: Scalable Incomplete Network Embedding". The 
+    procedure implicitly factorizes a joint adjacency matrix power and feature matrix.
+    The decomposition happens on truncated random walks and the adjacency matrix powers
+    are pooled together.
        
     Args:
         walk_number (int): Number of random walks. Default is 10.
