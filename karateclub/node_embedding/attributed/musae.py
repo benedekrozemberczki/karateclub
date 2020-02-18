@@ -11,7 +11,8 @@ class MUSAE(Estimator):
     procedure does attributed random walks to approximate the adjacency matrix power
     node feature matrix products. The matrices are decomposed implicitly by a Skip-Gram
     style optimizer. The individual embeddings are concatenated together to form a 
-    multi-scale attributed node embedding.
+    multi-scale attributed node embedding. This way the feature distributions at different scales
+    are separable.
        
     Args:
         walk_number (int): Number of random walks. Default is 5.
