@@ -52,6 +52,8 @@ Structural node embedding
 Attributed node embedding
 --------------------
 
+* Benedek Rozemberczki, Carl Allen, Rik Sarkar: **Multi-Scale Attributed Node Embedding** `Paper <https://arxiv.org/abs/1909.13021>`_, `Code <https://github.com/benedekrozemberczki/MUSAE>`_
+
 * Daokun Zhang, Jie Yin, Xingquan Zhu, Chengqi Zhang: **SINE: Scalable Incomplete Network Embedding** `Paper <https://arxiv.org/pdf/1810.06768.pdf>`_, `Code <https://github.com/benedekrozemberczki/SINE>`_
 
 * Hong Yang, Shirui Pan, Peng Zhang, Ling Chen, Defu Lian, Chengqi Zhang: **Binarized Attributed Network Embedding** `Paper <https://ieeexplore.ieee.org/document/8626170>`_, `Code <https://github.com/benedekrozemberczki/BANE>`_
