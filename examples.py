@@ -2,6 +2,7 @@
 
 import networkx as nx
 
+import random
 import community
 import numpy as np
 
