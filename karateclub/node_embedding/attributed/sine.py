@@ -45,9 +45,8 @@ class SINE(Estimator):
             for power in range(1,self.window_size+1): 
                 for step in range(power+1):
                     neighbors = [n for i, n in enumerate(walk[step:]) if i % power == 0]
-                    neighbors = [n for n in neighbors for _ in (0, 3)]
-                    #neighbors = [random.choice(self.features[val]) if i % 3 == 1 else val for i, val in enumerate(neighbors)]
-                    print(neighbors)
+                    neighbors = [n for n in neighbors for _ in range(0, 3)]
+                    neighbors = [random.choice(self.features[val]) if i % 3 == 1 else val for i, val in enumerate(neighbors)]
                     self.walklets.append(neighbors)
         del self.walker
         
@@ -64,8 +63,17 @@ class SINE(Estimator):
         self.walker.do_walks(graph)
         self.features = self._feature_transform(graph, X)
         self._select_walklets()
-        print(self.walklets)
 
+        model = Word2Vec(self.walklets,
+                         hs=0,
+                         alpha=self.learning_rate,
+                         iter=self.epochs,
+                         size=self.dimensions,
+                         window=1,
+                         min_count=self.min_count,
+                         workers=self.workers)
+
+        self.embedding = np.array([model[str(n)] for n in range(graph.number_of_nodes())])
 
     def get_embedding(self):
         r"""Getting the node embedding.
@@ -73,5 +81,5 @@ class SINE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = None
+        embedding = self.embedding
         return embedding
