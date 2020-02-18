@@ -31,11 +31,13 @@ shape = (100, 150)
 
 X = coo_matrix((data, (row, col)), shape=shape)
 
-model = SINE()
+model = MUSAE()
 
 model.fit(g, X)
 
 model.get_memberships()
+
+quit()
 
 #------------------------------------
 # SINE example
