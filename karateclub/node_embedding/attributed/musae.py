@@ -93,7 +93,7 @@ class MUSAE(Estimator):
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
-            * **X** *(Scipy COO array)* - The matrix of node features.
+            * **X** *(Scipy COO array)* - The binary matrix of node features.
         """
         self.graph = graph
         self.walker = RandomWalker(self.walk_length, self.walk_number)
