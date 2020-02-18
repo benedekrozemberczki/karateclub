@@ -23,7 +23,7 @@ class MUSAE(Estimator):
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurences. Default is 1.
     """
-    def __init__(self, walk_number=1, walk_length=10, dimensions=32, workers=4,
+    def __init__(self, walk_number=5, walk_length=80, dimensions=32, workers=4,
                  window_size=3, epochs=1, learning_rate=0.05, down_sampling=0.0001, min_count=1):
 
         self.walk_number = walk_number
