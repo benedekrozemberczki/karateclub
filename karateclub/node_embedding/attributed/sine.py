@@ -23,7 +23,7 @@ class SINE(Estimator):
         min_count (int): Minimal count of node occurences. Default is 1.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
-                 window_size=4, epochs=1, learning_rate=0.05, min_count=1):
+                 window_size=5, epochs=1, learning_rate=0.05, min_count=1):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
