@@ -89,7 +89,7 @@ class MUSAE(Estimator):
 
     def fit(self, graph, X):
         """
-        Fitting a SINE model.
+        Fitting a MUSAE model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
