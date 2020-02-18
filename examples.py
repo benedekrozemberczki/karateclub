@@ -22,6 +22,10 @@ g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
 model = SINE()
 
+model.fit(g, X)
+
+model.get_memberships()
+
 quit()
 
 #------------------------------------
