@@ -21,7 +21,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
 X = {i:random.sample(range(150),50) for i in range(100)}
-
+print(X)
 
 
 model = SINE()

@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from karateclub.estimator import Estimator
 
 class SINE(Estimator):
     r"""An implementation of `"SINE" <https://shiruipan.github.io/publication/yang-binarized-2018/yang-binarized-2018.pdf>`_
