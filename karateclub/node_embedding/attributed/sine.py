@@ -12,12 +12,14 @@ class SINE(Estimator):
     product. This matrix is further decomposed by a binary CCD based technique. 
        
     Args:
-        dimensions (int): Number of embedding dimensions. Default is 32.
-        svd_iterations (int): SVD iteration count. Default is 20.
-        seed (int): Random seed. Default is 42.
-        alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
-        iterations (int): Matrix decomposition iterations. Default is 100.
-        binarization_iterations (int): Binarization iterations. Default is 20.
+        walk_number (int): Number of random walks. Default is 10.
+        walk_length (int): Length of random walks. Default is 80.
+        dimensions (int): Dimensionality of embedding. Default is 32.
+        workers (int): Number of cores. Default is 4.
+        window_size (int): Matrix power order. Default is 4.
+        epochs (int): Number of epochs. Default is 1.
+        learning_rate (float): HogWild! learning rate. Default is 0.05.
+        min_count (int): Minimal count of node occurences. Default is 1.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=32, workers=4,
                  window_size=4, epochs=1, learning_rate=0.05, min_count=1):
