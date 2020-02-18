@@ -104,6 +104,9 @@ In detail, the following community detection and embedding methods were implemen
 
 **Attributed Node Level Embedding**
 
+* **[SINE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.sine.SINE)** from Zhang *et al.*: [SINE: Scalable Incomplete Network Embedding](https://arxiv.org/pdf/1810.06768.pdf) (ICDM 2018)
+
+
 * **[BANE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.bane.BANE)** from Yang *et al.*: [Binarized Attributed Network Embedding](https://ieeexplore.ieee.org/document/8626170) (ICDM 2018)
 
 * **[TENE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tene.TENE)** from Yang *et al.*: [Enhanced Network Embedding with Text Information](https://ieeexplore.ieee.org/document/8545577) (ICPR 2018)
