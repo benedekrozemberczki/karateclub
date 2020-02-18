@@ -5,6 +5,7 @@ import networkx as nx
 import random
 import community
 import numpy as np
+from scipy.sparse import coo_matrix
 
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
@@ -22,8 +23,13 @@ from karateclub.dataset import GraphReader, GraphSetReader
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
 X = {i:random.sample(range(150),50) for i in range(100)}
-print(X)
 
+row = np.array([k for k, v in X.items() for val in v])
+col = np.array([val for k, v in X.items() for val in v])
+data = np.ones(100*50)
+shape = (100, 150)
+
+X = coo_matrix((data, (row, col)), shape=shape)
 
 model = SINE()
 
