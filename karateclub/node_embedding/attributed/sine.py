@@ -15,14 +15,14 @@ class SINE(Estimator):
     Args:
         walk_number (int): Number of random walks. Default is 10.
         walk_length (int): Length of random walks. Default is 80.
-        dimensions (int): Dimensionality of embedding. Default is 32.
+        dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 4.
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurences. Default is 1.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=32, workers=4,
+    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
                  window_size=4, epochs=1, learning_rate=0.05, min_count=1):
 
         self.walk_number = walk_number
