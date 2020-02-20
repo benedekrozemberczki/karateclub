@@ -15,7 +15,7 @@ class MUSAE(Estimator):
     are separable.
        
     Args:
-        walk_number (int): Number of random walks. Default is 5.
+        walk_number (int): Number of random walks. Default is 10.
         walk_length (int): Length of random walks. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 32.
         workers (int): Number of cores. Default is 4.
@@ -26,7 +26,7 @@ class MUSAE(Estimator):
         min_count (int): Minimal count of node occurences. Default is 1.
     """
     def __init__(self, walk_number=5, walk_length=80, dimensions=32, workers=4,
-                 window_size=3, epochs=1, learning_rate=0.05, down_sampling=0.0001, min_count=1):
+                 window_size=3, epochs=5, learning_rate=0.05, down_sampling=0.0001, min_count=1):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -72,8 +72,8 @@ class MUSAE(Estimator):
             for i in range(len(walk)-approximation):
                 source = walk[i]
                 target = walk[i+approximation]
-                features[str(source)].append(self.features[str(target)])
-                features[str(target)].append(self.features[str(source)])
+                features[str(source)].append(self.features[str(target)] + [str(target)])
+                features[str(target)].append(self.features[str(source)] + [str(source)])
 
         return self._create_documents(features)
 
