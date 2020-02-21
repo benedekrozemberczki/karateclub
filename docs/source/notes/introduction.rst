@@ -22,6 +22,8 @@ If you find *Karate Club* useful in your research, please consider citing the fo
        howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
        }
 
+Overview
+=======================
 --------------------------------------------------------------------------------
 
 We shortly overview the fundamental concepts and features of Karate Club through simple examples. These are the following:
