@@ -13,12 +13,12 @@ Introduction by example
 If you find *Karate Club* useful in your research, please consider citing the following paper:
 
 
->@misc{rozemberczki2020karateclub,   
-       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},  
-       author = {Benedek Rozemberczki and Rik Sarkar},   
-       year = {2020},   
-       publisher = {GitHub},
-       journal = {GitHub repository},  
+>@misc{rozemberczki2020karateclub,   :raw-html:`<br />`
+       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},  :raw-html:`<br />`
+       author = {Benedek Rozemberczki and Rik Sarkar},   :raw-html:`<br />`
+       year = {2020},   :raw-html:`<br />`
+       publisher = {GitHub},:raw-html:`<br />`
+       journal = {GitHub repository},  :raw-html:`<br />`
        howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
        }
 
