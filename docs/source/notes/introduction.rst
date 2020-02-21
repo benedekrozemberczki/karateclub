@@ -1,6 +1,29 @@
 Introduction by example
 =======================
 
+*Karate Club* is an unsupervised machine learning extension library for [NetworkX](https://networkx.github.io/).
+
+
+*Karate Club* consists of state-of-the-art methods to do unsupervised learning on graph structured data. To put it simply it is a Swiss Army knife for small-scale graph mining research. First, it provides network embedding techniques at the node and graph level. Second, it includes a variety of overlapping and non-overlapping community detection methods. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences, workshops, and pieces from prominent journals.  
+
+--------------------------------------------------------------------------------
+
+**Citing**
+
+If you find *Karate Club* useful in your research, please consider citing the following paper:
+
+```bibtex
+>@misc{rozemberczki2020karateclub,    
+       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},   
+       author = {Benedek Rozemberczki and Rik Sarkar},   
+       year = {2020},   
+       publisher = {GitHub},   
+       journal = {GitHub repository},   
+       howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
+       }
+```
+--------------------------------------------------------------------------------
+
 We shortly overview the fundamental concepts and features of Karate Club through simple examples. These are the following:
 
 .. contents::
