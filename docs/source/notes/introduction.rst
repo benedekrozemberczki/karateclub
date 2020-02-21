@@ -12,16 +12,23 @@ Introduction by example
 
 If you find *Karate Club* useful in your research, please consider citing the following paper:
 
-```bibtex
->@misc{rozemberczki2020karateclub,    
-       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},   
+
+>@misc{rozemberczki2020karateclub,   
+ 
+       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},  
+ 
        author = {Benedek Rozemberczki and Rik Sarkar},   
+
        year = {2020},   
-       publisher = {GitHub},   
-       journal = {GitHub repository},   
+
+       publisher = {GitHub},
+   
+       journal = {GitHub repository},  
+ 
        howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
+
        }
-```
+
 --------------------------------------------------------------------------------
 
 We shortly overview the fundamental concepts and features of Karate Club through simple examples. These are the following:
