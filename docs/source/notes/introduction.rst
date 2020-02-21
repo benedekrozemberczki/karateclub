@@ -11,16 +11,15 @@ Introduction by example
 **Citing**
 
 If you find *Karate Club* useful in your research, please consider citing the following paper:
-.. role:: raw-html(raw)
-   :format: html
-   >@misc{rozemberczki2020karateclub,   :raw-html:`<br />`
-       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},  :raw-html:`<br />`
-       author = {Benedek Rozemberczki and Rik Sarkar},   :raw-html:`<br />`
-       year = {2020},   :raw-html:`<br />`
-       publisher = {GitHub},:raw-html:`<br />`
-       journal = {GitHub repository},  :raw-html:`<br />`
-       howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
-       }
+
+
+   >@misc{rozemberczki2020karateclub,  |br|
+       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},|br|
+       author = {Benedek Rozemberczki and Rik Sarkar},|br|
+       year = {2020},|br|
+       publisher = {GitHub},|br|
+       journal = {GitHub repository},|br|
+       howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}}
 
 Overview
 =======================
