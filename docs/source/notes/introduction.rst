@@ -13,6 +13,7 @@ Introduction by example
 If you find *Karate Club* useful in your research, please consider citing the following paper:
 
 .. code-block:: latex
+
    >@misc{rozemberczki2020karateclub,
        title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},
        author = {Benedek Rozemberczki and Rik Sarkar},
