@@ -51,8 +51,7 @@ class EdMot(Estimator):
         Filling the dense blocks of the adjacency matrix.
         """
         new_edges = [(n_1, n_2) for nodes in self.blocks for n_1 in nodes for n_2 in nodes if n_1!= n_2]
-        new_graph = nx.from_edgelist(new_edges)
-        self.graph = nx.disjoint_union(self.graph, new_graph)
+        self.graph.add_edges_from(new_edges)  
 
     def fit(self, graph):
         """
