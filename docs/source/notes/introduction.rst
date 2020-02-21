@@ -11,9 +11,9 @@ Introduction by example
 **Citing**
 
 If you find *Karate Club* useful in your research, please consider citing the following paper:
-
-
->@misc{rozemberczki2020karateclub,   :raw-html:`<br />`
+.. role:: raw-html(raw)
+   :format: html
+   >@misc{rozemberczki2020karateclub,   :raw-html:`<br />`
        title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},  :raw-html:`<br />`
        author = {Benedek Rozemberczki and Rik Sarkar},   :raw-html:`<br />`
        year = {2020},   :raw-html:`<br />`
