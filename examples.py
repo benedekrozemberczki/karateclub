@@ -15,24 +15,13 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE,
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
-
-#------------------------------------
-# Edmot example
-#------------------------------------
-
-g = nx.newman_watts_strogatz_graph(100, 10, 0.1)
-
-model = EdMot(3, 4)
-
-model.fit(g)
-
 #------------------------------------
 # MUSAE example
 #------------------------------------
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
-X = {i:random.sample(range(150),50) for i in range(100)}
+X = {i: random.sample(range(150),50) for i in range(100)}
 
 row = np.array([k for k, v in X.items() for val in v])
 col = np.array([val for k, v in X.items() for val in v])
@@ -53,7 +42,7 @@ model.get_memberships()
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
-X = {i:random.sample(range(150),50) for i in range(100)}
+X = {i: random.sample(range(150),50) for i in range(100)}
 
 row = np.array([k for k, v in X.items() for val in v])
 col = np.array([val for k, v in X.items() for val in v])
