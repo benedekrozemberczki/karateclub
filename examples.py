@@ -30,7 +30,6 @@ model = NetLSD()
 model.fit(graphs)
 model.get_embedding()
 
-
 #------------------------------------
 # MUSAE example
 #------------------------------------

@@ -28,11 +28,11 @@ class SF(Estimator):
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
         if number_of_nodes <= self.dimensions:
-            embedding = eigsh(L_tilde, k=number_of_nodes-1, which='SM', return_eigenvectors=False)
+            embedding = eigsh(L_tilde, k=number_of_nodes-1, which='LM', return_eigenvectors=False)
             shape_diff = self.dimensions - embedding.shape[0] - 1
             embedding = np.pad(embedding, (1, shape_diff), 'constant', constant_values=0)
         else:
-            embedding = eigsh(L_tilde, k=self.dimensions, which='SM', return_eigenvectors=False)
+            embedding = eigsh(L_tilde, k=self.dimensions, which='LM', return_eigenvectors=False)
         return embedding
 
     def fit(self, graphs):
