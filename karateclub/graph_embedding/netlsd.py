@@ -26,6 +26,26 @@ class NetLSD(Estimator):
         heat_kernel_trace = heat_kernel_trace / nodes
         return heat_kernel_trace
 
+    def _updown_linear_approx(self, eigvals_lower, eigvals_upper, nv):
+        nal = len(eigvals_lower)
+        nau = len(eigvals_upper)
+        ret = np.zeros(nv)
+        ret[:nal] = eigvals_lower
+        ret[-nau:] = eigvals_upper
+        ret[nal-1:-nau+1] = np.linspace(eigvals_lower[-1], eigvals_upper[0], nv-nal-nau+2)
+        return ret
+
+    def _eigenvalues_auto(self, mat):
+        n_approx = 10
+        nv = mat.shape[0]
+        if 2*n_approx < nv:
+            lo_eivals = sps.linalg.eigsh(mat, n_approx, which='SM', return_eigenvectors=False)[::-1]
+            up_eivals = sps.linalg.eigsh(mat, n_approx, which='LM', return_eigenvectors=False)
+            return self._updown_linear_approx(lo_eivals, up_eivals, nv)
+        else:
+            return sp.linalg.eigsh(mat, nv, which='SM', return_eigenvectors=False)
+
+
     def _calculate_netlsd(self, graph):
         """
         Calculating the features of a graph.
