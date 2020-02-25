@@ -14,9 +14,9 @@ class NetLSD(Estimator):
         scale_min (int): Time scale interval minimum. Default is -2.0.
         scale_max (int): Time scale interval maximum. Default is 2.0.
         scale_steps (int): Number of steps in time scale. Default is 250.
-        scale_approximations (int): Number of eigenvalue approximations. Default is 50.
+        scale_approximations (int): Number of eigenvalue approximations. Default is 200.
     """
-    def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=50):
+    def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=200):
         self.scale_min = scale_min
         self.scale_max = scale_max
         self.scale_steps = scale_steps
@@ -71,12 +71,12 @@ class NetLSD(Estimator):
             * **eigenvalues** *(Numpy array)* - The eigenvalues of the graph.
         """
         number_of_nodes = laplacian_matrix.shape[0]
-        if 2*self.approximations+2 < number_of_nodes:
-            lower_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="SM", return_eigenvectors=False, mode="cayley")[::-1]
-            upper_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="LM", return_eigenvectors=False, mode="cayley")
+        if 2*self.approximations< number_of_nodes:
+            lower_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="SM", ncv=3*self.approximations, return_eigenvectors=False)[::-1]
+            upper_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="LM", ncv=3*self.approximations, return_eigenvectors=False)
             eigenvalues = self._updown_linear_approx(lower_eigenvalues, upper_eigenvalues, number_of_nodes)
         else:
-            eigenvalues = sps.linalg.eigsh(laplacian_matrix, number_of_nodes-1, which="SM", return_eigenvectors=False, mode="cayley")
+            eigenvalues = sps.linalg.eigsh(laplacian_matrix, number_of_nodes-2, which="LM", return_eigenvectors=False)
         return eigenvalues
 
 
@@ -90,9 +90,9 @@ class NetLSD(Estimator):
         Return types:
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
-        graph.remove_edges_from(nx.selfloop_edges(graph))
-        normalized_laplacian = sps.coo_matrix(nx.normalized_laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())))
-        eigen_values = self._calculate_eigenvalues(normalized_laplacian)
+        graph.add_edges_from(nx.selfloop_edges(graph))
+        laplacian = sps.coo_matrix(nx.laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())), dtype=np.float32)
+        eigen_values = self._calculate_eigenvalues(laplacian)
         heat_kernel_trace = self._calculate_heat_kernel_trace(eigen_values)
         return heat_kernel_trace
 
