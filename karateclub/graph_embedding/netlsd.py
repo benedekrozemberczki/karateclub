@@ -90,8 +90,8 @@ class NetLSD(Estimator):
         Return types:
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
-        graph.add_edges_from(nx.selfloop_edges(graph))
-        laplacian = sps.coo_matrix(nx.laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())), dtype=np.float32)
+        graph.remove_edges_from(nx.selfloop_edges(graph))
+        laplacian = sps.coo_matrix(nx.normalized_laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())), dtype=np.float32)
         eigen_values = self._calculate_eigenvalues(laplacian)
         heat_kernel_trace = self._calculate_heat_kernel_trace(eigen_values)
         return heat_kernel_trace
