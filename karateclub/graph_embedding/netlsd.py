@@ -17,8 +17,6 @@ class NetLSD(Estimator):
         self.hist_bins = hist_bins
         self.hist_range = (0, hist_range)
 
-
-
     def _calculate_heat_kernel_trace(self, eivals):
         timescales = np.logspace(-2, 2, 250)
         nodes = eivals.shape[0]
@@ -38,9 +36,9 @@ class NetLSD(Estimator):
         Return types:
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
-        mat = sps.coo_matrix(nx.normalized_laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())))
-        eivals = eigenvalues_auto(mat)
-        heat_kernel_trace = self._calculat_heat_kernel_trace(eivals)
+        normalized_laplacian = sps.coo_matrix(nx.normalized_laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())))
+        eigen_values = self._calculate_eigenvalues_auto(normalized_laplacian)
+        heat_kernel_trace = self._calculat_heat_kernel_trace(eigen_values)
         return heat_kernel_trace
 
     def fit(self, graphs):
