@@ -74,7 +74,7 @@ class NetLSD(Estimator):
         if 2*self.approximations+2 < number_of_nodes:
             lower_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="SM", return_eigenvectors=False, mode="cayley")[::-1]
             upper_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="LM", return_eigenvectors=False, mode="cayley")
-            eigenvalues = self._updown_linear_approx(lower_eigenvalues, upper_eigenvalues, nv)
+            eigenvalues = self._updown_linear_approx(lower_eigenvalues, upper_eigenvalues, number_of_nodes)
         else:
             eigenvalues = sps.linalg.eigsh(laplacian_matrix, number_of_nodes-1, which="SM", return_eigenvectors=False, mode="cayley")
         return eigenvalues
