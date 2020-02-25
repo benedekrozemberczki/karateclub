@@ -10,7 +10,7 @@ from scipy.sparse import coo_matrix
 from karateclub.node_embedding.neighbourhood import GraRep, DeepWalk, Walklets, NMFADMM, Diff2Vec, BoostNE, NetMF
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD
-from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF
+from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
@@ -22,7 +22,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
-model = SF()
+model = NetLSD()
 
 model.fit(graphs)
 model.get_embedding()
