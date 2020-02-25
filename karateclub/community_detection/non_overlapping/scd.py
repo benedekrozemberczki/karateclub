@@ -2,7 +2,7 @@ import networkx as nx
 from karateclub.estimator import Estimator
 
 class SCD(Estimator):
-    r"""An implementation of `"SCD" <https://arxiv.org/abs/0709.2938>`_ from the
+    r"""An implementation of `"SCD" <http://wwwconference.org/proceedings/www2014/proceedings/p225.pdf>`_ from the
     WWW '14 paper "High Quality, Scalable and Parallel Community Detection for 
     Large Real Graphs". The procedure greedily optimizes the approximate weighted
     community clustering metric. First, clusters are built around highly clustered nodes.
