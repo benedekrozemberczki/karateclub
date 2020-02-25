@@ -120,6 +120,10 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[GL2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.gl2vec.GL2Vec)** from Chen and Koga: [GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICONIP 2019)
 
+
+* **[NetLSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.netlsd.NetLSD)** from Tsitsulin *et al.*: [NetLSD: Hearing the Shape of a Graph](https://arxiv.org/abs/1805.10712) (KDD 2018)
+
+
 * **[SF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.sf.SF)** from de Lara and Pineau: [A Simple Baseline Algorithm for Graph Classification](https://arxiv.org/abs/1810.09155) (NeurIPS RRL Workshop 2018) 
 
 * **[FGSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.fgsd.FGSD)** from Verma and Zhang: [Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs](https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs.pdf) (NeurIPS 2017)
