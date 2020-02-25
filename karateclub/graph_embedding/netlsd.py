@@ -5,7 +5,7 @@ from karateclub.estimator import Estimator
 
 class NetLSD(Estimator):
     r"""An implementation of `"NetLSD" <https://arxiv.org/abs/1805.10712>`_
-    from the NeurIPS '17 paper "Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs".
+    from the KDD '18 paper "NetLSD: Hearing the Shape of a Graph".
     The procedure calculates the Moore-Penrose spectrum of the normalized Laplacian.
     Using this spectrum the histogram of the spectral features is used as a whole graph representation. 
 
