@@ -1,7 +1,6 @@
 import numpy as np
 import networkx as nx
 import scipy.sparse as sps
-from tqdm import tqdm
 from karateclub.estimator import Estimator
 
 class NetLSD(Estimator):
@@ -15,7 +14,6 @@ class NetLSD(Estimator):
         hist_range (int): Histogram range considered. Default is 20.
     """
     def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=50):
-
         self.scale_min = scale_min
         self.scale_max = scale_max
         self.scale_steps = scale_steps
@@ -61,7 +59,6 @@ class NetLSD(Estimator):
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
         graph.remove_edges_from(nx.selfloop_edges(graph))
-        print(nx.number_of_nodes(graph))
         normalized_laplacian = sps.coo_matrix(nx.normalized_laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())))
         eigen_values = self._calculate_eigenvalues(normalized_laplacian)
         heat_kernel_trace = self._calculate_heat_kernel_trace(eigen_values)
@@ -74,7 +71,7 @@ class NetLSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        self._embedding = [self._calculate_netlsd(graph) for graph in tqdm(graphs)]
+        self._embedding = [self._calculate_netlsd(graph) for graph in graphs]
 
 
     def get_embedding(self):
