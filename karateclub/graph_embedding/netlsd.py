@@ -52,13 +52,13 @@ class NetLSD(Estimator):
         Return types:
             * **eigenvalues** *(Numpy array)* - The eigenvalues of the graph.
         """
-        nal = len(eigvalues_lower)
-        nau = len(eigvalues_upper)
-        eigvalues = np.zeros(number_of_nodes)
-        eigvalues[:nal] = eigenvalues_lower
-        eigvalues[-nau:] = eigenvalues_upper
-        eigvalues[nal-1:-nau+1] = np.linspace(eigenvalues_lower[-1], eigenvalues_upper[0], number_of_nodes-nal-nau+2)
-        return eigvalues
+        nal = len(eigenvalues_lower)
+        nau = len(eigenvalues_upper)
+        eigenvalues = np.zeros(number_of_nodes)
+        eigenvalues[:nal] = eigenvalues_lower
+        eigenvalues[-nau:] = eigenvalues_upper
+        eigenvalues[nal-1:-nau+1] = np.linspace(eigenvalues_lower[-1], eigenvalues_upper[0], number_of_nodes-nal-nau+2)
+        return eigenvalues
 
     def _calculate_eigenvalues(self, laplacian_matrix):
         """
