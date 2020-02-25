@@ -22,32 +22,62 @@ class NetLSD(Estimator):
         self.scale_steps = scale_steps
         self.approximations = approximations
    
-    def _calculate_heat_kernel_trace(self, eivals):
+    def _calculate_heat_kernel_trace(self, eigenvalues):
+        """
+        Calculating the heat kernel trace of the normalized Laplacian.
+
+        Arg types:
+            * **eigenvalues** *(Numpy array)* - The eigenvalues of the graph.
+
+        Return types:
+            * **heat_kernel_trace** *(Numpy array)* - The heat kernel trace of the graph.
+        """
         timescales = np.logspace(self.scale_min, self.scale_max, self.scale_steps)
-        nodes = eivals.shape[0]
+        nodes = eigenvalues.shape[0]
         heat_kernel_trace = np.zeros(timescales.shape)
         for idx, t in enumerate(timescales):
-            heat_kernel_trace[idx] = np.sum(np.exp(-t * eivals))
+            heat_kernel_trace[idx] = np.sum(np.exp(-t * eigenvalues))
         heat_kernel_trace = heat_kernel_trace / nodes
         return heat_kernel_trace
 
-    def _updown_linear_approx(self, eigvals_lower, eigvals_upper, nv):
-        nal = len(eigvals_lower)
-        nau = len(eigvals_upper)
-        ret = np.zeros(nv)
-        ret[:nal] = eigvals_lower
-        ret[-nau:] = eigvals_upper
-        ret[nal-1:-nau+1] = np.linspace(eigvals_lower[-1], eigvals_upper[0], nv-nal-nau+2)
-        return ret
+    def _updown_linear_approx(self, eigenvalues_lower, eigenvalues_upper, number_of_nodes):
+        """
+        Approximating the eigenvalues of the normalized Laplacian.
 
-    def _calculate_eigenvalues(self, mat):
-        nv = mat.shape[0]
-        if 2*self.approximations + 2< nv:
-            lo_eivals = sps.linalg.eigsh(mat, self.approximations, which="SM", return_eigenvectors=False, mode="cayley")[::-1]
-            up_eivals = sps.linalg.eigsh(mat, self.approximations, which="LM", return_eigenvectors=False, mode="cayley")
-            return self._updown_linear_approx(lo_eivals, up_eivals, nv)
+        Arg types:
+            * **eigenvalues_lower** *(Numpy array)* - The smallest eigenvalues of the graph.
+            * **eigenvalues_upper** *(Numpy array)* - The largest eigenvalues of the graph.
+            * **number_of_nodes** *(int)* - The number of nodes in the graph.
+
+        Return types:
+            * **eigenvalues** *(Numpy array)* - The eigenvalues of the graph.
+        """
+        nal = len(eigvalues_lower)
+        nau = len(eigvalues_upper)
+        eigvalues = np.zeros(number_of_nodes)
+        eigvalues[:nal] = eigvalues_lower
+        eigvalues[-nau:] = eigvalues_upper
+        eigvalues[nal-1:-nau+1] = np.linspace(eigvalues_lower[-1], eigvalues_upper[0], number_of_nodes-nal-nau+2)
+        return eigvalues
+
+    def _calculate_eigenvalues(self, laplacian_matrix):
+        """
+        Calculating the eigenvalues of the normalized Laplacian.
+
+        Arg types:
+            * **laplacian_matrix** *(SciPy COO matrix)* - The graph to be decomposed.
+
+        Return types:
+            * **eigenvalues** *(Numpy array)* - The eigenvalues of the graph.
+        """
+        number_of_nodes = laplacian_matrix.shape[0]
+        if 2*self.approximations+2 < number_of_nodes:
+            lower_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="SM", return_eigenvectors=False, mode="cayley")[::-1]
+            upper_eigenvalues = sps.linalg.eigsh(laplacian_matrix, self.approximations, which="LM", return_eigenvectors=False, mode="cayley")
+            eigenvalues = self._updown_linear_approx(lower_eigenvalues, upper_eigenvalues, nv)
         else:
-            return sps.linalg.eigsh(mat, nv-1, which="SM", return_eigenvectors=False)
+            eigenvalues = sps.linalg.eigsh(laplacian_matrix, number_of_nodes-1, which="SM", return_eigenvectors=False, mode="cayley")
+        return eigenvalues
 
 
     def _calculate_netlsd(self, graph):
