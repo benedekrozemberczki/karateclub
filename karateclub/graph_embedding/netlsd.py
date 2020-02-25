@@ -11,10 +11,10 @@ class NetLSD(Estimator):
     of the eigenvalues. 
 
     Args:
-        scale_min (int): Number of histogram bins. Default is -2.0.
-        scale_max (int): Histogram range considered. Default is 2.0.
-        scale_steps (int): Histogram range considered. Default is 250.
-        scale_approximations (int): Histogram range considered. Default is 50.
+        scale_min (int): Time scale interval minimum. Default is -2.0.
+        scale_max (int): Time scale interval maximum. Default is 2.0.
+        scale_steps (int): Number of steps in time scale. Default is 250.
+        scale_approximations (int): Number of eigenvalue approximations. Default is 50.
     """
     def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=50):
         self.scale_min = scale_min
