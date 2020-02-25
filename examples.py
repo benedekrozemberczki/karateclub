@@ -15,18 +15,34 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE,
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
+from sklearn.metrics import roc_auc_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 #-----------------------------------
 # NetLSD example
 #-----------------------------------
 
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+reader = GraphSetReader()
+graphs = reader.get_graphs()
+
+target = reader.get_target()
 
 model = NetLSD()
 
-model.fit(graphs)
-model.get_embedding()
+graphs = graphs
+y = target
 
+model.fit(graphs)
+X = model.get_embedding()
+
+for i in range(10):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=i)
+    downstream_model = LogisticRegression(random_state=i,solver ="saga").fit(X_train, y_train)
+    y_hat = downstream_model.predict_proba(X_test)[:, 1]
+    auc = roc_auc_score(y_test, y_hat)
+    print(auc)
+   
 
 quit()
 
