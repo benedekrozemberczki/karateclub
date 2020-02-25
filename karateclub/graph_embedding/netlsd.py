@@ -21,7 +21,6 @@ class NetLSD(Estimator):
         self.scale_steps = scale_steps
         self.approximations = approximations
    
-
     def _calculate_heat_kernel_trace(self, eivals):
         timescales = np.logspace(self.scale_min, self.scale_max, self.scale_steps)
         nodes = eivals.shape[0]
