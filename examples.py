@@ -15,6 +15,21 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE,
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
+#-----------------------------------
+# NetLSD example
+#-----------------------------------
+
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+model = SF()
+
+model.fit(graphs)
+model.get_embedding()
+
+
+quit()
+
 #------------------------------------
 # MUSAE example
 #------------------------------------
