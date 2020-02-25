@@ -17,7 +17,18 @@ class NetLSD(Estimator):
         self.hist_bins = hist_bins
         self.hist_range = (0, hist_range)
 
-    def _calculate_fgsd(self, graph):
+
+
+    def _calculate_heat_kernel_trace(self, eivals):
+        timescales = np.logspace(-2, 2, 250)
+        nodes = eivals.shape[0]
+        heat_kernel_trace = np.zeros(timescales.shape)
+        for idx, t in enumerate(timescales):
+            heat_kernel_trace[idx] = np.sum(np.exp(-t * eivals))
+        heat_kernel_trace = heat_kernel_trace / nodes
+        return heat_kernel_trace
+
+    def _calculate_netlsd(self, graph):
         """
         Calculating the features of a graph.
 
@@ -27,14 +38,10 @@ class NetLSD(Estimator):
         Return types:
             * **hist** *(Numpy array)* - The embedding of a single graph.
         """
-        L = nx.normalized_laplacian_matrix(graph).todense()
-        fL = np.linalg.pinv(L)
-        ones = np.ones(L.shape[0])
-        S = np.outer(np.diag(fL), ones)+np.outer(ones, np.diag(fL))-2*fL
-        hist, bin_edges = np.histogram(S.flatten(),
-                                       bins=self.hist_bins,
-                                       range=self.hist_range)
-        return hist
+        mat = sps.coo_matrix(nx.normalized_laplacian_matrix(graph, nodelist = range(graph.number_of_nodes())))
+        eivals = eigenvalues_auto(mat)
+        heat_kernel_trace = self._calculat_heat_kernel_trace(eivals)
+        return heat_kernel_trace
 
     def fit(self, graphs):
         """
@@ -43,7 +50,7 @@ class NetLSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
+        self._embedding = [self._calculate_netlsd(graph) for graph in graphs]
 
 
     def get_embedding(self):
