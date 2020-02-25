@@ -5,9 +5,10 @@ from karateclub.estimator import Estimator
 
 class NetLSD(Estimator):
     r"""An implementation of `"NetLSD" <https://arxiv.org/abs/1805.10712>`_
-    from the KDD '18 paper "NetLSD: Hearing the Shape of a Graph".
-    The procedure calculates the Moore-Penrose spectrum of the normalized Laplacian.
-    Using this spectrum the histogram of the spectral features is used as a whole graph representation. 
+    from the KDD '18 paper "NetLSD: Hearing the Shape of a Graph". The procedure
+    calculate the heat kernel trace of the normalized Laplacian matrix over a
+    vector of time scales. If the matrix is large it switches to an approximation
+    of the eigenvalues. 
 
     Args:
         scale_min (int): Number of histogram bins. Default is -2.0.
