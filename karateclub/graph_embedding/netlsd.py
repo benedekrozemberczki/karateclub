@@ -10,8 +10,10 @@ class NetLSD(Estimator):
     Using this spectrum the histogram of the spectral features is used as a whole graph representation. 
 
     Args:
-        hist_bins (int): Number of histogram bins. Default is 200.
-        hist_range (int): Histogram range considered. Default is 20.
+        scale_min (int): Number of histogram bins. Default is -2.0.
+        scale_max (int): Histogram range considered. Default is 2.0.
+        scale_steps (int): Histogram range considered. Default is 250.
+        scale_approximations (int): Histogram range considered. Default is 50.
     """
     def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=50):
         self.scale_min = scale_min
