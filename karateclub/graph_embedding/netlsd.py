@@ -55,9 +55,9 @@ class NetLSD(Estimator):
         nal = len(eigvalues_lower)
         nau = len(eigvalues_upper)
         eigvalues = np.zeros(number_of_nodes)
-        eigvalues[:nal] = eigvalues_lower
-        eigvalues[-nau:] = eigvalues_upper
-        eigvalues[nal-1:-nau+1] = np.linspace(eigvalues_lower[-1], eigvalues_upper[0], number_of_nodes-nal-nau+2)
+        eigvalues[:nal] = eigenvalues_lower
+        eigvalues[-nau:] = eigenvalues_upper
+        eigvalues[nal-1:-nau+1] = np.linspace(eigenvalues_lower[-1], eigenvalues_upper[0], number_of_nodes-nal-nau+2)
         return eigvalues
 
     def _calculate_eigenvalues(self, laplacian_matrix):
