@@ -13,12 +13,22 @@ from karateclub.community_detection.non_overlapping import EdMot, LabelPropagati
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
+from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
-from sklearn.metrics import roc_auc_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 
+#--------------
+# NEU example
+#--------------
+
+g = nx.newman_watts_strogatz_graph(100000, 20, 0.05)
+
+model = NetMF()
+
+meta_model = NEU()
+
+meta_model.fit(g, model)
+quit()
 #-----------------------------------
 # NetLSD example
 #-----------------------------------

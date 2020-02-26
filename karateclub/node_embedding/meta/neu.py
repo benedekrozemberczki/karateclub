@@ -40,7 +40,7 @@ class NEU(Estimator):
             embedding (Numpy array): An array containing the updated embedding.
         """
         embedding = self._normalize_embedding(original_embedding)
-        adjacency = nx.to_scipy_sparse_matrix(graph)
+        adjacency = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         normalized_adjacency = normalize(adjacency, norm='l1', axis=1)
         for _ in range(self.iterations):
             embedding = (embedding + 
