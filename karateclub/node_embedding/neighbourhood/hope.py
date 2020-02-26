@@ -5,9 +5,9 @@ from karateclub.estimator import Estimator
 
 class HOPE(Estimator):
     r"""An implementation of `"HOPE" <https://www.kdd.org/kdd2016/papers/files/rfp0184-ouA.pdf>`_
-    from the KDD '16 paper "Asymmetric Transitivity Preserving Graph Embedding".
-  
-    The procedure does whta?
+    from the KDD '16 paper "Asymmetric Transitivity Preserving Graph Embedding". The procedure uses
+    sparse SVD on the neighbourhood overlap matrix. The singular value rescaled left and right 
+    singular vectors are used as the node embeddings after concatenation.
 
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
@@ -24,15 +24,15 @@ class HOPE(Estimator):
         number_of_nodes = graph.number_of_nodes()
         A = nx.adjacency_matrix(graph, nodelist=range(number_of_nodes))
         S = sps.coo_matrix(A.dot(A), dtype=np.float32)
-        return A, S
+        return S
 
-    def _do_rescaled_decomopistion(self, A, S):
+    def _do_rescaled_decomposition(self, S):
         """
         Decomposing the similarity matrix.
         """
         U, sigmas, Vt = sps.linalg.svds(S, k=int(self.dimensions/2))
         sigmas = np.diagflat(np.sqrt(sigmas))
-        self._left_embedding = np.dot(A, sigmas)
+        self._left_embedding = np.dot(U, sigmas)
         self._right_embedding = np.dot(Vt.T, sigmas)
 
     def fit(self, graph):
@@ -42,8 +42,8 @@ class HOPE(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        A, S = self._create_target(graph)
-        self._do_rescaled_decomopistion(A, S)
+        S = self._create_target(graph)
+        self._do_rescaled_decomposition(S)
 
 
     def get_embedding(self):
