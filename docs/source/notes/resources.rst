@@ -64,6 +64,11 @@ Attributed node embedding
 
 * Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan, M N Murty: **Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks** `Paper <https://arxiv.org/pdf/1804.05313.pdf>`_, `Code <https://github.com/benedekrozemberczki/FSCNMF>`_
 
+Meta node embedding
+--------------------
+
+* Cheng Yang, Maosong Sun, Zhiyuan Liu, Cunchao Tu: **Fast Network Embedding Enhancement via High Order Proximity Approximation** `Paper <https://www.ijcai.org/Proceedings/2017/0544.pdf>`_
+
 Whole graph embedding
 --------------------
 
