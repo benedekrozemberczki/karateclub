@@ -17,9 +17,9 @@ from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
 
-#------------------------------
+#--------------
 # HOPE example
-#------------------------------
+#--------------
 
 g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
