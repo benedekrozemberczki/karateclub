@@ -3,10 +3,11 @@ import networkx as nx
 from sklearn.preprocessing import normalize
 from karateclub.estimator import Estimator
 
-class neu(Estimator):
+class NEU(Estimator):
     r"""An implementation of `"NEU" <https://www.ijcai.org/Proceedings/2017/0544.pdf>`_
-    from the paper "Fast Network Embedding Enhancement via High Order Proximity Approximation".
-    The procedure uses an arbitrary embedding and augments it by higher order proximities.
+    from the IJCAI 17 paper "Fast Network Embedding Enhancement via High Order Proximity Approximation".
+    The procedure uses an arbitrary embedding and augments it by higher order proximities wiht a recursive
+    meta learning alcorithmi..
     Args:
         model: A karateclub model instance.
         L1 (float): Weight of lower order proximities
