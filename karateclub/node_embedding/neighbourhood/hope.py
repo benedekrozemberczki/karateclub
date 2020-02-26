@@ -32,8 +32,8 @@ class HOPE(Estimator):
         """
         U, sigmas, Vt = sps.linalg.svds(S, k=int(self.dimensions/2))
         sigmas = np.diagflat(np.sqrt(sigmas))
-        self.left_embedding = np.dot(A, sigmas)
-        self.right_embedding = np.dot(Vt.T, sigmas)
+        self._left_embedding = np.dot(A, sigmas)
+        self._right_embedding = np.dot(Vt.T, sigmas)
 
     def fit(self, graph):
         """
