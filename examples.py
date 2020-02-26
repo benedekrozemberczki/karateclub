@@ -17,16 +17,17 @@ from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
 
-#--------------
+#------------------------------
 # Laplacian Eigenmaps example
-#--------------
+#------------------------------
 
-g = nx.newman_watts_strogatz_graph(10000, 20, 0.05)
+g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
 model = LaplacianEigenmaps()
 
 model.fit(g)
 embedding = model.get_embedding()
+
 quit()
 
 #--------------
