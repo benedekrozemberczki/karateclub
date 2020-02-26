@@ -115,6 +115,13 @@ Attributed node embedding
     :members:
     :undoc-members:
 
+Meta node embedding
+--------------------
+
+.. automodule:: karateclub.node_embedding.meta.neu
+    :members:
+    :undoc-members:
+
 Whole graph embedding
 --------------------
 
