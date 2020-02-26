@@ -8,13 +8,14 @@ Karate Club Documentation
 
 .. code-block:: latex
 
-   >@misc{rozemberczki2020karateclub,
-       title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},
-       author = {Benedek Rozemberczki and Rik Sarkar},
-       year = {2020},
-       publisher = {GitHub},
-       journal = {GitHub repository},
-       howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}}
+    >@misc{rozemberczki2020karateclub,    
+           title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},   
+           author={Rozemberczki, Benedek and Oliver, Kiss and Sarkar, Rik},  
+           year = {2020},   
+           publisher = {GitHub},   
+           journal = {GitHub repository},   
+           howpublished = {\url{https://github.com/benedekrozemberczki/karateclub}}   
+           }
 
 
 .. toctree::
