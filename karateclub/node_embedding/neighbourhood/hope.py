@@ -22,15 +22,15 @@ class HOPE(Estimator):
         Creating a target similarity matrix.
         """
         number_of_nodes = graph.number_of_nodes()
-        A = sps.coo_matrix(nx.adjacency_matrix(graph, nodelist=range(number_of_nodes)), dtype=np.float32)
-        S = A.dot(A)
+        A = nx.adjacency_matrix(graph, nodelist=range(number_of_nodes))
+        S = sps.coo_matrix(A.dot(A), dtype=np.float32)
         return A, S
 
     def _do_rescaled_decomopistion(self, A, S):
         """
         Decomposing the similarity matrix.
         """
-        U, sigmas, Vt = sps.linalg.svds(S, k=self.dimensions/2)
+        U, sigmas, Vt = sps.linalg.svds(S, k=int(self.dimensions/2))
         sigmas = np.diagflat(np.sqrt(sigmas))
         self.left_embedding = np.dot(A, sigmas)
         self.right_embedding = np.dot(Vt.T, sigmas)
