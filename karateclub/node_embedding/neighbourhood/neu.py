@@ -7,16 +7,14 @@ class NEU(Estimator):
     r"""An implementation of `"NEU" <https://www.ijcai.org/Proceedings/2017/0544.pdf>`_
     from the IJCAI 17 paper "Fast Network Embedding Enhancement via High Order Proximity Approximation".
     The procedure uses an arbitrary embedding and augments it by higher order proximities wiht a recursive
-    meta learning alcorithmi..
+    meta learning algorithm.
     Args:
-        model: A karateclub model instance.
-        L1 (float): Weight of lower order proximities
-        L2 (float): Weight of higer order proximities
-        T (int): Number of iterations
+        L1 (float): Weight of lower order proximities. Defauls is 0.5
+        L2 (float): Weight of higer order proximities. Default is 0.25.
+        T (int): Number of iterations. Default is 1.
     """
-    def __init__(self, model, L1=0.5, L2=0.25, T=1):
+    def __init__(self, L1=0.5, L2=0.25, T=1):
         self.iterations = T
-        self.model = model
         self.L1 = L1
         self.L2 = L2
 
@@ -50,13 +48,15 @@ class NEU(Estimator):
                          self.L2*(normalized_adjacency @ (normalized_adjacency @ embedding)))
         return embedding
 
-    def fit(self, graph):
+    def fit(self, graph, model):
         r"""
         Fitting a model and performing NEU.
 
         Args:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **model** *(KC embedding model)* - Karate Club embedding.
         """
+        self.model = model
         self.model.fit(graph)
         original_embedding = self.model.get_embedding()
         self._embedding = self._update_embedding(graph, original_embedding)    
