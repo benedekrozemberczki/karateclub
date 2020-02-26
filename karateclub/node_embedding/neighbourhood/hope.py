@@ -3,11 +3,11 @@ import networkx as nx
 import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
-class LaplacianEigenmaps(Estimator):
-    r"""An implementation of `"Laplacian Eigenmaps" <https://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering>`_
-    from the NIPS '01 paper "Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering".
-    The procedure extracts the eigenvectors corresponding to the largest values 
-    of the graph Laplacian. These vectors are used as the node embedding.
+class HOPE(Estimator):
+    r"""An implementation of `"HOPE" <https://www.kdd.org/kdd2016/papers/files/rfp0184-ouA.pdf>`_
+    from the KDD '16 paper "Asymmetric Transitivity Preserving Graph Embedding".
+  
+    The procedure does whta?
 
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
@@ -16,17 +16,34 @@ class LaplacianEigenmaps(Estimator):
 
         self.dimensions = dimensions
 
+
+    def _create_target(self, graph):
+        """
+        Creating a target similarity matrix.
+        """
+        number_of_nodes = graph.number_of_nodes()
+        A = sps.coo_matrix(nx.adjacency_matrix(graph, nodelist=range(number_of_nodes)), dtype=np.float32)
+        S = A.dot(A)
+        return A, S
+
+    def _do_rescaled_decomopistion(self, A, S):
+        """
+        Decomposing the similarity matrix.
+        """
+        U, sigmas, Vt = sps.linalg.svds(S, k=self.dimensions/2)
+        sigmas = np.diagflat(np.sqrt(sigmas))
+        self.left_embedding = np.dot(A, sigmas)
+        self.right_embedding = np.dot(Vt.T, sigmas)
+
     def fit(self, graph):
         """
-        Fitting a Laplacian EigenMaps model.
+        Fitting a HOPE model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
-        number_of_nodes = graph.number_of_nodes()
-        L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
-        eigenvalues, embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions, return_eigenvectors=True)
-        self._embedding = embedding
+        A, S = self._create_target(graph)
+        self._do_rescaled_decomopistion(A, S)
 
 
     def get_embedding(self):
@@ -35,4 +52,4 @@ class LaplacianEigenmaps(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        return self._embedding
+        return np.concatenate([self._left_embedding, self._right_embedding], axis=1)
