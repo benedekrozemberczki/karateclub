@@ -56,7 +56,7 @@ class NEU(Estimator):
         Fitting a model and performing NEU.
 
         Args:
-            graph (NetworkX graph) - The graph to be embedded.
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self.model.fit(graph)
         original_embedding = self.model.get_embedding()
@@ -66,6 +66,6 @@ class NEU(Estimator):
         r"""Getting the node embedding.
 
         Return types:
-            embedding (Numpy array) - The embedding of nodes.
+            * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return self._embedding
