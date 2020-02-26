@@ -42,6 +42,8 @@ Neighbourhood-based node embedding
 
 * Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_, `Code <https://github.com/benedekrozemberczki/NMFADMM>`_
 
+* Mikhail Belkin and Partha Niyogi: **Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering** `Paper <http://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering.pdf>`_, `Video <https://www.youtube.com/watch?v=U31TIICsHiA>`_
+
 Structural node embedding
 --------------------
 
