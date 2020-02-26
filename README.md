@@ -116,6 +116,10 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[TADW](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tadw.TADW)** from Yang *et al.*: [Network Representation Learning with Rich Text Information](https://www.ijcai.org/Proceedings/15/Papers/299.pdf) (IJCAI 2015)
 
+**Meta Node Embedding**
+
+* **[NEU](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.meta.neu.NEU)** from Yang *et al.*: [Fast Network Embedding Enhancement via High Order Proximity Approximation](https://www.ijcai.org/Proceedings/15/Papers/299.pdf) (IJCAI 2017)
+
 **Graph Level Embedding**
 
 * **[GL2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.gl2vec.GL2Vec)** from Chen and Koga: [GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICONIP 2019)
