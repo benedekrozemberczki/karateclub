@@ -25,7 +25,7 @@ If you find *Karate Club* useful in your research, please consider citing the fo
 ```bibtex
 >@misc{rozemberczki2020karateclub,    
        title = {Karate Club: An open-source Python framework for unsupervised learning on graphs},   
-       author = {Benedek Rozemberczki and Rik Sarkar},   
+       author={Rozemberczki, Benedek and Oliver, Kiss and Sarkar, Rik},  
        year = {2020},   
        publisher = {GitHub},   
        journal = {GitHub repository},   
