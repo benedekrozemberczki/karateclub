@@ -77,6 +77,10 @@ Neighbourhood-based node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.neighbourhood.laplacianeigenmaps
+    :members:
+    :undoc-members:
+
 Structural node embedding
 --------------------
 
