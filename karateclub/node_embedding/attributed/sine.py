@@ -49,7 +49,7 @@ class SINE(Estimator):
                 for step in range(power+1):
                     neighbors = [n for i, n in enumerate(walk[step:]) if i % power == 0]
                     neighbors = [n for n in neighbors for _ in range(0, 3)]
-                    neighbors = [random.choice(self.features[val]) if i % 3 == 1 else val for i, val in enumerate(neighbors)]
+                    neighbors = [random.choice(self.features[val]) if i % 3 == 1 and self.features[val] else val for i, val in enumerate(neighbors)]
                     self.walklets.append(neighbors)
         del self.walker
         
