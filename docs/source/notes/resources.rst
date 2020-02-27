@@ -12,7 +12,7 @@ Overlapping community detection
 
 * Bing-Jie Sun, Huawei Shen, Jinhua Gao, Wentao Ouyang, Xueqi Cheng: **A Non-negative Symmetric Encoder-Decoder Approach for Community Detection** `Paper <http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf>`_
 
-* Jaewon Yang and Jure Leskovec: **Overlapping Community Detection at Scale: A Nonnegative Matrix Factorization Approach** `Paper <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_, `Slides <http://snap.stanford.edu/class/cs224w-2017/slides/18-overlapping.pdf>`_, `Video <https://www.youtube.com/watch?v=Y78Kugdq24I>`_, `Video <https://www.youtube.com/watch?v=cuDDBfvK71g>`_
+* Jaewon Yang and Jure Leskovec: **Overlapping Community Detection at Scale:  A Nonnegative Matrix Factorization Approach** `Paper <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_, `Slides <http://snap.stanford.edu/class/cs224w-2017/slides/18-overlapping.pdf>`_, `Video <https://www.youtube.com/watch?v=Y78Kugdq24I>`_, `Video <https://www.youtube.com/watch?v=cuDDBfvK71g>`_
 
 * Da Kuang, Chris Ding, Haesun Park: **Symmetric Nonnegative Matrix Factorization for Graph Clustering** `Paper <https://www.cc.gatech.edu/~hpark/papers/DaDingParkSDM12.pdf>`_
 
