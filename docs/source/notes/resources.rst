@@ -78,7 +78,7 @@ Whole graph embedding
 
 * Hong Chen, Hisashi Koga: **GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features** `Paper <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
 
-* Anton Tsitsulin, Davide Mottin, Panagiotis Karras, Alex Bronstein, Emmanuel Müller: **NetLSD: Hearing the Shape of a Graph** `Paper <https://arxiv.org/abs/1805.10712>`_, ` Video <https://www.youtube.com/watch?v=aiPOa1NTgvM>`_
+* Anton Tsitsulin, Davide Mottin, Panagiotis Karras, Alex Bronstein, Emmanuel Müller: **NetLSD: Hearing the Shape of a Graph** `Paper <https://arxiv.org/abs/1805.10712>`_, `Video <https://www.youtube.com/watch?v=aiPOa1NTgvM>`_
 
 * Nathan de Lara, Edouard Pineau: **A Simple Baseline Algorithm for Graph Classification** `Paper <https://arxiv.org/abs/1810.09155>`_
 
