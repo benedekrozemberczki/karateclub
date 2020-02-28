@@ -85,8 +85,7 @@ class NodeSketch(Estimator):
         self._graph = graph
         self._num_nodes = len(graph.nodes)
         self._hash_values = self._generate_hash_values()
-        self._sla = nx.to_scipy_sparse_matrix(self._graph)
-        self._sla = self._sla.tocoo()
+        self._sla = nx.adjacency_matrix(self._graph, nodelist=range(self._num_nodes)).tocoo()
         self._sla.data = np.array([1 for _ in range(len(self._sla.data))])
         self._sla_original = self._sla.copy()
         self._do_single_sketch()
