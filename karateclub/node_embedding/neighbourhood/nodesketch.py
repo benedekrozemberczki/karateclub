@@ -2,16 +2,18 @@ import networkx as nx
 import numpy as np
 from collections import Counter
 from karateclub.estimator import Estimator
-from scipy import sparse
 
 class NodeSketch(Estimator):
     r"""An implementation of `"NodeSketch" <https://exascale.info/assets/pdf/yang2019nodesketch.pdf>`_
     from the KDD '19 paper "NodeSketch: Highly-Efficient Graph Embeddings
-    via Recursive Sketching". 
+    via Recursive Sketching". The procedure  starts by sketching the self-loop-augmented 
+    adjacency matrix of the graph to output low-order node embeddings, and then recursively 
+    generates k-order node embeddings based on the self-loop-augmented adjacency matrix 
+    and (k-1)-order node embeddings.
 
     Args:
         dimensions (int): Embedding dimensions. Default is 32
-        iterations (int): Number of iterations (sketch order minus one). Default is 4
+        iterations (int): Number of iterations (sketch order minus one). Default is 2
         decay (float): Exponential decay rate. Default is 0.01
     """
     def __init__(self, dimensions=32, iterations=2, decay=0.01):
@@ -21,17 +23,23 @@ class NodeSketch(Estimator):
         self._weight = self.decay/self.dimensions
 
     def _generate_hash_values(self):
+        """
+        Predefine a hash matrix
+        """
         random_matrix = np.random.rand(self.dimensions,self._num_nodes)
         hashes = -np.log(random_matrix)
         return hashes
 
     def _do_single_sketch(self):
+        """
+        Perform a single round of sketching
+        """
         sketch = []
         for iter in range(self.dimensions):
             hashed = self._sla.copy()
             hashed.data = np.array([self._hash_values[iter,self._sla.col[edge]]/self._sla.data[edge] for edge in range(len(self._sla.data))])
             min_values = [np.inf for k in range(self._num_nodes)]
-            min_indices = [None for k in range(self._num_nodes)]           
+            min_indices = [None for k in range(self._num_nodes)]
             for i,j,v in zip(hashed.row, hashed.col, hashed.data):
                 if v<min_values[i]:
                     min_values[i]=v
@@ -40,6 +48,9 @@ class NodeSketch(Estimator):
         self._sketch = sketch
 
     def _augment_sla(self):
+        """
+        Augment the sla matrix based on the previous sketch
+        """
         self._sla = self._sla_original.copy()
         data = []
         row = []
@@ -56,11 +67,13 @@ class NodeSketch(Estimator):
         self._sla.data = np.append(self._sla.data,data)
         self._sla.row = np.append(self._sla.row,row)
         self._sla.col = np.append(self._sla.col,col)
-        self._sla.sum_duplicates()       
+        self._sla.sum_duplicates()
 
     def _sketch_to_np_array(self):
+        """
+        Transform sketch to numpy array
+        """
         return np.array(self._sketch)
-
 
     def fit(self, graph):
         """
@@ -80,8 +93,6 @@ class NodeSketch(Estimator):
         for _ in range(self.iterations-1):
             self._augment_sla()
             self._do_single_sketch()
-
-        
 
     def get_embedding(self):
         r"""Getting the node embedding.
