@@ -53,6 +53,10 @@ Neighbourhood-based node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.neighbourhood.nodesketch
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.node_embedding.neighbourhood.netmf
     :members:
     :undoc-members:
