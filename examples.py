@@ -34,7 +34,7 @@ embedding = model.get_embedding()
 
 g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
-model = LaplacianEigenmaps()
+model = HOPE()
 
 model.fit(g)
 embedding = model.get_embedding()
