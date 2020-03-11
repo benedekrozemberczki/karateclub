@@ -24,7 +24,7 @@ Please look at the **[Documentation](https://karateclub.readthedocs.io/)** and t
 If you find *Karate Club* useful in your research, please consider citing the following paper:
 
 ```bibtex
->@misc{rozemberczki2020api,
+>@misc{karateclub2020,
        title={An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs},
        author={Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
        year={2020},
