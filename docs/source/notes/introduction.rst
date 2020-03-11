@@ -271,5 +271,5 @@ We included a number of datasets which can be used for comparing the performance
 
 We also added datasets for graph level embedding and graph statistical descriptors. These datasets are as follows:
 
-- `Reddit discussion and non-discussion thread graphs. <https://arxiv.org/abs/1909.13021>`_
+- `Reddit discussion and non-discussion thread graphs. <https://arxiv.org/abs/2003.04819>`_
  
