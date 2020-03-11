@@ -9,7 +9,9 @@
 --------------------------------------------------------------------------------
 
 
-**[Documentation](https://karateclub.readthedocs.io/)** **[Paper](https://arxiv.org/abs/2003.04819)**
+**[Documentation](https://karateclub.readthedocs.io/)**<br>
+
+**[Paper](https://arxiv.org/abs/2003.04819)**
 
 *Karate Club* is an unsupervised machine learning extension library for [NetworkX](https://networkx.github.io/).
 
