@@ -1,6 +1,6 @@
 
  ![Version](https://badge.fury.io/py/karateclub.svg?style=plastic)
- ![GitHub stars](https://img.shields.io/github/stars/benedekrozemberczki/karateclub.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) [![PyPI download month](https://img.shields.io/pypi/dm/karateclub.svg?color=blue&style=plastic)](https://pypi.python.org/pypi/karateclub/)
+ ![GitHub stars](https://img.shields.io/github/stars/benedekrozemberczki/karateclub.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) [![PyPI download month](https://img.shields.io/pypi/dm/karateclub.svg?color=blue&style=plastic)](https://pypi.python.org/pypi/karateclub/)  [![Arxiv](https://img.shields.io/badge/ArXiv-1909.13021-orange.svg?color=blue&style=plastic)](https://arxiv.org/abs/1909.13021)
 
 <p align="center">
   <img width="90%" src="https://github.com/benedekrozemberczki/karateclub/blob/master/karatelogo.jpg?sanitize=true" />
