@@ -37,6 +37,7 @@ Standardized dataset ingestion
 
 Karate Club assumes that the NetworkX graph provided by the user for node embedding and community detection has the following important properties:
 
+- The graph is undirected.
 - Nodes are indexed with integers.
 - There are no orphaned nodes in the graph.
 - The node indexing starts with zero and the indices are consecutive.
