@@ -124,6 +124,7 @@ class FSCNMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._check_graph(graph)
         self.X = X
         self.A = self._create_base_matrix(graph)
         self._init_weights()
