@@ -30,18 +30,18 @@ class Estimator(object):
         try:
             connected = nx.is_connected(graph)
             if not connected:
-                raise ValueError('Graph is not connected.')
+                raise ValueError("Graph is not connected.")
         except:
-            exit('Graph is not connected.')
+            exit("Graph is not connected.")
 
     def _check_directedness(self, graph):
         """Checking the undirected nature of a single graph."""
         try:
             directed = nx.is_directed(graph)
             if directed:
-                raise ValueError('Graph is not undirected.')
+                raise ValueError("Graph is not undirected.")
         except:
-            exit('Graph is not undirected.')
+            exit("Graph is not undirected.")
 
 
     def _check_indexing(self, graph):
