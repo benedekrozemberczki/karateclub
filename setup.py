@@ -4,7 +4,7 @@ from setuptools import find_packages
 setup(
   name = "karateclub",
   packages = find_packages(),
-  version = "0.45.27",
+  version = "0.45.28",
   license = "MIT",
   description = "A general purpose library for community detection, network embedding, and graph mining research.",
   author = "Benedek Rozemberczki",

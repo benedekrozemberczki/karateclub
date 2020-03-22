@@ -34,29 +34,32 @@ class Estimator(object):
         except:
             exit("Graph is not connected. Please see requirements.")
 
+
     def _check_directedness(self, graph):
         """Checking the undirected nature of a single graph."""
         try:
             directed = nx.is_directed(graph)
             if directed:
-                raise ValueError("Graph is not undirected. Please see requirements.")
+                raise ValueError("Graph is directed. Please see requirements.")
         except:
-            exit("Graph is not undirected. Please see requirements.")
+            exit("Graph is directed. Please see requirements.")
 
 
     def _check_indexing(self, graph):
         numeric_indices = [index for index in range(graph.number_of_nodes())]
-        node_indices = sorted([node for node in grapn.nodes()])
+        node_indices = sorted([node for node in graph.nodes()])
         try:
            if numeric_indices != node_indices:
                raise ValueError("The node indexing is wrong. Please see requirements.")
         except:
            exit("The node indexing is wrong. Please see requirements.")     
 
+
     def _check_graph(self, graph):
         """We check the Karate Club assumptions about the graph."""
         self._check_connectivity(graph)
         self._check_directedness(graph)
+        self._check_indexing(graph)
 
 
     def _check_graphs(self, graphs):
@@ -65,12 +68,5 @@ class Estimator(object):
             for graph in graphs:
                 self._check_graph(graph)
         except:
-            exit("The graph list do not satisfy requirements.")
-
-
-
-
- 
-        
-        
+            exit("The graph list does not satisfy requirements.")
 
