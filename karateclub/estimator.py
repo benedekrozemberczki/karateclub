@@ -54,7 +54,7 @@ class Estimator(object):
 
 
     def _check_indexing(self, graph):
-        
+        """Checking the consecutive numeric indexing."""
         numeric_indices = [index for index in range(graph.number_of_nodes())]
         node_indices = sorted([node for node in graph.nodes()])
         try:
