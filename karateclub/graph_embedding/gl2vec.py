@@ -60,6 +60,7 @@ class GL2Vec(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._check_graphs(graphs)
         graphs = [self._create_line_graph(graph) for graph in graphs]
         documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, False) for graph in graphs]
         documents = [TaggedDocument(words=doc.get_graph_features(), tags=[str(i)]) for i, doc in enumerate(documents)]
