@@ -136,6 +136,7 @@ class NMFADMM(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._check_graph(graph)
         self.V = self._create_base_matrix(graph)
         self._init_weights()
         for _ in range(self.iterations):
