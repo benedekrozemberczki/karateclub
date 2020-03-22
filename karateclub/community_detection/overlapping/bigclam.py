@@ -86,6 +86,7 @@ class BigClam(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         self._initialize_features(number_of_nodes)
         nodes = [node for node in graph.nodes()]
