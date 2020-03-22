@@ -38,7 +38,7 @@ class Estimator(object):
         try:
             connected = nx.is_connected(graph)
             if not connected:
-                raise TypeError("Graph is not connected. Please see requirements.")
+                raise ValueError("Graph is not connected. Please see requirements.")
         except:
             exit("Graph is not connected. Please see requirements.")
 
@@ -48,7 +48,7 @@ class Estimator(object):
         try:
             directed = nx.is_directed(graph)
             if directed:
-                raise TypeError("Graph is directed. Please see requirements.")
+                raise ValueError("Graph is directed. Please see requirements.")
         except:
             exit("Graph is directed. Please see requirements.")
 
@@ -59,7 +59,7 @@ class Estimator(object):
         node_indices = sorted([node for node in graph.nodes()])
         try:
            if numeric_indices != node_indices:
-               raise TypeError("The node indexing is wrong. Please see requirements.")
+               raise ValueError("The node indexing is wrong. Please see requirements.")
         except:
            exit("The node indexing is wrong. Please see requirements.")     
 
