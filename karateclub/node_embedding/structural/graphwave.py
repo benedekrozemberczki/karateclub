@@ -118,6 +118,7 @@ class GraphWave(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._check_graph(graph)
         graph.remove_edges_from(nx.selfloop_edges(graph))
         self._create_evaluation_points()
         self._check_size(graph)
