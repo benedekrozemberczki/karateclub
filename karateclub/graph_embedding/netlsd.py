@@ -103,6 +103,7 @@ class NetLSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._check_graphs(graphs)
         self._embedding = [self._calculate_netlsd(graph) for graph in graphs]
 
 
