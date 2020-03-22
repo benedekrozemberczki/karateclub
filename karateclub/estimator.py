@@ -31,6 +31,7 @@ class Estimator(object):
         self._check_directedness(graph)
 
     def _check_connectivity(self, graph):
+        """Checking the connected nature of a single graph."""
         try:
             connected = nx.is_connected(graph)
             if not connected:
@@ -39,12 +40,16 @@ class Estimator(object):
             exit('Graph is not connected.')
 
     def _check_directedness(self, graph):
+        """Checking the undirected nature of a single graph."""
         try:
             directed = nx.is_directed(graph)
             if directed:
                 raise ValueError('Graph is not undirected.')
         except:
             exit('Graph is not undirected.')
+
+
+
 
  
         
