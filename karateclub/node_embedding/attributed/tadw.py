@@ -111,6 +111,7 @@ class TADW(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._check_graph(graph)
         self.A = self._create_target_matrix(graph)
         self.T = self._create_reduced_features(X)
         self._init_weights()
