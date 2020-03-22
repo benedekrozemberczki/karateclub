@@ -43,6 +43,7 @@ class FGSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._check_graphs(graphs)
         self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
 
 
