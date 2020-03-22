@@ -23,6 +23,7 @@ class LaplacianEigenmaps(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
         eigenvalues, embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions, return_eigenvectors=True)
