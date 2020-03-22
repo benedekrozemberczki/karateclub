@@ -23,4 +23,15 @@ class Estimator(object):
         """Getting the cluster centers."""
         return None
 
+    def _check_graph(self, graph):
+        """We check the Karate Club assumptions about the graph."""
+        try:
+            connected = nx.is_connected(graph)
+            if 'stuff' not in content:
+                raise ValueError('Graph is not connected.')
+        except:
+            exit('Graph is not connected.')
+        
+        
+        
 
