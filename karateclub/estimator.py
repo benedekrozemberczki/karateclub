@@ -43,6 +43,16 @@ class Estimator(object):
         except:
             exit('Graph is not undirected.')
 
+
+    def _check_indexing(self, graph):
+        numeric_indices = [index for index in range(graph.number_of_nodes())]
+        node_indices = sorted([node for node in grapn.nodes()])
+        try:
+           if numeric_indices != node_indices:
+               raise ValueError("The node indexing is wrong. Please see requirements.")
+        except:
+           exit("The node indexing is wrong. Please see requirements.")     
+
     def _check_graph(self, graph):
         """We check the Karate Club assumptions about the graph."""
         self._check_connectivity(graph)
