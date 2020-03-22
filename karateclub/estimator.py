@@ -25,13 +25,26 @@ class Estimator(object):
 
     def _check_graph(self, graph):
         """We check the Karate Club assumptions about the graph."""
+        self._check_connectivity(graph)
+        self._check_directedness(graph)
+
+    def _check_connectivity(self, graph):
         try:
             connected = nx.is_connected(graph)
-            if 'stuff' not in content:
+            if not connected:
                 raise ValueError('Graph is not connected.')
         except:
             exit('Graph is not connected.')
-        
+
+    def _check_directedness(self, graph):
+        try:
+            directed = nx.is_directed(graph)
+            if directed:
+                raise ValueError('Graph is not undirected.')
+        except:
+            exit('Graph is not undirected.')
+
+ 
         
         
 
