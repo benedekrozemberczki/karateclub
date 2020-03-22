@@ -25,11 +25,6 @@ class Estimator(object):
         """Getting the cluster centers."""
         return None
 
-    def _check_graph(self, graph):
-        """We check the Karate Club assumptions about the graph."""
-        self._check_connectivity(graph)
-        self._check_directedness(graph)
-
     def _check_connectivity(self, graph):
         """Checking the connected nature of a single graph."""
         try:
@@ -47,6 +42,20 @@ class Estimator(object):
                 raise ValueError('Graph is not undirected.')
         except:
             exit('Graph is not undirected.')
+
+    def _check_graph(self, graph):
+        """We check the Karate Club assumptions about the graph."""
+        self._check_connectivity(graph)
+        self._check_directedness(graph)
+
+
+    def _check_graphs(self, graphs):
+        """We check the Karate Club assumptions for a list of graphs."""
+        try:
+            for graph in graphs:
+                self._check_graph(graph)
+        except:
+            exit("The graph list do not satisfy requirements.")
 
 
 
