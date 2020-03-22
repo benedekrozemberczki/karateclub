@@ -170,6 +170,7 @@ class SCD(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._check_graph(graph)
         self.graph = graph
         self._create_initial_partition()
         self._set_omega()
