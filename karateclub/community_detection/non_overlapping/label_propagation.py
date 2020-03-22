@@ -52,6 +52,7 @@ class LabelPropagation(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._check_graph(graph)
         self.graph = graph
         self.nodes = [node for node in self.graph.nodes()]
         self.labels = {node: i for i, node in enumerate(self.graph.nodes())}
