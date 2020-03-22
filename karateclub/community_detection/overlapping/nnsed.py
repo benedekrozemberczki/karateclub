@@ -111,7 +111,7 @@ class NNSED(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
-
+        self._check_graph(graph)
         A = self._create_base_matrix(graph)
         self._setup_embeddings(A)
         for _ in range(self.iterations):
