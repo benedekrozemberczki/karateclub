@@ -65,14 +65,14 @@ class Estimator(object):
 
 
     def _check_graph(self, graph):
-        """We check the Karate Club assumptions about the graph."""
+        """Check the Karate Club assumptions about the graph."""
         self._check_connectivity(graph)
         self._check_directedness(graph)
         self._check_indexing(graph)
 
 
     def _check_graphs(self, graphs):
-        """We check the Karate Club assumptions for a list of graphs."""
+        """Check the Karate Club assumptions for a list of graphs."""
         try:
             for graph in graphs:
                 self._check_graph(graph)
