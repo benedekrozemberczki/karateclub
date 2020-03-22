@@ -157,7 +157,7 @@ class SCD(Estimator):
             if WCC_r > WCC_t and WCC_r > 0: 
                 new_memberships[node] = community_index
                 community_index = community_index + 1
-            elif WCC_t > WCC_r and WCC_t>0:
+            elif WCC_t > WCC_r and WCC_t > 0:
                 new_memberships[node] = best_community
             else:
                 new_memberships[node] = self.cluster_memberships[node]
