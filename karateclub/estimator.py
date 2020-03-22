@@ -25,12 +25,20 @@ class Estimator(object):
         """Getting the cluster centers."""
         return None
 
+    def _check_networkx_graph(self, graph):
+        try:
+            if not isinstance(graph, nx.classes.graph.Graph):
+                raise TypeError("This is not a NetworkX graph. Please see requirements.")
+        except:
+                exit("This is not a NetworkX graph. Please see requirements.")
+   
+
     def _check_connectivity(self, graph):
         """Checking the connected nature of a single graph."""
         try:
             connected = nx.is_connected(graph)
             if not connected:
-                raise ValueError("Graph is not connected. Please see requirements.")
+                raise TypeError("Graph is not connected. Please see requirements.")
         except:
             exit("Graph is not connected. Please see requirements.")
 
@@ -40,17 +48,18 @@ class Estimator(object):
         try:
             directed = nx.is_directed(graph)
             if directed:
-                raise ValueError("Graph is directed. Please see requirements.")
+                raise TypeError("Graph is directed. Please see requirements.")
         except:
             exit("Graph is directed. Please see requirements.")
 
 
     def _check_indexing(self, graph):
+        
         numeric_indices = [index for index in range(graph.number_of_nodes())]
         node_indices = sorted([node for node in graph.nodes()])
         try:
            if numeric_indices != node_indices:
-               raise ValueError("The node indexing is wrong. Please see requirements.")
+               raise TypeError("The node indexing is wrong. Please see requirements.")
         except:
            exit("The node indexing is wrong. Please see requirements.")     
 
