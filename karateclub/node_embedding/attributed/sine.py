@@ -62,6 +62,7 @@ class SINE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO array)* - The matrix of node features.
         """
+        self._check_graph(graph)
         self.walker = RandomWalker(self.walk_length, self.walk_number)
         self.walker.do_walks(graph)
         self.features = self._feature_transform(graph, X)
