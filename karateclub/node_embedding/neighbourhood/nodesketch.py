@@ -82,6 +82,7 @@ class NodeSketch(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._check_graph(graph)
         self._graph = graph
         self._num_nodes = len(graph.nodes)
         self._hash_values = self._generate_hash_values()

@@ -27,7 +27,6 @@ model = NodeSketch()
 model.fit(g)
 embedding = model.get_embedding()
 
-
 #--------------
 # HOPE example
 #--------------
@@ -54,7 +53,7 @@ embedding = model.get_embedding()
 # NEU example
 #--------------
 
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
 model = NetMF()
 

@@ -1,3 +1,5 @@
+import networkx as nx
+
 """General Estimator base class."""
 
 class Estimator(object):
