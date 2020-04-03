@@ -16,7 +16,7 @@ class NetLSD(Estimator):
         scale_steps (int): Number of steps in time scale. Default is 250.
         scale_approximations (int): Number of eigenvalue approximations. Default is 200.
     """
-    def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=200):
+    def __init__(self, scale_min=-2.0, scale_max=2.0, scale_steps=250, approximations=200):
         self.scale_min = scale_min
         self.scale_max = scale_max
         self.scale_steps = scale_steps
