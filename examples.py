@@ -16,6 +16,21 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
+#-----------------------------------
+# Graph2Vec example
+#-----------------------------------
+
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(1000)]
+
+model = GeoScattering()
+
+model.fit(graphs)
+model.get_embedding()
+
+
+quit()
+
 #--------------------
 # NodeSketch example
 #--------------------

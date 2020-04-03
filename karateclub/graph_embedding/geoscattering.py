@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-import scipy.sparse as sps
+import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
 class GeoScattering(Estimator):
@@ -13,6 +13,38 @@ class GeoScattering(Estimator):
     def __init__(self, order=4):
         self.order = order
 
+
+    def _create_D_inverse(self, graph):
+        """
+        Creating a sparse inverse degree matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+
+        Return types:
+            * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
+        """
+        index = np.arange(graph.number_of_nodes())
+        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        shape = (graph.number_of_nodes(), graph.number_of_nodes())
+        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        return D_inverse
+
+    def _get_normalized_adjacency(self, graph):
+        """
+        Calculating the normalized adjacency matrix.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph of interest.
+
+        Return types:
+            * **A_hat** *(SciPy array)* - The normalized adjacency matrix graph.
+        """
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        D_inverse = self._create_D_inverse(graph)
+        A_hat = D_inverse.dot(A)
+        return A_hat
+
     def _calculate_geoscattering(self, graph):
         """
         Calculating the features of a graph.
@@ -23,7 +55,8 @@ class GeoScattering(Estimator):
         Return types:
             * **features** *(Numpy array)* - The embedding of a single graph.
         """
-        return features
+        A_hat = self._get_normalized_adjacency(graph)
+        return ""
 
     def fit(self, graphs):
         """
