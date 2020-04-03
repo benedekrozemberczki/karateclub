@@ -4,8 +4,8 @@ import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
 class GeoScattering(Estimator):
-    r"""An implementation of `"GeoScattering" <https://arxiv.org/abs/1805.10712>`_
-    from the ICML '18 paper "NetLSD: Hearing the Shape of a Graph".
+    r"""An implementation of `"GeoScattering" <http://proceedings.mlr.press/v97/gao19e.html>`_
+    from the ICML '19 paper "Geometric Scattering for Graph Data Analysis".
 
     Args:
         order (int): Adjacency matrix powers. Default is 4.
