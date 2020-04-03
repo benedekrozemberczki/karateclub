@@ -11,7 +11,7 @@ class NetLSD(Estimator):
     of the eigenvalues. 
 
     Args:
-        scale_min (int): Time scale interval minimum. Default is -2.0.
+        scale_min (float): Time scale interval minimum. Default is -2.0.
         scale_max (int): Time scale interval maximum. Default is 2.0.
         scale_steps (int): Number of steps in time scale. Default is 250.
         scale_approximations (int): Number of eigenvalue approximations. Default is 200.
