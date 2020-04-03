@@ -4,23 +4,14 @@ import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
 class GeoScattering(Estimator):
-    r"""An implementation of `"NetLSD" <https://arxiv.org/abs/1805.10712>`_
-    from the KDD '18 paper "NetLSD: Hearing the Shape of a Graph". The procedure
-    calculate the heat kernel trace of the normalized Laplacian matrix over a
-    vector of time scales. If the matrix is large it switches to an approximation
-    of the eigenvalues. 
+    r"""An implementation of `"GeoScattering" <https://arxiv.org/abs/1805.10712>`_
+    from the ICML '18 paper "NetLSD: Hearing the Shape of a Graph".
 
     Args:
-        scale_min (int): Time scale interval minimum. Default is -2.0.
-        scale_max (int): Time scale interval maximum. Default is 2.0.
-        scale_steps (int): Number of steps in time scale. Default is 250.
-        scale_approximations (int): Number of eigenvalue approximations. Default is 200.
+        order (int): Adjacency matrix powers. Default is 4.
     """
-    def __init__(self, scale_min = -2.0, scale_max=2.0, scale_steps=250, approximations=200):
-        self.scale_min = scale_min
-        self.scale_max = scale_max
-        self.scale_steps = scale_steps
-        self.approximations = approximations
+    def __init__(self, order=4):
+        self.order = order
    
     def _calculate_heat_kernel_trace(self, eigenvalues):
         """
