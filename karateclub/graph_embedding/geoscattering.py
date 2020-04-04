@@ -58,7 +58,7 @@ class GeoScattering(Estimator):
         log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
-        X = np.concatenate([log_degree, clustering_coefficient],axis=1)
+        X = np.concatenate([log_degree, eccentricity, clustering_coefficient],axis=1)
         return X
 
     def _get_zero_order_features(self, X):
@@ -80,15 +80,23 @@ class GeoScattering(Estimator):
                 filtered_x = psi.dot(x)
                 for q in range(1,self.moments):
                     features.append(np.sum(np.power(np.abs(filtered_x),q)))
-        features = np.array(features).reshape(-1, 1) 
-        #print(features.shape)  
+        features = np.array(features).reshape(1, -1) 
         return features  
 
     def _get_second_order_features(self, Psi, X):
         features = []
-        for i in range(0,3):
-            for j in range(i+1,4):
-                print(i,j) 
+        X = np.abs(X)
+        for col in range(X.shape[1]):
+            x = np.abs(X[:, col])
+            for i in range(self.order-1):
+                for j in range(i+1, self.order):
+                    psi_j = Psi[i]
+                    psi_j_prime = Psi[j]                 
+                    filtered_x = np.abs(psi_j_prime.dot(np.abs(psi_j.dot(x))))
+                    for q in range(1,self.moments):
+                       features.append(np.sum(np.power(np.abs(filtered_x),q)))
+
+        features = np.array(features).reshape(1,-1)
         return features   
             
 
@@ -108,8 +116,8 @@ class GeoScattering(Estimator):
         zero_order_features = self._get_zero_order_features(X)
         first_order_features = self._get_first_order_features(Psi, X)
         second_order_features = self._get_second_order_features(Psi, X)
-        #features = np.concatenate([zero_order_features, first_order_features, second_order_features], axis=1)
-        features = ""
+        features = np.concatenate([zero_order_features, first_order_features, second_order_features], axis=1)
+        print(features.shape)
         return features
 
     def fit(self, graphs):
