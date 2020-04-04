@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import networkx as nx
+from tqdm import tqdm
 import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
@@ -54,7 +55,10 @@ class GeoScattering(Estimator):
         return Psi
 
     def _create_node_feature_matrix(self, graph):
-        X = ''
+        log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1,1)
+        eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
+        clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
+        X = np.concatenate([log_degree, clustering_coefficient],axis=1)
         return X
             
 
@@ -71,7 +75,10 @@ class GeoScattering(Estimator):
         A_hat = self._get_normalized_adjacency(graph)
         Psi = self._calculate_wavelets(A_hat)
         X = self._create_node_feature_matrix(graph)
-        features = []
+        zero_order_features = self._get_zero_order_features(X)
+        #first_order_features = self._get_first_features(Psi, X)
+        #second_order_features = self._get_second_features(Psi, X)
+        #features = np.concatenate([zero_order_features, first_order_features, second_order_features], axis=1)
         #for psi in Psi:
         #    filtered_x = psi.dot(x)
         #    for q in range(1,self.moments):
@@ -89,7 +96,7 @@ class GeoScattering(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         self._check_graphs(graphs)
-        self._embedding = [self._calculate_geoscattering(graph) for graph in graphs]
+        self._embedding = [self._calculate_geoscattering(graph) for graph in tqdm(graphs)]
 
 
     def get_embedding(self):
