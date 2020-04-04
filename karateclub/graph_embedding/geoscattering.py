@@ -122,6 +122,16 @@ class GeoScattering(Estimator):
         return features  
 
     def _get_second_order_features(self, Psi, X):
+        """
+        Calculating the second order graph features.
+
+        Arg types:
+            * **Psi** *(List of Scipy arrays)* - The wavelet matrices.
+            * **X** *(NumPy array)* - The node features.
+
+        Return types:
+            * **features** *(NumPy vector)* - The graph features.
+        """
         features = []
         X = np.abs(X)
         for col in range(X.shape[1]):
