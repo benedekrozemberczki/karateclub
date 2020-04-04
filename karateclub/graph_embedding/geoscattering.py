@@ -65,7 +65,15 @@ class GeoScattering(Estimator):
         return Psi
 
     def _create_node_feature_matrix(self, graph):
-        
+        """
+        Calculating the node features.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph of interest.
+
+        Return types:
+            * **X** *(Numpy array)* - The node features.
+        """
         log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
