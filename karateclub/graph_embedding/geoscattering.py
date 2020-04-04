@@ -60,6 +60,16 @@ class GeoScattering(Estimator):
         clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         X = np.concatenate([log_degree, clustering_coefficient],axis=1)
         return X
+
+    def _get_zero_order_features(self, X):
+         features = []
+         X = np.abs(X)
+         for col in range(X.shape[1]):
+             x = np.abs(X[:, col])
+             for power in range(1,self.order+1):
+                 features.append(np.sum(np.power(x,power)))
+         features = np.array(features).reshape(1, -1)
+         print(features.shape)
             
 
     def _calculate_geoscattering(self, graph):
