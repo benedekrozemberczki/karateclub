@@ -74,10 +74,10 @@ class GeoScattering(Estimator):
         Return types:
             * **X** *(NumPy array)* - The node features.
         """
-        log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1,1)
-        eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
-        clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
-        X = np.concatenate([log_degree, eccentricity, clustering_coefficient],axis=1)
+        log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        X = np.concatenate([log_degree, eccentricity, clustering_coefficient], axis=1)
         return X
 
     def _get_zero_order_features(self, X):
