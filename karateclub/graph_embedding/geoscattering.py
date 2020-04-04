@@ -12,6 +12,7 @@ class GeoScattering(Estimator):
 
     Args:
         order (int): Adjacency matrix powers. Default is 4.
+        moments (int): Unnormalized moments considered. Default is 4.
     """
     def __init__(self, order=4, moments=4):
         self.order = order
