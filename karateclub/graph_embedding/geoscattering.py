@@ -1,5 +1,7 @@
+import math
 import numpy as np
 import networkx as nx
+import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
@@ -10,8 +12,9 @@ class GeoScattering(Estimator):
     Args:
         order (int): Adjacency matrix powers. Default is 4.
     """
-    def __init__(self, order=4):
+    def __init__(self, order=4, moments=4):
         self.order = order
+        self.moments = moments
 
 
     def _create_D_inverse(self, graph):
@@ -38,12 +41,22 @@ class GeoScattering(Estimator):
             * **graph** *(NetworkX graph)* - The graph of interest.
 
         Return types:
-            * **A_hat** *(SciPy array)* - The normalized adjacency matrix graph.
+            * **A_hat** *(SciPy array)* - The scattering matrix of the graph.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
-        A_hat = D_inverse.dot(A)
+        A_hat = sparse.identity(graph.number_of_nodes()) + D_inverse.dot(A)
+        A_hat = 0.5*A_hat
         return A_hat
+
+    def _calculate_wavelets(self, A_hat):
+        Psi = [A_hat.power(2**power) - A_hat.power(2**(power+1)) for power in range(self.order+1)]
+        return Psi
+
+    def _create_node_feature_matrix(self, graph):
+        X = ''
+        return X
+            
 
     def _calculate_geoscattering(self, graph):
         """
@@ -56,7 +69,17 @@ class GeoScattering(Estimator):
             * **features** *(Numpy array)* - The embedding of a single graph.
         """
         A_hat = self._get_normalized_adjacency(graph)
-        return ""
+        Psi = self._calculate_wavelets(A_hat)
+        X = self._create_node_feature_matrix(graph)
+        features = []
+        #for psi in Psi:
+        #    filtered_x = psi.dot(x)
+        #    for q in range(1,self.moments):
+        #        features.append(np.sum(np.power(np.abs(filtered_x),q)))
+        #features = np.array(features)
+        #features = features.reshape(-1, 1)
+        #print(features.shape)
+        return features
 
     def fit(self, graphs):
         """
