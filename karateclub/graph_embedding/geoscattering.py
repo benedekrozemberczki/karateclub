@@ -1,7 +1,6 @@
 import math
 import numpy as np
 import networkx as nx
-from tqdm import tqdm
 import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
@@ -175,7 +174,7 @@ class GeoScattering(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         self._check_graphs(graphs)
-        self._embedding = [self._calculate_geoscattering(graph) for graph in tqdm(graphs)]
+        self._embedding = [self._calculate_geoscattering(graph) for graph in graphs]
 
 
     def get_embedding(self):
