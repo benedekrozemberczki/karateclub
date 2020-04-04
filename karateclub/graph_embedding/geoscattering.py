@@ -82,7 +82,7 @@ class GeoScattering(Estimator):
 
     def _get_zero_order_features(self, X):
         """
-        Calculating the first order graph features.
+        Calculating the zero-th order graph features.
 
         Arg types:
             * **X** *(NumPy array)* - The node features.
@@ -100,6 +100,16 @@ class GeoScattering(Estimator):
          return features
 
     def _get_first_order_features(self, Psi, X):
+        """
+        Calculating the first order graph features.
+
+        Arg types:
+            * **Psi** *(List of Scipy arrays)* - The wavelet matrices.
+            * **X** *(NumPy array)* - The node features.
+
+        Return types:
+            * **features** *(NumPy vector)* - The graph features.
+        """
         features = []
         X = np.abs(X)
         for col in range(X.shape[1]):
