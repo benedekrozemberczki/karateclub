@@ -78,6 +78,8 @@ Meta node embedding
 Whole graph embedding
 --------------------
 
+* Feng Gao, Guy Wolf, Matthew Hirn: **Geometric Scattering for Graph Data Analysis** `Paper <http://proceedings.mlr.press/v97/gao19e.html>`_
+
 * Hong Chen, Hisashi Koga: **GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features** `Paper <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
 
 * Anton Tsitsulin, Davide Mottin, Panagiotis Karras, Alex Bronstein, Emmanuel Müller: **NetLSD: Hearing the Shape of a Graph** `Paper <https://arxiv.org/abs/1805.10712>`_, `Video <https://www.youtube.com/watch?v=aiPOa1NTgvM>`_
