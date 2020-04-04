@@ -108,7 +108,7 @@ class GeoScattering(Estimator):
             * **X** *(NumPy array)* - The node features.
 
         Return types:
-            * **features** *(NumPy vector)* - The graph features.
+            * **features** *(NumPy vector)* - The first order graph features.
         """
         features = []
         X = np.abs(X)
@@ -130,7 +130,7 @@ class GeoScattering(Estimator):
             * **X** *(NumPy array)* - The node features.
 
         Return types:
-            * **features** *(NumPy vector)* - The graph features.
+            * **features** *(NumPy vector)* - The second order graph features.
         """
         features = []
         X = np.abs(X)
