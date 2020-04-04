@@ -21,13 +21,14 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # Graph2Vec example
 #-----------------------------------
 
-graphs = [nx.newman_watts_strogatz_graph(1000, 5, 0.3) for _ in range(100)]
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
 model = GeoScattering()
 
 model.fit(graphs)
-model.get_embedding()
+embedding = model.get_embedding()
 
+print(embedding.shape)
 
 quit()
 
