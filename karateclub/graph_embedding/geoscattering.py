@@ -52,10 +52,20 @@ class GeoScattering(Estimator):
         return A_hat
 
     def _calculate_wavelets(self, A_hat):
+        """
+        Calculating the wavelets of a normalized self-looped adjacency matrix.
+
+        Arg types:
+            * **A_hat** *(SciPy array)* - The normalized adjacency matrix.
+
+        Return types:
+            * **Psi** *(List of Scipy arrays)* - The wavelet matrices.
+        """
         Psi = [A_hat.power(2**power) - A_hat.power(2**(power+1)) for power in range(self.order+1)]
         return Psi
 
     def _create_node_feature_matrix(self, graph):
+        
         log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
         clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1,1)
@@ -109,7 +119,7 @@ class GeoScattering(Estimator):
             * **graph** *(NetworkX graph)* - A graph to be embedded.
 
         Return types:
-            * **features** *(Numpy array)* - The embedding of a single graph.
+            * **features** *(Numpy vector)* - The embedding of a single graph.
         """
         A_hat = self._get_normalized_adjacency(graph)
         Psi = self._calculate_wavelets(A_hat)
@@ -122,7 +132,7 @@ class GeoScattering(Estimator):
 
     def fit(self, graphs):
         """
-        Fitting a NetLSD model.
+        Fitting a Geometric-Scattering model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
