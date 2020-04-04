@@ -127,6 +127,7 @@ In detail, the following community detection and embedding methods were implemen
 * **[NEU](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.meta.neu.NEU)** from Yang *et al.*: [Fast Network Embedding Enhancement via High Order Proximity Approximation](https://www.ijcai.org/Proceedings/2017/0544.pdf) (IJCAI 2017)
 
 **Graph Level Embedding**
+* **[GeoScattering](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.geoscattering.GeoScattering)** from Gao *et al.*: [Geometric Scattering for Graph Data Analysis](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICML
 
 * **[GL2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.gl2vec.GL2Vec)** from Chen and Koga: [GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICONIP 2019)
 
