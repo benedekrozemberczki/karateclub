@@ -7,7 +7,9 @@ from karateclub.estimator import Estimator
 
 class GeoScattering(Estimator):
     r"""An implementation of `"GeoScattering" <http://proceedings.mlr.press/v97/gao19e.html>`_
-    from the ICML '19 paper "Geometric Scattering for Graph Data Analysis".
+    from the ICML '19 paper "Geometric Scattering for Graph Data Analysis". The procedure
+    uses scattering with wavelet transforms to create graph spectral descriptors. Moments of the
+    wavelet transformed features are used as graph level features for the embedding. 
 
     Args:
         order (int): Adjacency matrix powers. Default is 4.
@@ -16,7 +18,6 @@ class GeoScattering(Estimator):
     def __init__(self, order=4, moments=4):
         self.order = order
         self.moments = moments
-
 
     def _create_D_inverse(self, graph):
         """
