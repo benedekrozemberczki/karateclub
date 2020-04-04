@@ -95,14 +95,14 @@ class GeoScattering(Estimator):
         Return types:
             * **features** *(NumPy vector)* - The zero-th order graph features.
         """
-         features = []
-         X = np.abs(X)
-         for col in range(X.shape[1]):
-             x = np.abs(X[:, col])
-             for power in range(1,self.order+1):
-                 features.append(np.sum(np.power(x,power)))
-         features = np.array(features).reshape(-1)
-         return features
+        features = []
+        X = np.abs(X)
+        for col in range(X.shape[1]):
+            x = np.abs(X[:, col])
+            for power in range(1,self.order+1):
+                features.append(np.sum(np.power(x,power)))
+        features = np.array(features).reshape(-1)
+        return features
 
 
     def _get_first_order_features(self, Psi, X):
