@@ -19,6 +19,7 @@ class GeoScattering(Estimator):
         self.order = order
         self.moments = moments
 
+
     def _create_D_inverse(self, graph):
         """
         Creating a sparse inverse degree matrix.
@@ -34,6 +35,7 @@ class GeoScattering(Estimator):
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
+
 
     def _get_normalized_adjacency(self, graph):
         """
@@ -51,6 +53,7 @@ class GeoScattering(Estimator):
         A_hat = 0.5*A_hat
         return A_hat
 
+
     def _calculate_wavelets(self, A_hat):
         """
         Calculating the wavelets of a normalized self-looped adjacency matrix.
@@ -63,6 +66,7 @@ class GeoScattering(Estimator):
         """
         Psi = [A_hat.power(2**power) - A_hat.power(2**(power+1)) for power in range(self.order+1)]
         return Psi
+
 
     def _create_node_feature_matrix(self, graph):
         """
@@ -79,6 +83,7 @@ class GeoScattering(Estimator):
         clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
         X = np.concatenate([log_degree, eccentricity, clustering_coefficient], axis=1)
         return X
+
 
     def _get_zero_order_features(self, X):
         """
@@ -98,6 +103,7 @@ class GeoScattering(Estimator):
                  features.append(np.sum(np.power(x,power)))
          features = np.array(features).reshape(-1)
          return features
+
 
     def _get_first_order_features(self, Psi, X):
         """
@@ -120,6 +126,7 @@ class GeoScattering(Estimator):
                     features.append(np.sum(np.power(np.abs(filtered_x),q)))
         features = np.array(features).reshape(-1) 
         return features  
+
 
     def _get_second_order_features(self, Psi, X):
         """
@@ -146,7 +153,7 @@ class GeoScattering(Estimator):
 
         features = np.array(features).reshape(-1)
         return features   
-            
+
 
     def _calculate_geoscattering(self, graph):
         """
@@ -166,6 +173,7 @@ class GeoScattering(Estimator):
         second_order_features = self._get_second_order_features(Psi, X)
         features = np.concatenate([zero_order_features, first_order_features, second_order_features], axis=0)
         return features
+
 
     def fit(self, graphs):
         """
