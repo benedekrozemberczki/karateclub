@@ -58,10 +58,10 @@ class GEMSEC(Estimator):
         return negative_samples
 
 
-    def _calculcate_noise_vector(self, negative_samples, target_node):
+    def _calculcate_noise_vector(self, negative_samples, source_node):
         noise_vectors = self._base_embedding[negative_samples, :]
-        target_vector = self._base_embedding[int(target_node), :]
-        raw_scores = noise_vectors.dot(target_vector.T)
+        source_vector = self._base_embedding[int(source_node), :]
+        raw_scores = noise_vectors.dot(source_vector.T)
         raw_scores = np.exp(np.clip(raw_scores, -15, 15))
         scores = raw_scores/np.sum(raw_scores)
         scores = scores.reshape(-1,1)
@@ -70,13 +70,18 @@ class GEMSEC(Estimator):
 
 
     def _calculate_cluster_vector(self, source_node):
-        norms = self.cluster_centers - self._base_embedding[int(source_node), :]
+        distances = self._base_embedding[int(source_node), :].reshape(-1,1) - self._cluster_centers
+        scores = np.power(np.sum(np.power(distances,2),axis=0),0.5)
+        cluster_index = np.argmin(scores)
+        cluster_vector = distances[:,cluster_index]/scores[cluster_index]
+        return cluster_vector, cluster_index
 
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
-        noise_vector = self._calculcate_noise_vector(negative_samples, target_node)
-        cluster_vector = self._calculate_cluster_vector(source_node)
-        gradient = noise_vector - target_vector #+ self.gamma*cluster_vector
-        self._base_embedding[int(source_node), :] += -self.learning_rate*gradient
+        noise_vector = self._calculcate_noise_vector(negative_samples, source_node)
+        target_vector = self._base_embedding[int(target_node), :]
+        cluster_vector, cluster_index = self._calculate_cluster_vector(source_node)
+        node_gradient = noise_vector - target_vector + self.gamma*cluster_vector
+        self._base_embedding[int(source_node), :] += -self.learning_rate*node_gradient
         
 
     def _update_a_weight(self, source_node, target_node):
