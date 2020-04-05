@@ -83,6 +83,12 @@ class GEMSEC(Estimator):
 
 
     def _calculcate_noise_vector(self, negative_samples, source_node):
+        """
+        Creating a cluster center array.
+
+        Arg types:
+            * **negative_samples** *(list)*: List of negative sampled nodes.
+        """
         noise_vectors = self._base_embedding[negative_samples, :]
         source_vector = self._base_embedding[int(source_node), :]
         raw_scores = noise_vectors.dot(source_vector.T)
