@@ -16,12 +16,13 @@ class GEMSEC(Estimator):
         walk_number (int): Number of random walks. Default is 10.
         walk_length (int): Length of random walks. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 128.
+        negative_samples (int): Number of negative samples. Default is 5.
         window_size (int): Matrix power order. Default is 5.
         learning_rate (float): Gradient descent learning rate. Default is 0.05.
         clusters (int): Number of cluster centers. Default is 10.
         gamma (float): Clustering cost weight coefficient. Default is 0.01.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128,
+    def __init__(self, walk_number=10, walk_length=80, dimensions=128, negative_samples=5,
                  window_size=5, learning_rate=0.01, clusters=10, gamma=0.01):
 
         self.walk_number = walk_number
@@ -38,9 +39,8 @@ class GEMSEC(Estimator):
         for node in graph.nodes():
             for _ in range(graph.degree(node)):
                 self.sampler[index] = node
-                index + 1
-         self.global_index = index + 1
-         print(self.sampler)
+                index = index + 1
+        self.global_index = index + 1
 
     def _initialize_node_embeddings(self, graph):
         shape = (graph.number_of_nodes(), self.dimensions)
@@ -51,8 +51,11 @@ class GEMSEC(Estimator):
         shape = (self.dimensions, self.clusters)
         self._cluster_centers = np.random.normal(0, 1.0/self.dimensions, shape)
 
+    def _sample_negative_samples(self):
+        negative_samples = [for _ in range(self.negative_samples)]
+
     def _update_a_weight(self, source_node, target_node):
-        x = 1
+        self._sample_negative_samples()
 
     def _do_gradient_descent(self):
         random.shuffle(self.walker.walks)
