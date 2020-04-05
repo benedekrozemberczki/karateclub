@@ -24,8 +24,8 @@ class GEMSEC(Estimator):
         clusters (int): Number of cluster centers. Default is 10.
         gamma (float): Clustering cost weight coefficient. Default is 0.01.
     """
-    def __init__(self, walk_number=1, walk_length=10, dimensions=32, negative_samples=5,
-                 window_size=5, learning_rate=0.1, clusters=10, gamma=0.01):
+    def __init__(self, walk_number=10, walk_length=10, dimensions=32, negative_samples=1,
+                 window_size=2, learning_rate=0.1, clusters=10, gamma=0.1):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -81,6 +81,7 @@ class GEMSEC(Estimator):
         target_vector = self._base_embedding[int(target_node), :]
         cluster_vector, cluster_index = self._calculate_cluster_vector(source_node)
         node_gradient = noise_vector - target_vector + self.gamma*cluster_vector
+        node_gradient = node_gradient / np.linalg.norm(node_gradient)
         self._base_embedding[int(source_node), :] += -self.learning_rate*node_gradient
         self._cluster_centers[:, cluster_index] += self.learning_rate*self.gamma*cluster_vector 
 

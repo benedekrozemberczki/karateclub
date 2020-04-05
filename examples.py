@@ -21,8 +21,9 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # GEMSEC example
 #--------------
 
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+reader = GraphReader("wikipedia")
 
+g = reader.get_graph()
 model = GEMSEC()
 
 model.fit(g)
