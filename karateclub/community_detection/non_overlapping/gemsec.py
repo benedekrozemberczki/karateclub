@@ -103,8 +103,11 @@ class GEMSEC(Estimator):
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
         """
         Updating the cluster center and the node embedding.
+
         Arg types:
-        
+            * **negative_samples** *(list)* - Negative samples.
+            * **source_node** *(int)* - Source node in the walk.
+            * **target_node** *(int)* - Target node in the walk.
         """
         noise_vector = self._calculcate_noise_vector(negative_samples, source_node)
         target_vector = self._base_embedding[int(target_node), :]
@@ -119,7 +122,8 @@ class GEMSEC(Estimator):
         Updating the weights for a pair of nodes.
 
         Arg types:
-            * **target_node** *(int)* - The graph to be clustered.
+            * **source_node** *(int)* - Source node in the walk.
+            * **target_node** *(int)* - Target node in the walk.
         """
         negative_samples = self._sample_negative_samples()
         self._do_descent_for_pair(negative_samples, source_node, target_node)
