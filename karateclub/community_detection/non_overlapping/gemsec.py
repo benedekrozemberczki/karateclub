@@ -24,8 +24,8 @@ class GEMSEC(Estimator):
         clusters (int): Number of cluster centers. Default is 10.
         gamma (float): Clustering cost weight coefficient. Default is 0.01.
     """
-    def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=1,
-                 window_size=5, learning_rate=0.01, clusters=10, gamma=0.01):
+    def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=5,
+                 window_size=5, learning_rate=0.1, clusters=10, gamma=0.1):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -91,6 +91,9 @@ class GEMSEC(Estimator):
         self._do_descent_for_pair(negative_samples, target_node, source_node)
 
     def _do_gradient_descent(self):
+        """
+        Updating the embedding weights and cluster centers with gradient descent.
+        """
         random.shuffle(self.walker.walks)
         for walk in tqdm(self.walker.walks):
             for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
@@ -122,11 +125,13 @@ class GEMSEC(Estimator):
         """
         return np.array(self._base_embedding)
 
+
     def _get_membership(self, node):
-        distances = self._base_embedding[node, :].reshape(-1,1) - self._cluster_centers
-        scores = np.power(np.sum(np.power(distances,2),axis=0),0.5)
+        distances = self._base_embedding[node, :].reshape(-1, 1) - self._cluster_centers
+        scores = np.power(np.sum(np.power(distances,2), axis=0), 0.5)
         cluster_index = np.argmin(scores)   
         return cluster_index
+
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
