@@ -59,10 +59,18 @@ class GEMSEC(Estimator):
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
         noise_vectors = self._base_embedding[negative_samples, :]
         target_vector = self._base_embedding[int(target_node), :]
+        raw_scores = noise_vectors.dot(target_vector.T)
+        raw_scores = np.exp(np.clip(raw_scores, -15, 15))
+        scores = raw_scores/np.sum(raw_scores)
+        scores = scores.reshape(-1,1)
+        gradient = np.sum(scores*noise_vectors,axis=0) - target_vector
+        self._base_embedding[int(source_node), :] += -self.learning_rate*gradient
+        
 
     def _update_a_weight(self, source_node, target_node):
         negative_samples = self._sample_negative_samples()
         self._do_descent_for_pair(negative_samples, source_node, target_node)
+        self._do_descent_for_pair(negative_samples, target_node, source_node)
 
     def _do_gradient_descent(self):
         random.shuffle(self.walker.walks)
@@ -94,4 +102,4 @@ class GEMSEC(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        return np.array(self._embedding)
+        return np.array(self._base_embedding)
