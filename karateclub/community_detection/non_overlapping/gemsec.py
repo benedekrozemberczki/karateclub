@@ -1,3 +1,4 @@
+import random
 import numpy as np
 import networkx as nx
 from tqdm import tqdm
@@ -31,6 +32,15 @@ class GEMSEC(Estimator):
         self.clusters = clusters
         self.gamma = gamma
 
+    def _setup_sampling_weights(self, graph):
+        self.sampler = {}
+        index = 0
+        for node in graph.nodes():
+            for _ in range(graph.degree(node)):
+                self.sampler[index] = node
+                index + 1
+         self.global_index = index + 1
+         print(self.sampler)
 
     def _initialize_node_embeddings(self, graph):
         shape = (graph.number_of_nodes(), self.dimensions)
@@ -45,6 +55,7 @@ class GEMSEC(Estimator):
         x = 1
 
     def _do_gradient_descent(self):
+        random.shuffle(self.walker.walks)
         for walk in tqdm(self.walker.walks):
             for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
                 for step in range(1,self.window_size+1):
@@ -59,6 +70,7 @@ class GEMSEC(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._check_graph(graph)
+        self._setup_sampling_weights(graph)
         self.walker = RandomWalker(self.walk_length, self.walk_number)
         self.walker.do_walks(graph)
         self._initialize_node_embeddings(graph)
