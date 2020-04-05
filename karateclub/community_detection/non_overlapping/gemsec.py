@@ -15,16 +15,16 @@ class GEMSEC(Estimator):
     learned jointly.
 
     Args:
-        walk_number (int): Number of random walks. Default is 10.
+        walk_number (int): Number of random walks. Default is 5.
         walk_length (int): Length of random walks. Default is 80.
-        dimensions (int): Dimensionality of embedding. Default is 128.
+        dimensions (int): Dimensionality of embedding. Default is 32.
         negative_samples (int): Number of negative samples. Default is 5.
         window_size (int): Matrix power order. Default is 5.
         learning_rate (float): Gradient descent learning rate. Default is 0.05.
         clusters (int): Number of cluster centers. Default is 10.
         gamma (float): Clustering cost weight coefficient. Default is 0.01.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128, negative_samples=5,
+    def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=5,
                  window_size=5, learning_rate=0.01, clusters=10, gamma=0.01):
 
         self.walk_number = walk_number
@@ -82,7 +82,7 @@ class GEMSEC(Estimator):
         cluster_vector, cluster_index = self._calculate_cluster_vector(source_node)
         node_gradient = noise_vector - target_vector + self.gamma*cluster_vector
         self._base_embedding[int(source_node), :] += -self.learning_rate*node_gradient
-        
+        self._cluster_centers[:, cluster_index] += self.learning_rate*self.gamma*cluster_vector 
 
     def _update_a_weight(self, source_node, target_node):
         negative_samples = self._sample_negative_samples()
