@@ -37,6 +37,12 @@ class GEMSEC(Estimator):
         self.gamma = gamma
 
     def _setup_sampling_weights(self, graph):
+        """
+        Creating a negative sampling table.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph for negative sampling.
+        """
         self.sampler = {}
         index = 0
         for node in graph.nodes():
@@ -46,14 +52,30 @@ class GEMSEC(Estimator):
         self.global_index = index-1
 
     def _initialize_node_embeddings(self, graph):
+        """
+        Creating a node embedding array.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph for negative sampling.
+        """
         shape = (graph.number_of_nodes(), self.dimensions)
         self._base_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
 
     def _initialize_cluster_centers(self, graph):
+        """
+        Creating a cluster center array.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph for negative sampling.
+        """
         shape = (self.dimensions, self.clusters)
         self._cluster_centers = np.random.normal(0, 1.0/self.dimensions, shape)
 
     def _sample_negative_samples(self):
+        """
+        Sampling a batch of nodes as negative samples.
+
+        """
         negative_samples = [self.sampler[random.randint(0,self.global_index)] for _ in range(self.negative_samples)]
         return negative_samples
 
