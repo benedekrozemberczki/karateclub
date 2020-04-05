@@ -24,11 +24,9 @@ class GEMSEC(Estimator):
         self.walk_number = walk_number
         self.walk_length = walk_length
         self.dimensions = dimensions
-        self.workers = workers
         self.window_size = window_size
-        self.epochs = epochs
         self.learning_rate = learning_rate
-        self.min_count = min_count
+        self.clusters = clusters
 
     def fit(self, graph):
         """
