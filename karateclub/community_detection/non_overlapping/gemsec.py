@@ -1,7 +1,6 @@
 import random
 import numpy as np
 import networkx as nx
-from tqdm import tqdm
 from karateclub.utils.walker import RandomWalker
 from karateclub.estimator import Estimator
 
@@ -155,7 +154,7 @@ class GEMSEC(Estimator):
         Updating the embedding weights and cluster centers with gradient descent.
         """
         random.shuffle(self.walker.walks)
-        for walk in tqdm(self.walker.walks):
+        for walk in self.walker.walks:
             for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
                 for step in range(1, self.window_size+1):
                     target_node = walk[i+step]
