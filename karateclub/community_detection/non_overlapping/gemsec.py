@@ -14,14 +14,11 @@ class GEMSEC(Estimator):
         walk_number (int): Number of random walks. Default is 10.
         walk_length (int): Length of random walks. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 128.
-        workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 5.
-        epochs (int): Number of epochs. Default is 1.
-        learning_rate (float): HogWild! learning rate. Default is 0.05.
-        min_count (int): Minimal count of node occurences. Default is 1.
+        learning_rate (float): Gradient descent learning rate. Default is 0.05.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
-                 window_size=5, epochs=1, learning_rate=0.05, min_count=1):
+    def __init__(self, walk_number=10, walk_length=80, dimensions=128,
+                 window_size=5, learning_rate=0.01):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -43,17 +40,6 @@ class GEMSEC(Estimator):
         walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
 
-        model = Word2Vec(walker.walks,
-                         hs=1,
-                         alpha=self.learning_rate,
-                         iter=self.epochs,
-                         size=self.dimensions,
-                         window=self.window_size,
-                         min_count=self.min_count,
-                         workers=self.workers)
-
-        num_of_nodes = graph.number_of_nodes()
-        self._embedding = [model[str(n)] for n in range(num_of_nodes)]
 
 
     def get_embedding(self):
