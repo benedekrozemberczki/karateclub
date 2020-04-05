@@ -22,15 +22,11 @@ from karateclub.dataset import GraphReader, GraphSetReader
 #--------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+
 model = GEMSEC()
 
 model.fit(g)
-
 memberships = model.get_memberships()
-
-print(community.modularity(memberships,g))
-
-quit()
 
 #-----------------------------------
 # Geometric Scattering example
