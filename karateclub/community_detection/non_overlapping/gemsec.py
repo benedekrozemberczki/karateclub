@@ -84,11 +84,14 @@ class GEMSEC(Estimator):
 
     def _calculcate_noise_vector(self, negative_samples, source_node):
         """
-        Creating a cluster center array.
+        Getting the noise vector for the weight update.
 
         Arg types:
             * **negative_samples** *(list)*: List of negative sampled nodes.
             * **source_node** *(int)* - Source node in the walk.
+
+        Return types:
+            * **noise_vector** *(NumPy array) - Noise update vector.
         """
         noise_vectors = self._base_embedding[negative_samples, :]
         source_vector = self._base_embedding[int(source_node), :]
@@ -101,6 +104,16 @@ class GEMSEC(Estimator):
 
 
     def _calculate_cluster_vector(self, source_node):
+        """
+        Getting the cluster vector for the weight update.
+
+        Arg types:
+            * **source_node** *(int)* - Source node in the walk.
+
+        Return types:
+            * **cluster_vector** *(NumPy array) - Cluster update vector.
+            * **cluster_index** *(int)*: Node cluster membership index.
+        """
         distances = self._base_embedding[int(source_node), :].reshape(-1,1) - self._cluster_centers
         scores = np.power(np.sum(np.power(distances,2),axis=0),0.5)
         cluster_index = np.argmin(scores)
