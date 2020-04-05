@@ -19,6 +19,8 @@ Overlapping community detection
 Non-overlapping community detection
 --------------------
 
+*  Benedek Rozemberczki, Ryan Davies, Rik Sarkar, and Charles Sutton: **GEMSEC: Graph Embedding with Self Clustering** `Paper <https://arxiv.org/abs/1802.03997>`_, `Video <https://www.youtube.com/watch?v=6fEGMHJSsq0>`_, `Code <https://github.com/benedekrozemberczki/GEMSEC>`_
+
 * Pei-Zhen Li, Ling Huang, Chang-Dong Wang, and Jian-Huang Lai: **EdMot: An Edge Enhancement Approach for Motif-aware Community Detection** `Paper <https://arxiv.org/abs/1906.04560>`_, `Video <https://www.youtube.com/watch?v=6fEGMHJSsq0>`_, `Code <https://github.com/benedekrozemberczki/EdMot>`_
 
 * Arnau Prat-Perez, David Dominguez-Sal, Joseph-Luis Larriba-Pey: **High Quality, Scalable and Parallel Community Detectionfor Large Real Graphs** `Paper <http://wwwconference.org/proceedings/www2014/proceedings/p225.pdf>`_
