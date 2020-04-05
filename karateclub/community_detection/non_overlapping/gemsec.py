@@ -35,6 +35,7 @@ class GEMSEC(Estimator):
         self.clusters = clusters
         self.gamma = gamma
 
+
     def _setup_sampling_weights(self, graph):
         """
         Creating a negative sampling table.
@@ -50,6 +51,7 @@ class GEMSEC(Estimator):
                 index = index + 1
         self.global_index = index-1
 
+
     def _initialize_node_embeddings(self, graph):
         """
         Creating a node embedding array.
@@ -59,6 +61,7 @@ class GEMSEC(Estimator):
         """
         shape = (graph.number_of_nodes(), self.dimensions)
         self._base_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
+
 
     def _initialize_cluster_centers(self, graph):
         """
@@ -120,6 +123,7 @@ class GEMSEC(Estimator):
         cluster_vector = distances[:,cluster_index]/scores[cluster_index]
         return cluster_vector, cluster_index
 
+
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
         """
         Updating the cluster center and the node embedding.
@@ -137,6 +141,7 @@ class GEMSEC(Estimator):
         self._base_embedding[int(source_node), :] += -self.learning_rate*node_gradient
         self._cluster_centers[:, cluster_index] += self.learning_rate*self.gamma*cluster_vector 
 
+
     def _update_a_weight(self, source_node, target_node):
         """
         Updating the weights for a pair of nodes.
@@ -149,6 +154,7 @@ class GEMSEC(Estimator):
         self._do_descent_for_pair(negative_samples, source_node, target_node)
         self._do_descent_for_pair(negative_samples, target_node, source_node)
 
+
     def _do_gradient_descent(self):
         """
         Updating the embedding weights and cluster centers with gradient descent.
@@ -159,6 +165,7 @@ class GEMSEC(Estimator):
                 for step in range(1, self.window_size+1):
                     target_node = walk[i+step]
                     self._update_a_weight(source_node, target_node)
+
 
     def fit(self, graph):
         """
