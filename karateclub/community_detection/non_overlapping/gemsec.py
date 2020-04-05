@@ -28,6 +28,7 @@ class GEMSEC(Estimator):
         self.walk_number = walk_number
         self.walk_length = walk_length
         self.dimensions = dimensions
+        self.negative_samples = negative_samples
         self.window_size = window_size
         self.learning_rate = learning_rate
         self.clusters = clusters
