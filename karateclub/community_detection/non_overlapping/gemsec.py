@@ -101,6 +101,11 @@ class GEMSEC(Estimator):
         return cluster_vector, cluster_index
 
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
+        """
+        Updating the cluster center and the node embedding.
+        Arg types:
+        
+        """
         noise_vector = self._calculcate_noise_vector(negative_samples, source_node)
         target_vector = self._base_embedding[int(target_node), :]
         cluster_vector, cluster_index = self._calculate_cluster_vector(source_node)
@@ -110,6 +115,12 @@ class GEMSEC(Estimator):
         self._cluster_centers[:, cluster_index] += self.learning_rate*self.gamma*cluster_vector 
 
     def _update_a_weight(self, source_node, target_node):
+        """
+        Updating the weights for a pair of nodes.
+
+        Arg types:
+            * **target_node** *(int)* - The graph to be clustered.
+        """
         negative_samples = self._sample_negative_samples()
         self._do_descent_for_pair(negative_samples, source_node, target_node)
         self._do_descent_for_pair(negative_samples, target_node, source_node)
