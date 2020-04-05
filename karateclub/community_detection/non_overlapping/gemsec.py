@@ -75,7 +75,7 @@ class GEMSEC(Estimator):
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
         noise_vector = self._calculcate_noise_vector(negative_samples, target_node)
         cluster_vector = self._calculate_cluster_vector(source_node)
-        gradient = noise_vector - target_vector + self.gamma*cluster_vector
+        gradient = noise_vector - target_vector #+ self.gamma*cluster_vector
         self._base_embedding[int(source_node), :] += -self.learning_rate*gradient
         
 
