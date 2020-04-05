@@ -17,9 +17,10 @@ class GEMSEC(Estimator):
         window_size (int): Matrix power order. Default is 5.
         learning_rate (float): Gradient descent learning rate. Default is 0.05.
         clusters (int): Number of cluster centers. Default is 10.
+        gamma (float): Clustering cost weight coefficient. Default is 0.01.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=128,
-                 window_size=5, learning_rate=0.01, clusters=10):
+                 window_size=5, learning_rate=0.01, clusters=10, gamma=0.01):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
