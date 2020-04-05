@@ -129,5 +129,10 @@ class GEMSEC(Estimator):
         return cluster_index
 
     def get_memberships(self):
+        r"""Getting the cluster membership of nodes.
+
+        Return types:
+            * **memberships** *(dict)*: Node cluster memberships.
+        """
         memberships = {node:self._get_membership(node) for node in range(self._base_embedding.shape[0])}
         return memberships 
