@@ -121,12 +121,20 @@ class GEMSEC(Estimator):
         r"""Getting the node embedding.
 
         Return types:
-            * **embedding** *(Numpy array)* - The embedding of nodes.
+            * **embedding** *(Numpy array)*: The embedding of nodes.
         """
         return np.array(self._base_embedding)
 
 
     def _get_membership(self, node):
+        """Getting the cluster membership of a node.
+
+        Arg types:
+            * **node** *(int)* - The graph to be clustered.
+
+        Return types:
+            * **cluster_index** *(int)*: Node cluster membership index.
+        """
         distances = self._base_embedding[node, :].reshape(-1, 1) - self._cluster_centers
         scores = np.power(np.sum(np.power(distances,2), axis=0), 0.5)
         cluster_index = np.argmin(scores)   
