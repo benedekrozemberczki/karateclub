@@ -34,6 +34,10 @@ Overlapping community detection
 Non-overlapping community detection
 --------------------
 
+.. automodule:: karateclub.community_detection.non_overlapping.gemsec
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.community_detection.non_overlapping.edmot
     :members:
     :undoc-members:
