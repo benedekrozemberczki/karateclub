@@ -10,7 +10,9 @@ class GEMSEC(Estimator):
     from the ASONAM '19 paper "GEMSEC: Graph Embedding with Self Clustering".
     The procedure uses random walks to approximate the pointwise mutual information
     matrix obtained by pooling normalized adjacency matrix powers. This matrix
-    is decomposed by an approximate factorization technique.
+    is decomposed by an approximate factorization technique which is combined
+    with a k-means like clustering cost. A node embedding and clustering are
+    learned jointly.
 
     Args:
         walk_number (int): Number of random walks. Default is 10.
