@@ -5,7 +5,7 @@ from karateclub.estimator import Estimator
 
 class GEMSEC(Estimator):
     r"""An implementation of `"GEMSEC" <https://arxiv.org/abs/1802.03997>`_
-    from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
+    from the ASONAM '19 paper "GEMSEC: Graph Embedding with Self Clustering".
     The procedure uses random walks to approximate the pointwise mutual information
     matrix obtained by pooling normalized adjacency matrix powers. This matrix
     is decomposed by an approximate factorization technique.
