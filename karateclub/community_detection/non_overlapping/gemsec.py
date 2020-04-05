@@ -76,7 +76,7 @@ class GEMSEC(Estimator):
         Sampling a batch of nodes as negative samples.
 
         Return types:
-            * **embedding** *(list)*: List of negative sampled nodes.
+            * **negative_samples** *(list)*: List of negative sampled nodes.
         """
         negative_samples = [self.sampler[random.randint(0,self.global_index)] for _ in range(self.negative_samples)]
         return negative_samples
