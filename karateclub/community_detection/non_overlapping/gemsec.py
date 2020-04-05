@@ -71,6 +71,7 @@ class GEMSEC(Estimator):
         shape = (self.dimensions, self.clusters)
         self._cluster_centers = np.random.normal(0, 1.0/self.dimensions, shape)
 
+
     def _sample_negative_samples(self):
         """
         Sampling a batch of nodes as negative samples.
