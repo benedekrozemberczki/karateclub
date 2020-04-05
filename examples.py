@@ -27,6 +27,10 @@ model = GEMSEC()
 
 model.fit(g)
 
+memberships = model.get_memberships()
+
+print(community.modularity(memberships,g))
+
 quit()
 
 #-----------------------------------

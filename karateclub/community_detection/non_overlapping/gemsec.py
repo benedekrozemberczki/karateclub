@@ -24,8 +24,8 @@ class GEMSEC(Estimator):
         clusters (int): Number of cluster centers. Default is 10.
         gamma (float): Clustering cost weight coefficient. Default is 0.01.
     """
-    def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=5,
-                 window_size=5, learning_rate=0.01, clusters=10, gamma=0.01):
+    def __init__(self, walk_number=1, walk_length=10, dimensions=32, negative_samples=5,
+                 window_size=5, learning_rate=0.1, clusters=10, gamma=0.01):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -120,3 +120,13 @@ class GEMSEC(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return np.array(self._base_embedding)
+
+    def _get_membership(self, node):
+        distances = self._base_embedding[node, :].reshape(-1,1) - self._cluster_centers
+        scores = np.power(np.sum(np.power(distances,2),axis=0),0.5)
+        cluster_index = np.argmin(scores)   
+        return cluster_index
+
+    def get_memberships(self):
+        memberships = {node:self._get_membership(node) for node in range(self._base_embedding.shape[0])}
+        return memberships 
