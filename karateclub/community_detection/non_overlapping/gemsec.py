@@ -53,8 +53,9 @@ class GEMSEC(Estimator):
         self._cluster_centers = np.random.normal(0, 1.0/self.dimensions, shape)
 
     def _sample_negative_samples(self):
-        negative_samples = [for _ in range(self.negative_samples)]
-
+        negative_samples = [self.sampler[random.randint(0,self.global_index)] for _ in range(self.negative_samples)]
+        print(negative_samples)
+        return negative_samples
     def _update_a_weight(self, source_node, target_node):
         self._sample_negative_samples()
 
