@@ -40,7 +40,8 @@ class GEMSEC(Estimator):
         self._check_graph(graph)
         walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
-
+        for walk in walker.walks:
+            print(walk)
 
 
     def get_embedding(self):
