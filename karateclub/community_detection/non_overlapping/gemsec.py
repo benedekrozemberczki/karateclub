@@ -28,6 +28,7 @@ class GEMSEC(Estimator):
         self.window_size = window_size
         self.learning_rate = learning_rate
         self.clusters = clusters
+        self.gamma = gamma
 
     def fit(self, graph):
         """
