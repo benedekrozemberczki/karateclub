@@ -88,6 +88,7 @@ class GEMSEC(Estimator):
 
         Arg types:
             * **negative_samples** *(list)*: List of negative sampled nodes.
+            * **source_node** *(int)* - Source node in the walk.
         """
         noise_vectors = self._base_embedding[negative_samples, :]
         source_vector = self._base_embedding[int(source_node), :]
