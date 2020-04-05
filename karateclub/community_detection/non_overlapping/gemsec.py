@@ -4,7 +4,7 @@ from karateclub.utils.walker import RandomWalker
 from karateclub.estimator import Estimator
 
 class GEMSEC(Estimator):
-    r"""An implementation of `"GEMSEC" <https://arxiv.org/abs/1403.6652>`_
+    r"""An implementation of `"GEMSEC" <https://arxiv.org/abs/1802.03997>`_
     from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
     The procedure uses random walks to approximate the pointwise mutual information
     matrix obtained by pooling normalized adjacency matrix powers. This matrix
