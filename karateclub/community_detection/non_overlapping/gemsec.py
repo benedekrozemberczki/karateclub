@@ -41,12 +41,11 @@ class GEMSEC(Estimator):
             for _ in range(graph.degree(node)):
                 self.sampler[index] = node
                 index = index + 1
-        self.global_index = index + 1
+        self.global_index = index-1
 
     def _initialize_node_embeddings(self, graph):
         shape = (graph.number_of_nodes(), self.dimensions)
         self._base_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
-        self._noise_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
 
     def _initialize_cluster_centers(self, graph):
         shape = (self.dimensions, self.clusters)
@@ -54,10 +53,16 @@ class GEMSEC(Estimator):
 
     def _sample_negative_samples(self):
         negative_samples = [self.sampler[random.randint(0,self.global_index)] for _ in range(self.negative_samples)]
-        print(negative_samples)
         return negative_samples
+
+
+    def _do_descent_for_pair(self, negative_samples, source_node, target_node):
+        noise_vectors = self._base_embedding[negative_samples, :]
+        target_vector = self._base_embedding[int(target_node), :]
+
     def _update_a_weight(self, source_node, target_node):
-        self._sample_negative_samples()
+        negative_samples = self._sample_negative_samples()
+        self._do_descent_for_pair(negative_samples, source_node, target_node)
 
     def _do_gradient_descent(self):
         random.shuffle(self.walker.walks)
