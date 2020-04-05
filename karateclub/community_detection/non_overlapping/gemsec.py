@@ -78,7 +78,7 @@ class GEMSEC(Estimator):
         random.shuffle(self.walker.walks)
         for walk in tqdm(self.walker.walks):
             for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
-                for step in range(1,self.window_size+1):
+                for step in range(1, self.window_size+1):
                     target_node = walk[i+step]
                     self._update_a_weight(source_node, target_node)
 
