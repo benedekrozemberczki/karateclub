@@ -31,7 +31,7 @@ class GEMSEC(Estimator):
 
     def fit(self, graph):
         """
-        Fitting a DeepWalk model.
+        Fitting a GEMSEC model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
