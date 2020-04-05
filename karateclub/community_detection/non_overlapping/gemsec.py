@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from tqdm import tqdm
 from karateclub.utils.walker import RandomWalker
 from karateclub.estimator import Estimator
 
@@ -30,6 +31,26 @@ class GEMSEC(Estimator):
         self.clusters = clusters
         self.gamma = gamma
 
+
+    def _initialize_node_embeddings(self, graph):
+        shape = (graph.number_of_nodes(), self.dimensions)
+        self._base_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
+        self._noise_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
+
+    def _initialize_cluster_centers(self, graph):
+        shape = (self.dimensions, self.clusters)
+        self._cluster_centers = np.random.normal(0, 1.0/self.dimensions, shape)
+
+    def _update_a_weight(self, source_node, target_node):
+        x = 1
+
+    def _do_gradient_descent(self):
+        for walk in tqdm(self.walker.walks):
+            for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
+                for step in range(1,self.window_size+1):
+                    target_node = walk[i+step]
+                    self._update_a_weight(source_node, target_node)
+
     def fit(self, graph):
         """
         Fitting a GEMSEC model.
@@ -38,10 +59,11 @@ class GEMSEC(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._check_graph(graph)
-        walker = RandomWalker(self.walk_length, self.walk_number)
-        walker.do_walks(graph)
-        for walk in walker.walks:
-            print(walk)
+        self.walker = RandomWalker(self.walk_length, self.walk_number)
+        self.walker.do_walks(graph)
+        self._initialize_node_embeddings(graph)
+        self._initialize_cluster_centers(graph)
+        self._do_gradient_descent()
 
 
     def get_embedding(self):
