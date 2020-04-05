@@ -74,8 +74,7 @@ In detail, the following community detection and embedding methods were implemen
 
 **Non-Overlapping Community Detection**
 
-* **[GEMSEC](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.non_overlapping.gemsec.GEMSEC)** from Rozemberczki *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (ASONAM 2019)
-
+* **[GEMSEC](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.non_overlapping.gemsec.GEMSEC)** from Rozemberczki *et al.*: [GEMSEC: Graph Embedding with Self Clustering](https://arxiv.org/abs/1802.03997) (ASONAM 2019)
 
 * **[EdMot](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.non_overlapping.edmot.EdMot)** from Li *et al.*: [EdMot: An Edge Enhancement Approach for Motif-aware Community Detection](https://arxiv.org/abs/1906.04560) (KDD 2019)
 
