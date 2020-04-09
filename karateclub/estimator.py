@@ -1,6 +1,8 @@
 import networkx as nx
+from sys import exit
 
 """General Estimator base class."""
+
 
 class Estimator(object):
     """Estimator base class with constructor and public methods."""
@@ -28,10 +30,11 @@ class Estimator(object):
     def _check_networkx_graph(self, graph):
         try:
             if not isinstance(graph, nx.classes.graph.Graph):
-                raise TypeError("This is not a NetworkX graph. Please see requirements.")
+                raise TypeError(
+                    "This is not a NetworkX graph. Please see requirements."
+                )
         except:
-                exit("This is not a NetworkX graph. Please see requirements.")
-   
+            exit("This is not a NetworkX graph. Please see requirements.")
 
     def _check_connectivity(self, graph):
         """Checking the connected nature of a single graph."""
@@ -42,7 +45,6 @@ class Estimator(object):
         except:
             exit("Graph is not connected. Please see requirements.")
 
-
     def _check_directedness(self, graph):
         """Checking the undirected nature of a single graph."""
         try:
@@ -52,24 +54,21 @@ class Estimator(object):
         except:
             exit("Graph is directed. Please see requirements.")
 
-
     def _check_indexing(self, graph):
         """Checking the consecutive numeric indexing."""
         numeric_indices = [index for index in range(graph.number_of_nodes())]
         node_indices = sorted([node for node in graph.nodes()])
         try:
-           if numeric_indices != node_indices:
-               raise ValueError("The node indexing is wrong. Please see requirements.")
+            if numeric_indices != node_indices:
+                raise ValueError("The node indexing is wrong. Please see requirements.")
         except:
-           exit("The node indexing is wrong. Please see requirements.")     
-
+            exit("The node indexing is wrong. Please see requirements.")
 
     def _check_graph(self, graph):
         """Check the Karate Club assumptions about the graph."""
         self._check_connectivity(graph)
         self._check_directedness(graph)
         self._check_indexing(graph)
-
 
     def _check_graphs(self, graphs):
         """Check the Karate Club assumptions for a list of graphs."""
@@ -78,4 +77,3 @@ class Estimator(object):
                 self._check_graph(graph)
         except:
             exit("The graph list does not satisfy requirements.")
-
