@@ -339,9 +339,9 @@ model.get_embedding()
 model.fit(g, tp)
 model.get_embedding()
 
-#-----------------------------------
+#---------------
 # BANE example
-#-----------------------------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -354,9 +354,9 @@ model = BANE()
 
 model.fit(g, x)
 
-#------------------------------------
+#-----------------
 # BigClam example
-#------------------------------------
+#-----------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -366,9 +366,9 @@ model.fit(g)
 
 membership = model.get_memberships()
 
-#------------------------------------
+#-------------------
 # Walklets example
-#------------------------------------
+#-------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -378,9 +378,9 @@ model.fit(g)
 
 emb = model.get_embedding()
 
-#------------------------------------
+#-------------------
 # DeepWalk example
-#------------------------------------
+#-------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -388,9 +388,9 @@ model = DeepWalk()
 
 model.fit(g)
 
-#------------------------------------
+#-------------------
 # Splitter example
-#------------------------------------
+#-------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
