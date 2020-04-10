@@ -149,9 +149,9 @@ model.fit(g)
 
 model.get_memberships()
 
-#------------------------------------
+#------------------
 # Symm-NMF example
-#------------------------------------
+#------------------
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
@@ -163,9 +163,9 @@ model.get_embedding()
 
 model.get_memberships()
 
-#-----------------------------------
+#------------------
 # Role2vec example
-#-----------------------------------
+#------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -174,9 +174,9 @@ model = Role2Vec()
 model.fit(g)
 model.get_embedding()
 
-#-----------------------------------
+#------------
 # SF example
-#-----------------------------------
+#------------
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
