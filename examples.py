@@ -17,9 +17,9 @@ from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
 
-#--------------
+#----------------
 # GEMSEC example
-#--------------
+#----------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -28,9 +28,9 @@ model = GEMSEC()
 model.fit(g)
 memberships = model.get_memberships()
 
-#-----------------------------------
+#-------------------------------
 # Geometric Scattering example
-#-----------------------------------
+#-------------------------------
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
@@ -50,9 +50,9 @@ model = NodeSketch()
 model.fit(g)
 embedding = model.get_embedding()
 
-#--------------
+#---------------
 # HOPE example
-#--------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
@@ -116,9 +116,9 @@ model.fit(g, X)
 
 model.get_memberships()
 
-#------------------------------------
+#--------------
 # SINE example
-#------------------------------------
+#--------------
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
@@ -137,9 +137,9 @@ model.fit(g, X)
 
 model.get_memberships()
 
-#------------------------------------
+#-------------
 # SCD example
-#------------------------------------
+#-------------
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
