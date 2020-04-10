@@ -14,6 +14,7 @@ class EulerianDiffuser:
         self.diffusion_number = diffusion_number
         self.diffusion_cover = diffusion_cover
 
+
     def _run_diffusion_process(self, node):
         """
         Generating a diffusion tree from a given source node and linearizing it
@@ -42,6 +43,7 @@ class EulerianDiffuser:
         if len(euler) == 0:
             euler = [str(u) for u, v in nx.eulerian_circuit(graph, infected[0])]
         return euler
+
 
     def do_diffusions(self, graph):
         """
