@@ -275,9 +275,9 @@ model = Graph2Vec(attributed=True)
 model.fit(graphs)
 model.get_embedding()
 
-#-----------------------------------
+#-------------------
 # Graph2Vec example
-#-----------------------------------
+#-------------------
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(1000)]
 
@@ -286,9 +286,9 @@ model = Graph2Vec()
 model.fit(graphs)
 model.get_embedding()
 
-#-----------------------------------
+#-----------------
 # BoostNE example
-#-----------------------------------
+#-----------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -297,9 +297,9 @@ model = BoostNE()
 model.fit(g)
 model.get_embedding()
 
-#-----------------------------------
+#------------------
 # Diff2Vec example
-#-----------------------------------
+#------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -308,9 +308,9 @@ model = Diff2Vec()
 model.fit(g)
 model.get_embedding()
 
-#-----------------------------------
+#-------------------
 # NMF ADMM example
-#-----------------------------------
+#-------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -319,9 +319,9 @@ model = NMFADMM()
 model.fit(g)
 model.get_embedding()
 
-#-----------------------------------
+#---------------
 # TENE example
-#-----------------------------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
@@ -462,9 +462,9 @@ model.fit(g)
 
 embedding = model.get_embedding()
 
-#------------------------------------
+#---------------
 # NNSED example
-#------------------------------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 
