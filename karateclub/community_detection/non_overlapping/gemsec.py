@@ -19,9 +19,9 @@ class GEMSEC(Estimator):
         dimensions (int): Dimensionality of embedding. Default is 32.
         negative_samples (int): Number of negative samples. Default is 5.
         window_size (int): Matrix power order. Default is 5.
-        learning_rate (float): Gradient descent learning rate. Default is 0.01.
+        learning_rate (float): Gradient descent learning rate. Default is 0.1.
         clusters (int): Number of cluster centers. Default is 10.
-        gamma (float): Clustering cost weight coefficient. Default is 0.01.
+        gamma (float): Clustering cost weight coefficient. Default is 0.1.
     """
     def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=5,
                  window_size=5, learning_rate=0.1, clusters=10, gamma=0.1):
