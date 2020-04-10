@@ -185,9 +185,9 @@ model = SF()
 model.fit(graphs)
 model.get_embedding()
 
-#-----------------------------------
+#-----------------
 # FSCNMF example
-#-----------------------------------
+#-----------------
 
 g = nx.newman_watts_strogatz_graph(200, 20, 0.05)
 
@@ -197,9 +197,9 @@ model = FSCNMF()
 
 model.fit(g, x)
 
-#-----------------------------------
+#---------------
 # TADW example
-#-----------------------------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(200, 20, 0.05)
 
@@ -209,9 +209,9 @@ model = TADW()
 
 model.fit(g, x)
 
-#-----------------------------------
+#-----------------
 # GL2Vec example
-#-----------------------------------
+#-----------------
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
@@ -220,9 +220,9 @@ model = GL2Vec()
 model.fit(graphs)
 model.get_embedding()
 
-#-----------------------------------
+#--------------
 # FGSD example
-#-----------------------------------
+#--------------
 
 graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
@@ -231,9 +231,9 @@ model = FGSD()
 model.fit(graphs)
 model.get_embedding()
 
-#-----------------------------------
+#---------------
 # NetMF example
-#-----------------------------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
