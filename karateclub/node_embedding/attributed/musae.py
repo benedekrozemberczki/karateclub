@@ -15,7 +15,7 @@ class MUSAE(Estimator):
     are separable.
        
     Args:
-        walk_number (int): Number of random walks. Default is 10.
+        walk_number (int): Number of random walks. Default is 5.
         walk_length (int): Length of random walks. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 32.
         workers (int): Number of cores. Default is 4.
