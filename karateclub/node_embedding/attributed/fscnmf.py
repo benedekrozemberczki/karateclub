@@ -14,7 +14,7 @@ class FSCNMF(Estimator):
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
         lower_control (float): Embedding score minimal value. Default is 10**-15.
-        iterations (int): Power iterations. Default is 200.
+        iterations (int): Power iterations. Default is 500.
         alpha_1 (float): Alignment parameter for adjacency matrix. Default is 1000.0.
         alpha_2 (float): Adjacency basis regularization. Default is 1.0.
         alpha_3 (float): Adjacency features regularization. Default is 1.0.
