@@ -242,27 +242,27 @@ model = NetMF()
 model.fit(g)
 model.get_embedding()
 
-#-----------------------------------
+#-------------------------
 # GraphSet reader example
-#-----------------------------------
+#-------------------------
 
 reader = GraphSetReader("reddit10k")
 
 graphs = reader.get_graphs()
 y = reader.get_target()
 
-#-----------------------------------
+#----------------------
 # Graph reader example
-#-----------------------------------
+#----------------------
 
 reader = GraphReader("facebook")
 
 graph = reader.get_graph()
 target = reader.get_target()
 
-#----------------------------------
+#-------------------------------
 # Graph2Vec attributed example
-#----------------------------------
+#-------------------------------
 
 graphs = []
 
