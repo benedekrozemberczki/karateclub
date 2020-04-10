@@ -20,6 +20,7 @@ class FSCNMF(Estimator):
         alpha_3 (float): Adjacency features regularization. Default is 1.0.
         beta_1 (float): Alignment parameter for feature matrix. Default is 1000.0.
         beta_2 (float): Attribute basis regularization. Default is 1.0.
+        beta_3 (float): Attribute basis regularization. Default is 1.0.
     """
     def __init__(self, dimensions=32, lower_control=10**-15, iterations=500,
                  alpha_1=1000.0, alpha_2=1.0, alpha_3=1.0,
