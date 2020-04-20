@@ -389,10 +389,6 @@ model = DeepWalk()
 
 model.fit(g)
 
-
-print("here")
-quit()
-
 #-------------------
 # Splitter example
 #-------------------

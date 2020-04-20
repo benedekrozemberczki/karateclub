@@ -59,13 +59,13 @@ class GraRep(Estimator):
         Return types:
             * **target_matrix** *(SciPy array)* - The PMI matrix.
         """
-        self.A_tilde = sparse.coo_matrix(self.A_tilde.dot(self.A_hat))
-        scores = np.log(self.A_tilde.data)-math.log(self.A_tilde.shape[0])
-        rows = self.A_tilde.row[scores < 0]
-        cols = self.A_tilde.col[scores < 0]
+        self._A_tilde = sparse.coo_matrix(self._A_tilde.dot(self._A_hat))
+        scores = np.log(self._A_tilde.data)-math.log(self._A_tilde.shape[0])
+        rows = self._A_tilde.row[scores < 0]
+        cols = self._A_tilde.col[scores < 0]
         scores = scores[scores < 0]
         target_matrix = sparse.coo_matrix((scores, (rows, cols)),
-                                          shape=self.A_tilde.shape,
+                                          shape=self._A_tilde.shape,
                                           dtype=np.float32)
 
         return target_matrix
@@ -79,7 +79,7 @@ class GraRep(Estimator):
                            random_state=self.seed)
         svd.fit(target_matrix)
         embedding = svd.transform(target_matrix)
-        self.embeddings.append(embedding)
+        self._embeddings.append(embedding)
 
     def fit(self, graph):
         """
@@ -89,8 +89,8 @@ class GraRep(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._check_graph(graph)
-        self.A_tilde, self.A_hat = self._create_base_matrix(graph)
-        self.embeddings = []
+        self._A_tilde, self._A_hat = self._create_base_matrix(graph)
+        self._embeddings = []
         target_matrix = self._create_target_matrix()
         self._create_single_embedding(target_matrix)
         for step in range(self.order-1):
@@ -103,5 +103,5 @@ class GraRep(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate(self.embeddings, axis=1)
+        embedding = np.concatenate(self._embeddings, axis=1)
         return embedding

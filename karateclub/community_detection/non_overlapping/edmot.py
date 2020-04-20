@@ -26,8 +26,8 @@ class EdMot(Estimator):
         Return types:
             * **overlap** *(int)* - Neighbourhood overlap score.
         """
-        nodes_1 = self.graph.neighbors(node_1)
-        nodes_2 = self.graph.neighbors(node_2)
+        nodes_1 = self._graph.neighbors(node_1)
+        nodes_2 = self._graph.neighbors(node_2)
         overlap = len(set(nodes_1).intersection(set(nodes_2)))
         return overlap
 
@@ -35,26 +35,26 @@ class EdMot(Estimator):
         """
         Enumerating pairwise motif counts.
         """
-        edges = [e for e in self.graph.edges() if self._overlap(e[0], e[1]) >= self.cutoff]
+        edges = [e for e in self._graph.edges() if self._overlap(e[0], e[1]) >= self.cutoff]
         self.motif_graph = nx.from_edgelist(edges)
 
     def _extract_components(self):
         """
         Extracting connected components from motif graph.
         """
-        components = [c for c in nx.connected_components(self.motif_graph)]
+        components = [c for c in nx.connected_components(self._motif_graph)]
         components = [[len(c), c] for c in components]
         components.sort(key=lambda x: x[0], reverse=True)
         important_components = [components[comp][1] for comp
-                                in range(self.component_count if len(components)>=self.component_count else len(components))]
-        self.blocks = [list(graph) for graph in important_components]
+                                in range(self._component_count if len(components)>=self._component_count else len(components))]
+        self._blocks = [list(graph) for graph in important_components]
 
     def _fill_blocks(self):
         """
         Filling the dense blocks of the adjacency matrix.
         """
-        new_edges = [(n_1, n_2) for nodes in self.blocks for n_1 in nodes for n_2 in nodes if n_1!= n_2]
-        self.graph.add_edges_from(new_edges)  
+        new_edges = [(n_1, n_2) for nodes in self._blocks for n_1 in nodes for n_2 in nodes if n_1!= n_2]
+        self._graph.add_edges_from(new_edges)  
 
     def fit(self, graph):
         """
@@ -64,11 +64,11 @@ class EdMot(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._check_graph(graph)
-        self.graph = graph
+        self._graph = graph
         self._calculate_motifs()
         self._extract_components()
         self._fill_blocks()
-        self.partition = community.best_partition(self.graph, randomize=True)
+        self._partition = community.best_partition(self._graph, randomize=True)
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
@@ -76,4 +76,4 @@ class EdMot(Estimator):
         Return types:
             * **memberships** *(dictionary of ints)* - Cluster memberships.
         """
-        return self.partition
+        return self._partition
