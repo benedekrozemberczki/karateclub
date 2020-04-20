@@ -43,13 +43,13 @@ class GEMSEC(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph for negative sampling.
         """
-        self.sampler = {}
+        self._sampler = {}
         index = 0
         for node in graph.nodes():
             for _ in range(graph.degree(node)):
-                self.sampler[index] = node
+                self._sampler[index] = node
                 index = index + 1
-        self.global_index = index-1
+        self._global_index = index-1
 
 
     def _initialize_node_embeddings(self, graph):
@@ -81,7 +81,7 @@ class GEMSEC(Estimator):
         Return types:
             * **negative_samples** *(list)*: List of negative sampled nodes.
         """
-        negative_samples = [self.sampler[random.randint(0,self.global_index)] for _ in range(self.negative_samples)]
+        negative_samples = [self._sampler[random.randint(0,self._global_index)] for _ in range(self.negative_samples)]
         return negative_samples
 
 
@@ -159,8 +159,8 @@ class GEMSEC(Estimator):
         """
         Updating the embedding weights and cluster centers with gradient descent.
         """
-        random.shuffle(self.walker.walks)
-        for walk in self.walker.walks:
+        random.shuffle(self._walker.walks)
+        for walk in self._walker.walks:
             for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
                 for step in range(1, self.window_size+1):
                     target_node = walk[i+step]
@@ -176,8 +176,8 @@ class GEMSEC(Estimator):
         """
         self._check_graph(graph)
         self._setup_sampling_weights(graph)
-        self.walker = RandomWalker(self.walk_length, self.walk_number)
-        self.walker.do_walks(graph)
+        self._walker = RandomWalker(self.walk_length, self.walk_number)
+        self._walker.do_walks(graph)
         self._initialize_node_embeddings(graph)
         self._initialize_cluster_centers(graph)
         self._do_gradient_descent()
