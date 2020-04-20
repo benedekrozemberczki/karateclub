@@ -165,10 +165,6 @@ model.get_embedding()
 
 model.get_memberships()
 
-
-quit()
-
-
 #------------------
 # Role2vec example
 #------------------
@@ -180,6 +176,7 @@ model = Role2Vec()
 model.fit(g)
 model.get_embedding()
 
+quit()
 #------------
 # SF example
 #------------

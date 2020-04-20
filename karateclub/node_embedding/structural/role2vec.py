@@ -84,7 +84,7 @@ class Role2Vec(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._check_graph(graph)
-        walker = RandomWalker(self.walk_length,self.walk_number)
+        walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
  
         hasher = WeisfeilerLehmanHashing(graph=graph, wl_iterations=self.wl_iterations, attributed=False)
