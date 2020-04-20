@@ -54,7 +54,7 @@ class FSCNMF(Estimator):
         regul = regul + self.alpha_2*np.eye(self.dimensions)
         covar_term = inv(np.dot(self._B_2, np.transpose(self._B_2))+regul)
         self._B_1 = np.dot(simi_term, covar_term)
-        self._B_1[self.B_1 < self.lower_control] = self.lower_control
+        self._B_1[self._B_1 < self.lower_control] = self.lower_control
 
     def _update_B2(self):
         """
@@ -87,7 +87,7 @@ class FSCNMF(Estimator):
         covar_term = inv(to_inv)
         simi_term = self._X.transpose().dot(self._U)
         self._V = np.dot(simi_term, covar_term).transpose()
-        self._V[self.V < self.lower_control] = self.lower_control
+        self._V[self._V < self.lower_control] = self.lower_control
 
     def _create_D_inverse(self, graph):
         """
@@ -141,5 +141,5 @@ class FSCNMF(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate([self._B_1,self._U], axis=1)
+        embedding = np.concatenate([self._B_1, self._U], axis=1)
         return embedding
