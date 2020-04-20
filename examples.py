@@ -116,8 +116,6 @@ model.fit(g, X)
 
 model.get_memberships()
 
-
-
 #--------------
 # SINE example
 #--------------
@@ -176,7 +174,6 @@ model = Role2Vec()
 model.fit(g)
 model.get_embedding()
 
-quit()
 #------------
 # SF example
 #------------
@@ -187,6 +184,8 @@ model = SF()
 
 model.fit(graphs)
 model.get_embedding()
+
+quit()
 
 #-----------------
 # FSCNMF example
@@ -312,7 +311,7 @@ model.fit(g)
 model.get_embedding()
 
 #-------------------
-# NMF ADMM example
+# NMF-ADMM example
 #-------------------
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
