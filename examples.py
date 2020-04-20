@@ -355,9 +355,6 @@ model = BANE()
 
 model.fit(g, x)
 
-print("here")
-quit()
-
 #-----------------
 # BigClam example
 #-----------------
@@ -391,6 +388,10 @@ g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 model = DeepWalk()
 
 model.fit(g)
+
+
+print("here")
+quit()
 
 #-------------------
 # Splitter example

@@ -54,8 +54,8 @@ class BANE(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._check_graph(graph)
-        self.P = self._create_target_matrix(graph)
-        self.X = X
+        self._P = self._create_target_matrix(graph)
+        self._X = X
         self._fit_base_SVD_model()
         self._binary_optimize()
 
@@ -63,28 +63,28 @@ class BANE(Estimator):
         """
         Reducing the dimensionality with SVD in the 1st step.
         """
-        self.P = self.P.dot(self.X)
+        self._P = self._P.dot(self._X)
         self.model = TruncatedSVD(n_components=self.dimensions,
                                   n_iter=self.svd_iterations,
                                   random_state=self.seed)
 
-        self.model.fit(self.P)
-        self.P = self.model.fit_transform(self.P)
+        self.model.fit(self._P)
+        self._P = self.model.fit_transform(self._P)
 
     def _update_G(self):
         """
         Updating the kernel matrix.
         """
-        self.G = np.dot(self.B.transpose(), self.B)
-        self.G = self.G + self.alpha*np.eye(self.dimensions)
-        self.G = inv(self.G)
-        self.G = self.G.dot(self.B.transpose()).dot(self.P)
+        self._G = np.dot(self._B.transpose(), self._B)
+        self._G = self._G + self.alpha*np.eye(self.dimensions)
+        self._G = inv(self._G)
+        self._G = self._G.dot(self._B.transpose()).dot(self._P)
 
     def _update_Q(self):
         """
         Updating the rescaled target matrix.
         """
-        self.Q = self.G.dot(self.P.transpose()).transpose()
+        self._Q = self._G.dot(self._P.transpose()).transpose()
 
     def _update_B(self):
         """
@@ -93,14 +93,14 @@ class BANE(Estimator):
         for _ in range(self.iterations):
             for d in range(self.dimensions):
                 sel = [x for x in range(self.dimensions) if x != d]
-                self.B[:, d] = self.Q[:, d]-self.B[:, sel].dot(self.G[sel, :]).dot(self.G[:, d]).transpose()
-                self.B[:, d] = np.sign(self.B[:, d])
+                self._B[:, d] = self._Q[:, d]-self._B[:, sel].dot(self._G[sel, :]).dot(self._G[:, d]).transpose()
+                self._B[:, d] = np.sign(self._B[:, d])
 
     def _binary_optimize(self):
         """
         Starting 2nd optimization phase with power iterations and CCD.
         """
-        self.B = np.sign(np.random.normal(size=(self.P.shape[0], self.dimensions)))
+        self._B = np.sign(np.random.normal(size=(self._P.shape[0], self.dimensions)))
         for _ in range(self.binarization_iterations):
             self._update_G()
             self._update_Q()
@@ -112,5 +112,5 @@ class BANE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = self.B
+        embedding = self._B
         return embedding
