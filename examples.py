@@ -185,8 +185,6 @@ model = SF()
 model.fit(graphs)
 model.get_embedding()
 
-quit()
-
 #-----------------
 # FSCNMF example
 #-----------------
@@ -210,6 +208,10 @@ x = np.random.uniform(0, 1, (200, 200))
 model = TADW()
 
 model.fit(g, x)
+
+
+quit()
+
 
 #-----------------
 # GL2Vec example

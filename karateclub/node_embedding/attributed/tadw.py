@@ -53,38 +53,38 @@ class TADW(Estimator):
         """
         Initialization of weights and loss container.
         """
-        self.W = np.random.uniform(0, 1, (self.dimensions, self.A.shape[0]))
-        self.H = np.random.uniform(0, 1, (self.dimensions, self.T.shape[0]))
+        self._W = np.random.uniform(0, 1, (self.dimensions, self._A.shape[0]))
+        self._H = np.random.uniform(0, 1, (self.dimensions, self._T.shape[0]))
 
     def _update_W(self):
         """
         A single update of the node embedding matrix.
         """
-        penalty = (self.lambd/np.linalg.norm(self.W))*self.W
-        transformed_features = self.H.dot(self.T)
+        penalty = (self.lambd/np.linalg.norm(self._W))*self._W
+        transformed_features = self._H.dot(self._T)
         scores = 0
         for i in range(self.dimensions):
-            scores = scores + transformed_features[i,self.A.row] * self.W[i,self.A.col]
-        score_matrix = coo_matrix((scores, (self.A.row, self.A.col)), shape=self.A.shape)
-        diff_matrix = self.A-score_matrix
+            scores = scores + transformed_features[i,self._A.row] * self._W[i,self._A.col]
+        score_matrix = coo_matrix((scores, (self._A.row, self._A.col)), shape=self._A.shape)
+        diff_matrix = self._A-score_matrix
         main_grad = diff_matrix.dot(transformed_features.T).T/np.sum(np.square(scores))
         grad = penalty-main_grad
-        self.W = self.W-self.alpha*grad
+        self._W = self._W-self.alpha*grad
 
     def _update_H(self):
         """
         A single update of the feature basis matrix.
         """
-        penalty = (self.lambd/np.linalg.norm(self.H))*self.H
-        transformed_features = self.H.dot(self.T)
+        penalty = (self.lambd/np.linalg.norm(self._H))*self._H
+        transformed_features = self._H.dot(self._T)
         scores = 0
         for i in range(self.dimensions):
-            scores = scores + transformed_features[i,self.A.col] * self.W[i,self.A.row]
-        score_matrix = coo_matrix((scores, (self.A.row, self.A.col)), shape=self.A.shape)
-        diff_matrix = self.A-score_matrix
-        main_grad = self.W.dot(diff_matrix.dot(self.T.T))/np.sum(np.square(scores))
+            scores = scores + transformed_features[i,self._A.col] * self._W[i,self._A.row]
+        score_matrix = coo_matrix((scores, (self._A.row, self._A.col)), shape=self._A.shape)
+        diff_matrix = self._A-score_matrix
+        main_grad = self._W.dot(diff_matrix.dot(self._T.T))/np.sum(np.square(scores))
         grad = penalty-main_grad
-        self.H = self.H-self.alpha*grad
+        self._H = self._H-self.alpha*grad
 
     def _create_reduced_features(self, X):
         """
@@ -112,8 +112,8 @@ class TADW(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._check_graph(graph)
-        self.A = self._create_target_matrix(graph)
-        self.T = self._create_reduced_features(X)
+        self._A = self._create_target_matrix(graph)
+        self._T = self._create_reduced_features(X)
         self._init_weights()
         for _ in range(self.iterations):
             self._update_W()
@@ -125,6 +125,6 @@ class TADW(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate([np.transpose(self.W), np.transpose(np.dot(self.H, self.T))], axis=1)
+        embedding = np.concatenate([np.transpose(self._W), np.transpose(np.dot(self._H, self._T))], axis=1)
         return embedding
 
