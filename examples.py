@@ -307,8 +307,6 @@ model = Diff2Vec()
 
 model.fit(g)
 model.get_embedding()
-print("here")
-quit()
 
 #-------------------
 # NMF-ADMM example
@@ -320,6 +318,10 @@ model = NMFADMM()
 
 model.fit(g)
 model.get_embedding()
+
+print("here")
+quit()
+
 
 #---------------
 # TENE example
