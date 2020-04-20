@@ -128,7 +128,7 @@ X = {i: random.sample(range(150),50) for i in range(100)}
 
 row = np.array([k for k, v in X.items() for val in v])
 col = np.array([val for k, v in X.items() for val in v])
-data = np.ones(100*100)
+data = np.ones(100*50)
 shape = (100, 150)
 
 X = coo_matrix((data, (row, col)), shape=shape)
@@ -139,7 +139,6 @@ model.fit(g, X)
 
 model.get_memberships()
 
-quit()
 #-------------
 # SCD example
 #-------------
@@ -165,6 +164,10 @@ model.fit(g)
 model.get_embedding()
 
 model.get_memberships()
+
+
+quit()
+
 
 #------------------
 # Role2vec example

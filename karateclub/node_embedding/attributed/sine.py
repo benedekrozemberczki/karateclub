@@ -43,15 +43,15 @@ class SINE(Estimator):
         return features
 
     def _select_walklets(self):
-        self.walklets = []
+        self._walklets = []
         for walk in self._walker.walks:
-            for power in range(1,self.window_size+1): 
+            for power in range(1, self.window_size+1): 
                 for step in range(power+1):
                     neighbors = [n for i, n in enumerate(walk[step:]) if i % power == 0]
                     neighbors = [n for n in neighbors for _ in range(0, 3)]
                     neighbors = [random.choice(self._features[val]) if i % 3 == 1 and self._features[val] else val for i, val in enumerate(neighbors)]
-                    self.walklets.append(neighbors)
-        del self.walker
+                    self._walklets.append(neighbors)
+        del self._walker
         
         
     def fit(self, graph, X):
