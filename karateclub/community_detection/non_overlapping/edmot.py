@@ -36,7 +36,7 @@ class EdMot(Estimator):
         Enumerating pairwise motif counts.
         """
         edges = [e for e in self._graph.edges() if self._overlap(e[0], e[1]) >= self.cutoff]
-        self.motif_graph = nx.from_edgelist(edges)
+        self._motif_graph = nx.from_edgelist(edges)
 
     def _extract_components(self):
         """
