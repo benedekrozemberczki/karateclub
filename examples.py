@@ -319,10 +319,6 @@ model = NMFADMM()
 model.fit(g)
 model.get_embedding()
 
-print("here")
-quit()
-
-
 #---------------
 # TENE example
 #---------------
@@ -343,6 +339,7 @@ model.get_embedding()
 model.fit(g, tp)
 model.get_embedding()
 
+
 #---------------
 # BANE example
 #---------------
@@ -357,6 +354,9 @@ x = nx.adjacency_matrix(p)
 model = BANE()
 
 model.fit(g, x)
+
+print("here")
+quit()
 
 #-----------------
 # BigClam example

@@ -28,56 +28,56 @@ class TENE(Estimator):
         """
         Setup basis and feature matrices.
         """
-        self.M = np.random.uniform(0, 1, (self.X.shape[0], self.dimensions))
-        self.U = np.random.uniform(0, 1, (self.X.shape[0], self.dimensions))
-        self.Q = np.random.uniform(0, 1, (self.X.shape[0], self.dimensions))
-        self.V = np.random.uniform(0, 1, (self.T.shape[1], self.dimensions))
-        self.C = np.random.uniform(0, 1, (self.dimensions, self.dimensions))
+        self._M = np.random.uniform(0, 1, (self._X.shape[0], self.dimensions))
+        self._U = np.random.uniform(0, 1, (self._X.shape[0], self.dimensions))
+        self._Q = np.random.uniform(0, 1, (self._X.shape[0], self.dimensions))
+        self._V = np.random.uniform(0, 1, (self._T.shape[1], self.dimensions))
+        self._C = np.random.uniform(0, 1, (self.dimensions, self.dimensions))
 
     def _update_M(self):
         """
         Update node bases.
         """
-        enum = self.X.dot(self.U)
-        denom = self.M.dot(self.U.T.dot(self.U))
-        self.M = np.multiply(self.M, enum/denom)
-        self.M[self.M < self.lower_control] = self.lower_control
+        enum = self._X.dot(self._U)
+        denom = self._M.dot(self._U.T.dot(self._U))
+        self._M = np.multiply(self._M, enum/denom)
+        self._M[self._M < self.lower_control] = self.lower_control
 
     def _update_V(self):
         """
         Update node features.
         """
-        enum = self.T.T.dot(self.Q)
-        denom = self.V.dot(self.Q.T.dot(self.Q))
-        self.V = np.multiply(self.V, enum/denom)
-        self.V[self.V < self.lower_control] = self.lower_control
+        enum = self._T.T.dot(self._Q)
+        denom = self._V.dot(self._Q.T.dot(self._Q))
+        self._V = np.multiply(self._V, enum/denom)
+        self._V[self._V < self.lower_control] = self.lower_control
 
     def _update_C(self):
         """
         Update transformation matrix.
         """
-        enum = self.Q.T.dot(self.U)
-        denom = self.C.dot(self.U.T.dot(self.U))
-        self.C = np.multiply(self.C, enum/denom)
-        self.C[self.C < self.lower_control] = self.lower_control
+        enum = self._Q.T.dot(self._U)
+        denom = self._C.dot(self._U.T.dot(self._U))
+        self._C = np.multiply(self._C, enum/denom)
+        self._C[self._C < self.lower_control] = self.lower_control
 
     def _update_U(self):
         """
         Update features.
         """
-        enum = self.X.T.dot(self.M)+self.alpha*self.Q.dot(self.C)
-        denom = self.U.dot((self.M.T.dot(self.M)+self.alpha*self.C.T.dot(self.C)))
-        self.U = np.multiply(self.U, enum/denom)
-        self.U[self.U < self.lower_control] = self.lower_control
+        enum = self._X.T.dot(self._M)+self.alpha*self._Q.dot(self._C)
+        denom = self._U.dot((self._M.T.dot(self._M)+self.alpha*self._C.T.dot(self._C)))
+        self._U = np.multiply(self._U, enum/denom)
+        self._U[self._U < self.lower_control] = self.lower_control
 
     def _update_Q(self):
         """
         Update feature bases.
         """
-        enum = self.alpha*self.U.dot(self.C.T)+self.beta*self.T.dot(self.V)
-        denom = self.alpha*self.Q+self.beta*self.Q.dot(self.V.T.dot(self.V))
-        self.Q = np.multiply(self.Q, enum/denom)
-        self.Q[self.Q < self.lower_control] = self.lower_control
+        enum = self.alpha*self._U.dot(self._C.T)+self.beta*self._T.dot(self._V)
+        denom = self.alpha*self._Q+self.beta*self._Q.dot(self._V.T.dot(self._V))
+        self._Q = np.multiply(self._Q, enum/denom)
+        self._Q[self._Q < self.lower_control] = self.lower_control
 
     def _create_D_inverse(self, graph):
         """
@@ -116,8 +116,8 @@ class TENE(Estimator):
             * **T** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._check_graph(graph)
-        self.X = self._create_base_matrix(graph)
-        self.T = T
+        self._X = self._create_base_matrix(graph)
+        self._T = T
         self._init_weights()
         for _ in range(self.iterations):
             self._update_M()
@@ -132,5 +132,5 @@ class TENE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate([self.M, self.Q], axis=1)
+        embedding = np.concatenate([self._M, self._Q], axis=1)
         return embedding

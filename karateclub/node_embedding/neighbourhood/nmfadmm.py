@@ -26,7 +26,7 @@ class NMFADMM(Estimator):
         """
         self._W = np.random.uniform(-0.1, 0.1, (self._V.shape[0], self.dimensions))
         self._H = np.random.uniform(-0.1, 0.1, (self.dimensions, self._V.shape[1]))
-        X_i, Y_i = sp.nonzero(self.V)
+        X_i, Y_i = sp.nonzero(self._V)
         scores = self._W[X_i]*self._H[:, Y_i].T+np.random.uniform(0, 1, (self.dimensions, ))
         values = np.sum(scores, axis=-1)
         self._X = sp.sparse.coo_matrix((values, (X_i, Y_i)), shape=self._V.shape)
@@ -40,9 +40,9 @@ class NMFADMM(Estimator):
         """
         Updating user_1 matrix.
         """
-        left = np.linalg.pinv(self.H.dot(self.H.T)+np.eye(self.dimensions))
-        right_1 = self.X.dot(self.H.T).T+self.W_plus.T
-        right_2 = (1.0/self.rho)*(self.alpha_X.dot(self.H.T).T-self.alpha_W.T)
+        left = np.linalg.pinv(self._H.dot(self._H.T)+np.eye(self.dimensions))
+        right_1 = self._X.dot(self._H.T).T+self._W_plus.T
+        right_2 = (1.0/self.rho)*(self._alpha_X.dot(self._H.T).T-self._alpha_W.T)
         self.W = left.dot(right_1+right_2).T
 
     def _update_H(self):
