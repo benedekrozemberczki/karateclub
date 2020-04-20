@@ -40,54 +40,54 @@ class FSCNMF(Estimator):
         """
         Setup basis and feature matrices.
         """
-        self.U = np.random.uniform(0, 1, (self.A.shape[0], self.dimensions))
-        self.V = np.random.uniform(0, 1, (self.dimensions, self.X.shape[1]))
-        self.B_1 = np.random.uniform(0, 1, (self.A.shape[0], self.dimensions))
-        self.B_2 = np.random.uniform(0, 1, (self.dimensions, self.A.shape[0]))
+        self._U = np.random.uniform(0, 1, (self._A.shape[0], self.dimensions))
+        self._V = np.random.uniform(0, 1, (self.dimensions, self._X.shape[1]))
+        self._B_1 = np.random.uniform(0, 1, (self._A.shape[0], self.dimensions))
+        self._B_2 = np.random.uniform(0, 1, (self.dimensions, self._A.shape[0]))
 
     def _update_B1(self):
         """
         Update node bases.
         """
-        simi_term = self.A.dot(np.transpose(self.B_2)) + self.alpha_1*self.U
+        simi_term = self._A.dot(np.transpose(self._B_2)) + self.alpha_1*self._U
         regul = self.alpha_1*np.eye(self.dimensions)
         regul = regul + self.alpha_2*np.eye(self.dimensions)
-        covar_term = inv(np.dot(self.B_2, np.transpose(self.B_2))+regul)
-        self.B_1 = np.dot(simi_term, covar_term)
-        self.B_1[self.B_1 < self.lower_control] = self.lower_control
+        covar_term = inv(np.dot(self._B_2, np.transpose(self._B_2))+regul)
+        self._B_1 = np.dot(simi_term, covar_term)
+        self._B_1[self.B_1 < self.lower_control] = self.lower_control
 
     def _update_B2(self):
         """
         Update node features.
         """
-        to_inv = np.dot(np.transpose(self.B_1), self.B_1)
+        to_inv = np.dot(np.transpose(self._B_1), self._B_1)
         to_inv = to_inv + self.alpha_3*np.eye(self.dimensions)
         covar_term = inv(to_inv)
-        simi_term = self.A.dot(self.B_1).transpose()
-        self.B_2 = covar_term.dot(simi_term)
-        self.B_2[self.B_2 < self.lower_control] = self.lower_control
+        simi_term = self._A.dot(self._B_1).transpose()
+        self._B_2 = covar_term.dot(simi_term)
+        self._B_2[self._B_2 < self.lower_control] = self.lower_control
 
     def _update_U(self):
         """
         Update feature basis.
         """
-        simi_term = self.X.dot(np.transpose(self.V)) + self.beta_1*self.B_1
+        simi_term = self._X.dot(np.transpose(self._V)) + self.beta_1*self._B_1
         regul = self.beta_1*np.eye(self.dimensions)
         regul = regul + self.beta_2*np.eye(self.dimensions)
-        covar_term = inv(np.dot(self.V, np.transpose(self.V))+regul)
-        self.U = np.dot(simi_term, covar_term)
-        self.U[self.U < self.lower_control] = self.lower_control
+        covar_term = inv(np.dot(self._V, np.transpose(self._V))+regul)
+        self._U = np.dot(simi_term, covar_term)
+        self._U[self._U < self.lower_control] = self.lower_control
 
     def _update_V(self):
         """
         Update features.
         """
-        to_inv = np.dot(np.transpose(self.U), self.U)
+        to_inv = np.dot(np.transpose(self._U), self._U)
         to_inv = to_inv + self.beta_3*np.eye(self.dimensions)
         covar_term = inv(to_inv)
-        simi_term = self.X.transpose().dot(self.U)
-        self.V = np.dot(simi_term, covar_term).transpose()
-        self.V[self.V < self.lower_control] = self.lower_control
+        simi_term = self._X.transpose().dot(self._U)
+        self._V = np.dot(simi_term, covar_term).transpose()
+        self._V[self.V < self.lower_control] = self.lower_control
 
     def _create_D_inverse(self, graph):
         """
@@ -126,8 +126,8 @@ class FSCNMF(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._check_graph(graph)
-        self.X = X
-        self.A = self._create_base_matrix(graph)
+        self._X = X
+        self._A = self._create_base_matrix(graph)
         self._init_weights()
         for _ in range(self.iterations):
             self._update_B1()
@@ -141,5 +141,5 @@ class FSCNMF(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate([self.B_1,self.U], axis=1)
+        embedding = np.concatenate([self._B_1,self._U], axis=1)
         return embedding
