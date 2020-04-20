@@ -209,10 +209,6 @@ model = TADW()
 
 model.fit(g, x)
 
-
-quit()
-
-
 #-----------------
 # GL2Vec example
 #-----------------
@@ -245,6 +241,8 @@ model = NetMF()
 
 model.fit(g)
 model.get_embedding()
+
+quit()
 
 #-------------------------
 # GraphSet reader example
