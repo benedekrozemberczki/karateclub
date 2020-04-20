@@ -242,8 +242,6 @@ model = NetMF()
 model.fit(g)
 model.get_embedding()
 
-quit()
-
 #-------------------------
 # GraphSet reader example
 #-------------------------
@@ -309,6 +307,8 @@ model = Diff2Vec()
 
 model.fit(g)
 model.get_embedding()
+print("here")
+quit()
 
 #-------------------
 # NMF-ADMM example

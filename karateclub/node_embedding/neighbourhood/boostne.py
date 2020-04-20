@@ -78,7 +78,7 @@ class BoostNE(Estimator):
         Return types:
             * **sample** *(int)* - Anchor point index.
         """
-        row_weights = self.residuals.sum(axis=index)
+        row_weights = self._residuals.sum(axis=index)
         if len(row_weights.shape) > 1:
             row_weights = row_weights.reshape(-1)
         sums = np.sum(np.sum(row_weights))
@@ -124,10 +124,10 @@ class BoostNE(Estimator):
         W = model.fit_transform(new_residuals)
         H = model.components_
 
-        sub_scores = np.sum(np.multiply(W[self.index_1, :], H[:, self.index_2].T), axis=1)
-        scores = np.maximum(self.residuals.data-sub_scores, 0)
-        scores = sparse.csr_matrix((scores, (self.index_1, self.index_2)),
-                                   shape=self.shape,
+        sub_scores = np.sum(np.multiply(W[self._index_1, :], H[:, self._index_2].T), axis=1)
+        scores = np.maximum(self._residuals.data-sub_scores, 0)
+        scores = sparse.csr_matrix((scores, (self._index_1, self._index_2)),
+                                   shape=self._shape,
                                    dtype=np.float32)
         return scores, W
 
@@ -135,12 +135,12 @@ class BoostNE(Estimator):
         """
         Fitting NMF on the starting matrix.
         """
-        self.shape = self.residuals.shape
-        indices = self.residuals.nonzero()
-        self.index_1 = indices[0]
-        self.index_2 = indices[1]
-        base_score, embedding = self._fit_and_score_NMF(self.residuals)
-        self.embeddings = [embedding]
+        self._shape = self._residuals.shape
+        indices = self._residuals.nonzero()
+        self._index_1 = indices[0]
+        self._index_2 = indices[1]
+        base_score, embedding = self._fit_and_score_NMF(self._residuals)
+        self._embeddings = [embedding]
 
 
     def _binary_search(self, weights):
@@ -173,12 +173,12 @@ class BoostNE(Estimator):
         """
         row = self._sampler(1)
         column = self._sampler(0)
-        chosen_row = self.residuals[row, :]
-        chosen_column = self.residuals[:, column]
-        new_residuals = self._reweighting(self.residuals, chosen_row, chosen_column)
+        chosen_row = self._residuals[row, :]
+        chosen_column = self._residuals[:, column]
+        new_residuals = self._reweighting(self._residuals, chosen_row, chosen_column)
         scores, embedding = self._fit_and_score_NMF(new_residuals)
-        self.embeddings.append(embedding)
-        self.residuals = scores
+        self._embeddings.append(embedding)
+        self._residuals = scores
 
     def fit(self, graph):
         """
@@ -188,7 +188,7 @@ class BoostNE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._check_graph(graph)
-        self.residuals = self._create_target_matrix(graph)
+        self._residuals = self._create_target_matrix(graph)
         self._setup_base_model()
         for _ in range(self.iterations):
             self._single_boosting_round()
@@ -199,5 +199,5 @@ class BoostNE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate(self.embeddings, axis=1)
+        embedding = np.concatenate(self._embeddings, axis=1)
         return embedding
