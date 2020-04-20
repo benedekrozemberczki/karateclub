@@ -105,8 +105,8 @@ X = {i: random.sample(range(150),50) for i in range(50)}
 
 row = np.array([k for k, v in X.items() for val in v])
 col = np.array([val for k, v in X.items() for val in v])
-data = np.ones(500*50)
-shape = (100, 150)
+data = np.ones(50*50)
+shape = (50, 150)
 
 X = coo_matrix((data, (row, col)), shape=shape)
 
@@ -116,7 +116,7 @@ model.fit(g, X)
 
 model.get_memberships()
 
-quit()
+
 
 #--------------
 # SINE example
@@ -128,7 +128,7 @@ X = {i: random.sample(range(150),50) for i in range(100)}
 
 row = np.array([k for k, v in X.items() for val in v])
 col = np.array([val for k, v in X.items() for val in v])
-data = np.ones(100*50)
+data = np.ones(100*100)
 shape = (100, 150)
 
 X = coo_matrix((data, (row, col)), shape=shape)
@@ -139,6 +139,7 @@ model.fit(g, X)
 
 model.get_memberships()
 
+quit()
 #-------------
 # SCD example
 #-------------
