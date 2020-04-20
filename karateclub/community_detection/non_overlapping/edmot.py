@@ -46,7 +46,7 @@ class EdMot(Estimator):
         components = [[len(c), c] for c in components]
         components.sort(key=lambda x: x[0], reverse=True)
         important_components = [components[comp][1] for comp
-                                in range(self._component_count if len(components)>=self._component_count else len(components))]
+                                in range(self.component_count if len(components)>=self.component_count else len(components))]
         self._blocks = [list(graph) for graph in important_components]
 
     def _fill_blocks(self):
