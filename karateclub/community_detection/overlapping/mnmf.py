@@ -69,22 +69,22 @@ class MNMF(Estimator):
 
     def _update_U(self):
         """Update matrix U."""
-        enum = self.S.dot(self.M)+self.alpha*np.dot(self.H, self.C)
-        denom = np.dot(self.U, np.dot(np.transpose(self.M), self.M)+self.alpha*np.dot(np.transpose(self.C), self.C))
+        enum = self._S.dot(self._M)+self.alpha*np.dot(self._H, self._C)
+        denom = np.dot(self._U, np.dot(np.transpose(self._M), self._M)+self.alpha*np.dot(np.transpose(self._C), self._C))
         denom[denom < self.lower_control] = self.lower_control
-        self.U = np.multiply(self.U, enum/denom)
-        row_sums = self.U.sum(axis=1)
-        self.U = self.U / row_sums[:, np.newaxis]
+        self._U = np.multiply(self._U, enum/denom)
+        row_sums = self._U.sum(axis=1)
+        self._U = self._U / row_sums[:, np.newaxis]
 
     def _update_C(self):
         """Update matrix C."""
-        enum = np.dot(np.transpose(self.H), self.U)
-        denom = np.dot(self.C, np.dot(np.transpose(self.U), self.U))
+        enum = np.dot(np.transpose(self._H), self._U)
+        denom = np.dot(self._C, np.dot(np.transpose(self._U), self._U))
         denom[denom < self.lower_control] = self.lower_control
         frac = enum/denom
-        self.C = np.multiply(self.C, frac)
-        row_sums = self.C.sum(axis=1)
-        self.C = self.C / row_sums[:, np.newaxis]
+        self._C = np.multiply(self._C, frac)
+        row_sums = self._C.sum(axis=1)
+        self._C = self._C / row_sums[:, np.newaxis]
 
     def _update_H(self):
         """Update matrix H."""
