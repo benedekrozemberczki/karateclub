@@ -135,7 +135,7 @@ class DANMF(Estimator):
             self._V_s[i] = self._V_s[i] * Vu/np.maximum(Vd, 10**-10)
 
     def _setup_VpVpT(self):
-        self._VpVpT = self._V_s[self.p-1].dot(self._V_s[self.p-1].T)
+        self._VpVpT = self._V_s[self._p-1].dot(self._V_s[self._p-1].T)
 
     def _setup_Asq(self):
         self._A_sq = self._A.dot(self._A.T)
