@@ -88,11 +88,11 @@ class MNMF(Estimator):
 
     def _update_H(self):
         """Update matrix H."""
-        B1H = self.B1.dot(self.H)
-        B2H = self.B2.dot(self.H)
-        HHH = np.dot(self.H, (np.dot(np.transpose(self.H), self.H)))
-        UC = np.dot(self.U, np.transpose(self.C))
-        rooted = np.square(2*self.beta*B2H)+np.multiply(16*self.lambd*HHH, (2*self.beta*B1H+2*self.alpha*UC+(4*self.lambd-2*self.alpha)*self.H))
+        B1H = self._B1.dot(self._H)
+        B2H = self._B2.dot(self._H)
+        HHH = np.dot(self._H, (np.dot(np.transpose(self._H), self._H)))
+        UC = np.dot(self._U, np.transpose(self._C))
+        rooted = np.square(2*self.beta*B2H)+np.multiply(16*self.lambd*HHH, (2*self.beta*B1H+2*self.alpha*UC+(4*self.lambd-2*self.alpha)*self._H))
         rooted[rooted < 0] = 0
         sqroot_1 = np.sqrt(rooted)
         enum = -2*self.beta*B2H+sqroot_1
@@ -101,9 +101,9 @@ class MNMF(Estimator):
         rooted = enum/denom
         rooted[rooted < 0] = 0
         sqroot_2 = np.sqrt(rooted)
-        self.H = np.multiply(self.H, sqroot_2)
-        row_sums = self.H.sum(axis=1)
-        self.H = self.H / row_sums[:, np.newaxis]
+        self._H = np.multiply(self._H, sqroot_2)
+        row_sums = self._H.sum(axis=1)
+        self._H = self._H / row_sums[:, np.newaxis]
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
