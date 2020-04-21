@@ -113,9 +113,9 @@ class DANMF(Estimator):
             * **i** *(int)* - The layer index.
         """
         if i == 0:
-            self.P = self.U_s[0]
+            self._P = self._U_s[0]
         else:
-            self.P = self.P.dot(self.U_s[i])
+            self._P = self._P.dot(self._U_s[i])
 
     def _update_V(self, i):
         """
