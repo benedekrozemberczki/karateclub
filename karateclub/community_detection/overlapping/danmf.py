@@ -23,7 +23,7 @@ class DANMF(Estimator):
         self.iterations = iterations
         self.seed = seed
         self.lamb = lamb
-        self.p = len(self.layers)
+        self._p = len(self.layers)
 
 
     def _setup_target_matrices(self, graph):
@@ -33,10 +33,10 @@ class DANMF(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph being clustered.
         """
-        self.graph = graph
-        self.A = nx.adjacency_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
-        self.L = nx.laplacian_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
-        self.D = self.L+self.A
+        self._graph = graph
+        self._A = nx.adjacency_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
+        self._L = nx.laplacian_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
+        self._D = self._L+self._A
 
     def _setup_z(self, i):
         """
@@ -46,9 +46,9 @@ class DANMF(Estimator):
             * **i** *(int)* - The layer index.
         """
         if i == 0:
-            self.Z = self.A
+            self._Z = self._A
         else:
-            self.Z = self.V_s[i-1]
+            self._Z = self._V_s[i-1]
 
     def _sklearn_pretrain(self, i):
         """
@@ -62,7 +62,7 @@ class DANMF(Estimator):
                         random_state=self.seed,
                         max_iter=self.pre_iterations)
 
-        U = nmf_model.fit_transform(self.Z)
+        U = nmf_model.fit_transform(self._Z)
         V = nmf_model.components_
         return U, V
 
@@ -70,22 +70,22 @@ class DANMF(Estimator):
         """
         Pre-training each NMF layer.
         """
-        self.U_s = []
-        self.V_s = []
-        for i in range(self.p):
+        self._U_s = []
+        self._V_s = []
+        for i in range(self._p):
             self._setup_z(i)
             U, V = self._sklearn_pretrain(i)
-            self.U_s.append(U)
-            self.V_s.append(V)
+            self._U_s.append(U)
+            self._V_s.append(V)
 
     def _setup_Q(self):
         """
         Setting up Q matrices.
         """
-        self.Q_s = [None for _ in range(self.p+1)]
-        self.Q_s[self.p] = np.eye(self.layers[self.p-1])
-        for i in range(self.p-1, -1, -1):
-            self.Q_s[i] = np.dot(self.U_s[i], self.Q_s[i+1])
+        self._Q_s = [None for _ in range(self._p+1)]
+        self._Q_s[self._p] = np.eye(self.layers[self._p-1])
+        for i in range(self._p-1, -1, -1):
+            self._Q_s[i] = np.dot(self._U_s[i], self._Q_s[i+1])
 
     def _update_U(self, i):
         """
