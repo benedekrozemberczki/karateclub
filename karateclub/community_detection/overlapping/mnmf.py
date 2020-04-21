@@ -35,37 +35,37 @@ class MNMF(Estimator):
 
     def _modularity_generator(self):
         """Calculating the sparse modularity matrix."""
-        degs = nx.degree(self.graph)
-        e_count = self.graph.number_of_edges()
-        n_count = self.graph.number_of_nodes()
+        degs = nx.degree(self._graph)
+        e_count = self._graph.number_of_edges()
+        n_count = self._graph.number_of_nodes()
         modularity_mat_shape = (n_count, n_count)
-        indices_1 = np.array([edge[0] for edge in self.graph.edges()])
-        indices_2 = np.array([edge[1] for edge in self.graph.edges()])
-        scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in self.graph.edges()]
+        indices_1 = np.array([edge[0] for edge in self._graph.edges()])
+        indices_2 = np.array([edge[1] for edge in self._graph.edges()])
+        scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in self._graph.edges()]
         mod_matrix = coo_matrix((scores, (indices_1, indices_2)), shape=modularity_mat_shape)
         return mod_matrix
 
     def _setup_matrices(self):
         """Creating parameter matrices and target matrices."""
-        self.number_of_nodes = nx.number_of_nodes(self.graph)
-        self.M = np.random.uniform(0, 1, (self.number_of_nodes, self.dimensions))
-        self.U = np.random.uniform(0, 1, (self.number_of_nodes, self.dimensions))
-        self.H = np.random.uniform(0, 1, (self.number_of_nodes, self.clusters))
+        self.number_of_nodes = nx.number_of_nodes(self._graph)
+        self.M = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
+        self.U = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
+        self.H = np.random.uniform(0, 1, (self._number_of_nodes, self.clusters))
         self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
-        self.B1 = nx.adjacency_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
+        self.B1 = nx.adjacency_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
         self.B2 = self._modularity_generator()
-        self.X = np.transpose(self.U)
-        overlaps = self.B1.dot(self.B1)
-        self.S = self.B1 + self.eta*self.B1*(overlaps)
+        self.X = np.transpose(self._U)
+        overlaps = self._B1.dot(self._B1)
+        self.S = self._B1 + self.eta*self._B1*(overlaps)
 
     def _update_M(self):
         """Update matrix M."""
-        enum = self.S.dot(self.U)
-        denom = np.dot(self.M, np.dot(np.transpose(self.U), self.U))
+        enum = self._S.dot(self._U)
+        denom = np.dot(self._M, np.dot(np.transpose(self._U), self._U))
         denom[denom < self.lower_control] = self.lower_control
-        self.M = np.multiply(self.M, enum/denom)
-        row_sums = self.M.sum(axis=1)
-        self.M = self.M / row_sums[:, np.newaxis]
+        self._M = np.multiply(self._M, enum/denom)
+        row_sums = self._M.sum(axis=1)
+        self._M = self._M / row_sums[:, np.newaxis]
 
     def _update_U(self):
         """Update matrix U."""
@@ -141,7 +141,7 @@ class MNMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._check_graph(graph)
-        self.graph = graph
+        self._graph = graph
         self._setup_matrices()
         for _ in range(self.iterations):
             self._update_M()
