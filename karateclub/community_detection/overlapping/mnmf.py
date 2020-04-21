@@ -33,7 +33,7 @@ class MNMF(Estimator):
         self.lower_control = lower_control
         self.eta = eta
 
-    def _modularity_generator(self, graph):
+    def _modularity_generator(self):
         """Calculating the sparse modularity matrix."""
         degs = nx.degree(self.graph)
         e_count = self.graph.number_of_edges()
@@ -53,7 +53,7 @@ class MNMF(Estimator):
         self.H = np.random.uniform(0, 1, (self.number_of_nodes, self.clusters))
         self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
         self.B1 = nx.adjacency_matrix(self.graph, nodelist=range(self.graph.number_of_nodes()))
-        self.B2 = self._modularity_generator(self.graph)
+        self.B2 = self._modularity_generator()
         self.X = np.transpose(self.U)
         overlaps = self.B1.dot(self.B1)
         self.S = self.B1 + self.eta*self.B1*(overlaps)
