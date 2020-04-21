@@ -47,9 +47,9 @@ class MNMF(Estimator):
 
     def _setup_matrices(self):
         """Creating parameter matrices and target matrices."""
-        self.number_of_nodes = nx.number_of_nodes(self._graph)
-        self.M = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
-        self.U = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
+        self._number_of_nodes = nx.number_of_nodes(self._graph)
+        self._M = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
+        self._U = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
         self.H = np.random.uniform(0, 1, (self._number_of_nodes, self.clusters))
         self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
         self.B1 = nx.adjacency_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
