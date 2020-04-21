@@ -95,15 +95,15 @@ class DANMF(Estimator):
             * **i** *(int)* - The layer index.
         """
         if i == 0:
-            R = self.U_s[0].dot(self.Q_s[1].dot(self.VpVpT).dot(self.Q_s[1].T))
-            R = R+self.A_sq.dot(self.U_s[0].dot(self.Q_s[1].dot(self.Q_s[1].T)))
-            Ru = 2*self.A.dot(self.V_s[self.p-1].T.dot(self.Q_s[1].T))
-            self.U_s[0] = (self.U_s[0]*Ru)/np.maximum(R, 10**-10)
+            R = self._U_s[0].dot(self._Q_s[1].dot(self._VpVpT).dot(self._Q_s[1].T))
+            R = R+self._A_sq.dot(self._U_s[0].dot(self._Q_s[1].dot(self._Q_s[1].T)))
+            Ru = 2*self._A.dot(self._V_s[self._p-1].T.dot(self._Q_s[1].T))
+            self._U_s[0] = (self._U_s[0]*Ru)/np.maximum(R, 10**-10)
         else:
-            R = self.P.T.dot(self.P).dot(self.U_s[i]).dot(self.Q_s[i+1]).dot(self.VpVpT).dot(self.Q_s[i+1].T)
-            R = R+self.A_sq.dot(self.P).T.dot(self.P).dot(self.U_s[i]).dot(self.Q_s[i+1]).dot(self.Q_s[i+1].T)
-            Ru = 2*self.A.dot(self.P).T.dot(self.V_s[self.p-1].T).dot(self.Q_s[i+1].T)
-            self.U_s[i] = (self.U_s[i]*Ru)/np.maximum(R, 10**-10)
+            R = self._P.T.dot(self._P).dot(self._U_s[i]).dot(self._Q_s[i+1]).dot(self._VpVpT).dot(self._Q_s[i+1].T)
+            R = R+self._A_sq.dot(self._P).T.dot(self._P).dot(self._U_s[i]).dot(self._Q_s[i+1]).dot(self._Q_s[i+1].T)
+            Ru = 2*self._A.dot(self._P).T.dot(self._V_s[self._p-1].T).dot(self._Q_s[i+1].T)
+            self._U_s[i] = (self._U_s[i]*Ru)/np.maximum(R, 10**-10)
 
     def _update_P(self, i):
         """
