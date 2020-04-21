@@ -16,7 +16,6 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
-
 #----------------
 # GEMSEC example
 #----------------
@@ -25,8 +24,8 @@ g = nx.newman_watts_strogatz_graph(50, 5, 0.05)
 
 model = GEMSEC()
 
-#model.fit(g)
-#memberships = model.get_memberships()
+model.fit(g)
+memberships = model.get_memberships()
 
 #-------------------------------
 # Geometric Scattering example
