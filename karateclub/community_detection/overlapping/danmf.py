@@ -124,10 +124,10 @@ class DANMF(Estimator):
         Arg types:
             * **i** *(int)* - The layer index.
         """
-        if i < self.p-1:
-            Vu = 2*self.A.dot(self.P).T
-            Vd = self.P.T.dot(self.P).dot(self.V_s[i])+self.V_s[i]
-            self.V_s[i] = self.V_s[i] * Vu/np.maximum(Vd, 10**-10)
+        if i < self._p-1:
+            Vu = 2*self._A.dot(self._P).T
+            Vd = self._P.T.dot(self._P).dot(self._V_s[i])+self._V_s[i]
+            self._V_s[i] = self._V_s[i] * Vu/np.maximum(Vd, 10**-10)
         else:
             Vu = 2*self.A.dot(self.P).T+(self.lamb*self.A.dot(self.V_s[i].T)).T
             Vd = self.P.T.dot(self.P).dot(self.V_s[i])
