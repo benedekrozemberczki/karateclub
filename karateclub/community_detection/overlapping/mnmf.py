@@ -111,7 +111,7 @@ class MNMF(Estimator):
         Return types:
             * **memberships** *(dict)* - Node cluster memberships.
         """
-        indices = np.argmax(self.H, axis=1)
+        indices = np.argmax(self._H, axis=1)
         memberships = {i: membership for i, membership in enumerate(indices)}
         return memberships
 
@@ -121,7 +121,7 @@ class MNMF(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = self.U
+        embedding = self._U
         return embedding
 
     def get_cluster_centers(self):
@@ -130,7 +130,7 @@ class MNMF(Estimator):
         Return types:
             * **centers** *(Numpy array)* - The cluster centers.
         """
-        centers = self.C
+        centers = self._C
         return centers
 
     def fit(self, graph):
