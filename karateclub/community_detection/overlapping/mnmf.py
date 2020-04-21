@@ -50,13 +50,13 @@ class MNMF(Estimator):
         self._number_of_nodes = nx.number_of_nodes(self._graph)
         self._M = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
         self._U = np.random.uniform(0, 1, (self._number_of_nodes, self.dimensions))
-        self.H = np.random.uniform(0, 1, (self._number_of_nodes, self.clusters))
-        self.C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
-        self.B1 = nx.adjacency_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
-        self.B2 = self._modularity_generator()
-        self.X = np.transpose(self._U)
+        self._H = np.random.uniform(0, 1, (self._number_of_nodes, self.clusters))
+        self._C = np.random.uniform(0, 1, (self.clusters, self.dimensions))
+        self._B1 = nx.adjacency_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
+        self._B2 = self._modularity_generator()
+        self._X = np.transpose(self._U)
         overlaps = self._B1.dot(self._B1)
-        self.S = self._B1 + self.eta*self._B1*(overlaps)
+        self._S = self._B1 + self.eta*self._B1*(overlaps)
 
     def _update_M(self):
         """Update matrix M."""
