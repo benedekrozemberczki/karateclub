@@ -71,7 +71,7 @@ class GraphWave(Estimator):
         self._real_and_imaginary = []
         for node in range(self.number_of_nodes):
             wave = self._single_wavelet_generator(node)
-            wavelet_coefficients = [np.mean(np.exp(wave*1.0*step*1j)) for step in self.steps]
+            wavelet_coefficients = [np.mean(np.exp(wave*1.0*step*1j)) for step in self._steps]
             self._real_and_imaginary.append(wavelet_coefficients)
         self._real_and_imaginary = np.array(self._real_and_imaginary)
 

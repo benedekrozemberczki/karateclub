@@ -57,8 +57,8 @@ class NNSED(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         number_of_nodes = graph.shape[0]
-        self.W = np.abs(np.random.normal(0, 10, size=(number_of_nodes, self.dimensions)))
-        self.Z = np.abs(np.random.normal(0, 10, size=(self.dimensions, number_of_nodes)))
+        self._W = np.abs(np.random.normal(0, 10, size=(number_of_nodes, self.dimensions)))
+        self._Z = np.abs(np.random.normal(0, 10, size=(self.dimensions, number_of_nodes)))
 
     def _update_W(self, A):
         """
@@ -67,11 +67,11 @@ class NNSED(Estimator):
         Arg types:
             * **A** *(Scipy COO matrix)* - The normalized adjacency matrix.
         """
-        enum = A.dot(self.Z.T)
-        denom_1 = self.W.dot(self.Z).dot(self.Z.T)
-        denom_2 = (A.dot(A.transpose())).dot(self.W)
+        enum = A.dot(self._Z.T)
+        denom_1 = self._W.dot(self._Z).dot(self._Z.T)
+        denom_2 = (A.dot(A.transpose())).dot(self._W)
         denom = denom_1 + denom_2
-        self.W = self.W*(enum/denom)
+        self._W = self._W*(enum/denom)
 
     def _update_Z(self, A):
         """
@@ -80,9 +80,9 @@ class NNSED(Estimator):
         Arg types:
             * **A** *(Scipy COO matrix)* - The normalized adjacency matrix.
         """
-        enum = (A.dot(self.W)).transpose()
-        denom = np.dot(np.dot(self.W.T, self.W), self.Z) + self.Z
-        self.Z = self.Z*(enum/denom)
+        enum = (A.dot(self._W)).transpose()
+        denom = np.dot(np.dot(self._W.T, self._W), self._Z) + self._Z
+        self._Z = self._Z*(enum/denom)
 
     def get_embedding(self):
         r"""Getting the bottleneck layer embedding.
@@ -90,7 +90,7 @@ class NNSED(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding =  self.Z.T
+        embedding =  self._Z.T
         return embedding
 
 
@@ -100,7 +100,7 @@ class NNSED(Estimator):
         Return types:
             * **memberships** *(dict)* - Node cluster memberships.
         """
-        index = np.argmax(self.Z, axis=0)
+        index = np.argmax(self._Z, axis=0)
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
