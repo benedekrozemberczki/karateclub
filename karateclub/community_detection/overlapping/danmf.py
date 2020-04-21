@@ -129,16 +129,16 @@ class DANMF(Estimator):
             Vd = self._P.T.dot(self._P).dot(self._V_s[i])+self._V_s[i]
             self._V_s[i] = self._V_s[i] * Vu/np.maximum(Vd, 10**-10)
         else:
-            Vu = 2*self.A.dot(self.P).T+(self.lamb*self.A.dot(self.V_s[i].T)).T
-            Vd = self.P.T.dot(self.P).dot(self.V_s[i])
-            Vd = Vd + self.V_s[i]+(self.lamb*self.D.dot(self.V_s[i].T)).T
-            self.V_s[i] = self.V_s[i] * Vu/np.maximum(Vd, 10**-10)
+            Vu = 2*self._A.dot(self._P).T+(self.lamb*self._A.dot(self._V_s[i].T)).T
+            Vd = self._P.T.dot(self._P).dot(self._V_s[i])
+            Vd = Vd + self._V_s[i]+(self.lamb*self._D.dot(self._V_s[i].T)).T
+            self._V_s[i] = self._V_s[i] * Vu/np.maximum(Vd, 10**-10)
 
     def _setup_VpVpT(self):
-        self.VpVpT = self.V_s[self.p-1].dot(self.V_s[self.p-1].T)
+        self._VpVpT = self._V_s[self.p-1].dot(self._V_s[self.p-1].T)
 
     def _setup_Asq(self):
-        self.A_sq = self.A.dot(self.A.T)
+        self._A_sq = self._A.dot(self._A.T)
 
     def get_embedding(self):
         r"""Getting the bottleneck layer embedding.
@@ -146,7 +146,7 @@ class DANMF(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The bottleneck layer embedding of nodes.
         """
-        embedding = [self.P, self.V_s[-1].T]
+        embedding = [self._P, self._V_s[-1].T]
         embedding = np.concatenate(embedding, axis=1)
         return embedding
 
@@ -156,7 +156,7 @@ class DANMF(Estimator):
         Return types:
             * **memberships** *(dict)*: Node cluster memberships.
         """
-        index = np.argmax(self.P, axis=1)
+        index = np.argmax(self._P, axis=1)
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
@@ -174,7 +174,7 @@ class DANMF(Estimator):
         for iteration in range(self.iterations):
             self._setup_Q()
             self._setup_VpVpT()
-            for i in range(self.p):
+            for i in range(self._p):
                 self._update_U(i)
                 self._update_P(i)
                 self._update_V(i)
