@@ -94,7 +94,7 @@ class GraphWave(Estimator):
             impulse = np.zeros((self._number_of_nodes))
             impulse[node] = 1
             wave_coeffs = pygsp.filters.approximations.cheby_op(self._G, self._chebyshev, impulse)
-            real_imag = [np.mean(np.exp(wave_coeffs*1*step*1j)) for step in self.steps]
+            real_imag = [np.mean(np.exp(wave_coeffs*1*step*1j)) for step in self._steps]
             self._real_and_imaginary.append(real_imag)
         self._real_and_imaginary = np.array(self._real_and_imaginary)
 
