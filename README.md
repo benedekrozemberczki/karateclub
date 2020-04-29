@@ -23,7 +23,7 @@ The newly introduced graph classification datasets are available at [SNAP](https
 
 **Citing**
 
-If you find *Karate Club* useful in your research, please consider citing the following paper:
+If you find *Karate Club* and the new datasets useful in your research, please consider citing the following paper:
 
 ```bibtex
 >@misc{karateclub2020,
