@@ -16,6 +16,7 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
+
 #----------------
 # GEMSEC example
 #----------------
@@ -454,7 +455,7 @@ embedding = model.get_embedding()
 # GraphWave example
 #-------------------
 
-g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
+g = nx.newman_watts_strogatz_graph(2000, 10, 0.02)
 
 model = GraphWave()
 

@@ -69,7 +69,7 @@ class GraphWave(Estimator):
         Calculates the structural role embedding using the exact eigenvalue decomposition.
         """
         self._real_and_imaginary = []
-        for node in range(self.number_of_nodes):
+        for node in range(self._number_of_nodes):
             wave = self._single_wavelet_generator(node)
             wavelet_coefficients = [np.mean(np.exp(wave*1.0*step*1j)) for step in self._steps]
             self._real_and_imaginary.append(wavelet_coefficients)
