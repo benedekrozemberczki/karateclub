@@ -60,7 +60,7 @@ class GraphWave(Estimator):
         impulse[node] = 1.0
         diags = np.diag(np.exp(-self.heat_coefficient*self._eigen_values))
         eigen_diag = np.dot(self._eigen_vectors, diags)
-        waves = np.dot(eigen_diag, np.transpose(self.eigen_vectors))
+        waves = np.dot(eigen_diag, np.transpose(self._eigen_vectors))
         wavelet_coefficients = np.dot(waves, impulse)
         return wavelet_coefficients
 

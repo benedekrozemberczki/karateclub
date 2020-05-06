@@ -455,7 +455,7 @@ embedding = model.get_embedding()
 # GraphWave example
 #-------------------
 
-g = nx.newman_watts_strogatz_graph(2000, 10, 0.02)
+g = nx.newman_watts_strogatz_graph(200, 10, 0.02)
 
 model = GraphWave()
 
