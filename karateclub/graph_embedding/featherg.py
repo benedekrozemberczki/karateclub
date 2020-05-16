@@ -52,21 +52,6 @@ class FeatherG(Estimator):
         A_hat = D_inverse.dot(A)
         return A_hat
 
-
-    def _calculate_wavelets(self, A_hat):
-        """
-        Calculating the wavelets of a normalized self-looped adjacency matrix.
-
-        Arg types:
-            * **A_hat** *(SciPy array)* - The normalized adjacency matrix.
-
-        Return types:
-            * **Psi** *(List of Scipy arrays)* - The wavelet matrices.
-        """
-        Psi = [A_hat.power(2**power) - A_hat.power(2**(power+1)) for power in range(self.order+1)]
-        return Psi
-
-
     def _create_node_feature_matrix(self, graph):
         """
         Calculating the node features.
