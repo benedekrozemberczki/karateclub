@@ -8,17 +8,18 @@ from karateclub.estimator import Estimator
 class FeatherG(Estimator):
     r"""An implementation of `"FEATHER-G" <http://proceedings.mlr.press/v97/gao19e.html>`_
     from the paper "Geometric Scattering for Graph Data Analysis". The procedure
-    uses scattering with wavelet transforms to create graph spectral descriptors. Moments of the
-    wavelet transformed features are used as graph level features for the embedding. 
+    uses characteristic functions of node features with random walk weights to describe
+    node neighborhoods. These node level features are pooled by mean pooling to 
+    create graph level statistics. 
 
     Args:
         order (int): Adjacency matrix powers. Default is 4.
         moments (int): Unnormalized moments considered. Default is 4.
     """
-    def __init__(self, order=4, moments=4):
+    def __init__(self, order=5, dimensions=25, theta_max=2.5):
         self.order = order
-        self.moments = moments
-
+        self.dimensions = dimensions
+        self.theta_max = theta_max
 
     def _create_D_inverse(self, graph):
         """
@@ -80,7 +81,7 @@ class FeatherG(Estimator):
         A_hat = self._get_normalized_adjacency(graph)
         X = self._create_node_feature_matrix(graph)
 
-        return features
+        return pooled_features
 
 
     def fit(self, graphs):
