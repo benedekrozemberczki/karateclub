@@ -5,10 +5,11 @@ from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
 class FeatherNode(Estimator):
-    r"""An implementation of `"TADW" <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
-    from the IJCAI '15 paper "Network Representation Learning with Rich Text Information". The
-    procedure uses the node attribute matrix with a factorization matrix to reproduce a power
-    of the adjacency matrix to create representations.
+    r"""An implementation of `"FEATHER-N" <http://proceedings.mlr.press/v97/gao19e.html>`_
+    from the paper "Characteristic Functions on Graphs: Birds of a Feather,
+    from Statistical Descriptors to Parametric Models". The procedure
+    uses characteristic functions of node features with random walk weights to describe
+    node neighborhoods.
 
     Args:
         reduction_dimensions (int): SVD reduction dimensions. Default is 64.
