@@ -16,27 +16,17 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
-g = nx.newman_watts_strogatz_graph(50, 10, 0.2)
+#----------------
+# Feather Node
+#----------------
 
-X = {i: random.sample(range(150),50) for i in range(50)}
+g = nx.newman_watts_strogatz_graph(150, 10, 0.2)
 
-row = np.array([k for k, v in X.items() for val in v])
-col = np.array([val for k, v in X.items() for val in v])
-data = np.ones(50*50)
-shape = (50, 150)
-
-X = coo_matrix((data, (row, col)), shape=shape)
+X = np.random.uniform(0, 1, (150, 127))
 
 model = FeatherNode()
 
 model.fit(g, X)
-
-X = model.get_embedding()
-
-print(X.shape)
-
-quit()
-
 
 #----------------
 # Feather Graph

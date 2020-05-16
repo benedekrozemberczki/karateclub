@@ -90,7 +90,6 @@ class FeatherNode(Estimator):
         """
         if scipy.sparse.issparse(X):
             X = self._reduce_dimensions(X)
-            print(X)
         elif (type(X) is np.ndarray) and (X.shape[1] > self.reduction_dimensions):
             X = self._reduce_dimensions(X)
         return X
