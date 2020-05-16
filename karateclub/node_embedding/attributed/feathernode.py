@@ -78,6 +78,7 @@ class FeatherNode(Estimator):
         X = svd.transform(X)
         return X
 
+
     def _create_reduced_features(self, X):
         """
         Creating a dense reduced node feature matrix.
