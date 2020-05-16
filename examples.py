@@ -16,6 +16,20 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
+#-------------------
+#
+#-------------------
+
+graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+model = FeatherGraph()
+
+model.fit(graphs)
+embedding = model.get_embedding()
+
+print(embedding.shape)
+
+quit()
 
 #----------------
 # GEMSEC example
