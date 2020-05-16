@@ -22,6 +22,7 @@ class FeatherGraph(Estimator):
         self.eval_points = eval_points
         self.theta_max = theta_max
 
+
     def _create_D_inverse(self, graph):
         """
         Creating a sparse inverse degree matrix.
@@ -54,6 +55,7 @@ class FeatherGraph(Estimator):
         A_hat = D_inverse.dot(A)
         return A_hat
 
+
     def _create_node_feature_matrix(self, graph):
         """
         Calculating the node features.
@@ -68,6 +70,7 @@ class FeatherGraph(Estimator):
         clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
         X = np.concatenate([log_degree, clustering_coefficient], axis=1)
         return X
+
 
     def _calculate_feather(self, graph):
         """
