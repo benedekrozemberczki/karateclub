@@ -16,9 +16,9 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
-#----------------
+#---------------
 # Feather Node
-#----------------
+#---------------
 
 g = nx.newman_watts_strogatz_graph(150, 10, 0.2)
 
