@@ -100,7 +100,7 @@ class FeatherGraph(Estimator):
 
     def fit(self, graphs):
         """
-        Fitting a FEATHER graph level model.
+        Fitting a graph level FEATHER model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
