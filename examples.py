@@ -31,6 +31,10 @@ model = FeatherNode()
 
 model.fit(g, X)
 
+X = model.get_embedding()
+
+print(X.shape)
+
 quit()
 
 
