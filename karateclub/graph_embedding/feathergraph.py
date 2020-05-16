@@ -5,7 +5,7 @@ import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
-class FeatherG(Estimator):
+class FeatherGraph(Estimator):
     r"""An implementation of `"FEATHER-G" <http://proceedings.mlr.press/v97/gao19e.html>`_
     from the paper "Geometric Scattering for Graph Data Analysis". The procedure
     uses characteristic functions of node features with random walk weights to describe
