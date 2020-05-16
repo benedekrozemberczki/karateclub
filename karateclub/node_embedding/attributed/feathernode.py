@@ -79,7 +79,7 @@ class FeatherNode(Estimator):
 
     def fit(self, graph, X):
         """
-        Fitting a TADW model.
+        Fitting a FEATHER-N model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
