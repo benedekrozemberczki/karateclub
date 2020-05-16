@@ -29,6 +29,7 @@ class FeatherNode(Estimator):
         self.eval_points = eval_points
         self.order = order
 
+
     def _create_D_inverse(self, graph):
         """
         Creating a sparse inverse degree matrix.
@@ -43,6 +44,7 @@ class FeatherNode(Estimator):
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = scipy.sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
+
 
     def _create_A_tilde(self, graph):
         """
@@ -112,6 +114,7 @@ class FeatherNode(Estimator):
             X = A_tilde.dot(X)
             self._feature_blocks.append(X)
         self._feature_blocks = np.concatenate(self._feature_blocks, axis=1)
+
 
     def get_embedding(self):
         r"""Getting the node embedding.
