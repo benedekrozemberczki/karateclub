@@ -14,7 +14,8 @@ class FeatherG(Estimator):
 
     Args:
         order (int): Adjacency matrix powers. Default is 5.
-        moments (int): Unnormalized moments considered. Default is 4.
+        eval_points (int): Number of evaluation points. Default is 25.
+        theta_max (int): Maximal evaluation point value. Default is 2.5.
     """
     def __init__(self, order=5, eval_points=25, theta_max=2.5):
         self.order = order
