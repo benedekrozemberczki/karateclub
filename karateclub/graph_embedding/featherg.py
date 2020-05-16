@@ -13,12 +13,12 @@ class FeatherG(Estimator):
     create graph level statistics. 
 
     Args:
-        order (int): Adjacency matrix powers. Default is 4.
+        order (int): Adjacency matrix powers. Default is 5.
         moments (int): Unnormalized moments considered. Default is 4.
     """
-    def __init__(self, order=5, dimensions=25, theta_max=2.5):
+    def __init__(self, order=5, eval_points=25, theta_max=2.5):
         self.order = order
-        self.dimensions = dimensions
+        self.eval_points = eval_points
         self.theta_max = theta_max
 
     def _create_D_inverse(self, graph):
@@ -80,8 +80,19 @@ class FeatherG(Estimator):
         """
         A_hat = self._get_normalized_adjacency(graph)
         X = self._create_node_feature_matrix(graph)
-
-        return pooled_features
+        theta = np.linspace(0.01, self.theta_max, self.eval_points)
+        A_tilde = self._create_A_tilde(graph)
+        X = np.outer(X, theta)
+        X = X.reshape(graph.number_of_nodes(), -1)
+        X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
+        feature_blocks = []
+        for _ in range(self.order):
+            X = A_tilde.dot(X)
+            feature_blocks.append(X)
+        X = np.concatenate(feature_blocks, axis=1)
+        X = np.mean(X, axis=0)
+        print(X.shape)
+        return X
 
 
     def fit(self, graphs):
