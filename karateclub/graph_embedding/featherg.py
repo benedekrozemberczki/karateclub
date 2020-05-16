@@ -79,10 +79,9 @@ class FeatherG(Estimator):
         Return types:
             * **features** *(Numpy vector)* - The embedding of a single graph.
         """
-        A_hat = self._get_normalized_adjacency(graph)
+        A_tilde = self._get_normalized_adjacency(graph)
         X = self._create_node_feature_matrix(graph)
         theta = np.linspace(0.01, self.theta_max, self.eval_points)
-        A_tilde = self._create_A_tilde(graph)
         X = np.outer(X, theta)
         X = X.reshape(graph.number_of_nodes(), -1)
         X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
