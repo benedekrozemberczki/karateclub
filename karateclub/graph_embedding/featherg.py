@@ -5,7 +5,7 @@ import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
-class GeoScattering(Estimator):
+class FeatherG(Estimator):
     r"""An implementation of `"GeoScattering" <http://proceedings.mlr.press/v97/gao19e.html>`_
     from the ICML '19 paper "Geometric Scattering for Graph Data Analysis". The procedure
     uses scattering with wavelet transforms to create graph spectral descriptors. Moments of the
@@ -177,7 +177,7 @@ class GeoScattering(Estimator):
 
     def fit(self, graphs):
         """
-        Fitting a Geometric-Scattering model.
+        Fitting a FEATHER graph level model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
