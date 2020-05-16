@@ -27,6 +27,7 @@ X = np.random.uniform(0, 1, (150, 127))
 model = FeatherNode()
 
 model.fit(g, X)
+embedding = model.get_embedding()
 
 #----------------
 # Feather Graph
