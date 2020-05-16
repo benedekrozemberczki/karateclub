@@ -21,7 +21,6 @@ class FeatherNode(Estimator):
     """
     def __init__(self, reduction_dimensions=64, svd_iterations=20,
                  seed=42, theta_max=2.5, eval_points=25, order=5):
-        self.dimensions = dimensions
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
         self.seed = seed
