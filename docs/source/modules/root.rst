@@ -103,6 +103,10 @@ Structural node embedding
 Attributed node embedding
 --------------------
 
+.. automodule:: karateclub.node_embedding.attributed.feathernode
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.node_embedding.attributed.musae
     :members:
     :undoc-members:
