@@ -1,6 +1,6 @@
+import scipy
 import numpy as np
 import networkx as nx
-from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
@@ -11,7 +11,6 @@ class FeatherNode(Estimator):
     of the adjacency matrix to create representations.
 
     Args:
-        dimensions (int): Number of embedding dimensions. Default is 32.
         reduction_dimensions (int): SVD reduction dimensions. Default is 64.
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
@@ -19,7 +18,7 @@ class FeatherNode(Estimator):
         eval_points (int): Number of characteristic function evaluation points. Default is 25.
         order (int): Scale - number of adjacency matrix powers. Default is 5.
     """
-    def __init__(self, dimensions=32, reduction_dimensions=64, svd_iterations=20,
+    def __init__(self, reduction_dimensions=64, svd_iterations=20,
                  seed=42, theta_max=2.5, eval_points=25, order=5):
         self.dimensions = dimensions
         self.reduction_dimensions = reduction_dimensions
@@ -41,7 +40,7 @@ class FeatherNode(Estimator):
         index = np.arange(graph.number_of_nodes())
         values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
-        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        D_inverse = scipy.sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
 
     def _create_A_tilde(self, graph):
@@ -59,10 +58,9 @@ class FeatherNode(Estimator):
         return A_tilde
 
 
-
-    def _create_reduced_features(self, X):
+    def _reduce_dimensions(self, X):
         """
-        Creating a dense reduced node feature matrix.
+        Using Truncated SVD.
 
         Arg types:
             * **X** *(Scipy COO or Numpy array)* - The wide feature matrix.
@@ -75,6 +73,22 @@ class FeatherNode(Estimator):
                            random_state=self.seed)
         svd.fit(X)
         X = svd.transform(X)
+        return X
+
+    def _create_reduced_features(self, X):
+        """
+        Creating a dense reduced node feature matrix.
+
+        Arg types:
+            * **X** *(Scipy COO or Numpy array)* - The wide feature matrix.
+
+        Return types:
+            * **X** *(Numpy array)* - The reduced feature matrix of nodes.
+        """
+        if scipy.sparse.issparse(X):
+            X = self._reduce_dimensions(X)
+        elif (type(X) is np.ndarray) and (X.shape[1] > self.reduction_dimensions):
+            X = self._reduce_dimensions(X)
         return X
 
     def fit(self, graph, X):
@@ -105,5 +119,3 @@ class FeatherNode(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return self._feature_blocks
-
-
