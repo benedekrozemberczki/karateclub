@@ -31,7 +31,7 @@ class FeatherNode(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The wide feature matrix.
 
         Return types:
-            * **T** *(Numpy array)* - The reduced feature matrix of nodes.
+            * **X** *(Numpy array)* - The reduced feature matrix of nodes.
         """
         svd = TruncatedSVD(n_components=self.reduction_dimensions,
                            n_iter=self.svd_iterations,
@@ -49,14 +49,6 @@ class FeatherNode(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._check_graph(graph)
-        self.X = self._create_reduced_features(X)
+        X = self._create_reduced_features(X)
 
-    def get_embedding(self):
-        r"""Getting the node embedding.
-
-        Return types:
-            * **embedding** *(Numpy array)* - The embedding of nodes.
-        """
-        embedding = np.concatenate([np.transpose(self._W), np.transpose(np.dot(self._H, self._T))], axis=1)
-        return embedding
 
