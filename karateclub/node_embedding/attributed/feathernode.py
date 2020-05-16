@@ -87,15 +87,23 @@ class FeatherNode(Estimator):
         """
         self._check_graph(graph)
         X = self._create_reduced_features(X)
-        theta = np.linspace(0.01, self.theta_max, self.eval_points)
         A_tilde = self._create_A_tilde(graph)
+        theta = np.linspace(0.01, self.theta_max, self.eval_points)
         X = np.outer(X, theta)
         X = X.reshape(graph.number_of_nodes(), -1)
         X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
-        feature_blocks = []
+        self._feature_blocks = []
         for _ in range(self.order):
             X = A_tilde.dot(X)
-            feature_blocks.append(X)
-        self._X = np.concatenate(feature_blocks, axis=1)
+            self._feature_blocks.append(X)
+        self._feature_blocks = np.concatenate(self._feature_blocks, axis=1)
+
+    def get_embedding(self):
+        r"""Getting the node embedding.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
+        return self._feature_blocks
 
 
