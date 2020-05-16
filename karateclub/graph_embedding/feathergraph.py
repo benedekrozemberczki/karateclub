@@ -89,10 +89,9 @@ class FeatherGraph(Estimator):
         for _ in range(self.order):
             X = A_tilde.dot(X)
             feature_blocks.append(X)
-        X = np.concatenate(feature_blocks, axis=1)
-        X = np.mean(X, axis=0)
-        print(X.shape)
-        return X
+        feature_blocks = np.concatenate(feature_blocks, axis=1)
+        feature_blocks = np.mean(feature_blocks, axis=0)
+        return feature_blocks
 
 
     def fit(self, graphs):
