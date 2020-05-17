@@ -5,7 +5,7 @@ from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
 class FeatherNode(Estimator):
-    r"""An implementation of `"FEATHER-N" <http://proceedings.mlr.press/v97/gao19e.html>`_
+    r"""An implementation of `"FEATHER-N" <http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf>`_
     from the paper "Characteristic Functions on Graphs: Birds of a Feather,
     from Statistical Descriptors to Parametric Models". The procedure
     uses characteristic functions of node features with random walk weights to describe
