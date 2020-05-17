@@ -124,8 +124,8 @@ class GeoScattering(Estimator):
                 filtered_x = psi.dot(x)
                 for q in range(1, self.moments):
                     features.append(np.sum(np.power(np.abs(filtered_x), q)))
-        features = np.array(features).reshape(-1) 
-        return features  
+        features = np.array(features).reshape(-1)
+        return features
 
 
     def _get_second_order_features(self, Psi, X):
@@ -146,7 +146,7 @@ class GeoScattering(Estimator):
             for i in range(self.order-1):
                 for j in range(i+1, self.order):
                     psi_j = Psi[i]
-                    psi_j_prime = Psi[j]                 
+                    psi_j_prime = Psi[j]           
                     filtered_x = np.abs(psi_j_prime.dot(np.abs(psi_j.dot(x))))
                     for q in range(1, self.moments):
                        features.append(np.sum(np.power(np.abs(filtered_x), q)))
