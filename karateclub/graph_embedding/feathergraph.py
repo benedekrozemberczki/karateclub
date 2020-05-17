@@ -67,7 +67,7 @@ class FeatherGraph(Estimator):
             * **X** *(NumPy array)* - The node features.
         """
         log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
-        clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        clustering_coefficient = np.array([nx.clustering(graph, node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
         X = np.concatenate([log_degree, clustering_coefficient], axis=1)
         return X
 
