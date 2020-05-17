@@ -115,7 +115,7 @@ In detail, the following community detection and embedding methods were implemen
 
 **Attributed Node Level Embedding**
 
-* **[FEATHER-N](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.feathernode.FeatherNode)** from Rozemberczki *et al.*: [](http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf) (Arxiv 2020)
+* **[FEATHER-N](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.feathernode.FeatherNode)** from Rozemberczki *et al.*: [Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models](http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf) (Arxiv 2020)
 
 * **[MUSAE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.musae.MUSAE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019)
 
