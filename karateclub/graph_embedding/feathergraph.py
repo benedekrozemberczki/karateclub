@@ -5,7 +5,7 @@ import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
-class FeatherGraph(Estimator):
+class FEATHERG(Estimator):
     r"""An implementation of `"FEATHER-G" <http://proceedings.mlr.press/v97/gao19e.html>`_
     from the paper "Characteristic Functions on Graphs: Birds of a Feather,
     from Statistical Descriptors to Parametric Models". The procedure
