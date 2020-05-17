@@ -10,8 +10,8 @@ class FeatherGraph(Estimator):
     from the paper "Characteristic Functions on Graphs: Birds of a Feather,
     from Statistical Descriptors to Parametric Models". The procedure
     uses characteristic functions of node features with random walk weights to describe
-    node neighborhoods. These node level features are pooled by mean pooling to 
-    create graph level statistics. 
+    node neighborhoods. These node level features are pooled by mean pooling to
+    create graph level statistics.
 
     Args:
         order (int): Adjacency matrix powers. Default is 5.
