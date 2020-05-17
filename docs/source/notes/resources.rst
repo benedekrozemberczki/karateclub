@@ -80,7 +80,7 @@ Meta node embedding
 Whole graph embedding
 --------------------
 
-* Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf>`_
+* Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf>`_, `Code <https://github.com/benedekrozemberczki/FEATHER>`_
 
 * Feng Gao, Guy Wolf, Matthew Hirn: **Geometric Scattering for Graph Data Analysis** `Paper <http://proceedings.mlr.press/v97/gao19e.html>`_
 
