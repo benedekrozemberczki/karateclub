@@ -1,7 +1,6 @@
 import math
 import numpy as np
 import networkx as nx
-import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
