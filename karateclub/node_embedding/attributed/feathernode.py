@@ -56,7 +56,7 @@ class FeatherNode(Estimator):
             * **A_tilde** *(Scipy array)* - The normalized adjacency matrix.
         """
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
-        D_inverse = self._create_D_inverse(graph) 
+        D_inverse = self._create_D_inverse(graph)
         A_tilde = D_inverse.dot(A)
         return A_tilde
 
