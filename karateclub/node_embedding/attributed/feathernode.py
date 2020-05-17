@@ -29,7 +29,6 @@ class FeatherNode(Estimator):
         self.eval_points = eval_points
         self.order = order
 
-
     def _create_D_inverse(self, graph):
         """
         Creating a sparse inverse degree matrix.
