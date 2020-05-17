@@ -80,6 +80,8 @@ Meta node embedding
 Whole graph embedding
 --------------------
 
+* Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf>`_
+
 * Feng Gao, Guy Wolf, Matthew Hirn: **Geometric Scattering for Graph Data Analysis** `Paper <http://proceedings.mlr.press/v97/gao19e.html>`_
 
 * Hong Chen, Hisashi Koga: **GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features** `Paper <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
