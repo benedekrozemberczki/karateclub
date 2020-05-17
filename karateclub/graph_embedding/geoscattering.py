@@ -9,7 +9,7 @@ class GeoScattering(Estimator):
     r"""An implementation of `"GeoScattering" <http://proceedings.mlr.press/v97/gao19e.html>`_
     from the ICML '19 paper "Geometric Scattering for Graph Data Analysis". The procedure
     uses scattering with wavelet transforms to create graph spectral descriptors. Moments of the
-    wavelet transformed features are used as graph level features for the embedding. 
+    wavelet transformed features are used as graph level features for the embedding.
 
     Args:
         order (int): Adjacency matrix powers. Default is 4.
@@ -79,8 +79,8 @@ class GeoScattering(Estimator):
             * **X** *(NumPy array)* - The node features.
         """
         log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
-        eccentricity = np.array([nx.eccentricity(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
-        clustering_coefficient = np.array([nx.clustering(graph,node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        eccentricity = np.array([nx.eccentricity(graph, node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        clustering_coefficient = np.array([nx.clustering(graph, node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
         X = np.concatenate([log_degree, eccentricity, clustering_coefficient], axis=1)
         return X
 
