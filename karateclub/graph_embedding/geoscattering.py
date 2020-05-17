@@ -100,7 +100,7 @@ class GeoScattering(Estimator):
         for col in range(X.shape[1]):
             x = np.abs(X[:, col])
             for power in range(1, self.order+1):
-                features.append(np.sum(np.power(x,power)))
+                features.append(np.sum(np.power(x, power)))
         features = np.array(features).reshape(-1)
         return features
 
@@ -148,7 +148,7 @@ class GeoScattering(Estimator):
                     psi_j = Psi[i]
                     psi_j_prime = Psi[j]                 
                     filtered_x = np.abs(psi_j_prime.dot(np.abs(psi_j.dot(x))))
-                    for q in range(1,self.moments):
+                    for q in range(1, self.moments):
                        features.append(np.sum(np.power(np.abs(filtered_x),q)))
 
         features = np.array(features).reshape(-1)
