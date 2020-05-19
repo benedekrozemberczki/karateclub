@@ -5,7 +5,7 @@ import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
 class FeatherGraph(Estimator):
-    r"""An implementation of `"FEATHER-G" <http://homepages.inf.ed.ac.uk/s1668259/papers/charfun_paper.pdf>`_
+    r"""An implementation of `"FEATHER-G" <https://arxiv.org/abs/2005.07959>`_
     from the paper "Characteristic Functions on Graphs: Birds of a Feather,
     from Statistical Descriptors to Parametric Models". The procedure
     uses characteristic functions of node features with random walk weights to describe
