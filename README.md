@@ -26,13 +26,13 @@ The newly introduced graph classification datasets are available at [SNAP](https
 If you find *Karate Club* and the new datasets useful in your research, please consider citing the following paper:
 
 ```bibtex
->@misc{karateclub2020,
-       title={An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs},
-       author={Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
-       year={2020},
-       eprint={2003.04819},
-       archivePrefix={arXiv},
-       primaryClass={cs.LG}
+@misc{karateclub2020,
+      title={An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs},
+      author={Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
+      year={2020},
+      eprint={2003.04819},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
 }
 ```
 --------------------------------------------------------------------------------
