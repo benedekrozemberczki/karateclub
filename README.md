@@ -1,6 +1,5 @@
 
- ![Version](https://badge.fury.io/py/karateclub.svg?style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) [![PyPI download month](https://img.shields.io/pypi/dm/karateclub.svg?color=blue&style=plastic)](https://pypi.python.org/pypi/karateclub/)  [![Arxiv](https://img.shields.io/badge/ArXiv-2003.04819-orange.svg?color=blue&style=plastic)](https://arxiv.org/abs/2003.04819) ![Astro](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fastronomer.ullaakut.eu%2Fshields%3Fowner%3Dbenedekrozemberczki%26name%3Dkarateclub) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-
+ ![Version](https://badge.fury.io/py/karateclub.svg?style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic) [![PyPI download month](https://img.shields.io/pypi/dm/karateclub.svg?color=blue&style=plastic)](https://pypi.python.org/pypi/karateclub/)  [![Arxiv](https://img.shields.io/badge/ArXiv-2003.04819-orange.svg?color=blue&style=plastic)](https://arxiv.org/abs/2003.04819) ![Astro](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fastronomer.ullaakut.eu%2Fshields%3Fowner%3Dbenedekrozemberczki%26name%3Dkarateclub)
 <p align="center">
   <img width="90%" src="https://github.com/benedekrozemberczki/karateclub/blob/master/karatelogo.jpg?sanitize=true" />
 </p>
@@ -17,7 +16,7 @@ Please look at the **[Documentation](https://karateclub.readthedocs.io/)**, rele
 *Karate Club* consists of state-of-the-art methods to do unsupervised learning on graph structured data. To put it simply it is a Swiss Army knife for small-scale graph mining research. First, it provides network embedding techniques at the node and graph level. Second, it includes a variety of overlapping and non-overlapping community detection methods. Implemented methods cover a wide range of network science ([NetSci](https://netscisociety.net/home), [Complenet](https://complenet.weebly.com/)), data mining ([ICDM](http://icdm2019.bigke.org/), [CIKM](http://www.cikm2019.net/), [KDD](https://www.kdd.org/kdd2020/)), artificial intelligence ([AAAI](http://www.aaai.org/Conferences/conferences.php), [IJCAI](https://www.ijcai.org/)) and machine learning ([NeurIPS](https://nips.cc/), [ICML](https://icml.cc/), [ICLR](https://iclr.cc/)) conferences, workshops, and pieces from prominent journals. 
 
 
-The newly introduced graph classification datasets are available at [SNAP](https://snap.stanford.edu/data/#disjointgraphs), [TUD Graph Kernel Datasets](https://ls11-www.cs.tu-dortmund.de/staff/morris/graphkerneldatasets) and [GraphLearning.io](https://chrsmrrs.github.io/datasets/).  
+The newly introduced graph classification datasets are available at [SNAP](https://snap.stanford.edu/data/#disjointgraphs), [TUD Graph Kernel Datasets](https://ls11-www.cs.tu-dortmund.de/staff/morris/graphkerneldatasets), and [GraphLearning.io](https://chrsmrrs.github.io/datasets/).  
 
 --------------------------------------------------------------------------------
 
