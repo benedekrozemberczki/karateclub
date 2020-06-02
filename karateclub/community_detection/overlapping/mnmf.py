@@ -20,9 +20,10 @@ class MNMF(Estimator):
         iterations (int): Number of power iterations. Default is 200.
         lower_control (float): Floating point overflow control. Default is 10**-15.
         eta (float): Similarity mixing parameter. Default is 5.0.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, dimensions=128, clusters=10, lambd=0.2, alpha=0.05,
-                 beta=0.05, iterations=200, lower_control=10**-15, eta=5.0):
+                 beta=0.05, iterations=200, lower_control=10**-15, eta=5.0, seed=42):
 
         self.dimensions = dimensions
         self.clusters = clusters
@@ -32,6 +33,7 @@ class MNMF(Estimator):
         self.iterations = iterations
         self.lower_control = lower_control
         self.eta = eta
+        self.seed = seed
 
     def _modularity_generator(self):
         """Calculating the sparse modularity matrix."""
@@ -141,6 +143,7 @@ class MNMF(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._graph = graph
         self._setup_matrices()
