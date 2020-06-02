@@ -30,20 +30,24 @@ class Estimator(object):
         """Getting the cluster centers."""
         return None
 
+
     def _set_seed(self):
         """Creating the initial random seed."""
         random.seed(self.seed)
         np.random.seed(self.seed)
 
+
     def _check_networkx_graph(self, graph):
         if not isinstance(graph, nx.classes.graph.Graph):
             raise TypeError("This is not a NetworkX graph. Please see requirements.")
+
 
     def _check_connectivity(self, graph):
         """Checking the connected nature of a single graph."""
         connected = nx.is_connected(graph)
         if not connected:
             raise ValueError("Graph is not connected. Please see requirements.")
+
 
     def _check_directedness(self, graph):
         """Checking the undirected nature of a single graph."""
@@ -58,6 +62,7 @@ class Estimator(object):
         node_indices = sorted([node for node in graph.nodes()])
         if numeric_indices != node_indices:
             raise ValueError("The node indexing is wrong. Please see requirements.")
+
 
     def _check_graph(self, graph):
         """Check the Karate Club assumptions about the graph."""
