@@ -12,10 +12,12 @@ class SCD(Estimator):
     Args:
         iterations (int): Refinemeent iterations. Default is 25.
         eps (float): Epsilon score for zero division correction. Default is 10**-6.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, iterations=25, eps=10**-6):
+    def __init__(self, iterations=25, eps=10**-6, seed=42):
         self.iterations = iterations
         self.eps = eps
+        self.seed = seed
 
     def _set_omega(self):
         """
@@ -170,6 +172,7 @@ class SCD(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._graph = graph
         self._create_initial_partition()
