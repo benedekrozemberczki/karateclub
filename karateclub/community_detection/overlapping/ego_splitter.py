@@ -10,9 +10,11 @@ class EgoNetSplitter(Estimator):
 
     Args:
         resolution (float): Resolution parameter of Python Louvain. Default 1.0.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, resolution=1.0):
+    def __init__(self, resolution=1.0, seed=42):
         self.resolution = resolution
+        self.seed = seed
 
     def _create_egonet(self, node):
         """
@@ -81,6 +83,7 @@ class EgoNetSplitter(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._set_seed()
         self._check_graph(graph)
         self.graph = graph
         self._create_egonets()
