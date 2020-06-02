@@ -29,6 +29,10 @@ class Estimator(object):
         """Getting the cluster centers."""
         return None
 
+    def _set_seed(self):
+        """Creating the initial random seed."""
+        random.seed(self.seed)
+        np.random.seed(self.seed)
 
     def _check_networkx_graph(self, graph):
         if not isinstance(graph, nx.classes.graph.Graph):
