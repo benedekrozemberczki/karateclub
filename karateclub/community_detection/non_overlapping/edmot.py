@@ -71,9 +71,7 @@ class EdMot(Estimator):
         self._calculate_motifs()
         self._extract_components()
         self._fill_blocks()
-        self._partition = community.best_partition(self._graph,
-                                                   randomize=True,
-                                                   random_state=self.seed)
+        self._partition = community.best_partition(self._graph, random_state=self.seed)
 
     def get_memberships(self):
         r"""Getting the cluster membership of nodes.
