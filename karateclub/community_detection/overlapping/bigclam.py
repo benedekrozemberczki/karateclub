@@ -14,11 +14,13 @@ class BigClam(Estimator):
         dimensions (int): Number of embedding dimensions. Default 8.
         iterations (int): Number of training iterations. Default 50.
         learning_rate (float): Gradient ascent learning rate. Default is 0.005.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=8, iterations=50, learning_rate=0.005):
+    def __init__(self, dimensions=8, iterations=50, learning_rate=0.005, seed=42):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
+        self.seed = seed
 
     def _initialize_features(self, number_of_nodes):
         """
@@ -86,6 +88,7 @@ class BigClam(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._set_seed()
         self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         self._initialize_features(number_of_nodes)
