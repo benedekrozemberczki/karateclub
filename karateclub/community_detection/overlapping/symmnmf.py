@@ -14,13 +14,15 @@ class SymmNMF(Estimator):
     Args:
         dimensions (int): Number of dimensions. Default is 32.
         iterations (int): Number of power iterations. Default is 200.
-        rho (float): ADMM tuning parameter. Default is 100.0.
+        rho (float): Regularization tuning parameter. Default is 100.0.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, iterations=200, rho=100.0):
+    def __init__(self, dimensions=32, iterations=200, rho=100.0, seed=42):
 
         self.dimensions = dimensions
         self.iterations = iterations
         self.rho = rho
+        self.seed = seed
 
     def _create_D_inverse(self, graph):
         """
@@ -102,6 +104,7 @@ class SymmNMF(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._set_seed()
         self._check_graph(graph)
         graph.remove_edges_from(nx.selfloop_edges(graph))
         A_hat = self._create_base_matrix(graph)
