@@ -22,9 +22,10 @@ class GEMSEC(Estimator):
         learning_rate (float): Gradient descent learning rate. Default is 0.1.
         clusters (int): Number of cluster centers. Default is 10.
         gamma (float): Clustering cost weight coefficient. Default is 0.1.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=5,
-                 window_size=5, learning_rate=0.1, clusters=10, gamma=0.1):
+                 window_size=5, learning_rate=0.1, clusters=10, gamma=0.1, seed=42):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -34,6 +35,7 @@ class GEMSEC(Estimator):
         self.learning_rate = learning_rate
         self.clusters = clusters
         self.gamma = gamma
+        self.seed = seed
 
 
     def _setup_sampling_weights(self, graph):
@@ -174,6 +176,7 @@ class GEMSEC(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._setup_sampling_weights(graph)
         self._walker = RandomWalker(self.walk_length, self.walk_number)
