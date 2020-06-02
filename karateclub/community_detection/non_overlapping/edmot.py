@@ -11,10 +11,12 @@ class EdMot(Estimator):
     Args:
         component_count (int): Number of extracted motif hypergraph components. Default is 2.
         cutoff (int): Motif edge cut-off value. Default is 50.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, component_count=2, cutoff=50):
+    def __init__(self, component_count=2, cutoff=50, seed=42):
         self.component_count = component_count
         self.cutoff = cutoff
+        self.seed = seed
 
     def _overlap(self, node_1, node_2):
         """
@@ -63,6 +65,7 @@ class EdMot(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._graph = graph
         self._calculate_motifs()
