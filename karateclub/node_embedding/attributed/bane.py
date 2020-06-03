@@ -17,6 +17,7 @@ class BANE(Estimator):
         alpha (float): Kernel matrix inversion parameter. Default is 0.3. 
         iterations (int): Matrix decomposition iterations. Default is 100.
         binarization_iterations (int): Binarization iterations. Default is 20.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, dimensions=32, svd_iterations=20, seed=42, alpha=0.3,
                  iterations=100, binarization_iterations=20):
@@ -26,6 +27,7 @@ class BANE(Estimator):
         self.alpha = alpha
         self.iterations = iterations
         self.binarization_iterations = binarization_iterations
+        self.seed = seed
 
     def _create_target_matrix(self, graph):
         """
@@ -53,6 +55,7 @@ class BANE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._P = self._create_target_matrix(graph)
         self._X = X

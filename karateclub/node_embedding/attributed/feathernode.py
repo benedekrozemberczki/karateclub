@@ -18,9 +18,10 @@ class FeatherNode(Estimator):
         theta_max (float): Maximal evaluation point. Default is 2.5.
         eval_points (int): Number of characteristic function evaluation points. Default is 25.
         order (int): Scale - number of adjacency matrix powers. Default is 5.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, reduction_dimensions=64, svd_iterations=20,
-                 seed=42, theta_max=2.5, eval_points=25, order=5):
+                 seed=42, theta_max=2.5, eval_points=25, order=5, seed=42):
 
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
@@ -28,6 +29,7 @@ class FeatherNode(Estimator):
         self.theta_max = theta_max
         self.eval_points = eval_points
         self.order = order
+        self.seed = seed
 
     def _create_D_inverse(self, graph):
         """
@@ -102,6 +104,7 @@ class FeatherNode(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._set_seed()
         self._check_graph(graph)
         X = self._create_reduced_features(X)
         A_tilde = self._create_A_tilde(graph)
