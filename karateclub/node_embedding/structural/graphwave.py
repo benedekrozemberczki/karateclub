@@ -132,7 +132,8 @@ class GraphWave(Estimator):
         elif self.mechanism == "approximate":
             self._approximate_structural_wavelet_embedding()
         else:
-            pass
+            raise NameError("Unknown method.")
+
 
     def get_embedding(self):
         r"""Getting the node embedding.
