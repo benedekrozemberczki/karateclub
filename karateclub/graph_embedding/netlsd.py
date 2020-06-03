@@ -15,12 +15,16 @@ class NetLSD(Estimator):
         scale_max (float): Time scale interval maximum. Default is 2.0.
         scale_steps (int): Number of steps in time scale. Default is 250.
         scale_approximations (int): Number of eigenvalue approximations. Default is 200.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, scale_min=-2.0, scale_max=2.0, scale_steps=250, approximations=200):
+    def __init__(self, scale_min=-2.0, scale_max=2.0,
+                 scale_steps=250, approximations=200, seed=42):
+
         self.scale_min = scale_min
         self.scale_max = scale_max
         self.scale_steps = scale_steps
         self.approximations = approximations
+        self.seed = seed
    
     def _calculate_heat_kernel_trace(self, eigenvalues):
         """
@@ -103,6 +107,7 @@ class NetLSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_netlsd(graph) for graph in graphs]
 
