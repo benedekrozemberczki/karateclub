@@ -11,6 +11,7 @@ class HOPE(Estimator):
 
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, dimensions=128):
 
@@ -42,6 +43,7 @@ class HOPE(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         S = self._create_target(graph)
         self._do_rescaled_decomposition(S)
