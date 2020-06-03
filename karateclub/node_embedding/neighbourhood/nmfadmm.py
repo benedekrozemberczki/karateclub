@@ -14,11 +14,13 @@ class NMFADMM(Estimator):
         dimensions (int): Number of individual embedding dimensions. Default is 32.
         iterations (int): Number of ADMM iterations. Default is 100.
         rho (float): ADMM Tuning parameter. Default is 1.0.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, iterations=100, rho=1.0):
+    def __init__(self, dimensions=32, iterations=100, rho=1.0, seed=42):
         self.dimensions = dimensions
         self.iterations = iterations
         self.rho = rho
+        self.seed = seed
         
     def _init_weights(self):
         """
@@ -136,6 +138,7 @@ class NMFADMM(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._V = self._create_base_matrix(graph)
         self._init_weights()
