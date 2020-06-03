@@ -18,12 +18,14 @@ class BoostNE(Estimator):
         iterations (int): Number of boosting iterations. Default is 16.
         order (int): Number of adjacency matrix powers. Default is 2.
         alpha (float): NMF regularization parameter. Default is 0.01.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=8, iterations=16, order=2, alpha=0.01):
+    def __init__(self, dimensions=8, iterations=16, order=2, alpha=0.01, seed=42):
         self.dimensions = dimensions
         self.iterations = iterations
         self.order = order
         self.alpha = alpha
+        self.seed = seed
 
     def _create_D_inverse(self, graph):
         """
@@ -187,6 +189,7 @@ class BoostNE(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._residuals = self._create_target_matrix(graph)
         self._setup_base_model()
