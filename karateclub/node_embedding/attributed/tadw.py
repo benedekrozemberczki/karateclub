@@ -29,6 +29,7 @@ class TADW(Estimator):
         self.alpha = alpha
         self.iterations = iterations
         self.lambd = lambd
+        self.seed = seed
 
     def _create_target_matrix(self, graph):
         """
@@ -112,6 +113,7 @@ class TADW(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._A = self._create_target_matrix(graph)
         self._T = self._create_reduced_features(X)
