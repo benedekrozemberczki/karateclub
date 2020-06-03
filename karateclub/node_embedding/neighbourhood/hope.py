@@ -13,9 +13,10 @@ class HOPE(Estimator):
         dimensions (int): Dimensionality of embedding. Default is 128.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128):
+    def __init__(self, dimensions=128, seed=42):
 
         self.dimensions = dimensions
+        self.seed = seed
 
 
     def _create_target(self, graph):
