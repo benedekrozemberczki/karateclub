@@ -21,10 +21,11 @@ class FSCNMF(Estimator):
         beta_1 (float): Alignment parameter for feature matrix. Default is 1000.0.
         beta_2 (float): Attribute basis regularization. Default is 1.0.
         beta_3 (float): Attribute basis regularization. Default is 1.0.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, dimensions=32, lower_control=10**-15, iterations=500,
                  alpha_1=1000.0, alpha_2=1.0, alpha_3=1.0,
-                 beta_1=1000.0, beta_2=1.0, beta_3=1.0):
+                 beta_1=1000.0, beta_2=1.0, beta_3=1.0, seed=42):
 
         self.dimensions = dimensions
         self.lower_control = lower_control
@@ -35,6 +36,7 @@ class FSCNMF(Estimator):
         self.beta_1 = beta_1
         self.beta_2 = beta_2
         self.beta_3 = beta_3
+        self.seed = seed
 
     def _init_weights(self):
         """
@@ -125,6 +127,7 @@ class FSCNMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._X = X
         self._A = self._create_base_matrix(graph)
