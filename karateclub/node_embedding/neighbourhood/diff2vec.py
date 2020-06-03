@@ -20,9 +20,10 @@ class Diff2Vec(Estimator):
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurences. Default is 1.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, diffusion_number=10, diffusion_cover=80, dimensions=128, workers=4,
-                 window_size=5, epochs=1, learning_rate=0.05, min_count=1):
+                 window_size=5, epochs=1, learning_rate=0.05, min_count=1, seed=42):
 
         self.diffusion_number = diffusion_number
         self.diffusion_cover = diffusion_cover
@@ -32,6 +33,7 @@ class Diff2Vec(Estimator):
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.min_count = min_count
+        self.seed = seed
 
     def fit(self, graph):
         """
@@ -40,6 +42,7 @@ class Diff2Vec(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         diffuser = EulerianDiffuser(self.diffusion_number, self.diffusion_cover)
         diffuser.do_diffusions(graph)
@@ -51,7 +54,8 @@ class Diff2Vec(Estimator):
                          size=self.dimensions,
                          window=self.window_size,
                          min_count=self.min_count,
-                         workers=self.workers)
+                         workers=self.workers,
+                         seed=self.seed)
 
         num_of_nodes = graph.number_of_nodes()
         self._embedding = [model[str(n)] for n in range(num_of_nodes)]
