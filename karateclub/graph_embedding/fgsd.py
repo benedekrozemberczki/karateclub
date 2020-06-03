@@ -11,11 +11,13 @@ class FGSD(Estimator):
     Args:
         hist_bins (int): Number of histogram bins. Default is 200.
         hist_range (int): Histogram range considered. Default is 20.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, hist_bins=200, hist_range=20):
+    def __init__(self, hist_bins=200, hist_range=20, seed=42):
 
         self.hist_bins = hist_bins
         self.hist_range = (0, hist_range)
+        self.seed = seed
 
     def _calculate_fgsd(self, graph):
         """
@@ -43,6 +45,7 @@ class FGSD(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
 
