@@ -21,9 +21,10 @@ class Walklets(Estimator):
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurences. Default is 1.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, walk_number=10, walk_length=80, dimensions=32, workers=4,
-                 window_size=4, epochs=1, learning_rate=0.05, min_count=1):
+                 window_size=4, epochs=1, learning_rate=0.05, min_count=1, seed=42):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -33,6 +34,7 @@ class Walklets(Estimator):
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.min_count = min_count
+        self.seed = seed
 
     def _select_walklets(self, walks, power):
         walklets = []
@@ -49,6 +51,7 @@ class Walklets(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
@@ -64,7 +67,8 @@ class Walklets(Estimator):
                              size=self.dimensions,
                              window=1,
                              min_count=self.min_count,
-                             workers=self.workers)
+                             workers=self.workers,
+                             seed=self.seed)
 
             embedding = np.array([model[str(n)] for n in range(num_of_nodes)])
             self._embedding.append(embedding)
