@@ -18,9 +18,10 @@ class GraphWave(Estimator):
         approximation (int): Chebyshev polynomial order. Default is 100.
         mechanism (str): Wavelet calculation method 'exact' or 'approximate'. Default is 'approximate'.
         switch (int): Vertex cardinality when the wavelet calculation method switches to approximation. Default is 1000.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, sample_number=200, step_size=0.1, heat_coefficient=1.0,
-                 approximation=100, mechanism="approximate", switch=1000):
+                 approximation=100, mechanism="approximate", switch=1000, seed=42):
 
         self.sample_number = sample_number
         self.step_size = step_size
@@ -28,6 +29,7 @@ class GraphWave(Estimator):
         self.approximation = approximation
         self.mechanism = mechanism
         self.switch = switch
+        self.seed = seed
 
     def _create_evaluation_points(self):
         """
@@ -118,6 +120,7 @@ class GraphWave(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         graph.remove_edges_from(nx.selfloop_edges(graph))
         self._create_evaluation_points()
