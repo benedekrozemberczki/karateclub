@@ -14,10 +14,12 @@ class GeoScattering(Estimator):
     Args:
         order (int): Adjacency matrix powers. Default is 4.
         moments (int): Unnormalized moments considered. Default is 4.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, order=4, moments=4):
+    def __init__(self, order=4, moments=4, seed=42):
         self.order = order
         self.moments = moments
+        self.seed = seed
 
 
     def _create_D_inverse(self, graph):
@@ -182,6 +184,7 @@ class GeoScattering(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_geoscattering(graph) for graph in graphs]
 
