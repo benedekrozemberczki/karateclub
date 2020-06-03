@@ -11,9 +11,11 @@ class SF(Estimator):
 
     Args:
         dimensions (int): Number of lowest eigenvalues. Default is 128.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128):
+    def __init__(self, dimensions=128, seed=42):
         self.dimensions = dimensions
+        self.seed = seed
 
     def _calculate_sf(self, graph):
         """
@@ -42,6 +44,7 @@ class SF(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_sf(graph) for graph in graphs]
 
