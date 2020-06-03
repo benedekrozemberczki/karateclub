@@ -12,9 +12,9 @@ class NodeSketch(Estimator):
     and (k-1)-order node embeddings.
 
     Args:
-        dimensions (int): Embedding dimensions. Default is 32
-        iterations (int): Number of iterations (sketch order minus one). Default is 2
-        decay (float): Exponential decay rate. Default is 0.01
+        dimensions (int): Embedding dimensions. Default is 32.
+        iterations (int): Number of iterations (sketch order minus one). Default is 2.
+        decay (float): Exponential decay rate. Default is 0.01.
     """
     def __init__(self, dimensions=32, iterations=2, decay=0.01):
         self.dimensions = dimensions
