@@ -15,11 +15,13 @@ class NodeSketch(Estimator):
         dimensions (int): Embedding dimensions. Default is 32.
         iterations (int): Number of iterations (sketch order minus one). Default is 2.
         decay (float): Exponential decay rate. Default is 0.01.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, iterations=2, decay=0.01):
+    def __init__(self, dimensions=32, iterations=2, decay=0.01, seed=42):
         self.dimensions = dimensions
         self.iterations = iterations
         self.decay = decay
+        self.seed = seed
         self._weight = self.decay/self.dimensions
 
     def _generate_hash_values(self):
@@ -82,6 +84,7 @@ class NodeSketch(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._graph = graph
         self._num_nodes = len(graph.nodes)
