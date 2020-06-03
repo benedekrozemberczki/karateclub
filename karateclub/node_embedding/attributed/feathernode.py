@@ -14,14 +14,13 @@ class FeatherNode(Estimator):
     Args:
         reduction_dimensions (int): SVD reduction dimensions. Default is 64.
         svd_iterations (int): SVD iteration count. Default is 20.
-        seed (int): Random seed. Default is 42.
         theta_max (float): Maximal evaluation point. Default is 2.5.
         eval_points (int): Number of characteristic function evaluation points. Default is 25.
         order (int): Scale - number of adjacency matrix powers. Default is 5.
         seed (int): Random seed value. Default is 42.
     """
     def __init__(self, reduction_dimensions=64, svd_iterations=20,
-                 seed=42, theta_max=2.5, eval_points=25, order=5, seed=42):
+                 theta_max=2.5, eval_points=25, order=5, seed=42):
 
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
