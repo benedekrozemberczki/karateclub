@@ -96,6 +96,7 @@ class NetMF(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         target_matrix = self._create_target_matrix(graph)
         self._embedding = self._create_embedding(target_matrix)
