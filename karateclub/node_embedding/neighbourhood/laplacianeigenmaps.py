@@ -11,10 +11,12 @@ class LaplacianEigenmaps(Estimator):
 
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128):
+    def __init__(self, dimensions=128, seed=42):
 
         self.dimensions = dimensions
+        self.seed = seed
 
     def fit(self, graph):
         """
@@ -23,6 +25,7 @@ class LaplacianEigenmaps(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
