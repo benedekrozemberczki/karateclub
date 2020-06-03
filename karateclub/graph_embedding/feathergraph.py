@@ -16,11 +16,13 @@ class FeatherGraph(Estimator):
         order (int): Adjacency matrix powers. Default is 5.
         eval_points (int): Number of evaluation points. Default is 25.
         theta_max (int): Maximal evaluation point value. Default is 2.5.
+        seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, order=5, eval_points=25, theta_max=2.5):
+    def __init__(self, order=5, eval_points=25, theta_max=2.5, seed=42):
         self.order = order
         self.eval_points = eval_points
         self.theta_max = theta_max
+        self.seed = seed
 
 
     def _create_D_inverse(self, graph):
@@ -104,6 +106,7 @@ class FeatherGraph(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
+        self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_feather(graph) for graph in graphs]
 
