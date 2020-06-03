@@ -88,6 +88,7 @@ class GraRep(Estimator):
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._A_tilde, self._A_hat = self._create_base_matrix(graph)
         self._embeddings = []
