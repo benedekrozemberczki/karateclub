@@ -15,14 +15,16 @@ class TENE(Estimator):
         alpha (float): Adjacency matrix regularization coefficient. Default is 0.1. 
         beta (float): Feature matrix regularization coefficient. Default is 0.1.
         iterations (int): ALS iterations. Default is 200.
+        seed (int): Random seed value. Default is 42.
     """
     def __init__(self, dimensions=32, lower_control=10**-15,
-                 alpha=0.1, beta=0.1, iterations=200):
+                 alpha=0.1, beta=0.1, iterations=200, seed=42):
         self.dimensions = dimensions
         self.lower_control = lower_control
         self.alpha = alpha
         self.beta = beta
         self.iterations = iterations
+        self.seed = seed
 
     def _init_weights(self):
         """
@@ -115,6 +117,7 @@ class TENE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
             * **T** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
+        self._set_seed()
         self._check_graph(graph)
         self._X = self._create_base_matrix(graph)
         self._T = T
