@@ -145,7 +145,7 @@ def test_laplacianeigenmaps():
     """
     model = LaplacianEigenmaps()
 
-    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+    graph = nx.watts_strogatz_graph(500, 10, 0.5)
 
     model.fit(graph)
 
@@ -167,4 +167,4 @@ def test_nmf_admm():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions
+    assert embedding.shape[1] == model.dimensions*2
