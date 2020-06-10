@@ -1,0 +1,10 @@
+[run]
+source=karatecluv
+[report]
+exclude_lines =
+    pragma: no cover
+    raise
+    except
+    register_parameter
+    warn
+    pass
