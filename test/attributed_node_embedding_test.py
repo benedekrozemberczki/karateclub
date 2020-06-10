@@ -111,7 +111,7 @@ def test_musae():
     """
     graph = nx.newman_watts_strogatz_graph(50, 10, 0.2)
 
-    features = {i: random.sample(range(150),50) for i in range(50)}
+    features = {i: random.sample(range(150), 50) for i in range(50)}
     row = np.array([k for k, v in features.items() for val in v])
     col = np.array([val for k, v in features.items() for val in v])
     data = np.ones(50*50)
@@ -120,6 +120,28 @@ def test_musae():
 
     model = MUSAE()
     model.fit(graph, X)
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+
+
+def test_sine():
+    """
+    Testing the SINE node embedding.
+    """
+    graph = nx.newman_watts_strogatz_graph(100, 10, 0.2)
+
+    features = {i: random.sample(range(150), 50) for i in range(100)}
+    row = np.array([k for k, v in features.items() for val in v])
+    col = np.array([val for k, v in features.items() for val in v])
+    data = np.ones(100*50)
+    shape = (100, 150)
+
+    features = coo_matrix((data, (row, col)), shape=shape)
+
+    model = SINE()
+    model.fit(graph, features)
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
