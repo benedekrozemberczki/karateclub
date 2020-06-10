@@ -1,6 +1,6 @@
 import networkx as nx
 
-from karateclub import DeepWalk, Walklets
+from karateclub import DeepWalk, Walklets, HOPE
 
 def test_deepwalk():
     """
