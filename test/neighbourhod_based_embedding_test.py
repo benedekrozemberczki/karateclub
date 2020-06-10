@@ -114,7 +114,7 @@ def test_boostne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions*(model.iterations+1)
 
-    graph = nx.watts_strogatz_graph(100, 10, 0.0)
+    graph = nx.watts_strogatz_graph(200, 10, 0.0)
 
     model.fit(graph)
 
@@ -125,7 +125,7 @@ def test_boostne():
 
 def test_nodesketch():
     """
-    Testing the DeepWalk class.
+    Testing the NodeSketch class.
     """
     model = NodeSketch()
 
@@ -139,3 +139,17 @@ def test_nodesketch():
     assert embedding.shape[1] == model.dimensions
    
 
+def test_laplacianeigenmaps():
+    """
+    Testing the Laplacian Eigenmaps class.
+    """
+    model = LaplacianEigenmaps()
+
+    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
