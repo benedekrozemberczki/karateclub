@@ -14,6 +14,6 @@ def test_sampler():
 
     embedding = model.get_embedding()
 
-    assert embedding.shape[1] = model.dimensions
+    assert embedding.shape[1] == model.dimensions
     
 
