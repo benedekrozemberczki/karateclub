@@ -156,8 +156,6 @@ model = SINE()
 
 model.fit(g, X)
 
-model.get_memberships()
-
 #-------------
 # SCD example
 #-------------

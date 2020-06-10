@@ -121,7 +121,7 @@ class FSCNMF(Estimator):
 
     def fit(self, graph, X):
         """
-        Fitting a TENE model.
+        Fitting an FSCNMF model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.

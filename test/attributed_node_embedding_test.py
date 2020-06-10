@@ -58,3 +58,69 @@ def test_bane():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
+
+
+def test_fscnmf():
+    """
+    Testing the FSCNMF node embedding.
+    """
+    graph = nx.newman_watts_strogatz_graph(250, 10, 0.2)
+
+    features = np.random.uniform(0, 1, (250, 128))
+    model = FSCNMF()
+    model.fit(graph, features)
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == 2*model.dimensions
+
+
+def test_tene():
+    """
+    Testing the TENE node embedding.
+    """
+    graph = nx.newman_watts_strogatz_graph(250, 10, 0.2)
+
+    features = np.random.uniform(0, 1, (250, 128))
+    model = TENE()
+    model.fit(graph, features)
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == 2*model.dimensions
+
+
+def test_tadw():
+    """
+    Testing the TADW node embedding.
+    """
+    graph = nx.newman_watts_strogatz_graph(250, 10, 0.2)
+
+    features = np.random.uniform(0, 1, (250, 128))
+    model = TADW()
+    model.fit(graph, features)
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == 2*model.dimensions
+
+
+def test_musae():
+    """
+    Testing the MUSAE node embedding.
+    """
+    graph = nx.newman_watts_strogatz_graph(50, 10, 0.2)
+
+    features = {i: random.sample(range(150),50) for i in range(50)}
+    row = np.array([k for k, v in features.items() for val in v])
+    col = np.array([val for k, v in features.items() for val in v])
+    data = np.ones(50*50)
+    shape = (50, 150)
+    features = coo_matrix((data, (row, col)), shape=shape)
+
+    model = MUSAE()
+    model.fit(graph, X)
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions

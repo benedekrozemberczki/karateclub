@@ -93,6 +93,8 @@ class FeatherNode(Estimator):
             X = self._reduce_dimensions(X)
         elif (type(X) is np.ndarray) and (X.shape[1] > self.reduction_dimensions):
             X = self._reduce_dimensions(X)
+        else:
+            X = X
         return X
 
     def fit(self, graph, X):
@@ -106,7 +108,6 @@ class FeatherNode(Estimator):
         self._set_seed()
         self._check_graph(graph)
         X = self._create_reduced_features(X)
-        print(X.shape)
         A_tilde = self._create_A_tilde(graph)
         theta = np.linspace(0.01, self.theta_max, self.eval_points)
         X = np.outer(X, theta)
