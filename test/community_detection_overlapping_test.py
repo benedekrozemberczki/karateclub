@@ -64,3 +64,25 @@ def test_danmf():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.layers[-1]
+
+def test_bigclam():
+    """
+    Test the BigClam procedure.
+    """
+    graph = nx.newman_watts_strogatz_graph(100, 5, 0.3)
+
+    model = BigClam()
+
+    model.fit(graph)
+    memberships = model.get_memberships()
+    
+    indices = [k for k, v in memberships.items()].sort()
+    nodes = [node for node in graph.nodes()].sort()
+
+    assert graph.number_of_nodes() == len(memberships)
+    assert indices == nodes
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
