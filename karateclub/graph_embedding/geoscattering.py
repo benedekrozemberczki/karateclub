@@ -104,6 +104,7 @@ class GeoScattering(Estimator):
             for power in range(1, self.order+1):
                 features.append(np.sum(np.power(x, power)))
         features = np.array(features).reshape(-1)
+        print(features.shape)
         return features
 
 
@@ -127,6 +128,7 @@ class GeoScattering(Estimator):
                 for q in range(1, self.moments):
                     features.append(np.sum(np.power(np.abs(filtered_x), q)))
         features = np.array(features).reshape(-1)
+        print(features.shape)
         return features
 
 
@@ -154,6 +156,7 @@ class GeoScattering(Estimator):
                         features.append(np.sum(np.power(np.abs(filtered_x), q)))
 
         features = np.array(features).reshape(-1)
+        print(features.shape)
         return features
 
 

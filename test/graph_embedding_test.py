@@ -128,9 +128,9 @@ def test_geoscattering():
     """
     Test the GeoScattering embedding.
     """
-    graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(5)]
+    graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(10)]
 
-    for order in range(4, 13):
+    for order in range(4, 20):
         for moment in range(4, 7):
 
             model = GeoScattering(order=order, moments=moment)
