@@ -119,11 +119,11 @@ def test_musae():
     features = coo_matrix((data, (row, col)), shape=shape)
 
     model = MUSAE()
-    model.fit(graph, X)
+    model.fit(graph, features)
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions
+    assert embedding.shape[1] == model.dimensions*(1+model.window_size)
 
 
 def test_sine():
