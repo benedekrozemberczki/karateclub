@@ -22,7 +22,7 @@ setup(
               "clustering", "embedding","network","deepwalk",
               "graph2vec","node2vec", "deep","learning","louvain",
               "machine-learning","deep-learning","deeplearning"],
-  install_requires=install_requires,
+  install_requires = install_requires,
   setup_requires = setup_requires,
   tests_require = tests_require,
   classifiers=[
