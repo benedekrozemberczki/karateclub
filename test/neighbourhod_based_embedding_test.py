@@ -21,7 +21,7 @@ def test_walklets():
     """
     Testing the Walklets class.
     """
-    model = DeepWalk()
+    model = Walklets()
 
     graph = nx.watts_strogatz_graph(100, 10, 0.5)
 
