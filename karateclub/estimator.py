@@ -19,17 +19,17 @@ class Estimator(object):
 
     def get_embedding(self):
         """Getting the embeddings (graph or node level)."""
-        return None
+        pass
 
 
     def get_memberships(self):
         """Getting the membership dictionary."""
-        return None
+        pass
 
 
     def get_cluster_centers(self):
         """Getting the cluster centers."""
-        return None
+        pass
 
 
     def _set_seed(self):
@@ -67,6 +67,7 @@ class Estimator(object):
 
     def _check_graph(self, graph):
         """Check the Karate Club assumptions about the graph."""
+        self._check_networkx_graph(graph)
         self._check_connectivity(graph)
         self._check_directedness(graph)
         self._check_indexing(graph)

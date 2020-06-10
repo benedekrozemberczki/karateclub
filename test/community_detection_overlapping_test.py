@@ -111,6 +111,11 @@ def test_mmf():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
 
+    centers = model.get_cluster_centers()
+
+    assert centers.shape[0] == model.clusters
+    assert centers.shape[1] == model.dimensions
+
 
 def test_symmnmf():
     """
