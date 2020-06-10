@@ -185,3 +185,11 @@ Besides the case studies we provide synthetic examples for each model. These can
 ```sh
 $ python examples.py
 ```
+
+--------------------------------------------------------------------------------
+
+**Running tests**
+
+```sh
+$ python setup.py test
+```
