@@ -1,6 +1,7 @@
 import networkx as nx
 
-from karateclub import DeepWalk, Walklets, HOPE
+from karateclub import DeepWalk, Walklets, HOPE, NetMF
+
 
 def test_deepwalk():
     """
@@ -16,6 +17,7 @@ def test_deepwalk():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
+
 
 def test_walklets():
     """
@@ -33,11 +35,11 @@ def test_walklets():
     assert embedding.shape[1] == model.dimensions*model.window_size
 
 
-def test_hope():
+def test_netmf():
     """
-    Testing the HOPE class.
+    Testing the NetMF class.
     """
-    model = HOPE()
+    model = NetMF()
 
     graph = nx.watts_strogatz_graph(100, 10, 0.5)
 
@@ -47,5 +49,5 @@ def test_hope():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
-    
+   
 
