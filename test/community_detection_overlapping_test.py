@@ -65,6 +65,7 @@ def test_danmf():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.layers[-1]
 
+
 def test_bigclam():
     """
     Test the BigClam procedure.
