@@ -1,7 +1,7 @@
 import networkx as nx
 
 from karateclub import DeepWalk, Walklets, HOPE, NetMF, Diff2Vec, GraRep, BoostNE
-from karateclub import NodeSketch
+from karateclub import NodeSketch, LaplacianEigenmaps, NMFADMM
 
 
 def test_deepwalk():
@@ -144,6 +144,21 @@ def test_laplacianeigenmaps():
     Testing the Laplacian Eigenmaps class.
     """
     model = LaplacianEigenmaps()
+
+    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+
+def test_nmf_admm():
+    """
+    Testing the NMF ADMM class.
+    """
+    model = NMFADMM()
 
     graph = nx.watts_strogatz_graph(100, 10, 0.5)
 
