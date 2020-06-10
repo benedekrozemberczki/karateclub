@@ -89,11 +89,31 @@ def test_sf():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
 
+    graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+    model = SF(dimensions=128)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == model.dimensions
+
 def test_netlsd():
     """
     Test the NetLSD embedding.
     """
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+    model = NetLSD()
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == model.scale_steps
+
+    graphs = [nx.newman_watts_strogatz_graph(500, 5, 0.3) for _ in range(100)]
 
     model = NetLSD()
 
