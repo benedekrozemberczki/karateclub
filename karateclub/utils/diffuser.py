@@ -40,8 +40,6 @@ class EulerianDiffuser:
                 if infected_counter == self.diffusion_cover:
                     break
         euler = [str(u) for u, v in nx.eulerian_circuit(sub_graph, infected[0])]
-        if len(euler) == 0:
-            euler = [str(u) for u, v in nx.eulerian_circuit(graph, infected[0])]
         return euler
 
 
