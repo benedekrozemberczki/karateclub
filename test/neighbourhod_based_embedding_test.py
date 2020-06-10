@@ -114,6 +114,15 @@ def test_boostne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions*(model.iterations+1)
 
+    graph = nx.watts_strogatz_graph(100, 10, 0.0)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions*(model.iterations+1)
+
 def test_nodesketch():
     """
     Testing the DeepWalk class.
