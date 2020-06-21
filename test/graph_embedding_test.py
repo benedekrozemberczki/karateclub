@@ -121,6 +121,7 @@ def test_netlsd():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.scale_steps
+    assert type(embedding) == np.ndarray
 
     graphs = [nx.newman_watts_strogatz_graph(500, 5, 0.3) for _ in range(100)]
 
@@ -131,6 +132,7 @@ def test_netlsd():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.scale_steps
+    assert type(embedding) == np.ndarray
 
 
 def test_geoscattering():
