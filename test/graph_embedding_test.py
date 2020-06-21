@@ -1,5 +1,5 @@
+import numpy as np
 import networkx as nx
-
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoScattering, FeatherGraph
 
 
@@ -34,6 +34,7 @@ def test_fgsd():
     assert embedding.shape[1] == model.hist_bins
     assert type(embedding) == np.ndarray
 
+
 def test_graph2vec():
     """
     Test the Graph2Vec embedding.
@@ -64,6 +65,7 @@ def test_graph2vec():
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
 
+
 def test_gl2vec():
     """
     Test the GL2Vec embedding.
@@ -77,6 +79,7 @@ def test_gl2vec():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
+
 
 def test_sf():
     """
@@ -103,6 +106,7 @@ def test_sf():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
 
 def test_netlsd():
     """
