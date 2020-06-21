@@ -116,6 +116,7 @@ def test_mmf():
 
     assert centers.shape[0] == model.clusters
     assert centers.shape[1] == model.dimensions
+    assert type(centers) == np.ndarray
 
 
 def test_symmnmf():
