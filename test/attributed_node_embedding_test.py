@@ -92,6 +92,7 @@ def test_tene():
     assert embedding.shape[1] == 2*model.dimensions
     assert type(embedding) == np.ndarray
 
+
 def test_tadw():
     """
     Testing the TADW node embedding.
