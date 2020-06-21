@@ -50,6 +50,7 @@ def test_graphwave_exact():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.sample_number
+    assert type(embedding) == np.ndarray
 
     model = GraphWave(mechanism="whatelse")
 
@@ -63,3 +64,4 @@ def test_graphwave_exact():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.sample_number
+    assert type(embedding) == np.ndarray
