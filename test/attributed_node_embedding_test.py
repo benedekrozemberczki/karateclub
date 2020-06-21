@@ -1,7 +1,6 @@
-import networkx as nx
-
 import random
 import numpy as np
+import networkx as nx
 from scipy.sparse import coo_matrix
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
 

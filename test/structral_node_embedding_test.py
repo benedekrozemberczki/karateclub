@@ -1,6 +1,5 @@
 import numpy as np
 import networkx as nx
-
 from karateclub import Role2Vec, GraphWave
 
 
