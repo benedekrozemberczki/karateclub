@@ -1,3 +1,4 @@
+import numpy as np
 import networkx as nx
 from karateclub import NEU, NetMF
 
@@ -14,3 +15,4 @@ def test_neu():
     embedding = meta_model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
+    assert type(embedding) == np.ndarray
