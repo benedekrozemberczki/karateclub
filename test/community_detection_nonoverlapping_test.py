@@ -1,5 +1,5 @@
+import numpy as np
 import networkx as nx
-
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
 
 def test_edmot():
@@ -81,3 +81,4 @@ def test_GEMSEC():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
