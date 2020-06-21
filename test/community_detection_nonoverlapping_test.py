@@ -56,6 +56,7 @@ def test_scd():
 
     assert graph.number_of_nodes() == len(memberships)
     assert indices == nodes
+    assert type(memberships) == dict
 
 
 def test_GEMSEC():
