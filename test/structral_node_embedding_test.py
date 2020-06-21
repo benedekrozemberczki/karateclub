@@ -37,7 +37,7 @@ def test_graphwave_approximate():
 
 def test_graphwave_exact():
     """
-    Testing the GraphWave class with approximation.
+    Testing the GraphWave class with exact calculation.
     """
     model = GraphWave(mechanism="exact")
 
