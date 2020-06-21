@@ -1,5 +1,5 @@
+import numpy as np
 import networkx as nx
-
 from karateclub import DeepWalk, Walklets, HOPE, NetMF, Diff2Vec, GraRep
 from karateclub import NodeSketch, LaplacianEigenmaps, NMFADMM
 
@@ -18,6 +18,7 @@ def test_deepwalk():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
 
 
 def test_walklets():
@@ -34,6 +35,7 @@ def test_walklets():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions*model.window_size
+    assert type(embedding) == np.ndarray
 
 
 def test_hope():
