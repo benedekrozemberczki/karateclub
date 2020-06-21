@@ -139,6 +139,7 @@ def test_symmnmf():
 
     assert graph.number_of_nodes() == len(memberships)
     assert indices == nodes
+    assert type(memberships) == dict
 
     embedding = model.get_embedding()
 
