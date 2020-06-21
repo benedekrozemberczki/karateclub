@@ -1,5 +1,5 @@
+import numpy as np
 import networkx as nx
-
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 
 def test_egonet_splitter():
@@ -41,6 +41,7 @@ def test_nnsed():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
 
 
 def test_danmf():
