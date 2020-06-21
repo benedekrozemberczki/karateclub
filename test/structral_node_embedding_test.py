@@ -20,9 +20,9 @@ def test_role2vec():
     assert type(embedding) == np.ndarray
 
 
-def test_graphwave_approximate():
+def test_graphwave():
     """
-    Testing the GraphWave class with approximation.
+    Testing the GraphWave class.
     """
     model = GraphWave()
 
@@ -34,12 +34,8 @@ def test_graphwave_approximate():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.sample_number
+    assert type(embedding) == np.ndarray
 
-
-def test_graphwave_exact():
-    """
-    Testing the GraphWave class with exact calculation.
-    """
     model = GraphWave(mechanism="exact")
 
     graph = nx.watts_strogatz_graph(100, 10, 0.5)
