@@ -105,6 +105,7 @@ def test_tadw():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.dimensions
+    assert type(embedding) == np.ndarray
 
 
 def test_musae():
