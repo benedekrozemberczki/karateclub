@@ -21,7 +21,7 @@ def test_role2vec():
 
 def test_graphwave_approximate():
     """
-    Testing the GraphWave class.
+    Testing the GraphWave class with approximation.
     """
     model = GraphWave()
 
@@ -34,6 +34,11 @@ def test_graphwave_approximate():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.sample_number
 
+
+def test_graphwave_exact():
+    """
+    Testing the GraphWave class with approximation.
+    """
     model = GraphWave(mechanism="exact")
 
     graph = nx.watts_strogatz_graph(100, 10, 0.5)
