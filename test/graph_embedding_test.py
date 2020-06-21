@@ -16,6 +16,7 @@ def test_feather_graph():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert type(embedding) == np.ndarray
 
 
 def test_fgsd():
@@ -31,6 +32,7 @@ def test_fgsd():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.hist_bins
+    assert type(embedding) == np.ndarray
 
 def test_graph2vec():
     """
@@ -60,6 +62,7 @@ def test_graph2vec():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
 
 def test_gl2vec():
     """
