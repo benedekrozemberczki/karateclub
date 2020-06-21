@@ -154,3 +154,4 @@ def test_nmf_admm():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions*2
+    assert type(embedding) == np.ndarray
