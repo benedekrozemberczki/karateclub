@@ -18,6 +18,7 @@ def test_egonet_splitter():
 
     assert graph.number_of_nodes() == len(memberships)
     assert indices == nodes
+    assert type(memberships) == dict
 
 
 def test_nnsed():
