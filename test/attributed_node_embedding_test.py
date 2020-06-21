@@ -27,7 +27,7 @@ def test_feather_node():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.order*model.eval_points*features.shape[1]
-
+    assert type(embedding) == np.ndarray
 
     features = {i: random.sample(range(150),50) for i in range(250)}
 
@@ -43,6 +43,7 @@ def test_feather_node():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2*model.order*model.eval_points*model.reduction_dimensions
+    assert type(embedding) == np.ndarray
 
 
 def test_bane():
