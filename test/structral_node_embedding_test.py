@@ -19,7 +19,7 @@ def test_role2vec():
     assert embedding.shape[1] == model.dimensions
 
 
-def test_graphwave():
+def test_graphwave_approximate():
     """
     Testing the GraphWave class.
     """
