@@ -5,7 +5,7 @@ from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoS
 
 def test_feather_graph():
     """
-    Test the grap level FEATHER embedding.
+    Test the graph level FEATHER embedding.
     """
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
@@ -51,7 +51,7 @@ def test_graph2vec():
 
     graphs = []
 
-    for i in range(50):
+    for _ in range(50):
         graph = nx.newman_watts_strogatz_graph(50, 5, 0.3)
         nx.set_node_attributes(graph, {j: str(j) for j in range(50)}, "feature")
         graphs.append(graph)
