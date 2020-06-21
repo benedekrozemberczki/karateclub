@@ -90,7 +90,7 @@ def test_bigclam():
     assert type(embedding) == np.ndarray
 
 
-def test_mmf():
+def test_mnmf():
     """
     Test the MNMF procedure.
     """
