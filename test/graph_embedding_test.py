@@ -79,6 +79,7 @@ def test_gl2vec():
     
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
 
 
 def test_sf():
