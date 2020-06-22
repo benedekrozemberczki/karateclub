@@ -14,12 +14,6 @@ if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
   PATH=/Users/travis/miniconda3/bin:${PATH}
 fi
 
-if [ "${TRAVIS_OS_NAME}" = "windows" ]; then
-  choco install openssl.light
-  choco install miniconda3
-  PATH=/c/tools/miniconda3/Scripts:$PATH
-fi
-
 conda update --yes conda
 
 conda create --yes -n test python="${PYTHON_VERSION}"

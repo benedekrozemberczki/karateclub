@@ -3,7 +3,6 @@ language: shell
 os:
   - linux
   - osx
-  - windows
 
 env:
   jobs:
