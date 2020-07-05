@@ -58,7 +58,7 @@ class Estimator(object):
         """Checking the consecutive numeric indexing."""
         numeric_indices = [index for index in range(graph.number_of_nodes())]
         node_indices = sorted([node for node in graph.nodes()])
-        if numeric_indices == node_indices, "The node indexing is wrong."
+        assert numeric_indices == node_indices, "The node indexing is wrong."
 
 
     def _check_graph(self, graph):
