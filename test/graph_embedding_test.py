@@ -103,6 +103,17 @@ def test_gl2vec():
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
 
+    graphs = [nx.newman_watts_strogatz_graph(150, 5, 0.3) for _ in range(100)]
+
+    model = GL2Vec(dimensions=16)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
 
 def test_sf():
     """
