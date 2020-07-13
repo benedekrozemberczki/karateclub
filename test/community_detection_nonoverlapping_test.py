@@ -53,7 +53,7 @@ def test_label_propagation():
     assert indices == nodes
     assert type(memberships) == dict
 
-    graph = nx.newman_watts_strogatz_graph(50, 5, 0.3)
+    graph = nx.newman_watts_strogatz_graph(150, 5, 0.3)
 
     model = LabelPropagation()
 
