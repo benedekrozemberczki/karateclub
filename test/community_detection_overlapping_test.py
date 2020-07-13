@@ -152,7 +152,7 @@ def test_bigclam():
 
     graph = nx.newman_watts_strogatz_graph(200, 5, 0.3)
 
-    model = BigClam()
+    model = BigClam(dimensions=8)
 
     model.fit(graph)
     memberships = model.get_memberships()
