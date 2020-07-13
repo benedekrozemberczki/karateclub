@@ -254,7 +254,7 @@ def test_symmnmf():
 
     graph = nx.newman_watts_strogatz_graph(200, 5, 0.3)
 
-    model = SymmNMF()
+    model = SymmNMF(dimensions=16)
 
     model.fit(graph)
     memberships = model.get_memberships()
