@@ -194,6 +194,19 @@ def test_nodesketch():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
+    model = NodeSketch(dimensions=16)
+
+    graph = nx.watts_strogatz_graph(150, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+   
    
 
 def test_laplacianeigenmaps():
