@@ -45,6 +45,17 @@ def test_fgsd():
     assert embedding.shape[1] == model.hist_bins
     assert type(embedding) == np.ndarray
 
+    graphs = [nx.newman_watts_strogatz_graph(150, 5, 0.3) for _ in range(100)]
+
+    model = FGSD(hist_bins=8)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == model.hist_bins
+    assert type(embedding) == np.ndarray
+
 
 def test_graph2vec():
     """
