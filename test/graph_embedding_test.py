@@ -18,6 +18,17 @@ def test_feather_graph():
     assert embedding.shape[1] == 4*model.order*model.eval_points
     assert type(embedding) == np.ndarray
 
+    graphs = [nx.newman_watts_strogatz_graph(150, 5, 0.3) for _ in range(100)]
+
+    model = FeatherGraph(order=3)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert type(embedding) == np.ndarray
+
 
 def test_fgsd():
     """
