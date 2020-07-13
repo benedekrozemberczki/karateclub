@@ -20,6 +20,20 @@ def test_edmot():
     assert indices == nodes
     assert type(memberships) == dict
 
+    graph = nx.newman_watts_strogatz_graph(150, 5, 0.3)
+
+    model = EdMot()
+
+    model.fit(graph)
+    memberships = model.get_memberships()
+    
+    indices = [k for k, v in memberships.items()].sort()
+    nodes = [node for node in graph.nodes()].sort()
+
+    assert graph.number_of_nodes() == len(memberships)
+    assert indices == nodes
+    assert type(memberships) == dict
+
 
 def test_label_propagation():
     """
@@ -38,6 +52,21 @@ def test_label_propagation():
     assert graph.number_of_nodes() == len(memberships)
     assert indices == nodes
     assert type(memberships) == dict
+
+    graph = nx.newman_watts_strogatz_graph(50, 5, 0.3)
+
+    model = LabelPropagation()
+
+    model.fit(graph)
+    memberships = model.get_memberships()
+    
+    indices = [k for k, v in memberships.items()].sort()
+    nodes = [node for node in graph.nodes()].sort()
+
+    assert graph.number_of_nodes() == len(memberships)
+    assert indices == nodes
+    assert type(memberships) == dict
+
 
 
 def test_scd():
