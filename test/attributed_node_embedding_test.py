@@ -153,7 +153,6 @@ def test_tadw():
     assert type(embedding) == np.ndarray
 
 
-
 def test_musae():
     """
     Testing the MUSAE node embedding.
