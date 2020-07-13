@@ -88,6 +88,17 @@ def test_fscnmf():
     assert embedding.shape[1] == 2*model.dimensions
 
 
+    graph = nx.newman_watts_strogatz_graph(150, 10, 0.2)
+
+    features = np.random.uniform(0, 1, (150, 128))
+    model = FSCNMF(dimensions=8)
+    model.fit(graph, features)
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == 2*model.dimensions
+
+
 def test_tene():
     """
     Testing the TENE node embedding.
