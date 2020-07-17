@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 
 class FeatherGraph(Estimator):
     r"""An implementation of `"FEATHER-G" <https://arxiv.org/abs/2005.07959>`_
-    from the paper "Characteristic Functions on Graphs: Birds of a Feather,
+    from the CIKM '20 paper "Characteristic Functions on Graphs: Birds of a Feather,
     from Statistical Descriptors to Parametric Models". The procedure
     uses characteristic functions of node features with random walk weights to describe
     node neighborhoods. These node level features are pooled by mean pooling to
