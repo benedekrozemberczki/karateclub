@@ -77,7 +77,7 @@ class EgoNetSplitter(Estimator):
         for node, membership in self.partitions.items():
             self.overlapping_partitions[self.personality_map[node]].append(membership)
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting an Ego-Splitter clustering model.
 
@@ -92,7 +92,7 @@ class EgoNetSplitter(Estimator):
         self._create_persona_graph()
         self._create_partitions()
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
