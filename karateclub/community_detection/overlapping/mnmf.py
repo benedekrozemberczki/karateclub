@@ -23,8 +23,8 @@ class MNMF(Estimator):
         eta (float): Similarity mixing parameter. Default is 5.0.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128, clusters=10, lambd=0.2, alpha=0.05,
-                 beta=0.05, iterations=200, lower_control=10**-15, eta=5.0, seed=42):
+    def __init__(self, dimensions: int=128, clusters: int=10, lambd: float=0.2, alpha: float=0.05,
+                 beta: float=0.05, iterations: int=200, lower_control: float=10**-15, eta: float=5.0, seed: int=42):
 
         self.dimensions = dimensions
         self.clusters = clusters
