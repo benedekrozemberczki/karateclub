@@ -1,8 +1,9 @@
 import random
 import numpy as np
 import networkx as nx
-from karateclub.utils.walker import RandomWalker
+from typing import Dict
 from karateclub.estimator import Estimator
+from karateclub.utils.walker import RandomWalker
 
 class GEMSEC(Estimator):
     r"""An implementation of `"GEMSEC" <https://arxiv.org/abs/1802.03997>`_
@@ -187,7 +188,7 @@ class GEMSEC(Estimator):
         self._do_gradient_descent()
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
@@ -211,7 +212,7 @@ class GEMSEC(Estimator):
         return cluster_index
 
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
