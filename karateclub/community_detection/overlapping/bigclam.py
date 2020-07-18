@@ -16,7 +16,7 @@ class BigClam(Estimator):
         learning_rate (float): Gradient ascent learning rate. Default is 0.005.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=8, iterations=50, learning_rate=0.005, seed=42):
+    def __init__(self, dimensions: int=8, iterations: int=50, learning_rate: int=0.005, seed: int=42):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
@@ -81,7 +81,7 @@ class BigClam(Estimator):
         embedding = self._embedding
         return embedding
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a BigClam clustering model.
 
