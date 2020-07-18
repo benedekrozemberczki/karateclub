@@ -17,8 +17,8 @@ class NetLSD(Estimator):
         scale_approximations (int): Number of eigenvalue approximations. Default is 200.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, scale_min=-2.0, scale_max=2.0,
-                 scale_steps=250, approximations=200, seed=42):
+    def __init__(self, scale_min: float=-2.0, scale_max: float=2.0,
+                 scale_steps: int=250, approximations: int=200, seed: int=42):
 
         self.scale_min = scale_min
         self.scale_max = scale_max
@@ -100,7 +100,7 @@ class NetLSD(Estimator):
         heat_kernel_trace = self._calculate_heat_kernel_trace(eigen_values)
         return heat_kernel_trace
 
-    def fit(self, graphs):
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
         Fitting a NetLSD model.
 
@@ -112,7 +112,7 @@ class NetLSD(Estimator):
         self._embedding = [self._calculate_netlsd(graph) for graph in graphs]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
 
         Return types:
