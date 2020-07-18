@@ -14,7 +14,7 @@ class SCD(Estimator):
         eps (float): Epsilon score for zero division correction. Default is 10**-6.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, iterations=25, eps=10**-6, seed=42):
+    def __init__(self, iterations: int=25, eps: float=10**-6, seed: int=42):
         self.iterations = iterations
         self.eps = eps
         self.seed = seed
@@ -165,7 +165,7 @@ class SCD(Estimator):
                 new_memberships[node] = self._cluster_memberships[node]
         self._cluster_memberships = new_memberships
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Label Propagation clustering model.
 
