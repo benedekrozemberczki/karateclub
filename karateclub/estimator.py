@@ -3,8 +3,6 @@ import numpy as np
 import networkx as nx
 from typing import List
 
-Graphs = List[nx.classes.graph.Graph]
-
 """General Estimator base class."""
 
 class Estimator(object):
@@ -66,7 +64,7 @@ class Estimator(object):
         self._check_indexing(graph)
 
 
-    def _check_graphs(self, graphs: Graphs):
+    def _check_graphs(self, graphs: List[nx.classes.graph.Graph]):
         """Check the Karate Club assumptions for a list of graphs."""
         for graph in graphs:
             self._check_graph(graph)
