@@ -1,6 +1,9 @@
 import random
 import numpy as np
 import networkx as nx
+from typing import List
+
+Graphs = List[nx.classes.graph.Graph]
 
 """General Estimator base class."""
 
@@ -37,11 +40,6 @@ class Estimator(object):
         random.seed(self.seed)
         np.random.seed(self.seed)
 
-
-    def _check_networkx_graph(self, graph):
-        assert isinstance(graph, nx.classes.graph.Graph), "This is not a NetworkX graph."
-
-
     def _check_connectivity(self, graph):
         """Checking the connected nature of a single graph."""
         connected = nx.is_connected(graph)
@@ -61,15 +59,14 @@ class Estimator(object):
         assert numeric_indices == node_indices, "The node indexing is wrong."
 
 
-    def _check_graph(self, graph):
+    def _check_graph(self, graph: nx.classes.graph.Graph):
         """Check the Karate Club assumptions about the graph."""
-        self._check_networkx_graph(graph)
         self._check_connectivity(graph)
         self._check_directedness(graph)
         self._check_indexing(graph)
 
 
-    def _check_graphs(self, graphs):
+    def _check_graphs(self, graphs: Graphs):
         """Check the Karate Club assumptions for a list of graphs."""
         for graph in graphs:
             self._check_graph(graph)
