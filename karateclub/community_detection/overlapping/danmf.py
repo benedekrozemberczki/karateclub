@@ -18,8 +18,8 @@ class DANMF(Estimator):
         lamb (float): Regularization parameter. Default 0.01.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, layers=[32, 8], pre_iterations=100,
-                 iterations=100, seed=42, lamb=0.01):
+    def __init__(self, layers: List[int]=[32, 8], pre_iterations: int=100,
+                 iterations: int=100, seed: int=42, lamb: float=0.01):
         self.layers = layers
         self.pre_iterations = pre_iterations
         self.iterations = iterations
@@ -163,7 +163,7 @@ class DANMF(Estimator):
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
-    def fit(self, graph):
+    def fit(self, graph; nx.classes.graph.Graph):
         """
         Fitting a DANMF clustering model.
 
