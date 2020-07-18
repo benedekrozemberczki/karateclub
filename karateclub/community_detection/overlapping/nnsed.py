@@ -1,6 +1,7 @@
-from scipy import sparse
 import numpy as np
 import networkx as nx
+from typing import Dict
+from scipy import sparse
 from karateclub.estimator import Estimator
 
 class NNSED(Estimator):
