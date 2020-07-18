@@ -10,7 +10,7 @@ class WeisfeilerLehmanHashing(object):
         features (dict of strings): Feature hash map.
         iterations (int): Number of WL iterations.
     """
-    def __init__(self, graph, wl_iterations, attributed):
+    def __init__(self, graph: nx.classes.graph.Graph, wl_iterations: int, attributed: bool):
         """
         Initialization method which also executes feature extraction.
         """
