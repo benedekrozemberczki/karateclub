@@ -154,7 +154,7 @@ class DANMF(Estimator):
         embedding = np.concatenate(embedding, axis=1)
         return embedding
 
-    def get_memberships(self) -> dict:
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
