@@ -12,7 +12,7 @@ class LabelPropagation(Estimator):
         seed (int): Random seed. Default is 42.
         iterations (int): Propagation iterations. Default is 100.
     """
-    def __init__(self, seed=42, iterations=100):
+    def __init__(self, seed: int=42, iterations: int=100):
         self.seed = seed
         self.iterations = iterations
 
@@ -45,7 +45,7 @@ class LabelPropagation(Estimator):
             new_labels[node] = pick
         self._labels = new_labels
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Label Propagation clustering model.
 
