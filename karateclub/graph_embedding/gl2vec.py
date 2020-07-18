@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from typing import List
 from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
@@ -53,7 +54,7 @@ class GL2Vec(Estimator):
         line_graph = nx.from_edgelist(edges)
         return line_graph
 
-    def fit(self, graphs):
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
         Fitting a GL2Vec model.
 
