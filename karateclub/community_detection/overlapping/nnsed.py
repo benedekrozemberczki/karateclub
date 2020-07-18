@@ -17,7 +17,7 @@ class NNSED(Estimator):
         iterations (int): Number of training epochs. Default 10.
         seed (int): Random seed for weight initializations. Default 42.
     """
-    def __init__(self, dimensions=32, iterations=10, seed=42):
+    def __init__(self, dimensions: int=32, iterations: int=10, seed: int=42):
         self.dimensions = dimensions
         self.iterations = iterations
         self.seed = seed
@@ -85,7 +85,7 @@ class NNSED(Estimator):
         denom = np.dot(np.dot(self._W.T, self._W), self._Z) + self._Z
         self._Z = self._Z*(enum/denom)
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the bottleneck layer embedding.
 
         Return types:
@@ -95,7 +95,7 @@ class NNSED(Estimator):
         return embedding
 
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
@@ -105,7 +105,7 @@ class NNSED(Estimator):
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting an NNSED clustering model.
 
