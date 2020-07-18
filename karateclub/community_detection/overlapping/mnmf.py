@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from typing import Dict
 from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 
@@ -108,7 +109,7 @@ class MNMF(Estimator):
         row_sums = self._H.sum(axis=1)
         self._H = self._H / row_sums[:, np.newaxis]
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
@@ -118,7 +119,7 @@ class MNMF(Estimator):
         memberships = {i: membership for i, membership in enumerate(indices)}
         return memberships
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
@@ -127,7 +128,7 @@ class MNMF(Estimator):
         embedding = self._U
         return embedding
 
-    def get_cluster_centers(self):
+    def get_cluster_centers(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
