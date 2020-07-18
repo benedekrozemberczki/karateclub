@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from typing import List
 from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
@@ -26,9 +27,9 @@ class Graph2Vec(Estimator):
         min_count (int): Minimal count of graph feature occurences. Default is 5.
         seed (int): Random seed for the model. Default is 42.
     """
-    def __init__(self, wl_iterations=2, attributed=False, dimensions=128, workers=4,
-                 down_sampling=0.0001, epochs=10, learning_rate=0.025, min_count=5,
-                 seed=42):
+    def __init__(self, wl_iterations: int=2, attributed: bool=False, dimensions: int=128,
+                 workers: int=4, down_sampling: float=0.0001, epochs: int=10, 
+                 learning_rate: float=0.025, min_count: int=5, seed: int=42):
 
         self.wl_iterations = wl_iterations
         self.attributed = attributed
