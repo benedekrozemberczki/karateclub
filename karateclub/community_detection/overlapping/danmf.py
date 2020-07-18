@@ -153,7 +153,7 @@ class DANMF(Estimator):
         embedding = np.concatenate(embedding, axis=1)
         return embedding
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
@@ -163,7 +163,7 @@ class DANMF(Estimator):
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
-    def fit(self, graph: nx.classes.graph.Graph) -> Dict[int int]:
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a DANMF clustering model.
 
