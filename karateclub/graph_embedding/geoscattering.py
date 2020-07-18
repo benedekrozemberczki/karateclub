@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import networkx as nx
+from typing import List
 import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
@@ -16,7 +17,7 @@ class GeoScattering(Estimator):
         moments (int): Unnormalized moments considered. Default is 4.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, order=4, moments=4, seed=42):
+    def __init__(self, order: int=4, moments: int=4, seed: int=42):
         self.order = order
         self.moments = moments
         self.seed = seed
@@ -177,7 +178,7 @@ class GeoScattering(Estimator):
         return features
 
 
-    def fit(self, graphs):
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
         Fitting a Geometric-Scattering model.
 
@@ -189,7 +190,7 @@ class GeoScattering(Estimator):
         self._embedding = [self._calculate_geoscattering(graph) for graph in graphs]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
 
         Return types:
