@@ -18,7 +18,7 @@ class SymmNMF(Estimator):
         rho (float): Regularization tuning parameter. Default is 100.0.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, iterations=200, rho=100.0, seed=42):
+    def __init__(self, dimensions: int=32, iterations: int=200, rho: float=100.0, seed: int=42):
 
         self.dimensions = dimensions
         self.iterations = iterations
@@ -66,7 +66,7 @@ class SymmNMF(Estimator):
         self._H_gamma = np.zeros((number_of_nodes, self.dimensions))
         self._I = np.identity(self.dimensions)
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
@@ -76,7 +76,7 @@ class SymmNMF(Estimator):
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
@@ -98,7 +98,7 @@ class SymmNMF(Estimator):
         self._H = np.maximum(self._H, 0)
         self._H_gamma = self._H_gamma + self.rho*(self._W-self._H)
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Symm-NMF clustering model.
 
