@@ -169,7 +169,7 @@ class GEMSEC(Estimator):
                     self._update_a_weight(source_node, target_node)
 
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a GEMSEC model.
 
