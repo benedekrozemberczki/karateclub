@@ -2,6 +2,7 @@ import random
 import community
 import numpy as np
 import networkx as nx
+from typing import Dict
 from karateclub.estimator import Estimator
 
 class BigClam(Estimator):
@@ -62,7 +63,7 @@ class BigClam(Estimator):
         self._embedding[node] = np.clip(self._embedding[node], 0.00001, 10)
         self._global_features = self._global_features - node_feature + self._embedding[node]
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
@@ -72,7 +73,7 @@ class BigClam(Estimator):
         memberships = {i: membership for i, membership in enumerate(indices)}
         return memberships
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
