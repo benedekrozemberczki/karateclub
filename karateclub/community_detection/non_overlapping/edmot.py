@@ -13,7 +13,7 @@ class EdMot(Estimator):
         cutoff (int): Motif edge cut-off value. Default is 50.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, component_count=2, cutoff=50, seed=42):
+    def __init__(self, component_count: int=2, cutoff: int=50, seed: int=42):
         self.component_count = component_count
         self.cutoff = cutoff
         self.seed = seed
@@ -58,7 +58,7 @@ class EdMot(Estimator):
         new_edges = [(n_1, n_2) for nodes in self._blocks for n_1 in nodes for n_2 in nodes if n_1!= n_2]
         self._graph.add_edges_from(new_edges)  
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting an Edge Motif clustering model.
 
