@@ -136,7 +136,7 @@ class MNMF(Estimator):
         centers = self._C
         return centers
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting an M-NMF clustering model.
 
