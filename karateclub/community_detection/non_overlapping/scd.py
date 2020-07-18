@@ -1,4 +1,5 @@
 import networkx as nx
+from typing import Dict
 from karateclub.estimator import Estimator
 
 class SCD(Estimator):
@@ -181,7 +182,7 @@ class SCD(Estimator):
         for _ in range(self.iterations):
             self._do_refinement()
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
