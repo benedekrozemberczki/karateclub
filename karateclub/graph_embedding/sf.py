@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from typing import List
 from scipy.sparse.linalg import eigsh
 from karateclub.estimator import Estimator
 
@@ -13,7 +14,7 @@ class SF(Estimator):
         dimensions (int): Number of lowest eigenvalues. Default is 128.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128, seed=42):
+    def __init__(self, dimensions: int=128, seed: int=42):
         self.dimensions = dimensions
         self.seed = seed
 
@@ -52,7 +53,7 @@ class SF(Estimator):
         self._embedding = [self._calculate_sf(graph) for graph in graphs]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
 
         Return types:
