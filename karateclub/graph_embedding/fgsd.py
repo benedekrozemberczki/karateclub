@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+from typing import List
 from karateclub.estimator import Estimator
 
 class FGSD(Estimator):
@@ -13,7 +14,7 @@ class FGSD(Estimator):
         hist_range (int): Histogram range considered. Default is 20.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, hist_bins=200, hist_range=20, seed=42):
+    def __init__(self, hist_bins: int=200, hist_range: int=20, seed: int=42):
 
         self.hist_bins = hist_bins
         self.hist_range = (0, hist_range)
@@ -38,7 +39,7 @@ class FGSD(Estimator):
                                        range=self.hist_range)
         return hist
 
-    def fit(self, graphs):
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
         Fitting a FGSD model.
 
@@ -50,7 +51,7 @@ class FGSD(Estimator):
         self._embedding = [self._calculate_fgsd(graph) for graph in graphs]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
 
         Return types:
