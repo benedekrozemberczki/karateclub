@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import networkx as nx
+from typing import List
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
@@ -18,7 +19,7 @@ class FeatherGraph(Estimator):
         theta_max (int): Maximal evaluation point value. Default is 2.5.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, order=5, eval_points=25, theta_max=2.5, seed=42):
+    def __init__(self, order: int=5, eval_points: int=25, theta_max: float=2.5, seed: int=42):
         self.order = order
         self.eval_points = eval_points
         self.theta_max = theta_max
@@ -99,7 +100,7 @@ class FeatherGraph(Estimator):
         return feature_blocks
 
 
-    def fit(self, graphs):
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
         Fitting a graph level FEATHER model.
 
@@ -111,7 +112,7 @@ class FeatherGraph(Estimator):
         self._embedding = [self._calculate_feather(graph) for graph in graphs]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
 
         Return types:
