@@ -163,7 +163,7 @@ class DANMF(Estimator):
         memberships = {int(i): int(index[i]) for i in range(len(index))}
         return memberships
 
-    def fit(self, graph; nx.classes.graph.Graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a DANMF clustering model.
 
