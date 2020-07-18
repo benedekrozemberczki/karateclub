@@ -40,7 +40,7 @@ class Graph2Vec(Estimator):
         self.min_count = min_count
         self.seed = seed
 
-    def fit(self, graphs):
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
         Fitting a Graph2Vec model.
 
@@ -66,7 +66,7 @@ class Graph2Vec(Estimator):
         self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
 
         Return types:
