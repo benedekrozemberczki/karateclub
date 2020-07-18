@@ -143,7 +143,7 @@ class DANMF(Estimator):
     def _setup_Asq(self):
         self._A_sq = self._A.dot(self._A.T)
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the bottleneck layer embedding.
 
         Return types:
