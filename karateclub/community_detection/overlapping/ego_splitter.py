@@ -1,5 +1,6 @@
 import community
 import networkx as nx
+from typing import Dict
 from karateclub.estimator import Estimator
 
 class EgoNetSplitter(Estimator):
@@ -12,7 +13,7 @@ class EgoNetSplitter(Estimator):
         resolution (float): Resolution parameter of Python Louvain. Default 1.0.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, resolution=1.0, seed=42):
+    def __init__(self, resolution: float=1.0, seed: int=42):
         self.resolution = resolution
         self.seed = seed
 
