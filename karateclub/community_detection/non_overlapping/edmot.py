@@ -1,5 +1,6 @@
 import community
 import networkx as nx
+from typing import Dict
 from karateclub.estimator import Estimator
 
 class EdMot(Estimator):
@@ -73,7 +74,7 @@ class EdMot(Estimator):
         self._fill_blocks()
         self._partition = community.best_partition(self._graph, random_state=self.seed)
 
-    def get_memberships(self):
+    def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
 
         Return types:
