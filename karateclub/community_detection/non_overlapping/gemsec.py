@@ -24,8 +24,9 @@ class GEMSEC(Estimator):
         gamma (float): Clustering cost weight coefficient. Default is 0.1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, walk_number=5, walk_length=80, dimensions=32, negative_samples=5,
-                 window_size=5, learning_rate=0.1, clusters=10, gamma=0.1, seed=42):
+    def __init__(self, walk_number: int=5, walk_length: int=80, dimensions: int=32,
+                 negative_samples: int=5, window_size: int=5, learning_rate: float=0.1,
+                 clusters: int=10, gamma: float=0.1, seed: int=42):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
