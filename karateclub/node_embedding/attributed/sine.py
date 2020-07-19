@@ -2,6 +2,7 @@ import random
 import numpy as np
 import networkx as nx
 from typing import Union
+from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker

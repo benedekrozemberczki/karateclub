@@ -2,6 +2,7 @@ import scipy
 import numpy as np
 import networkx as nx
 from typing import Union
+from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
@@ -98,7 +99,7 @@ class FeatherNode(Estimator):
             X = X
         return X
 
-    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix])
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
         """
         Fitting a FEATHER-N model.
 

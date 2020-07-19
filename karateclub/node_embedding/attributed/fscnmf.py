@@ -1,7 +1,8 @@
 import numpy as np
 import networkx as nx
 from scipy import sparse
-from typin import Union
+from scipy.sparse import coo_matrix
+from typing import Union
 from numpy.linalg import inv
 from karateclub.estimator import Estimator
 
