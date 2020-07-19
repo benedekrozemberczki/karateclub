@@ -19,8 +19,8 @@ class FeatherNode(Estimator):
         order (int): Scale - number of adjacency matrix powers. Default is 5.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, reduction_dimensions=64, svd_iterations=20,
-                 theta_max=2.5, eval_points=25, order=5, seed=42):
+    def __init__(self, reduction_dimensions: int=64, svd_iterations: int=20,
+                 theta_max: float=2.5, eval_points: int=25, order: int=5, seed: int=42):
 
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
@@ -97,7 +97,7 @@ class FeatherNode(Estimator):
             X = X
         return X
 
-    def fit(self, graph, X):
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix])
         """
         Fitting a FEATHER-N model.
 
@@ -120,7 +120,7 @@ class FeatherNode(Estimator):
         self._feature_blocks = np.concatenate(self._feature_blocks, axis=1)
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
