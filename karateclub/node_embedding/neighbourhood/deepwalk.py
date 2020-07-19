@@ -35,7 +35,7 @@ class DeepWalk(Estimator):
         self.min_count = min_count
         self.seed = seed
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a DeepWalk model.
 
@@ -61,7 +61,7 @@ class DeepWalk(Estimator):
         self._embedding = [model[str(n)] for n in range(num_of_nodes)]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
