@@ -4,6 +4,7 @@ import json
 import numpy as np
 import pandas as pd
 import networkx as nx
+from typing import List
 from six.moves import urllib
 from scipy.sparse import coo_matrix
 
@@ -14,7 +15,7 @@ class GraphReader(object):
     Args:
         dataset (str): Dataset of interest  on of facebook/wikipedia/github/twitch. Default is 'wikipedia'.
     """
-    def __init__(self, dataset: int="wikipedia"):
+    def __init__(self, dataset: str="wikipedia"):
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 
@@ -79,7 +80,7 @@ class GraphSetReader(object):
     Args:
         dataset (str): Dataset of interest one of reddit10k. Default is 'reddit10k'.
     """
-    def __init__(self, dataset="reddit10k"):
+    def __init__(self, dataset: str="reddit10k"):
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/graph_level/"
 
@@ -101,7 +102,7 @@ class GraphSetReader(object):
         data = urllib.request.urlopen(path).read()
         return data
 
-    def get_graphs(self):
+    def get_graphs(self) -> List[nx.classes.graph.Graph]:
         r"""Getting the graphs.
 
         Return types:
@@ -112,7 +113,7 @@ class GraphSetReader(object):
         graphs = [nx.from_edgelist(graphs[str(i)]) for i in range(len(graphs))]
         return graphs
 
-    def get_target(self):
+    def get_target(self) -> np.array:
         r"""Getting the class membership of graphs.
 
         Return types:
