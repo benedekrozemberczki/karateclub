@@ -44,7 +44,7 @@ class Walklets(Estimator):
                 walklets.append(neighbors)
         return walklets
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Walklets model.
 
@@ -74,7 +74,7 @@ class Walklets(Estimator):
             self._embedding.append(embedding)
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
