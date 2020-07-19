@@ -22,8 +22,9 @@ class DeepWalk(Estimator):
         min_count (int): Minimal count of node occurences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4,
-                 window_size=5, epochs=1, learning_rate=0.05, min_count=1, seed=42):
+    def __init__(self, walk_number: int=10, walk_length: int=80, dimensions: int=128,
+                 workers: int=4, window_size: int=5, epochs: int=1,
+                 learning_rate: float=0.05, min_count: int=1, seed: int=42):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
