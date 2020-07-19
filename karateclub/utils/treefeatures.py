@@ -1,5 +1,6 @@
 import hashlib
 import networkx as nx
+from typing import List, Dict
 
 class WeisfeilerLehmanHashing(object):
     """
@@ -56,13 +57,13 @@ class WeisfeilerLehmanHashing(object):
         for _ in range(self.wl_iterations):
             self.features = self._do_a_recursion()
 
-    def get_node_features(self):
+    def get_node_features(self) -> Dict[int, List[str]]:
         """
         Return the node level features.
         """
         return self.extracted_features
 
-    def get_graph_features(self):
+    def get_graph_features(self) -> List[str]:
         """
         Return the graph level features.
         """

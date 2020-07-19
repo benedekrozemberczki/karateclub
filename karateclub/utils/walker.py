@@ -9,7 +9,7 @@ class RandomWalker:
         walk_length (int): Number of random walks.
         walk_number (int): Number of nodes in truncated walk.
     """
-    def __init__(self, walk_length, walk_number):
+    def __init__(self, walk_length: int, walk_number: int):
         self.walk_length = walk_length
         self.walk_number = walk_number
 
