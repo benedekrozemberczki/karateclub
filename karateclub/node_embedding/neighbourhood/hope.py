@@ -13,7 +13,7 @@ class HOPE(Estimator):
         dimensions (int): Dimensionality of embedding. Default is 128.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128, seed=42):
+    def __init__(self, dimensions: int=128, seed: int=42):
 
         self.dimensions = dimensions
         self.seed = seed
@@ -37,7 +37,7 @@ class HOPE(Estimator):
         self._left_embedding = np.dot(U, sigmas)
         self._right_embedding = np.dot(Vt.T, sigmas)
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a HOPE model.
 
@@ -50,7 +50,7 @@ class HOPE(Estimator):
         self._do_rescaled_decomposition(S)
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
