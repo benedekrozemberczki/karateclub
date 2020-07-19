@@ -50,7 +50,7 @@ class NEU(Estimator):
                          self.L2*(normalized_adjacency @ (normalized_adjacency @ embedding)))
         return embedding
 
-    def fit(self, graph, model):
+    def fit(self, graph: nx.classes.graph.Graph, model: Estimator):
         r"""
         Fitting a model and performing NEU.
 
