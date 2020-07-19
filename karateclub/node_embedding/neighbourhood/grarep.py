@@ -81,7 +81,7 @@ class GraRep(Estimator):
         embedding = svd.transform(target_matrix)
         self._embeddings.append(embedding)
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a GraRep model.
 
@@ -98,7 +98,7 @@ class GraRep(Estimator):
             target_matrix = self._create_target_matrix()
             self._create_single_embedding(target_matrix)
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
