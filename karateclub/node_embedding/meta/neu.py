@@ -14,7 +14,7 @@ class NEU(Estimator):
         T (int): Number of iterations. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, L1=0.5, L2=0.25, T=1, seed=42):
+    def __init__(self, L1: float=0.5, L2: float=0.25, T: int=1, seed: int=42):
         self.iterations = T
         self.L1 = L1
         self.L2 = L2
