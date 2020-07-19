@@ -20,8 +20,8 @@ class GraphWave(Estimator):
         switch (int): Vertex cardinality when the wavelet calculation method switches to approximation. Default is 1000.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, sample_number=200, step_size=0.1, heat_coefficient=1.0,
-                 approximation=100, mechanism="approximate", switch=1000, seed=42):
+    def __init__(self, sample_number: int=200, step_size: float=0.1, heat_coefficient: float=1.0,
+                 approximation: int=100, mechanism: str="approximate", switch: int=1000, seed: int=42):
 
         self.sample_number = sample_number
         self.step_size = step_size
