@@ -18,7 +18,7 @@ class GraRep(Estimator):
         order (int): Number of PMI matrix powers. Default is 5.
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions=32, iteration=10, order=5, seed=42):
+    def __init__(self, dimensions: int=32, iteration: int=10, order: int=5, seed: int=42):
         self.dimensions = dimensions
         self.iterations = iteration
         self.order = order
