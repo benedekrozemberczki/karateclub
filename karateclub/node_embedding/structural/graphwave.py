@@ -113,7 +113,7 @@ class GraphWave(Estimator):
                                                                            m=self.approximation)
         self._approximate_wavelet_calculator()
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a GraphWave model.
 
@@ -135,7 +135,7 @@ class GraphWave(Estimator):
             raise NameError("Unknown method.")
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
