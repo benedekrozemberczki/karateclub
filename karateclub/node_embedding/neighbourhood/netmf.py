@@ -18,7 +18,8 @@ class NetMF(Estimator):
         negative_samples (in): Number of negative samples. Default is 1.
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions=32, iteration=10, order=2, negative_samples=1, seed=42):
+    def __init__(self, dimensions: int=32, iteration: int=10, order: int=2,
+                 negative_samples: int=1, seed: int=42):
         self.dimensions = dimensions
         self.iterations = iteration
         self.order = order
@@ -89,7 +90,7 @@ class NetMF(Estimator):
         embedding = svd.transform(target_matrix)
         return embedding
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a NetMF model.
     
@@ -101,7 +102,7 @@ class NetMF(Estimator):
         target_matrix = self._create_target_matrix(graph)
         self._embedding = self._create_embedding(target_matrix)
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
     
         Return types:
