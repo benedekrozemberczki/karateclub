@@ -1,6 +1,7 @@
 import numpy as np
 import networkx as nx
 from scipy import sparse
+from typin import Union
 from numpy.linalg import inv
 from karateclub.estimator import Estimator
 
@@ -23,9 +24,9 @@ class FSCNMF(Estimator):
         beta_3 (float): Attribute basis regularization. Default is 1.0.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, lower_control=10**-15, iterations=500,
-                 alpha_1=1000.0, alpha_2=1.0, alpha_3=1.0,
-                 beta_1=1000.0, beta_2=1.0, beta_3=1.0, seed=42):
+    def __init__(self, dimensions: int=32, lower_control: float=10**-15, iterations: int=500,
+                 alpha_1: float=1000.0, alpha_2: float=1.0, alpha_3: float=1.0,
+                 beta_1: float=1000.0, beta_2: float=1.0, beta_3: float=1.0, seed: int=42):
 
         self.dimensions = dimensions
         self.lower_control = lower_control
@@ -119,7 +120,7 @@ class FSCNMF(Estimator):
         A_hat = D_inverse.dot(A)
         return A_hat
 
-    def fit(self, graph, X):
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
         """
         Fitting an FSCNMF model.
 
@@ -138,7 +139,7 @@ class FSCNMF(Estimator):
             self._update_U()
             self._update_V()
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:

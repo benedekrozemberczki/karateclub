@@ -1,6 +1,7 @@
 import scipy
 import numpy as np
 import networkx as nx
+from typing import Union
 from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
