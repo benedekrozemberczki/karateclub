@@ -17,7 +17,8 @@ class NodeSketch(Estimator):
         decay (float): Exponential decay rate. Default is 0.01.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, iterations=2, decay=0.01, seed=42):
+    def __init__(self, dimensions: int=32, iterations: int=2, decay: float=0.01, seed: int=42):
+
         self.dimensions = dimensions
         self.iterations = iterations
         self.decay = decay
