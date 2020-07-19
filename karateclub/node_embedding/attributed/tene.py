@@ -110,7 +110,7 @@ class TENE(Estimator):
         A_hat = D_inverse.dot(A)
         return A_hat
 
-    def fit(self, graph, T):
+    def fit(self, graph: nx.classes.graph.Graph, T: Union[np.array, coo_matrix]):
         """
         Fitting a TENE model.
 
@@ -130,7 +130,7 @@ class TENE(Estimator):
             self._update_U()
             self._update_Q()
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
