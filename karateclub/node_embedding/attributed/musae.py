@@ -94,7 +94,7 @@ class MUSAE(Estimator):
         features_out = [TaggedDocument(words=[str(feature) for feature in features], tags = [str(node)]) for node, features in self.features.items()]
         return features_out 
 
-    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix])
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
         """
         Fitting a MUSAE model.
 

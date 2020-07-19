@@ -56,7 +56,7 @@ class SINE(Estimator):
         del self._walker
         
         
-    def fit(self, graph, X):
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
         """
         Fitting a SINE model.
 
@@ -83,7 +83,7 @@ class SINE(Estimator):
 
         self.embedding = np.array([model[str(n)] for n in range(graph.number_of_nodes())])
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
