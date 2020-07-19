@@ -48,7 +48,7 @@ class GraphReader(object):
         graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
         return graph
 
-    def get_features(self):
+    def get_features(self) -> scipy.sparse.coo_matrix:
         r"""Getting the node features Scipy matrix.
 
         Return types:
