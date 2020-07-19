@@ -19,8 +19,9 @@ class TADW(Estimator):
         iterations (int): Matrix decomposition iterations. Default is 10.
         lambd (float): Regularization coefficient. Default is 10.0.
     """
-    def __init__(self, dimensions=32, reduction_dimensions=64, svd_iterations=20,
-                 seed=42, alpha=0.01, iterations=10, lambd=10.0):
+    def __init__(self, dimensions: int=32, reduction_dimensions: int=64, svd_iterations: int=20,
+                 seed: int=42, alpha: float=0.01, iterations: int=10, lambd: float=10.0):
+
         self.dimensions = dimensions
         self.reduction_dimensions = reduction_dimensions
         self.svd_iterations = svd_iterations
@@ -104,7 +105,7 @@ class TADW(Estimator):
         T = svd.transform(X)
         return T.T
 
-    def fit(self, graph, X):
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
         """
         Fitting a TADW model.
 
@@ -121,7 +122,7 @@ class TADW(Estimator):
             self._update_W()
             self._update_H()
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
