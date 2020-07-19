@@ -65,7 +65,7 @@ class NEU(Estimator):
         original_embedding = self.model.get_embedding()
         self._embedding = self._update_embedding(graph, original_embedding)    
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
