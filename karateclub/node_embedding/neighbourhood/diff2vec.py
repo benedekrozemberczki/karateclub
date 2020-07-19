@@ -22,8 +22,9 @@ class Diff2Vec(Estimator):
         min_count (int): Minimal count of node occurences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, diffusion_number=10, diffusion_cover=80, dimensions=128, workers=4,
-                 window_size=5, epochs=1, learning_rate=0.05, min_count=1, seed=42):
+    def __init__(self, diffusion_number: int=10, diffusion_cover: int=80,
+                 dimensions: int=128, workers: int=4, window_size: int=5,
+                 epochs: int=1, learning_rate: float=0.05, min_count: int=1, seed: int=42):
 
         self.diffusion_number = diffusion_number
         self.diffusion_cover = diffusion_cover
@@ -35,7 +36,7 @@ class Diff2Vec(Estimator):
         self.min_count = min_count
         self.seed = seed
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Diff2Vec model.
 
@@ -61,7 +62,7 @@ class Diff2Vec(Estimator):
         self._embedding = [model[str(n)] for n in range(num_of_nodes)]
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
