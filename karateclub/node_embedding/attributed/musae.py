@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import networkx as nx
+from typing import Union
 from karateclub.estimator import Estimator
 from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 from karateclub.utils.walker import RandomWalker
@@ -93,7 +94,7 @@ class MUSAE(Estimator):
         features_out = [TaggedDocument(words=[str(feature) for feature in features], tags = [str(node)]) for node, features in self.features.items()]
         return features_out 
 
-    def fit(self, graph, X):
+    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix])
         """
         Fitting a MUSAE model.
 
@@ -111,7 +112,7 @@ class MUSAE(Estimator):
         self.embeddings = [self._create_single_embedding(self._base_docs)]
         self._learn_musae_embedding()
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
