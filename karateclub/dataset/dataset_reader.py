@@ -14,7 +14,7 @@ class GraphReader(object):
     Args:
         dataset (str): Dataset of interest  on of facebook/wikipedia/github/twitch. Default is 'wikipedia'.
     """
-    def __init__(self, dataset="wikipedia"):
+    def __init__(self, dataset: int="wikipedia"):
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 
@@ -37,7 +37,7 @@ class GraphReader(object):
         data = self._pandas_reader(data)
         return data
    
-    def get_graph(self):
+    def get_graph(self) -> nx.classes.graph.Graph:
         r"""Getting the graph.
 
         Return types:
@@ -63,7 +63,7 @@ class GraphReader(object):
         features = coo_matrix((values, (row, col)), shape=shape)
         return features
 
-    def get_target(self):
+    def get_target(self) -> np.array:
         r"""Getting the class membership of nodes.
 
         Return types:
