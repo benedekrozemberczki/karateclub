@@ -13,12 +13,12 @@ class LaplacianEigenmaps(Estimator):
         dimensions (int): Dimensionality of embedding. Default is 128.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=128, seed=42):
+    def __init__(self, dimensions: int=128, seed: int=42):
 
         self.dimensions = dimensions
         self.seed = seed
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Laplacian EigenMaps model.
 
@@ -33,7 +33,7 @@ class LaplacianEigenmaps(Estimator):
         self._embedding = embedding
 
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
