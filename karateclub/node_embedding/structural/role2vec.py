@@ -26,8 +26,9 @@ class Role2Vec(Estimator):
         wl_iterations (int): Number of Weisfeiler-Lehman hashing iterations. Default is 2.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, walk_number=10, walk_length=80, dimensions=128, workers=4, window_size=2,
-                 epochs=1, learning_rate=0.05, down_sampling=0.0001, min_count=10, wl_iterations=2, seed=42):
+    def __init__(self, walk_number: int=10, walk_length: int=80, dimensions: int=128, workers: int=4,
+                 window_size: int=2, epochs: int=1, learning_rate: float=0.05, down_sampling: float=0.0001,
+                 min_count: int=10, wl_iterations: int=2, seed: int=42):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -78,7 +79,7 @@ class Role2Vec(Estimator):
         return new_features
 
 
-    def fit(self, graph):
+    def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a Role2vec model.
 
@@ -108,7 +109,7 @@ class Role2Vec(Estimator):
 
         self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
-    def get_embedding(self):
+    def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
         Return types:
