@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-install_requires = ["numpy", "networkx", "tqdm", "python-louvain", "sklearn",
+install_requires = ["numpy", "networkx", "tqdm", "python-louvain", "scikit-learn",
                     "scipy","pygsp", "gensim", "pandas", "six"]
 
 setup_requires = ['pytest-runner']
@@ -10,15 +10,15 @@ tests_require = ['pytest', 'pytest-cov', 'mock']
 setup(
   name = "karateclub",
   packages = find_packages(),
-  version = "1.0.9",
+  version = "1.0.10",
   license = "MIT",
   description = "A general purpose library for community detection, network embedding, and graph mining research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
   url = "https://github.com/benedekrozemberczki/karateclub",
-  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_10009.tar.gz",
+  download_url = "https://github.com/benedekrozemberczki/karateclub/archive/v_10010.tar.gz",
   keywords = ["community", "detection", "networkx", "graph",
-              "clustering", "embedding","network","deepwalk",
+              "clustering", "embedding","deepwalk",
               "graph2vec","node2vec", "deep","learning","louvain",
               "machine-learning","deep-learning","deeplearning"],
   install_requires = install_requires,
