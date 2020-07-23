@@ -71,6 +71,16 @@ def test_graph2vec():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
 
+    graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+    model = Graph2Vec(erase_base_features=True)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == model.dimensions
+
     graphs = []
 
     for _ in range(50):
