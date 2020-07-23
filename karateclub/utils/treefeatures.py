@@ -38,8 +38,7 @@ class WeisfeilerLehmanHashing(object):
         Erasing the base features
         """
         for k, v in self.extracted_features.items():
-            if len(self.extracted_features[k][0]) != 32:
-                del self.extracted_features[k][0:1]
+            del self.extracted_features[k][0]
 
     def _do_a_recursion(self):
         """
