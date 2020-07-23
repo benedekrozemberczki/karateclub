@@ -25,10 +25,11 @@ class Role2Vec(Estimator):
         min_count (int): Minimal count of feature occurences. Default is 10.
         wl_iterations (int): Number of Weisfeiler-Lehman hashing iterations. Default is 2.
         seed (int): Random seed value. Default is 42.
+        erase_base_features (bool): Removing the base features. Default is False.
     """
     def __init__(self, walk_number: int=10, walk_length: int=80, dimensions: int=128, workers: int=4,
                  window_size: int=2, epochs: int=1, learning_rate: float=0.05, down_sampling: float=0.0001,
-                 min_count: int=10, wl_iterations: int=2, seed: int=42):
+                 min_count: int=10, wl_iterations: int=2, seed: int=42, erase_base_features: bool=False):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -41,6 +42,7 @@ class Role2Vec(Estimator):
         self.min_count = min_count
         self.wl_iterations = wl_iterations
         self.seed = seed
+        self.erase_base_features = erase_base_features
 
     def _transform_walks(self, walks):
         """
@@ -91,7 +93,10 @@ class Role2Vec(Estimator):
         walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
  
-        hasher = WeisfeilerLehmanHashing(graph=graph, wl_iterations=self.wl_iterations, attributed=False)
+        hasher = WeisfeilerLehmanHashing(graph=graph,
+                                         wl_iterations=self.wl_iterations,
+                                         attributed=False,
+                                         erase_base_features=self.erase_base_features)
       
         node_features = hasher.get_node_features()
         documents = self._create_documents(walker.walks, node_features)

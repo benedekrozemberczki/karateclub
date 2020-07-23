@@ -29,7 +29,7 @@ class GL2Vec(Estimator):
     """
     def __init__(self, wl_iterations: int=2, dimensions: int=128, workers: int=4,
                  down_sampling: float=0.0001, epochs: int=10, learning_rate: float=0.025,
-                 min_count: int=5, seed: int=42):
+                 min_count: int=5, seed: int=42, erase_base_features: bool=False):
 
         self.wl_iterations = wl_iterations
         self.dimensions = dimensions
@@ -39,6 +39,7 @@ class GL2Vec(Estimator):
         self.learning_rate = learning_rate
         self.min_count = min_count
         self.seed = seed
+        self.erase_base_features = erase_base_features
 
     def _create_line_graph(self, graph):
         r"""Getting the embedding of graphs.
@@ -65,7 +66,7 @@ class GL2Vec(Estimator):
         self._set_seed()
         self._check_graphs(graphs)
         graphs = [self._create_line_graph(graph) for graph in graphs]
-        documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, False) for graph in graphs]
+        documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, False, self.erase_base_features) for graph in graphs]
         documents = [TaggedDocument(words=doc.get_graph_features(), tags=[str(i)]) for i, doc in enumerate(documents)]
 
         model = Doc2Vec(documents,

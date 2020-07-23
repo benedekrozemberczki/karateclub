@@ -106,7 +106,7 @@ def test_GEMSEC():
     """
     Test the GEMSEC procedure.
     """
-    graph = nx.newman_watts_strogatz_graph(100, 5, 0.3)
+    graph = nx.newman_watts_strogatz_graph(50, 5, 0.3)
 
     model = GEMSEC()
 
@@ -126,7 +126,7 @@ def test_GEMSEC():
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
 
-    graph = nx.newman_watts_strogatz_graph(150, 5, 0.3)
+    graph = nx.newman_watts_strogatz_graph(75, 5, 0.3)
 
     model = GEMSEC(dimensions=4)
 

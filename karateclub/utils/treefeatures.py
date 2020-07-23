@@ -8,16 +8,18 @@ class WeisfeilerLehmanHashing(object):
 
     Args:
         graph (NetworkX graph): NetworkX graph for which we do WL hashing.
-        features (dict of strings): Feature hash map.
-        iterations (int): Number of WL iterations.
+        wl_iterations (int): Number of WL iterations.
+        attributed (bool): Presence of attributes.
+        erase_base_feature (bool): Deleting the base features.
     """
-    def __init__(self, graph: nx.classes.graph.Graph, wl_iterations: int, attributed: bool):
+    def __init__(self, graph: nx.classes.graph.Graph, wl_iterations: int, attributed: bool, erase_base_features: bool):
         """
         Initialization method which also executes feature extraction.
         """
         self.wl_iterations = wl_iterations
         self.graph = graph
         self.attributed = attributed
+        self.erase_base_features = erase_base_features
         self._set_features()
         self._do_recursions()
 
@@ -29,6 +31,15 @@ class WeisfeilerLehmanHashing(object):
             self.features = nx.get_node_attributes(self.graph, 'feature')
         else:
             self.features = {node: self.graph.degree(node) for node in self.graph.nodes()}
+        self.extracted_features = {k: [str(v)] for k, v in self.features.items()}
+
+    def _erase_base_features(self):
+        """
+        Erasing the base features
+        """
+        for k, v in self.extracted_features.items():
+            if len(self.extracted_features[k][0]) != 32:
+                del self.extracted_features[k][0:1]
 
     def _do_a_recursion(self):
         """
@@ -37,7 +48,6 @@ class WeisfeilerLehmanHashing(object):
         Return types:
             * **new_features** *(dict of strings)* - The hash table with extracted WL features.
         """
-        self.extracted_features = {k: [str(v)] for k, v in self.features.items()}
         new_features = {}
         for node in self.graph.nodes():
             nebs = self.graph.neighbors(node)
@@ -56,6 +66,9 @@ class WeisfeilerLehmanHashing(object):
         """
         for _ in range(self.wl_iterations):
             self.features = self._do_a_recursion()
+        if self.erase_base_features:
+            self._erase_base_features()
+        
 
     def get_node_features(self) -> Dict[int, List[str]]:
         """
