@@ -10,7 +10,7 @@ tests_require = ['pytest', 'pytest-cov', 'mock']
 setup(
   name = "karateclub",
   packages = find_packages(),
-  version = "1.0.11",
+  version = "1.0.12",
   license = "GPLv3",
   description = "A general purpose library for community detection, network embedding, and graph mining research.",
   author = "Benedek Rozemberczki",
