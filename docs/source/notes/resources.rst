@@ -46,7 +46,6 @@ Neighbourhood-based node embedding
 
 * Aditya Grover and Jure Leskovec: **Node2Vec: Scalable Feature Learning for Networks** `Paper <https://dl.acm.org/doi/abs/10.1145/2939672.2939754>`_, `Video <https://www.youtube.com/watch?v=1_QH5BEP5BM>`_
 
-
 * Bryan Perozzi, Rami Al-Rfou, Steven Skiena: **DeepWalk: Online Learning of Social Representations** `Paper <https://arxiv.org/abs/1403.6652>`_, `Slides <https://www.slideshare.net/bperz/14-kdddeep-walk-2>`_, `Video <https://www.youtube.com/watch?v=n12HS-24CtA>`_, `Video <https://www.youtube.com/watch?v=aZNtHJwfIVg>`_
 
 * Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_, `Code <https://github.com/benedekrozemberczki/NMFADMM>`_
