@@ -1,11 +1,21 @@
 from setuptools import find_packages, setup
 
-install_requires = ["numpy", "networkx", "tqdm", "python-louvain", "scikit-learn",
-                    "scipy","pygsp", "gensim", "pandas", "six"]
+install_requires = ["numpy",
+                    "networkx",
+                    "tqdm",
+                    "python-louvain",
+                    "scikit-learn",
+                    "scipy",
+                    "pygsp",
+                    "gensim",
+                    "pandas",
+                    "six"]
 
 setup_requires = ['pytest-runner']
 
-tests_require = ['pytest', 'pytest-cov', 'mock']
+tests_require = ['pytest',
+                 'pytest-cov',
+                 'mock']
 
 setup(
   name = "karateclub",
