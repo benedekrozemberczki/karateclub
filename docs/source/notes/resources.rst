@@ -44,6 +44,9 @@ Neighbourhood-based node embedding
 
 * Shaosheng Cao, Wei Lu, Qiongkai Xu: **GraRep: Learning Graph Representations with Global Structural Information** `Paper <https://dl.acm.org/citation.cfm?id=2806512>`_, `Code <https://github.com/benedekrozemberczki/GraRep>`_
 
+* Aditya Grover and Jure Leskovec: **Node2Vec: Scalable Feature Learning for Networks** `Paper <https://dl.acm.org/doi/abs/10.1145/2939672.2939754>`_, `Slides <http://snap.stanford.edu/class/cs224w-2017/slides/18-overlapping.pdf>`_, `Video <https://www.youtube.com/watch?v=Y78Kugdq24I>`_, `Video <https://www.youtube.com/watch?v=cuDDBfvK71g>`_
+
+
 * Bryan Perozzi, Rami Al-Rfou, Steven Skiena: **DeepWalk: Online Learning of Social Representations** `Paper <https://arxiv.org/abs/1403.6652>`_, `Slides <https://www.slideshare.net/bperz/14-kdddeep-walk-2>`_, `Video <https://www.youtube.com/watch?v=n12HS-24CtA>`_, `Video <https://www.youtube.com/watch?v=aZNtHJwfIVg>`_
 
 * Dennis L. Sun and Cédric Févotte: **Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence** `Paper <http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf>`_, `Code <https://github.com/benedekrozemberczki/NMFADMM>`_
