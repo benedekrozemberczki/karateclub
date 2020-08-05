@@ -1,5 +1,6 @@
 from .grarep import GraRep
 from .deepwalk import DeepWalk
+from .node2vec import Node2Vec
 from .walklets import Walklets
 from .nmfadmm import NMFADMM
 from .diff2vec import Diff2Vec

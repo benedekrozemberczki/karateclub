@@ -10,8 +10,8 @@ tests_require = ['pytest', 'pytest-cov', 'mock']
 setup(
   name = "karateclub",
   packages = find_packages(),
-  version = "1.0.11",
-  license = "MIT",
+  version = "1.0.12",
+  license = "GPLv3",
   description = "A general purpose library for community detection, network embedding, and graph mining research.",
   author = "Benedek Rozemberczki",
   author_email = "benedek.rozemberczki@gmail.com",
@@ -28,7 +28,7 @@ setup(
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Build Tools",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python :: 3.7",
   ],
 )

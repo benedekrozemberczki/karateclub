@@ -34,6 +34,35 @@ def test_egonet_splitter():
     assert indices == nodes
     assert type(memberships) == dict
 
+    # Test weighted graph
+    graph = nx.les_miserables_graph()
+    graph = nx.convert_node_labels_to_integers(graph)
+    model = EgoNetSplitter(weight='weight')
+    model.fit(graph)
+    memberships = model.get_memberships()
+    
+    indices = [k for k, v in memberships.items()].sort()
+    nodes = [node for node in graph.nodes()].sort()
+
+    assert graph.number_of_nodes() == len(memberships)
+    assert indices == nodes
+    assert type(memberships) == dict
+
+    # Force unweighted
+    graph = nx.les_miserables_graph()
+    graph = nx.convert_node_labels_to_integers(graph)
+    model = EgoNetSplitter(weight=None)
+    model.fit(graph)
+    memberships = model.get_memberships()
+    
+    indices = [k for k, v in memberships.items()].sort()
+    nodes = [node for node in graph.nodes()].sort()
+
+    assert graph.number_of_nodes() == len(memberships)
+    assert indices == nodes
+    assert type(memberships) == dict
+
+
 
 def test_nnsed():
     """
