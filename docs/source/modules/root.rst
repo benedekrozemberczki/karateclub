@@ -81,6 +81,10 @@ Neighbourhood-based node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.neighbourhood.node2vec
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.node_embedding.neighbourhood.nmfadmm
     :members:
     :undoc-members:
