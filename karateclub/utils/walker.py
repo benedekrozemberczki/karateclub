@@ -19,7 +19,7 @@ class RandomWalker:
         Doing a single truncated random walk from a source node.
 
         Arg types:
-            * **node** *(int)* - The source node of the diffusion.
+            * **node** *(int)* - The source node of the random walk.
 
         Return types:
             * **walk** *(list of strings)* - A single truncated random walk.
