@@ -62,12 +62,12 @@ class BiasedRandomWalker:
         try: 
             _ = 1/p
         except ZeroDivisionError:
-            raise ValueError(f"value of p:{p} is too small or zero to be used in 1/p")
+            raise ValueError("The value of p is too small or zero to be used in 1/p.")
         self.p = p
         try: 
             _ = 1/q
         except ZeroDivisionError:
-            raise ValueError(f"value of q:{q} is too small or zero to be used in 1/q")
+            raise ValueError("The value of q is too small or zero to be used in 1/q.")
         self.q = q
 
     def do_walk(self, node):
@@ -75,7 +75,7 @@ class BiasedRandomWalker:
         Doing a single truncated second order random walk from a source node.
 
         Arg types:
-            * **node** *(int)* - The source node of the diffusion.
+            * **node** *(int)* - The source node of the random walk.
 
         Return types:
             * **walk** *(list of strings)* - A single truncated random walk.
