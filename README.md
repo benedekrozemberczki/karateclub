@@ -26,9 +26,9 @@ If you find *Karate Club* and the new datasets useful in your research, please c
 
 ```bibtex
 @inproceedings{karateclub,
-       title={{Karate Club: An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs}},
-       author={Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
-       year={2020},
+       title = {{Karate Club: An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs}},
+       author = {Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
+       year = {2020},
        booktitle = {Proceedings of the 29th ACM International on Conference on Information and Knowledge Management (CIKM '20)},
        organization = {ACM},
 }
