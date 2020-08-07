@@ -14,13 +14,12 @@ If you find *Karate Club* useful in your research, please consider citing the fo
 
 .. code-block:: latex
 
-    @misc{karateclub2020,
-          title={An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs},
-          author={Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
-          year={2020},
-          eprint={2003.04819},
-          archivePrefix={arXiv},
-          primaryClass={cs.LG}
+    @inproceedings{karateclub,
+                   title = {{Karate Club: An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs}},
+                   author = {Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
+                   year = {2020},
+	           booktitle = {Proceedings of the 29th ACM International Conference on Information and Knowledge Management (CIKM '20)},
+	           organization = {ACM},
     }
 
 Overview
