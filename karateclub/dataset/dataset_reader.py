@@ -13,8 +13,8 @@ class GraphReader(object):
     r"""Class to read benchmark datasets for the community detection or node embedding task.
 
     Args:
-        dataset (str): Dataset of interest. Default is 'wikipedia'.
-            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`).
+        dataset (str): Dataset of interest, one of: 
+            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`). Default is 'wikipedia'.
     """
     def __init__(self, dataset: str="wikipedia"):
         self.dataset = dataset
