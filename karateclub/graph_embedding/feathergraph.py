@@ -106,6 +106,8 @@ class FeatherGraph(Estimator):
             feature_blocks = np.min(feature_blocks, axis=0)
         elif self.pooling == "max":
             feature_blocks = np.max(feature_blocks, axis=0)
+        else:
+            raise ValueError("Wrong pooling function.")
         return feature_blocks
 
 
