@@ -103,7 +103,9 @@ class FeatherGraph(Estimator):
         if self.pooling == "mean":      
             feature_blocks = np.mean(feature_blocks, axis=0)
         elif self.pooling == "min":
-            feature_blocks = np.mean(feature_blocks, axis=0)
+            feature_blocks = np.min(feature_blocks, axis=0)
+        elif self.pooling == "max":
+            feature_blocks = np.max(feature_blocks, axis=0)
         return feature_blocks
 
 
