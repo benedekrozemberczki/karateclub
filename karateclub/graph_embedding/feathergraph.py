@@ -27,6 +27,7 @@ class FeatherGraph(Estimator):
         self.eval_points = eval_points
         self.theta_max = theta_max
         self.seed = seed
+        self.pooling = pooling
 
 
     def _create_D_inverse(self, graph):
@@ -99,7 +100,10 @@ class FeatherGraph(Estimator):
             X = A_tilde.dot(X)
             feature_blocks.append(X)
         feature_blocks = np.concatenate(feature_blocks, axis=1)
-        feature_blocks = np.mean(feature_blocks, axis=0)
+        if self.pooling == "mean":      
+            feature_blocks = np.mean(feature_blocks, axis=0)
+        elif self.pooling == "min":
+            feature_blocks = np.mean(feature_blocks, axis=0)
         return feature_blocks
 
 
