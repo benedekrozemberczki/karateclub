@@ -16,7 +16,8 @@ class GraphWave(Estimator):
         step_size (float): Grid point step size. Default is 0.1.
         heat_coefficient (float): Heat kernel coefficient. Default is 1.0.
         approximation (int): Chebyshev polynomial order. Default is 100.
-        mechanism (str): Wavelet calculation method 'exact' or 'approximate'. Default is 'approximate'.
+        mechanism (str): Wavelet calculation method one of: 
+                         (:obj:`"exact"`, :obj:`"approximate"`). Default is 'approximate'.
         switch (int): Vertex cardinality when the wavelet calculation method switches to approximation. Default is 1000.
         seed (int): Random seed value. Default is 42.
     """
