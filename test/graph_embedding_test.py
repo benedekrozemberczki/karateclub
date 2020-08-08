@@ -29,7 +29,6 @@ def test_feather_graph():
     assert embedding.shape[1] == 4*model.order*model.eval_points
     assert type(embedding) == np.ndarray
 
-
     model = FeatherGraph(pooling="mean")
 
     model.fit(graphs)
