@@ -14,7 +14,7 @@ class GraphReader(object):
 
     Args:
         dataset (str): Dataset of interest. Default is 'wikipedia'.
-            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`).
+            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`).
     """
     def __init__(self, dataset: str="wikipedia"):
         self.dataset = dataset
