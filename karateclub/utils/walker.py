@@ -14,7 +14,6 @@ class RandomWalker:
         self.walk_length = walk_length
         self.walk_number = walk_number
 
-
     def do_walk(self, node):
         """
         Doing a single truncated random walk from a source node.
@@ -33,7 +32,6 @@ class RandomWalker:
         walk = [str(w) for w in walk]
         return walk
 
-
     def do_walks(self, graph):
         """
         Doing a fixed number of truncated random walk from every node in the graph.
@@ -47,7 +45,6 @@ class RandomWalker:
             for _ in range(self.walk_number):
                 walk_from_node = self.do_walk(node)
                 self.walks.append(walk_from_node)
-
 
 class BiasedRandomWalker:
     """
@@ -72,7 +69,6 @@ class BiasedRandomWalker:
         except ZeroDivisionError:
             raise ValueError("The value of q is too small or zero to be used in 1/q.")
         self.q = q
-
 
     def do_walk(self, node):
         """
@@ -100,7 +96,6 @@ class BiasedRandomWalker:
             previous_node = current_node
         walk = [str(w) for w in walk]
         return walk
-
 
     def do_walks(self, graph):
         """
