@@ -41,7 +41,7 @@ If you find *Karate Club* and the new datasets useful in your research, please c
 
 **A simple example**
 
-<p align="justify"> *Karate Club* makes the use of modern community detection techniques quite easy (see [here](https://karateclub.readthedocs.io/en/latest/notes/introduction.html) for the accompanying tutorial). For example, this is all it takes to use on a Watts-Strogatz graph [Ego-splitting](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf):</p>
+*Karate Club* makes the use of modern community detection techniques quite easy (see [here](https://karateclub.readthedocs.io/en/latest/notes/introduction.html) for the accompanying tutorial). For example, this is all it takes to use on a Watts-Strogatz graph [Ego-splitting](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf):
 
 ```python
 import networkx as nx
@@ -153,11 +153,10 @@ In detail, the following community detection and embedding methods were implemen
 * **[Graph2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.graph2vec.Graph2Vec)** from Narayanan *et al.*: [Graph2Vec: Learning Distributed Representations of Graphs](https://arxiv.org/abs/1707.05005) (MLGWorkshop 2017)
 
 
-<p align="justify">Head over to our [documentation](https://karateclub.readthedocs.io) to find out more about installation and data handling, a full list of implemented methods, and datasets. For a quick start, check out our [examples](https://github.com/benedekrozemberczki/karateclub/tree/master/examples.py).</p>
+Head over to our [documentation](https://karateclub.readthedocs.io) to find out more about installation and data handling, a full list of implemented methods, and datasets. For a quick start, check out our [examples](https://github.com/benedekrozemberczki/karateclub/tree/master/examples.py).
 
-<p align="justify">If you notice anything unexpected, please open an [issue](https://github.com/benedekrozemberczki/karateclub/issues) and let us know.
-If you are missing a specific method, feel free to open a [feature request](https://github.com/benedekrozemberczki/karateclub/issues).
-We are motivated to constantly make Karate Club even better.</p>
+If you notice anything unexpected, please open an [issue](https://github.com/benedekrozemberczki/karateclub/issues) and let us know. If you are missing a specific method, feel free to open a [feature request](https://github.com/benedekrozemberczki/karateclub/issues).
+We are motivated to constantly make Karate Club even better.
 
 
 --------------------------------------------------------------------------------
@@ -180,10 +179,10 @@ $ pip install karateclub --upgrade
 
 **Running examples**
 
-<p align="justify">As part of the documentation we provide a number of use cases to show how the clusterings and embeddings can be utilized for downstream learning. These can accessed [here](https://karateclub.readthedocs.io/en/latest/notes/introduction.html) with detailed explanations.</p>
+As part of the documentation we provide a number of use cases to show how the clusterings and embeddings can be utilized for downstream learning. These can accessed [here](https://karateclub.readthedocs.io/en/latest/notes/introduction.html) with detailed explanations.
 
 
-<p align="justify">Besides the case studies we provide synthetic examples for each model. These can be tried out by running the examples script.</p>
+Besides the case studies we provide synthetic examples for each model. These can be tried out by running the examples script.
 
 ```sh
 $ python examples.py
