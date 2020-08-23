@@ -3,7 +3,7 @@ import numpy as np
 import networkx as nx
 from typing import List
 import scipy.stats.mstats
-import scipy.sparse as sparse
+import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
 class IGE(Estimator):
@@ -65,8 +65,13 @@ class IGE(Estimator):
         return features
 
     def _get_spectral_features(self, graph, features):
+        L = nx.laplacian_matrix(graph).asfptype()
         for emb_dim in self.spectral_embedding_dimensions:
-            print(emb_dim)
+            emb_eig = np.zeros(emb_dim)
+            min_dim = min(graph.number_of_nodes(), emb_dim)
+            eigenvalues = sps.linalg.eigsh(L, min_dim, which="SM", ncv=5*emb_dim, return_eigenvectors=False)
+            emb_eig[-min_dim:] = eigenvalues[:min_dim]
+            features.append(emb_eig)
         return features
 
     def _get_histogram_features(self, graph, features):
@@ -79,7 +84,7 @@ class IGE(Estimator):
         features = self._get_embedding_features(graph, features)
         features = self._get_spectral_features(graph, features)
         features = self._get_histogram_features(graph, features)
-        return np.ones((1, 128))
+        return np.concatenate(features)
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
