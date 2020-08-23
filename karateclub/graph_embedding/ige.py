@@ -112,6 +112,16 @@ class IGE(Estimator):
         return features
 
     def _get_histogram_features(self, graph, features):
+        """
+        Calculating the spectral histogram features.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph of interest.
+            * **features** *(list)* - The list of graph feature NumPy arrays.
+
+        Return types:
+            * **features** *(list)* - The list of graph feature NumPy arrays.
+        """
         L = nx.laplacian_matrix(graph).asfptype()
         eigenvalues, eigenvectors = sps.linalg.eigsh(L)
 
