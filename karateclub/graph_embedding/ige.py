@@ -61,7 +61,7 @@ class IGE(Estimator):
         A_hat = 0.5*A_hat
         return A_hat
 
-    def _get_embedding_features(self, graph, features):
+    def _get_embedding_features(self, graph, features, max_deg):
         return features
 
     def _get_spectral_features(self, graph, features):
@@ -106,6 +106,7 @@ class IGE(Estimator):
         """
         self._set_seed()
         self._check_graphs(graphs)
+        self.max_deg = max([max([graph.degree[node] for node in graph.nodes()]) for graph in graphs])
         self._embedding = [self._calculate_invariant_embedding(graph) for graph in graphs]
 
 
