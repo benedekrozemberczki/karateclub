@@ -22,8 +22,9 @@ class IGE(Estimator):
                  spectral_embedding_dimensions: List[int]=[10, 20],
                  histogram_bins: List[int]=[21, 31],
                  seed: int=42):
-        self.order = order
-        self.moments = moments
+        self.feature_embedding_dimensions = feature_embedding_dimensions
+        self.spectral_embedding_dimensions = spectral_embedding_dimensions
+        self.histogram_bins = histogram_bins
         self.seed = seed
 
 
