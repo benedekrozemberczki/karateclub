@@ -149,6 +149,10 @@ Whole graph embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.graph_embedding.ige
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.graph_embedding.geoscattering
     :members:
     :undoc-members:
