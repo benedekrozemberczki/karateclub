@@ -147,7 +147,9 @@ class IGE(Estimator):
         features = self._get_embedding_features(graph, features)
         features = self._get_spectral_features(graph, features)
         features = self._get_histogram_features(graph, features)
-        return np.concatenate(features)
+        features = np.concatenate(features).reshape(1, -1)
+        print(features.shape)
+        return features
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
@@ -160,7 +162,7 @@ class IGE(Estimator):
         self._check_graphs(graphs)
         self.max_deg = max([max([graph.degree[node] for node in graph.nodes()]) for graph in graphs])
         self._embedding = [self._calculate_invariant_embedding(graph) for graph in graphs]
-
+        self._embedding = np.concatenate(self._embedding,axis=1)
 
     def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
@@ -168,4 +170,4 @@ class IGE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
-        return np.array(self._embedding)
+        return self._embedding
