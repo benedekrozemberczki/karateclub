@@ -75,7 +75,7 @@ class IGE(Estimator):
         return features
 
     def _get_histogram_features(self, graph, features):
-        eigen_values, eigenvectors = LA.eigh(L)
+        eigen_values, eigenvectors = sps.linalg.eigsh(L)
 
         eigvector_norm = np.dot(np.diag(np.sqrt(1 / eigenvalues[1:])),
                                 eigenvectors.T[1:, :])
