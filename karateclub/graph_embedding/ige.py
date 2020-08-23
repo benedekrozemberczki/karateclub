@@ -63,6 +63,16 @@ class IGE(Estimator):
         return A_hat
 
     def _get_embedding_features(self, graph, features):
+      """
+        Calculating the embedding features
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph of interest.
+            * **features** *(list)* - The list of graph feature NumPy arrays.
+
+        Return types:
+            * **features** *(list)* - The list of graph feature NumPy arrays.
+        """
         number_of_nodes = graph.number_of_nodes()
         mat_eye = np.eye(self.max_deg + 1)
         degrees = [graph.degree[node] for node in graph.nodes()]
