@@ -75,11 +75,12 @@ class IGE(Estimator):
         return features
 
     def _get_histogram_features(self, graph, features):
-        eigen_values, eigenvectors = sps.linalg.eigsh(L)
+        L = nx.laplacian_matrix(graph).asfptype()
+        eigenvalues, eigenvectors = sps.linalg.eigsh(L)
 
         eigvector_norm = np.dot(np.diag(np.sqrt(1 / eigenvalues[1:])),
                                 eigenvectors.T[1:, :])
-        sim = np.dot(eigvecNorm.T, eigvecNorm)
+        sim = np.dot(eigvectors_norm.T, eigvectors_norm)
         sim = np.reshape(sim, (1, -1))
         for bins in self.histogram_bins:
             hist = np.histogram(sim, range=(-1, 1), bins=bins)[0]
