@@ -65,6 +65,8 @@ class IGE(Estimator):
         return features
 
     def _get_spectral_features(self, graph, features):
+        for emb_dim in self.spectral_embedding_dimensions:
+            print(emb_dim)
         return features
 
     def _get_histogram_features(self, graph, features):
