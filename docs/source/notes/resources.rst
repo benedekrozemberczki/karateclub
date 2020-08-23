@@ -86,7 +86,7 @@ Whole graph embedding
 
 * Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_, `Code <https://github.com/benedekrozemberczki/FEATHER>`_
 
-* Alexis Galland, Marc Lelarge: **graph2vec: Learning Distributed Representations of Graphs** `Paper <https://graphreason.github.io/papers/16.pdf>`_, `Code <https://github.com/benedekrozemberczki/graph2vec>`_
+* Alexis Galland, Marc Lelarge: **Invariant Embedding for Graph Classification** `Paper <https://graphreason.github.io/papers/16.pdf>`_, `Code <https://github.com/benedekrozemberczki/graph2vec>`_
 
 * Feng Gao, Guy Wolf, Matthew Hirn: **Geometric Scattering for Graph Data Analysis** `Paper <http://proceedings.mlr.press/v97/gao19e.html>`_
 
