@@ -61,21 +61,20 @@ class IGE(Estimator):
         return A_hat
 
     def _get_embedding_features(self, graph, features):
-        A = np.asarray(nx.to_numpy_matrix(graph))
-        n_nodes, m_nodes = A.shape
+        number_of_nodes = graph.number_of_nodes()
         mat_eye = np.eye(self.max_deg + 1)
-        degs = list(np.sum(A, 0).astype(int))
-        feat = mat_eye[degs]
-        featdim = feat.shape[1]
+        degrees = [graph.degree[node] for node in graph.nodes()]
+        features = mat_eye[degrees]
+        feature_dim = feat.shape[1]
         for emb_dim in self.feature_embedding_dimensions:
-            emb_space_full = emb_dim * featdim
+            emb_space_full = emb_dim * feature_dim
 
-            embed_space = np.zeros((emb_space_full, n_nodes))
-            P = np.dot(np.eye(A.shape[0]) / np.sum(A, axis=0), A)
-            Q = np.dot(np.eye(A.shape[0]) / np.sum(A, axis=0), A)
+            embed_space = np.zeros((emb_space_full, number_of_nodes))
+            P = self._get_normalized_adjacency(graph)
+            Q = self._get_normalized_adjacency(graph)
             for i in range(emb_dim):
-                P = np.dot(P, Q)
-                embed_space[i * featdim:(i + 1) * featdim, :] = np.dot(P, feat).T
+                P = P.dot(Q)
+                embed_space[i * feature_dim:(i + 1) * feature_dim, :] = P.dot(features).T
 
             features.append(np.mean(embed_space, axis=0).T)
         return features
