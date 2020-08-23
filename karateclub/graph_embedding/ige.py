@@ -68,7 +68,7 @@ class IGE(Estimator):
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
-        Fitting a Geometric-Scattering model.
+        Fitting an Invariant Graph Embedding model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
