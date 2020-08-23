@@ -28,11 +28,6 @@ model.fit(graphs)
 embedding = model.get_embedding()
 
 
-print(embedding.shape)
-
-quit()
-
-
 #---------------
 # Feather Node
 #---------------
