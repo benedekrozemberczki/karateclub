@@ -27,8 +27,6 @@ model = IGE()
 model.fit(graphs)
 embedding = model.get_embedding()
 
-quit()
-
 #---------------
 # Feather Node
 #---------------
