@@ -240,7 +240,7 @@ def test_ige():
     for order in range(4, 20):
         for moment in range(4, 7):
 
-            model = IGE(order=order, moments=moment)
+            model = IGE()
 
             model.fit(graphs)
             embedding = model.get_embedding()

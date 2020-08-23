@@ -62,7 +62,7 @@ class IGE(Estimator):
         return A_hat
 
 
-    def calculate_invariant_embedding(self, graph):
+    def _calculate_invariant_embedding(self, graph):
         return np.ones((1, 128))
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
