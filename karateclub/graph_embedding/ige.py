@@ -61,8 +61,18 @@ class IGE(Estimator):
         A_hat = 0.5*A_hat
         return A_hat
 
+    def _get_embedding_features(self, graph, features):
+        return features
+
+    def _get_spectral_features(self, graph, features):
+        return features
+
+    def _get_histogram_features(self, graph, features):
+        return features
 
     def _calculate_invariant_embedding(self, graph):
+        """
+        """ 
         features = []
         features = self._get_embedding_features(graph, features)
         features = self._get_spectral_features(graph, features)
