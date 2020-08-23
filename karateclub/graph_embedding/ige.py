@@ -4,6 +4,7 @@ import networkx as nx
 from typing import List
 import scipy.stats.mstats
 import scipy.sparse as sps
+from tqdm import tqdm
 from karateclub.estimator import Estimator
 
 class IGE(Estimator):
@@ -123,7 +124,7 @@ class IGE(Estimator):
         self._set_seed()
         self._check_graphs(graphs)
         self.max_deg = max([max([graph.degree[node] for node in graph.nodes()]) for graph in graphs])
-        self._embedding = [self._calculate_invariant_embedding(graph) for graph in graphs]
+        self._embedding = [self._calculate_invariant_embedding(graph) for graph in tqdm(graphs)]
 
 
     def get_embedding(self) -> np.array:
