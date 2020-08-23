@@ -140,7 +140,7 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[FEATHER-G](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.feathergraph.FeatherGraph)** from Rozemberczki *et al.*: [Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models](https://arxiv.org/abs/2005.07959) (CIKM 2020)
 
-* **[IGE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.ige.IGE)** from Rozemberczki *et al.*: [Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models](https://graphreason.github.io/papers/16.pdf) (ICML 2019 LRGSD)
+* **[IGE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.ige.IGE)** from Galland *et al.*: [Invariant Embedding for Graph Classification](https://graphreason.github.io/papers/16.pdf) (ICML 2019 LRGSD Workshop)
 
 * **[GeoScattering](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.geoscattering.GeoScattering)** from Gao *et al.*: [Geometric Scattering for Graph Data Analysis](http://proceedings.mlr.press/v97/gao19e.html) (ICML 2019)
 
