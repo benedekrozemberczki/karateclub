@@ -64,7 +64,7 @@ class IGE(Estimator):
 
     def _get_embedding_features(self, graph, features):
         """
-        Calculating the embedding features
+        Calculating the embedding features.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph of interest.
@@ -92,7 +92,16 @@ class IGE(Estimator):
         return features
 
     def _get_spectral_features(self, graph, features):
+        """
+        Calculating the spectral features.
 
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph of interest.
+            * **features** *(list)* - The list of graph feature NumPy arrays.
+
+        Return types:
+            * **features** *(list)* - The list of graph feature NumPy arrays.
+        """
         L = nx.laplacian_matrix(graph).asfptype()
         for emb_dim in self.spectral_embedding_dimensions:
             emb_eig = np.zeros(emb_dim)
