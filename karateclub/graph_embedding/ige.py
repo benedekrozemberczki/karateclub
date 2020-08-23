@@ -75,6 +75,15 @@ class IGE(Estimator):
         return features
 
     def _get_histogram_features(self, graph, features):
+        eigen_values, eigenvectors = LA.eigh(L)
+
+        eigvector_norm = np.dot(np.diag(np.sqrt(1 / eigenvalues[1:])),
+                                eigenvectors.T[1:, :])
+        sim = np.dot(eigvecNorm.T, eigvecNorm)
+        sim = np.reshape(sim, (1, -1))
+        for bins in self.histogram_bins:
+            hist = np.histogram(sim, range=(-1, 1), bins=bins)[0]
+            features.append(hist)
         return features
 
     def _calculate_invariant_embedding(self, graph):
