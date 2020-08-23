@@ -41,7 +41,7 @@ class IGE(Estimator):
         index = np.arange(graph.number_of_nodes())
         values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
-        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        D_inverse = sps.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
 
 
@@ -64,8 +64,8 @@ class IGE(Estimator):
         number_of_nodes = graph.number_of_nodes()
         mat_eye = np.eye(self.max_deg + 1)
         degrees = [graph.degree[node] for node in graph.nodes()]
-        features = mat_eye[degrees]
-        feature_dim = feat.shape[1]
+        sub_features = mat_eye[degrees]
+        feature_dim = sub_features.shape[1]
         for emb_dim in self.feature_embedding_dimensions:
             emb_space_full = emb_dim * feature_dim
 
@@ -74,7 +74,7 @@ class IGE(Estimator):
             Q = self._get_normalized_adjacency(graph)
             for i in range(emb_dim):
                 P = P.dot(Q)
-                embed_space[i * feature_dim:(i + 1) * feature_dim, :] = P.dot(features).T
+                embed_space[i * feature_dim:(i + 1) * feature_dim, :] = P.dot(sub_features).T
 
             features.append(np.mean(embed_space, axis=0).T)
         return features
