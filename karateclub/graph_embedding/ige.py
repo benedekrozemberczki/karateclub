@@ -8,7 +8,7 @@ from karateclub.estimator import Estimator
 
 class IGE(Estimator):
     r"""An implementation of `"Invariant Graph Embedding" <https://graphreason.github.io/papers/16.pdf>`_
-    from the ICML 2019 Workshop on Learning and Reasoningwith Graph-Structured Data paper 
+    from the ICML 2019 Workshop on Learning and Reasoning with Graph-Structured Data paper 
     "Invariant Embedding for Graph Classification". The procedure
     uses scattering with wavelet transforms to create graph spectral descriptors. Moments of the
     wavelet transformed features are used as graph level features for the embedding.
