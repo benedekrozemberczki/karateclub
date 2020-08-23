@@ -9,8 +9,9 @@ from karateclub.estimator import Estimator
 class IGE(Estimator):
     r"""An implementation of `"Invariant Graph Embedding" <https://graphreason.github.io/papers/16.pdf>`_
     from the ICML 2019 Workshop on Learning and Reasoning with Graph-Structured Data paper 
-    "Invariant Embedding for Graph Classification". The procedure
-    uses ...
+    "Invariant Embedding for Graph Classification". The procedure computes a mixture of spectral and node
+    embedding based features. Specifically, it uses scattering, eigenvalues and pooled node feature embeddings
+    to create graph descriptors. 
 
     Args:
         feature_embedding_dimensions (list): Feature embedding dimensions. Default is [3, 5]
