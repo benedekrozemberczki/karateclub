@@ -107,6 +107,12 @@ class IGE(Estimator):
     def _calculate_invariant_embedding(self, graph):
         """
         Calculating features from generic embedding, spectral embeddings and histogram features.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph of interest.
+
+        Return types:
+            * **features** *(NumPy array)* - The features of the graph.
         """ 
         features = []
         features = self._get_embedding_features(graph, features)
