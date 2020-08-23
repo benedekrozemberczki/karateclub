@@ -79,6 +79,7 @@ class IGE(Estimator):
 
     def _calculate_invariant_embedding(self, graph):
         """
+        Calculating features from generic embedding, spectral embeddings and histogram features.
         """ 
         features = []
         features = self._get_embedding_features(graph, features)
