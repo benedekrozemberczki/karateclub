@@ -76,7 +76,7 @@ class IGE(Estimator):
         features = []
         features = self._get_embedding_features(graph, features)
         features = self._get_spectral_features(graph, features)
-        features = self._get_histogram_features(graph, features
+        features = self._get_histogram_features(graph, features)
         return np.ones((1, 128))
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
