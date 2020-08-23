@@ -61,7 +61,25 @@ class IGE(Estimator):
         A_hat = 0.5*A_hat
         return A_hat
 
-    def _get_embedding_features(self, graph, features, max_deg):
+    def _get_embedding_features(self, graph, features):
+        A = np.asarray(nx.to_numpy_matrix(graph))
+        n_nodes, m_nodes = A.shape
+        emb_space_full = emb_space
+
+        mat_eye = np.eye(self.max_deg + 1)
+        degs = list(np.sum(A, 0).astype(int))
+        feat = mat_eye[degs]
+        featdim = feat.shape[1]
+        emb_space_full = emb_space * featdim
+
+        embed_space = np.zeros((emb_space_full, n_nodes))
+        P = np.dot(np.eye(A.shape[0]) / np.sum(A, axis=0), A)
+        Q = np.dot(np.eye(A.shape[0]) / np.sum(A, axis=0), A)
+        for i in range(emb_space):
+            P = np.dot(P, Q)
+            embed_space[i * featdim:(i + 1) * featdim, :] = np.dot(P, feat).T
+
+
         return features
 
     def _get_spectral_features(self, graph, features):
