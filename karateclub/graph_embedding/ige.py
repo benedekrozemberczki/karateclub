@@ -63,7 +63,7 @@ class IGE(Estimator):
         return A_hat
 
     def _get_embedding_features(self, graph, features):
-      """
+        """
         Calculating the embedding features
 
         Arg types:
@@ -92,6 +92,7 @@ class IGE(Estimator):
         return features
 
     def _get_spectral_features(self, graph, features):
+
         L = nx.laplacian_matrix(graph).asfptype()
         for emb_dim in self.spectral_embedding_dimensions:
             emb_eig = np.zeros(emb_dim)
