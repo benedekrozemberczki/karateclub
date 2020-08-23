@@ -16,6 +16,7 @@ class IGE(Estimator):
     Args:
         feature_embedding_dimensions (list): Feature embedding dimensions. Default is [3, 5]
         spectral_embedding_dimensions (list): Spectral embedding dimensions. Default is [10, 20].
+        histogram_bins (list): Number of histogram bins. Default is [21, 31].
         seed (int): Random seed value. Default is 42.
     """
     def __init__(self, feature_embedding_dimensions: List[int]=[3, 5],
