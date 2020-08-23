@@ -14,8 +14,8 @@ class IGE(Estimator):
     wavelet transformed features are used as graph level features for the embedding.
 
     Args:
-        order (int): Adjacency matrix powers. Default is 4.
-        moments (int): Unnormalized moments considered. Default is 4.
+        feature_embedding_dimensions (list): Feature embedding dimensions. Default is [3, 5]
+        spectral_embedding_dimensions (list): Spectral embedding dimensions. Default is [10, 20].
         seed (int): Random seed value. Default is 42.
     """
     def __init__(self, feature_embedding_dimensions: List[int]=[3, 5],
