@@ -20,7 +20,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # IGE
 #-------
 
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+graphs = [nx.newman_watts_strogatz_graph(7, 5, 0.3) for _ in range(100)]
 
 model = IGE()
 
