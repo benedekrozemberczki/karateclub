@@ -244,13 +244,6 @@ def test_ige():
 
             model.fit(graphs)
             embedding = model.get_embedding()
-
-            first_block = 3*model.order
-            second_block = 3*(model.order+1)*(model.moments-1)
-            third_block = 3*(model.order-1)*model.order*(model.moments-1)/2
-
-            feature_count = first_block+second_block+third_block
     
             assert embedding.shape[0] == len(graphs)
-            assert embedding.shape[1] == feature_count
             assert type(embedding) == np.ndarray
