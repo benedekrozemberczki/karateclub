@@ -158,7 +158,7 @@ class IGE(Estimator):
         """
         self._set_seed()
         self._check_graphs(graphs)
-        self.max_deg = max([max([graph.degree[node] for node in graph.nodes()]) for graph in graphs])
+        self.max_deg = max([max([graph.degree[n] for n in graph.nodes()]) for graph in graphs])
         self._embedding = [self._calculate_invariant_embedding(graph) for graph in graphs]
         self._embedding = np.concatenate(self._embedding)
 
