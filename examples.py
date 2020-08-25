@@ -22,7 +22,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 
 reader = GraphReader("deezer")
 
-graph = reader.get_graph()
+#graph = reader.get_graph()
 target = reader.get_target()
 features = reader.get_features()
 
