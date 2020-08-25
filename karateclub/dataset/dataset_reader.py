@@ -14,7 +14,7 @@ class GraphReader(object):
 
     Args:
         dataset (str): Dataset of interest, one of: 
-            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`). Default is 'wikipedia'.
+            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`, :obj:`"lastfm"`). Default is 'wikipedia'.
     """
     def __init__(self, dataset: str="wikipedia"):
         assert dataset in ["wikipedia", "twitch", "github", "facebook","lastfm"] == True
