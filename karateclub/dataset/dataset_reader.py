@@ -17,7 +17,7 @@ class GraphReader(object):
             (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`, :obj:`"lastfm"`,:obj:`"deezer"`). Default is 'wikipedia'.
     """
     def __init__(self, dataset: str="wikipedia"):
-        assert dataset in ["wikipedia", "twitch", "github", "facebook", "lastfm", "deezer"] == True
+        assert dataset in ["wikipedia", "twitch", "github", "facebook", "lastfm", "deezer"], "Wrong dataset."
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 

@@ -20,7 +20,7 @@ from karateclub.dataset import GraphReader, GraphSetReader
 # Graph reader example
 #----------------------
 
-reader = GraphReader("lastfm")
+reader = GraphReader("deezer")
 
 graph = reader.get_graph()
 target = reader.get_target()
