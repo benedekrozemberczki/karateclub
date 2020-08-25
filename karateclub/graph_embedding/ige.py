@@ -6,7 +6,7 @@ from karateclub.estimator import Estimator
 
 class IGE(Estimator):
     r"""An implementation of `"Invariant Graph Embedding" <https://graphreason.github.io/papers/16.pdf>`_
-    from the ICML 2019 Workshop on Learning and Reasoning with Graph-Structured Data paper 
+    from the ICML 2019 Workshop on Learning and Reasoning with Graph-Structured Data paper
     "Invariant Embedding for Graph Classification". The procedure computes a mixture of spectral and node
     embedding based features. Specifically, it uses scattering, eigenvalues and pooled node feature embeddings
     to create graph descriptors. 
@@ -103,7 +103,8 @@ class IGE(Estimator):
         for emb_dim in self.spectral_embedding_dimensions:
             emb_eig = np.zeros(emb_dim)
             min_dim = min(graph.number_of_nodes()-1, emb_dim)
-            eigenvalues = sps.linalg.eigsh(L, min_dim, which="SM", ncv=5*min_dim, return_eigenvectors=False)
+            eigenvalues = sps.linalg.eigsh(L, min_dim, which="SM",
+                                           ncv=5*min_dim, return_eigenvectors=False)
             emb_eig[-min_dim:] = eigenvalues[:min_dim]
             features.append(emb_eig)
         return features
