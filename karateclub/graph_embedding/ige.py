@@ -141,7 +141,7 @@ class IGE(Estimator):
 
         Return types:
             * **features** *(NumPy array)* - The features of the graph.
-        """ 
+        """
         features = []
         features = self._get_embedding_features(graph, features)
         features = self._get_spectral_features(graph, features)
