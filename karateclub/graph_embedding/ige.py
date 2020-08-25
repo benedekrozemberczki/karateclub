@@ -124,7 +124,7 @@ class IGE(Estimator):
         eigenvalues, eigenvectors = sps.linalg.eigsh(L)
 
         eigenvectors_norm = np.dot(np.diag(np.sqrt(1 / eigenvalues[1:])),
-                                eigenvectors.T[1:, :])
+                                   eigenvectors.T[1:, :])
         sim = np.dot(eigenvectors_norm.T, eigenvectors_norm)
         sim = np.reshape(sim, (1, -1))
         for bins in self.histogram_bins:
