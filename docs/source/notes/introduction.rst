@@ -265,7 +265,7 @@ Benchmark datasets
 We included a number of datasets which can be used for comparing the performance of embedding and clustering algorithms. In case of node level learning these are as follows:
 
 - `European Deezer user network. <https://arxiv.org/abs/2005.07959>`_
-- `Asian LastFM user network. <https://arxiv.org/abs/1909.13021>`_
+- `Asian LastFM user network. <https://arxiv.org/abs/2005.07959>`_
 - `Twitch user network from the UK. <https://arxiv.org/abs/1909.13021>`_
 - `Wikipedia page-page network with articles about Crocodiles. <https://arxiv.org/abs/1909.13021>`_
 - `GitHub machine learning and web developers social network. <https://arxiv.org/abs/1909.13021>`_
