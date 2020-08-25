@@ -14,10 +14,10 @@ class GraphReader(object):
 
     Args:
         dataset (str): Dataset of interest, one of: 
-            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`, :obj:`"lastfm"`). Default is 'wikipedia'.
+            (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`, :obj:`"lastfm"`,:obj:`"deezer"`). Default is 'wikipedia'.
     """
     def __init__(self, dataset: str="wikipedia"):
-        assert dataset in ["wikipedia", "twitch", "github", "facebook","lastfm"] == True
+        assert dataset in ["wikipedia", "twitch", "github", "facebook", "lastfm", "deezer"] == True
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 
