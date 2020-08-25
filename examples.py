@@ -16,17 +16,6 @@ from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
-#----------------------
-# Graph reader example
-#----------------------
-
-reader = GraphReader("deezer")
-
-#graph = reader.get_graph()
-target = reader.get_target()
-features = reader.get_features()
-
-quit()
 
 #-------
 # IGE
