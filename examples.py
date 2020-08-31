@@ -7,7 +7,6 @@ import community
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from karateclub.node_embedding.neighbourhood import NetMF
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoScattering, FeatherGraph, IGE
@@ -73,18 +72,6 @@ model = GeoScattering()
 
 model.fit(graphs)
 embedding = model.get_embedding()
-
-#--------------
-# NEU example
-#--------------
-
-g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
-
-model = NetMF()
-
-meta_model = NEU()
-
-meta_model.fit(g, model)
 
 #-----------------------------------
 # NetLSD example
