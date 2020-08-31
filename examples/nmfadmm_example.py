@@ -1,4 +1,4 @@
-"""NetMF illustrative example."""
+"""NMFADMM illustrative example."""
 
 import networkx as nx
 from karateclub.node_embedding.neighbourhood import NMFADMM
