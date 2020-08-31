@@ -7,7 +7,7 @@ import community
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from karateclub.node_embedding.neighbourhood import NetMF, BoostNE, LaplacianEigenmaps, NodeSketch
+from karateclub.node_embedding.neighbourhood import NetMF, LaplacianEigenmaps, NodeSketch
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoScattering, FeatherGraph, IGE
@@ -296,16 +296,6 @@ model = Graph2Vec()
 model.fit(graphs)
 model.get_embedding()
 
-#-----------------
-# BoostNE example
-#-----------------
-
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
-
-model = BoostNE()
-
-model.fit(g)
-model.get_embedding()
 
 #---------------
 # TENE example
