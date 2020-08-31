@@ -3,7 +3,7 @@
 import networkx as nx
 from karateclub.node_embedding.neighbourhood import LaplacianEigenmaps
 
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
+g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
 model = LaplacianEigenmaps()
 
