@@ -7,7 +7,7 @@ import community
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from karateclub.node_embedding.neighbourhood import NMFADMM, BoostNE, NetMF, LaplacianEigenmaps, HOPE, NodeSketch
+from karateclub.node_embedding.neighbourhood import NMFADMM, BoostNE, NetMF, LaplacianEigenmaps, NodeSketch
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoScattering, FeatherGraph, IGE
@@ -82,17 +82,6 @@ embedding = model.get_embedding()
 g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
 
 model = NodeSketch()
-
-model.fit(g)
-embedding = model.get_embedding()
-
-#---------------
-# HOPE example
-#---------------
-
-g = nx.newman_watts_strogatz_graph(1000, 20, 0.05)
-
-model = HOPE()
 
 model.fit(g)
 embedding = model.get_embedding()
