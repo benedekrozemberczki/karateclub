@@ -13,7 +13,6 @@ from karateclub.community_detection.non_overlapping import EdMot, LabelPropagati
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoScattering, FeatherGraph, IGE
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
-from karateclub.node_embedding.meta import NEU
 from karateclub.dataset import GraphReader, GraphSetReader
 
 
