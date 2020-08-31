@@ -9,7 +9,7 @@ from scipy.sparse import coo_matrix
 
 from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
-from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, NetLSD, GeoScattering, FeatherGraph, IGE
+from karateclub.graph_embedding import FGSD, SF, NetLSD, GeoScattering, FeatherGraph, IGE
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
@@ -233,33 +233,6 @@ reader = GraphReader("facebook")
 
 graph = reader.get_graph()
 target = reader.get_target()
-
-#-------------------------------
-# Graph2Vec attributed example
-#-------------------------------
-
-graphs = []
-
-for i in range(50):
-    graph = nx.newman_watts_strogatz_graph(50, 5, 0.3)
-    nx.set_node_attributes(graph, {j: str(j) for j in range(50)}, "feature")
-    graphs.append(graph)
-model = Graph2Vec(attributed=True)
-
-model.fit(graphs)
-model.get_embedding()
-
-#-------------------
-# Graph2Vec example
-#-------------------
-
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(1000)]
-
-model = Graph2Vec()
-
-model.fit(graphs)
-model.get_embedding()
-
 
 #---------------
 # TENE example
