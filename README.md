@@ -188,7 +188,7 @@ Besides the case studies we provide synthetic examples for each model. These can
 
 ```sh
 $ cd examples/whole_graph_embedding/
-$ python examples.py
+$ python graph2vec_example.py
 ```
 
 --------------------------------------------------------------------------------
