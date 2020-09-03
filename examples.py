@@ -73,17 +73,6 @@ model = GeoScattering()
 model.fit(graphs)
 embedding = model.get_embedding()
 
-#-----------------------------------
-# NetLSD example
-#-----------------------------------
-
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
-
-model = NetLSD()
-
-model.fit(graphs)
-model.get_embedding()
-
 #------------------------------------
 # MUSAE example
 #------------------------------------
