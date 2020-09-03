@@ -7,7 +7,7 @@ import community
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from karateclub.community_detection.overlapping import NNSED, DANMF, MNMF, BigClam, SymmNMF
+from karateclub.community_detection.overlapping import  BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
 from karateclub.dataset import GraphReader, GraphSetReader
@@ -212,15 +212,6 @@ model = DANMF()
 
 model.fit(g)
 
-#----------------
-# M-NMF example
-#----------------
-
-g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
-
-model = MNMF()
-
-model.fit(g)
 
 #----------------------------
 # Label Propagation example
