@@ -41,17 +41,6 @@ model.fit(g, X)
 embedding = model.get_embedding()
 
 #----------------
-# Feather Graph
-#----------------
-
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
-
-model = FeatherGraph()
-
-model.fit(graphs)
-embedding = model.get_embedding()
-
-#----------------
 # GEMSEC example
 #----------------
 
