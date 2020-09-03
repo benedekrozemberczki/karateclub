@@ -7,7 +7,7 @@ import community
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
+from karateclub.community_detection.overlapping import NNSED, DANMF, MNMF, BigClam, SymmNMF
 from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
 from karateclub.dataset import GraphReader, GraphSetReader
@@ -191,16 +191,6 @@ model = BigClam()
 model.fit(g)
 
 membership = model.get_memberships()
-
-#-------------------
-# Splitter example
-#-------------------
-
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
-
-model = EgoNetSplitter(1.0)
-
-model.fit(g)
 
 #----------------
 # Edmot example
