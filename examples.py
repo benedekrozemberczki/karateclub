@@ -23,18 +23,6 @@ model = FeatherNode()
 model.fit(g, X)
 embedding = model.get_embedding()
 
-#----------------
-# GEMSEC example
-#----------------
-
-g = nx.newman_watts_strogatz_graph(50, 5, 0.05)
-
-model = GEMSEC()
-
-model.fit(g)
-memberships = model.get_memberships()
-
-
 #------------------------------------
 # MUSAE example
 #------------------------------------
