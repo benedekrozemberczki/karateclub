@@ -101,18 +101,6 @@ model.get_embedding()
 
 model.get_memberships()
 
-#------------------
-# Role2vec example
-#------------------
-
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
-
-model = Role2Vec()
-
-model.fit(g)
-model.get_embedding()
-
-
 #-----------------
 # FSCNMF example
 #-----------------
