@@ -1,10 +1,10 @@
-"""Ego Splitting example."""
+"""NNSED example."""
 
 import networkx as nx
-from karateclub.community_detection.overlapping import EgoNetSplitter
+from karateclub.community_detection.overlapping import NNSED
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
-model = EgoNetSplitter()
+model = NNSED()
 
 model.fit(g)
