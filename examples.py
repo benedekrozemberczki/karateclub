@@ -163,13 +163,3 @@ x = nx.adjacency_matrix(p)
 model = BANE()
 
 model.fit(g, x)
-
-#----------------
-# Edmot example
-#----------------
-
-g = nx.newman_watts_strogatz_graph(100, 10, 0.9)
-
-model = EdMot(3, 0.5)
-
-model.fit(g)
