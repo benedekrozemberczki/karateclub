@@ -254,18 +254,6 @@ model = LabelPropagation()
 
 model.fit(g)
 
-#-------------------
-# GraphWave example
-#-------------------
-
-g = nx.newman_watts_strogatz_graph(200, 10, 0.02)
-
-model = GraphWave()
-
-model.fit(g)
-
-embedding = model.get_embedding()
-
 #---------------
 # NNSED example
 #---------------
