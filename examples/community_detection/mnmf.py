@@ -1,10 +1,10 @@
-"""Ego Splitting example."""
+"""MNMF example."""
 
 import networkx as nx
-from karateclub.community_detection.overlapping import EgoNetSplitter
+from karateclub.community_detection.overlapping import MNMF
 
 g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
 
-model = EgoNetSplitter()
+model = MNMF()
 
 model.fit(g)
