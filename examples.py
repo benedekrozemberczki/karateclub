@@ -38,16 +38,6 @@ model = GEMSEC()
 model.fit(g)
 memberships = model.get_memberships()
 
-#-------------------------------
-# Geometric Scattering example
-#-------------------------------
-
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
-
-model = GeoScattering()
-
-model.fit(graphs)
-embedding = model.get_embedding()
 
 #------------------------------------
 # MUSAE example
