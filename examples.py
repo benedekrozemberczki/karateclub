@@ -3,12 +3,10 @@
 import networkx as nx
 
 import random
-import community
 import numpy as np
 from scipy.sparse import coo_matrix
 
 from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
-from karateclub.dataset import GraphReader, GraphSetReader
 
 #---------------
 # Feather Node
