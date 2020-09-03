@@ -222,18 +222,3 @@ g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
 model = LabelPropagation()
 
 model.fit(g)
-
-#---------------
-# NNSED example
-#---------------
-
-g = nx.newman_watts_strogatz_graph(100, 10, 0.02)
-
-model = NNSED()
-
-model.fit(g)
-
-embedding = model.get_embedding()
-
-memberships = model.get_memberships()
-
