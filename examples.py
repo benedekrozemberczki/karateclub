@@ -6,20 +6,8 @@ import random
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode
+from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE
 
-#---------------
-# Feather Node
-#---------------
-
-g = nx.newman_watts_strogatz_graph(150, 10, 0.2)
-
-X = np.random.uniform(0, 1, (150, 127))
-
-model = FeatherNode()
-
-model.fit(g, X)
-embedding = model.get_embedding()
 
 #------------------------------------
 # MUSAE example
@@ -82,25 +70,6 @@ x = np.random.uniform(0, 1, (200, 200))
 model = TADW()
 
 model.fit(g, x)
-
-
-#-------------------------
-# GraphSet reader example
-#-------------------------
-
-reader = GraphSetReader("reddit10k")
-
-graphs = reader.get_graphs()
-y = reader.get_target()
-
-#----------------------
-# Graph reader example
-#----------------------
-
-reader = GraphReader("facebook")
-
-graph = reader.get_graph()
-target = reader.get_target()
 
 #---------------
 # TENE example
