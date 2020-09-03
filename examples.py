@@ -73,18 +73,6 @@ model = SINE()
 
 model.fit(g, X)
 
-#-------------
-# SCD example
-#-------------
-
-g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
-
-model = SCD()
-
-model.fit(g)
-
-model.get_memberships()
-
 #-----------------
 # FSCNMF example
 #-----------------
