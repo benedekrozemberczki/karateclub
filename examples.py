@@ -180,18 +180,6 @@ model = BANE()
 
 model.fit(g, x)
 
-#-----------------
-# BigClam example
-#-----------------
-
-g = nx.newman_watts_strogatz_graph(100, 20, 0.05)
-
-model = BigClam()
-
-model.fit(g)
-
-membership = model.get_memberships()
-
 #----------------
 # Edmot example
 #----------------
