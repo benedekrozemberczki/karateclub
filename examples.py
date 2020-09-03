@@ -159,16 +159,6 @@ model = Role2Vec()
 model.fit(g)
 model.get_embedding()
 
-#------------
-# SF example
-#------------
-
-graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
-
-model = SF()
-
-model.fit(graphs)
-model.get_embedding()
 
 #-----------------
 # FSCNMF example
