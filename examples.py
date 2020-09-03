@@ -87,20 +87,6 @@ model.fit(g)
 
 model.get_memberships()
 
-#------------------
-# Symm-NMF example
-#------------------
-
-g = nx.newman_watts_strogatz_graph(100, 10, 0.2)
-
-model = SymmNMF()
-
-model.fit(g)
-
-model.get_embedding()
-
-model.get_memberships()
-
 #-----------------
 # FSCNMF example
 #-----------------
