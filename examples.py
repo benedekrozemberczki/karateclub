@@ -14,19 +14,6 @@ from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE,
 from karateclub.node_embedding.structural import GraphWave, Role2Vec
 from karateclub.dataset import GraphReader, GraphSetReader
 
-
-#-------
-# IGE
-#-------
-
-graphs = [nx.newman_watts_strogatz_graph(7, 5, 0.3) for _ in range(100)]
-
-model = IGE()
-
-model.fit(graphs)
-embedding = model.get_embedding()
-
-
 #---------------
 # Feather Node
 #---------------
