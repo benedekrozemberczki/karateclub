@@ -1,6 +1,7 @@
 """MUSAE Example."""
 
 import random
+import numpy as np
 import networkx as nx
 from scipy.sparse import coo_matrix
 
