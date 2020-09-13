@@ -20,7 +20,7 @@ class Walklets(Estimator):
         window_size (int): Matrix power order. Default is 4.
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
-        min_count (int): Minimal count of node occurences. Default is 1.
+        min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
     def __init__(self, walk_number: int=10, walk_length: int=80, dimensions: int=32,

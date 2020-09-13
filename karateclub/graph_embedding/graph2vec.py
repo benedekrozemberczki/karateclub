@@ -24,7 +24,7 @@ class Graph2Vec(Estimator):
         down_sampling (float): Down sampling frequency. Default is 0.0001.
         epochs (int): Number of epochs. Default is 10.
         learning_rate (float): HogWild! learning rate. Default is 0.025.
-        min_count (int): Minimal count of graph feature occurences. Default is 5.
+        min_count (int): Minimal count of graph feature occurrences. Default is 5.
         seed (int): Random seed for the model. Default is 42.
         erase_base_features (bool): Erasing the base features. Default is False.
     """
