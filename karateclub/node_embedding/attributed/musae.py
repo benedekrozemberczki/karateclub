@@ -25,7 +25,7 @@ class MUSAE(Estimator):
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         down_sampling (float): Down sampling rate in the corpus. Default is 0.0001.
-        min_count (int): Minimal count of node occurences. Default is 1.
+        min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
     def __init__(self, walk_number=5, walk_length=80, dimensions=32, workers=4,
