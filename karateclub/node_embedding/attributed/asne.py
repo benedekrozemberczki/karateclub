@@ -3,7 +3,7 @@ import numpy as np
 import networkx as nx
 from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
-from gensim.models.word2vec import Doc2Vec
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 
 class ASNE(Estimator):
     r"""An implementation of `"ASNE" <https://arxiv.org/abs/1705.04969>`_
