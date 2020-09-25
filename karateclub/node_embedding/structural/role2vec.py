@@ -22,7 +22,7 @@ class Role2Vec(Estimator):
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         down_sampling (float): Down sampling frequency. Default is 0.0001.
-        min_count (int): Minimal count of feature occurences. Default is 10.
+        min_count (int): Minimal count of feature occurrences. Default is 10.
         wl_iterations (int): Number of Weisfeiler-Lehman hashing iterations. Default is 2.
         seed (int): Random seed value. Default is 42.
         erase_base_features (bool): Removing the base features. Default is False.

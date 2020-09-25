@@ -24,7 +24,7 @@ class GL2Vec(Estimator):
         down_sampling (float): Down sampling frequency. Default is 0.0001.
         epochs (int): Number of epochs. Default is 10.
         learning_rate (float): HogWild! learning rate. Default is 0.025.
-        min_count (int): Minimal count of graph feature occurences. Default is 5.
+        min_count (int): Minimal count of graph feature occurrences. Default is 5.
         seed (int): Random seed for the model. Default is 42.
     """
     def __init__(self, wl_iterations: int=2, dimensions: int=128, workers: int=4,
