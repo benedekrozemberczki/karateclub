@@ -7,7 +7,7 @@ from karateclub.estimator import Estimator
 from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
-class SINE(Estimator):
+class ASNE(Estimator):
     r"""An implementation of `"SINE" <https://arxiv.org/pdf/1810.06768.pdf>`_
     from the ICDM '18 paper "SINE: Scalable Incomplete Network Embedding". The 
     procedure implicitly factorizes a joint adjacency matrix power and feature matrix.
