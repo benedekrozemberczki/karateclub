@@ -72,6 +72,8 @@ Attributed node embedding
 
 * Shuang Yang, Bo Yang: **Enhanced Network Embedding with Text Information** `Paper <https://ieeexplore.ieee.org/document/8545577>`_, `Code <https://github.com/benedekrozemberczki/TENE>`_
 
+* Lizi Liao, Xiangnan He, Hanwang Zhang, Tat-Seng Chua: **Attributed Social Network Embedding** `Paper <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_, `Code <https://github.com/benedekrozemberczki/TADW>`_
+
 * Cheng Yang, Zhiyuan Liu, Deli Zhao, Maosong Sun, Edward Y. Chang: **Network Representation Learning with Rich Text Information** `Paper <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_, `Code <https://github.com/benedekrozemberczki/TADW>`_
 
 * Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan, M N Murty: **Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks** `Paper <https://arxiv.org/pdf/1804.05313.pdf>`_, `Code <https://github.com/benedekrozemberczki/FSCNMF>`_
