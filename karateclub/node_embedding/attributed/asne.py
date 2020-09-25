@@ -38,7 +38,7 @@ class ASNE(Estimator):
         
     def fit(self, graph: nx.classes.graph.Graph, X: coo_matrix):
         """
-        Fitting a SINE model.
+        Fitting an ASNE model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
@@ -46,10 +46,6 @@ class ASNE(Estimator):
         """
         self._set_seed()
         self._check_graph(graph)
-        self._walker = RandomWalker(self.walk_length, self.walk_number)
-        self._walker.do_walks(graph)
-        self._features = self._feature_transform(graph, X)
-        self._select_walklets()
 
         model = Word2Vec(self._walklets,
                          hs=0,
