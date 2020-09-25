@@ -200,7 +200,7 @@ def test_sine():
 
 def test_asne():
     """
-    Testing the SINE node embedding.
+    Testing the ASNE node embedding.
     """
     graph = nx.newman_watts_strogatz_graph(100, 10, 0.2)
 
@@ -212,7 +212,7 @@ def test_asne():
 
     features = coo_matrix((data, (row, col)), shape=shape)
 
-    model = SINE()
+    model = ASNE()
     model.fit(graph, features)
     embedding = model.get_embedding()
 
