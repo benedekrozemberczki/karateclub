@@ -15,11 +15,8 @@ class ASNE(Estimator):
     are pooled together.
        
     Args:
-        walk_number (int): Number of random walks. Default is 10.
-        walk_length (int): Length of random walks. Default is 80.
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
-        window_size (int): Matrix power order. Default is 5.
         epochs (int): Number of epochs. Default is 1.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurrences. Default is 1.
