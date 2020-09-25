@@ -72,7 +72,7 @@ Attributed node embedding
 
 * Shuang Yang, Bo Yang: **Enhanced Network Embedding with Text Information** `Paper <https://ieeexplore.ieee.org/document/8545577>`_, `Code <https://github.com/benedekrozemberczki/TENE>`_
 
-* Lizi Liao, Xiangnan He, Hanwang Zhang, Tat-Seng Chua: **Attributed Social Network Embedding** `Paper <https://arxiv.org/abs/1705.04969>`_, `Code <https://github.com/benedekrozemberczki/TADW>`_
+* Lizi Liao, Xiangnan He, Hanwang Zhang, Tat-Seng Chua: **Attributed Social Network Embedding** `Paper <https://arxiv.org/abs/1705.04969>`_, `Code <https://github.com/benedekrozemberczki/ASNE>`_
 
 * Cheng Yang, Zhiyuan Liu, Deli Zhao, Maosong Sun, Edward Y. Chang: **Network Representation Learning with Rich Text Information** `Paper <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_, `Code <https://github.com/benedekrozemberczki/TADW>`_
 
