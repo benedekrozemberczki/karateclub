@@ -8,8 +8,8 @@ from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
 class ASNE(Estimator):
-    r"""An implementation of `"SINE" <https://arxiv.org/pdf/1810.06768.pdf>`_
-    from the ICDM '18 paper "SINE: Scalable Incomplete Network Embedding". The 
+    r"""An implementation of `"ASNE" <https://arxiv.org/pdf/1810.06768.pdf>`_
+    from the TKDE '18 paper "Attributed Social Network Embedding". The 
     procedure implicitly factorizes a joint adjacency matrix power and feature matrix.
     The decomposition happens on truncated random walks and the adjacency matrix powers
     are pooled together.
