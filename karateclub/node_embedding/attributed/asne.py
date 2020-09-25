@@ -1,18 +1,14 @@
 import random
 import numpy as np
 import networkx as nx
-from typing import Union
 from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
-from gensim.models.word2vec import Word2Vec
-from karateclub.utils.walker import RandomWalker
+from gensim.models.word2vec import Doc2Vec
 
 class ASNE(Estimator):
     r"""An implementation of `"ASNE" <https://arxiv.org/abs/1705.04969>`_
     from the TKDE '18 paper "Attributed Social Network Embedding". The 
-    procedure implicitly factorizes a joint adjacency matrix power and feature matrix.
-    The decomposition happens on truncated random walks and the adjacency matrix powers
-    are pooled together.
+    procedure implicitly factorizes a concatenated adjacency matrix and feature matrix.
        
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
@@ -39,20 +35,8 @@ class ASNE(Estimator):
         for i, node in enumerate(nodes):
             features[str(node)].append("feature_"+ str(X.col[i]))
         return features
-
-    def _select_walklets(self):
-        self._walklets = []
-        for walk in self._walker.walks:
-            for power in range(1, self.window_size+1): 
-                for step in range(power+1):
-                    neighbors = [n for i, n in enumerate(walk[step:]) if i % power == 0]
-                    neighbors = [n for n in neighbors for _ in range(0, 3)]
-                    neighbors = [random.choice(self._features[val]) if i % 3 == 1 and self._features[val] else val for i, val in enumerate(neighbors)]
-                    self._walklets.append(neighbors)
-        del self._walker
         
-        
-    def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
+    def fit(self, graph: nx.classes.graph.Graph, X: coo_matrix):
         """
         Fitting a SINE model.
 
