@@ -19,7 +19,8 @@ class ASNE(Estimator):
         min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions: int=128, workers: int=4, epochs: int=1, down_sampling: float=0.0001,
+    def __init__(self, dimensions: int=128, workers: int=4,
+                 epochs: int=1, down_sampling: float=0.0001,
                  learning_rate: float=0.05, min_count: int=1, seed: int=42):
 
         self.dimensions = dimensions
@@ -62,7 +63,7 @@ class ASNE(Estimator):
                         alpha=self.learning_rate,
                         seed=self.seed)
 
-        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+        self._embedding = np.array([model.docvecs[str(i)] for i, _ in enumerate(documents)])
 
 
 
@@ -72,5 +73,5 @@ class ASNE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = self.embedding
+        embedding = self._embedding
         return embedding
