@@ -30,10 +30,10 @@ class ASNE(Estimator):
 
 
     def _feature_transform(self, graph, X):
-        features = {str(node): [] for node in graph.nodes()}
+        features = {node: ["neb_" + str(neb) for neb in graph.neighbors(node)] for node in graph.nodes()}
         nodes = X.row
         for i, node in enumerate(nodes):
-            features[str(node)].append("feature_"+ str(X.col[i]))
+            features[node].append("feature_"+ str(X.col[i]))
         return features
         
     def fit(self, graph: nx.classes.graph.Graph, X: coo_matrix):
@@ -46,18 +46,23 @@ class ASNE(Estimator):
         """
         self._set_seed()
         self._check_graph(graph)
+        features = self._feature_transform(graph, X)
+        documents = [TaggedDocument(words=features[node], tags=[str(node)]) for node in range(len(features))]
 
-        model = Word2Vec(self._walklets,
-                         hs=0,
-                         alpha=self.learning_rate,
-                         iter=self.epochs,
-                         size=self.dimensions,
-                         window=1,
-                         min_count=self.min_count,
-                         workers=self.workers,
-                         seed=self.seed)
+        model = Doc2Vec(documents,
+                        vector_size=self.dimensions,
+                        window=0,
+                        min_count=self.min_count,
+                        dm=0,
+                        sample=self.down_sampling,
+                        workers=self.workers,
+                        epochs=self.epochs,
+                        alpha=self.learning_rate,
+                        seed=self.seed)
 
-        self.embedding = np.array([model[str(n)] for n in range(graph.number_of_nodes())])
+        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+
+
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
