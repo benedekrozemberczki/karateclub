@@ -8,7 +8,7 @@ from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 
 class ASNE(Estimator):
-    r"""An implementation of `"ASNE" <https://arxiv.org/pdf/1810.06768.pdf>`_
+    r"""An implementation of `"ASNE" <https://arxiv.org/abs/1705.04969>`_
     from the TKDE '18 paper "Attributed Social Network Embedding". The 
     procedure implicitly factorizes a joint adjacency matrix power and feature matrix.
     The decomposition happens on truncated random walks and the adjacency matrix powers
@@ -25,11 +25,8 @@ class ASNE(Estimator):
     def __init__(self, dimensions: int=128, workers: int=4, epochs: int=1,
                  learning_rate: float=0.05, min_count: int=1, seed: int=42):
 
-        self.walk_number = walk_number
-        self.walk_length = walk_length
         self.dimensions = dimensions
         self.workers = workers
-        self.window_size = window_size
         self.epochs = epochs
         self.learning_rate = learning_rate
         self.min_count = min_count
