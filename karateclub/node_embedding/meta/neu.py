@@ -8,6 +8,7 @@ class NEU(Estimator):
     from the IJCAI 17 paper "Fast Network Embedding Enhancement via High Order Proximity Approximation".
     The procedure uses an arbitrary embedding and augments it by higher order proximities wiht a recursive
     meta learning algorithm.
+
     Args:
         L1 (float): Weight of lower order proximities. Defauls is 0.5
         L2 (float): Weight of higer order proximities. Default is 0.25.
