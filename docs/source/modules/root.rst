@@ -135,6 +135,10 @@ Attributed node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.attributed.asne
+    :members:
+    :undoc-members:
+
 Meta node embedding
 --------------------
 
