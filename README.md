@@ -2,7 +2,6 @@
  ![Version](https://badge.fury.io/py/karateclub.svg?style=plastic)
  ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic)
  [![Arxiv](https://img.shields.io/badge/ArXiv-2003.04819-orange.svg?color=blue&style=plastic)](https://arxiv.org/abs/2003.04819)
- ![Astro](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fastronomer.ullaakut.eu%2Fshields%3Fowner%3Dbenedekrozemberczki%26name%3Dkarateclub)
  [![build badge](https://travis-ci.com/benedekrozemberczki/karateclub.svg?branch=master)](https://travis-ci.com/github/benedekrozemberczki/karateclub)
  [![coverage badge](https://codecov.io/gh/benedekrozemberczki/karateclub/branch/master/graph/badge.svg)](https://codecov.io/github/benedekrozemberczki/karateclub?branch=master)
 <p align="center">
