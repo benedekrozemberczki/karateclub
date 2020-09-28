@@ -1,7 +1,7 @@
 External resources
 ==================
 
-Overlapping community detection
+Overlapping Community Detection
 --------------------
 
 * Alessandro Epasto, Silvio Lattanzi, Renato Paes Leme: **Ego-splitting Framework: from Non-Overlapping to Overlapping Clusters** `Paper <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_, `Slides <https://epasto.org/papers/kdd2017-Slides.pdf>`_, `Video <https://www.youtube.com/watch?v=xMGZo-F_jss>`_, `Code <https://github.com/benedekrozemberczki/EgoSplitting>`_
@@ -16,7 +16,7 @@ Overlapping community detection
 
 * Da Kuang, Chris Ding, Haesun Park: **Symmetric Nonnegative Matrix Factorization for Graph Clustering** `Paper <https://www.cc.gatech.edu/~hpark/papers/DaDingParkSDM12.pdf>`_
 
-Non-overlapping community detection
+Non-Overlapping Community Detection
 --------------------
 
 *  Benedek Rozemberczki, Ryan Davies, Rik Sarkar, and Charles Sutton: **GEMSEC: Graph Embedding with Self Clustering** `Paper <https://arxiv.org/abs/1802.03997>`_, `Code <https://github.com/benedekrozemberczki/GEMSEC>`_
@@ -27,7 +27,7 @@ Non-overlapping community detection
 
 * Usha Nandini Raghavan, Reka Albert, Soundar Kumara: **Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks** `Paper <https://arxiv.org/abs/0709.2938>`_, `Code <https://github.com/benedekrozemberczki/LabelPropagation>`_
 
-Neighbourhood-based node embedding
+Neighbourhood-Based Node Embedding
 --------------------
 
 * Jundong Li, Liang Wu, and Huan Liu: **Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation** `Paper <https://arxiv.org/abs/1808.08627>`_
@@ -52,14 +52,14 @@ Neighbourhood-based node embedding
 
 * Mikhail Belkin and Partha Niyogi: **Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering** `Paper <http://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering.pdf>`_, `Video <https://www.youtube.com/watch?v=U31TIICsHiA>`_
 
-Structural node embedding
+Structural Node Embedding
 --------------------
 
 * Claire Donnat, Marinka Zitnik, David Hallac, Jure Leskovec: **Learning Structural Node Embeddings Via Diffusion Wavelets** `Paper <https://arxiv.org/abs/1710.10321>`_, `Video <https://www.youtube.com/watch?v=S4QZiUPJkRI>`_, `Code <https://github.com/benedekrozemberczki/GraphWaveMachine>`_
 
 * Nesreen K. Ahmed, Ryan Rossi, John Boaz Lee, Theodore L. Willke, Rong Zhou, Xiangnan Kong, Hoda Eldardiry: **Learning Role-based Graph Embeddings** `Paper <https://arxiv.org/abs/1802.02896>`_, `Code <https://github.com/benedekrozemberczki/Role2Vec>`_
 
-Attributed node embedding
+Attributed Node Embedding
 --------------------
 
 * Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_, `Code <https://github.com/benedekrozemberczki/FEATHER>`_
@@ -78,12 +78,12 @@ Attributed node embedding
 
 * Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan, M N Murty: **Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks** `Paper <https://arxiv.org/pdf/1804.05313.pdf>`_, `Code <https://github.com/benedekrozemberczki/FSCNMF>`_
 
-Meta node embedding
+Meta Node Embedding
 --------------------
 
 * Cheng Yang, Maosong Sun, Zhiyuan Liu, Cunchao Tu: **Fast Network Embedding Enhancement via High Order Proximity Approximation** `Paper <https://www.ijcai.org/Proceedings/2017/0544.pdf>`_
 
-Whole graph embedding
+Whole Graph Embedding
 --------------------
 
 * Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_, `Code <https://github.com/benedekrozemberczki/FEATHER>`_
@@ -101,4 +101,3 @@ Whole graph embedding
 * Saurabh Verma, Zhi-Li Zhang: **Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs** `Paper <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
 
 * Annamalai Narayanan, Mahinthan Chandramohan, Rajasekar Venkatesan, Lihui Chen, Yang Liu, Shantanu Jaiswal: **graph2vec: Learning Distributed Representations of Graphs** `Paper <https://arxiv.org/abs/1707.05005>`_, `Code <https://github.com/benedekrozemberczki/graph2vec>`_
-
