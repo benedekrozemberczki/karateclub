@@ -38,7 +38,7 @@ class Estimator(object):
         random.seed(self.seed)
         np.random.seed(self.seed)
 
-    def _check_connectivity(self, graph):
+    def _check_connectivity(self, graph: nx.classes.graph.Graph):
         """Checking the connected nature of a single graph."""
         connected = nx.is_connected(graph)
         assert connected, "Graph is not connected."
