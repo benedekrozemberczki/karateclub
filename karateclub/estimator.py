@@ -44,7 +44,7 @@ class Estimator(object):
         assert connected, "Graph is not connected."
 
 
-    def _check_directedness(self, graph):
+    def _check_directedness(self, graph: nx.classes.graph.Graph):
         """Checking the undirected nature of a single graph."""
         directed = nx.is_directed(graph)
         assert directed == False, "Graph is directed."
