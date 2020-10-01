@@ -50,7 +50,7 @@ class Estimator(object):
         assert directed == False, "Graph is directed."
 
 
-    def _check_indexing(self, graph):
+    def _check_indexing(self, graph: nx.classes.graph.Graph):
         """Checking the consecutive numeric indexing."""
         numeric_indices = [index for index in range(graph.number_of_nodes())]
         node_indices = sorted([node for node in graph.nodes()])
