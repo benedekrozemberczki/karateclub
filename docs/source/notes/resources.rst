@@ -117,6 +117,6 @@ Libraries
 
 **OpenNE** `GitHub <https://github.com/thunlp/OpenNE>`_
 
-**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+**OpenKE** `GitHub <https://github.com/thunlp/OpenKE>`_
 
 **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
