@@ -105,16 +105,4 @@ Whole Graph Embedding
 Similar Libraries
 -----------------
 
-* **NodeVectors** `GitHub <https://github.com/VHRanger/nodevectors>`_
-
-* **PyTorch BigGraph** `GitHub <https://github.com/facebookresearch/PyTorch-BigGraph>`_
-
-* **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
-
-* **KB2E** `GitHub <https://github.com/thunlp/KB2E>`_
-
-* **SciKit KGE** `GitHub <https://github.com/mnick/scikit-kge>`_
-
-* **OpenNE** `GitHub <https://github.com/thunlp/OpenNE>`_
-
-* **OpenKE** `GitHub <https://github.com/thunlp/OpenKE>`_
+* **NodeVectors** `GitHub <https://github.com/VHRanger/nodevectors>`_, **PyTorch BigGraph** `GitHub <https://github.com/facebookresearch/PyTorch-BigGraph>`_, **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_, **KB2E** `GitHub <https://github.com/thunlp/KB2E>`_, **SciKit KGE** `GitHub <https://github.com/mnick/scikit-kge>`_, **OpenNE** `GitHub <https://github.com/thunlp/OpenNE>`_, **OpenKE** `GitHub <https://github.com/thunlp/OpenKE>`_
