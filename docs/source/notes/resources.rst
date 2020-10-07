@@ -108,3 +108,5 @@ Libraries
 **NodeVectors** `GitHub <https://github.com/VHRanger/nodevectors>`_
 
 **PyTorch BigGraph** `GitHub <https://github.com/facebookresearch/PyTorch-BigGraph>`_
+
+**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
