@@ -105,8 +105,6 @@ Whole Graph Embedding
 Libraries
 -----------
 
-**NodeVectors** `GitHub <https://github.com/VHRanger/nodevectors>`_,
+**NodeVectors** `GitHub <https://github.com/VHRanger/nodevectors>`_
 
-**Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_,
-
-**Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_,
+**PyTorch BigGraph** `GitHub <https://github.com/facebookresearch/PyTorch-BigGraph>`_
