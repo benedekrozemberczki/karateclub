@@ -101,3 +101,12 @@ Whole Graph Embedding
 * Saurabh Verma, Zhi-Li Zhang: **Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs** `Paper <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
 
 * Annamalai Narayanan, Mahinthan Chandramohan, Rajasekar Venkatesan, Lihui Chen, Yang Liu, Shantanu Jaiswal: **graph2vec: Learning Distributed Representations of Graphs** `Paper <https://arxiv.org/abs/1707.05005>`_, `Code <https://github.com/benedekrozemberczki/graph2vec>`_
+
+Libraries
+-----------
+
+**Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_,
+
+**Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_,
+
+**Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_,
