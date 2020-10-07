@@ -115,7 +115,7 @@ Libraries
 
 **SciKit KGE** `GitHub <https://github.com/mnick/scikit-kge>`_
 
-**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+**OpenNE** `GitHub <https://github.com/thunlp/OpenNE>`_
 
 **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
 
