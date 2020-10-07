@@ -110,3 +110,13 @@ Libraries
 **PyTorch BigGraph** `GitHub <https://github.com/facebookresearch/PyTorch-BigGraph>`_
 
 **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+
+**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+
+**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+
+**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+
+**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+
+**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
