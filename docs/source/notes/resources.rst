@@ -111,7 +111,7 @@ Libraries
 
 **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
 
-**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+**KB2E** `GitHub <https://github.com/thunlp/KB2E>`_
 
 **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
 
