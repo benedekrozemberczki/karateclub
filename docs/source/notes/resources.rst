@@ -113,7 +113,7 @@ Libraries
 
 **KB2E** `GitHub <https://github.com/thunlp/KB2E>`_
 
-**Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
+**SciKit KGE** `GitHub <https://github.com/mnick/scikit-kge>`_
 
 **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
 
