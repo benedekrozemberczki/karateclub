@@ -101,20 +101,3 @@ Whole Graph Embedding
 * Saurabh Verma, Zhi-Li Zhang: **Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs** `Paper <https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs>`_
 
 * Annamalai Narayanan, Mahinthan Chandramohan, Rajasekar Venkatesan, Lihui Chen, Yang Liu, Shantanu Jaiswal: **graph2vec: Learning Distributed Representations of Graphs** `Paper <https://arxiv.org/abs/1707.05005>`_, `Code <https://github.com/benedekrozemberczki/graph2vec>`_
-
-Similar Libraries
------------------
-
-* **NodeVectors** `GitHub <https://github.com/VHRanger/nodevectors>`_
-
-* **PyTorch BigGraph** `GitHub <https://github.com/facebookresearch/PyTorch-BigGraph>`_
-
-* **Graph Embedding** `GitHub <https://github.com/shenweichen/GraphEmbedding>`_
-
-* **KB2E** `GitHub <https://github.com/thunlp/KB2E>`_
-
-* **SciKit KGE** `GitHub <https://github.com/mnick/scikit-kge>`_
-
-* **OpenNE** `GitHub <https://github.com/thunlp/OpenNE>`_
-
-* **OpenKE** `GitHub <https://github.com/thunlp/OpenKE>`_
