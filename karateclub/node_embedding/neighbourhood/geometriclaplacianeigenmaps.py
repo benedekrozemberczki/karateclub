@@ -20,7 +20,7 @@ class GLEE(Estimator):
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
-        Fitting a Laplacian EigenMaps model.
+        Fitting a Geometric Laplacian EigenMaps model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
