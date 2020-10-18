@@ -30,7 +30,7 @@ Non-Overlapping Community Detection
 Neighbourhood-Based Node Embedding
 --------------------
 
-* Jundong Li, Liang Wu, and Huan Liu: **GLEE: Geometric Laplacian Eigenmap Embedding** `Paper <https://arxiv.org/abs/1905.09763>`_
+* Leo Torres, Kevin S Chan, Tina Eliassi-Rad: **GLEE: Geometric Laplacian Eigenmap Embedding** `Paper <https://arxiv.org/abs/1905.09763>`_
 
 * Jundong Li, Liang Wu, and Huan Liu: **Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation** `Paper <https://arxiv.org/abs/1808.08627>`_
 
