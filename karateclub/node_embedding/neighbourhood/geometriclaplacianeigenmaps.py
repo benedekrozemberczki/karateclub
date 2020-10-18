@@ -3,7 +3,7 @@ import networkx as nx
 import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
-class LaplacianEigenmaps(Estimator):
+class GLEE(Estimator):
     r"""An implementation of `"Laplacian Eigenmaps" <https://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering>`_
     from the NIPS '01 paper "Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering".
     The procedure extracts the eigenvectors corresponding to the largest values 
