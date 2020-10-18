@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
 from karateclub import DeepWalk, Walklets, HOPE, NetMF, Diff2Vec, GraRep, Node2Vec
-from karateclub import NodeSketch, LaplacianEigenmaps, NMFADMM
+from karateclub import NodeSketch, LaplacianEigenmaps, NMFADMM, GLEE
 
 
 def test_deepwalk():
