@@ -29,7 +29,7 @@ class LaplacianEigenmaps(Estimator):
         self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
-        _, self.embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions,
+        _, self._embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions,
                                              which='SM',  return_eigenvectors=True)
 
     def get_embedding(self) -> np.array:
