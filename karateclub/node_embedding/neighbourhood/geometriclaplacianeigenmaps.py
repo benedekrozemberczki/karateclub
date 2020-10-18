@@ -29,9 +29,8 @@ class GLEE(Estimator):
         self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
-        eigenvalues, embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions,
+        _, self._embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions,
                                                   which='LM', return_eigenvectors=True)
-        self._embedding = embedding
 
 
     def get_embedding(self) -> np.array:
