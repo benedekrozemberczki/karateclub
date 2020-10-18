@@ -5,7 +5,7 @@ from karateclub.estimator import Estimator
 
 class GLEE(Estimator):
     r"""An implementation of `"Geometric Laplacian Eigenmaps" <https://arxiv.org/abs/1905.09763>`_
-    from the Journal  '20 paper "GLEE: Geometric Laplacian Eigenmap Embedding".
+    from the Journal of Complex Networks '20 paper "GLEE: Geometric Laplacian Eigenmap Embedding".
     The procedure extracts the eigenvectors corresponding to the largest eigenvalues 
     of the graph Laplacian. These vectors are used as the node embedding.
 
