@@ -4,8 +4,8 @@ import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
 class GLEE(Estimator):
-    r"""An implementation of `"Geometric Laplacian Eigenmaps" <https://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering>`_
-    from the Journal  '01 paper "GLEE: Geometric Laplacian Eigenmap Embedding".
+    r"""An implementation of `"Geometric Laplacian Eigenmaps" <https://arxiv.org/abs/1905.09763>`_
+    from the Journal  '20 paper "GLEE: Geometric Laplacian Eigenmap Embedding".
     The procedure extracts the eigenvectors corresponding to the largest eigenvalues 
     of the graph Laplacian. These vectors are used as the node embedding.
 
