@@ -278,7 +278,7 @@ def test_geometriclaplacianeigenmaps():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions
+    assert embedding.shape[1] == model.dimensions+1
     assert type(embedding) == np.ndarray
 
     model = GLEE(dimensions=16)
@@ -290,7 +290,7 @@ def test_geometriclaplacianeigenmaps():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions
+    assert embedding.shape[1] == model.dimensions+1
     assert type(embedding) == np.ndarray
 
 
