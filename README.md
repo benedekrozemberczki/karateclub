@@ -87,6 +87,8 @@ In detail, the following community detection and embedding methods were implemen
 
 **Neighbourhood-Based Node Level Embedding**
 
+* **[GLEE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nmfadmm.NMFADMM)** from Belkin and Niyogi: [Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering](https://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering) (NIPS 2001)
+
 * **[BoostNE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.boostne.BoostNE)** from Li *et al.*: [Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation](https://arxiv.org/abs/1808.08627) (ASONAM 2019)
 
 * **[NodeSketch](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nodesketch.NodeSketch)**  from Yang *et al.*: [NodeSketch: Highly-Efficient Graph Embeddings via Recursive Sketching](https://exascale.info/assets/pdf/yang2019nodesketch.pdf) (KDD 2019)
