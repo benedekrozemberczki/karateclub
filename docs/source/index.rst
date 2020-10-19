@@ -12,6 +12,7 @@ Karate Club Documentation
                    title = {{Karate Club: An API Oriented Open-source Python Framework for Unsupervised Learning on Graphs}},
                    author = {Benedek Rozemberczki and Oliver Kiss and Rik Sarkar},
                    year = {2020},
+                   pages = {3125–3132},
 	           booktitle = {Proceedings of the 29th ACM International Conference on Information and Knowledge Management (CIKM '20)},
 	           organization = {ACM},
     }
