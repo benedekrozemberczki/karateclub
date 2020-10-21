@@ -8,7 +8,7 @@ from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 from karateclub.utils.walker import RandomWalker
 
 class AE(Estimator):
-    r"""An implementation of `"MUSAE" <https://arxiv.org/abs/1909.13021>`_
+    r"""An implementation of `"AE" <https://arxiv.org/abs/1909.13021>`_
     from the Arxiv '19 paper "MUSAE: Multi-Scale Attributed Node Embedding". The
     procedure does attributed random walks to approximate the adjacency matrix power
     node feature matrix products. The matrix is decomposed implicitly by a Skip-Gram
