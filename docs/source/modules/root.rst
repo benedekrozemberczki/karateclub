@@ -115,6 +115,10 @@ Attributed node embedding
     :members:
     :undoc-members:
 
+.. automodule:: karateclub.node_embedding.attributed.ae
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.node_embedding.attributed.musae
     :members:
     :undoc-members:
