@@ -22,5 +22,7 @@ after_success:
   - codecov
 
 notifications:
-  email: false
-
+    recipients:
+      - benedek.rozemberczki@gmail.com
+    on_success: always
+    on_failure: always
