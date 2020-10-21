@@ -10,9 +10,9 @@ from karateclub.utils.walker import RandomWalker
 class AE(Estimator):
     r"""An implementation of `"AE" <https://arxiv.org/abs/1909.13021>`_
     from the Arxiv '19 paper "MUSAE: Multi-Scale Attributed Node Embedding". The
-    procedure does attributed random walks to approximate the adjacency matrix power
-    node feature matrix products. The matrix is decomposed implicitly by a Skip-Gram
-    style optimization problem.
+    procedure does attributed random walks to approximate the pooled adjacency 
+    matrix power node feature matrix product. The matrix is decomposed 
+    implicitly by a Skip-Gram style optimization problem.
        
     Args:
         walk_number (int): Number of random walks. Default is 5.
