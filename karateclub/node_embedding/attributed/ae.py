@@ -83,7 +83,6 @@ class AE(Estimator):
         return self._create_documents(features)
 
     def _learn_ae_embedding(self):
-
         features = self._setup_ae_features()
         self._embeddings.append(self._create_single_embedding(features))
 
