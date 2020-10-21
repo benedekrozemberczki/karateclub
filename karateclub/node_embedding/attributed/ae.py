@@ -73,21 +73,19 @@ class AE(Estimator):
     def _setup_musae_features(self, approximation):
         features = {str(node): [] for node in self.graph.nodes()}
         for walk in self._walker.walks:
-            for i in range(len(walk)-approximation):
-                source = walk[i]
-                target = walk[i+approximation]
-                features[str(source)].append(self.features[str(target)] + [str(target)])
-                features[str(target)].append(self.features[str(source)] + [str(source)])
+            for approximation in range(1, self.window_size+1):
+                for i in range(len(walk)-approximation):
+                    source = walk[i]
+                    target = walk[i+approximation]
+                    features[str(source)].append(self.features[str(target)] + [str(target)])
+                    features[str(target)].append(self.features[str(source)] + [str(source)])
 
         return self._create_documents(features)
 
-    def _learn_musae_embedding(self):
+    def _learn_ae_embedding(self):
 
-        for approximation in range(self.window_size):
-
-            features = self._setup_musae_features(approximation+1)
-            embedding = self._create_single_embedding(features)
-            self.embeddings.append(embedding)
+        features = self._setup_musae_features(approximation+1)
+        self.embedding = self._create_single_embedding(features)
 
     def _create_base_docs(self):
         features_out = [TaggedDocument(words=[str(feature) for feature in features], tags = [str(node)]) for node, features in self.features.items()]
