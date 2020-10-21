@@ -85,7 +85,7 @@ class AE(Estimator):
     def _learn_ae_embedding(self):
 
         features = self._setup_ae_features()
-        self._embedding = self._create_single_embedding(features)
+        self._embeddings.append(self._create_single_embedding(features))
 
     def _create_base_docs(self):
         features_out = [TaggedDocument(words=[str(fet) for fet in feats], tags = [str(n)]) for n, feats in self.features.items()]
@@ -106,7 +106,7 @@ class AE(Estimator):
         self._walker.do_walks(graph)
         self.features = self._feature_transform(graph, X)
         self._base_docs = self._create_base_docs()
-        self.embeddings = [self._create_single_embedding(self._base_docs)]
+        self._embeddings = [self._create_single_embedding(self._base_docs)]
         self._learn_ae_embedding()
 
     def get_embedding(self) -> np.array:
@@ -115,4 +115,4 @@ class AE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        return self._embedding
+        return np.concatenate(self._embeddings, axis=1)
