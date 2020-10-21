@@ -18,6 +18,6 @@ shape = (50, 150)
 
 X = coo_matrix((data, (row, col)), shape=shape)
 
-model = MUSAE()
+model = AE()
 
 model.fit(g, X)
