@@ -7,14 +7,12 @@ from karateclub.estimator import Estimator
 from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 from karateclub.utils.walker import RandomWalker
 
-class MUSAE(Estimator):
+class AE(Estimator):
     r"""An implementation of `"MUSAE" <https://arxiv.org/abs/1909.13021>`_
     from the Arxiv '19 paper "MUSAE: Multi-Scale Attributed Node Embedding". The
     procedure does attributed random walks to approximate the adjacency matrix power
-    node feature matrix products. The matrices are decomposed implicitly by a Skip-Gram
-    style optimizer. The individual embeddings are concatenated together to form a 
-    multi-scale attributed node embedding. This way the feature distributions at different scales
-    are separable.
+    node feature matrix products. The matrix is decomposed implicitly by a Skip-Gram
+    style optimization problem.
        
     Args:
         walk_number (int): Number of random walks. Default is 5.
