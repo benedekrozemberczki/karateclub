@@ -107,7 +107,7 @@ class AE(Estimator):
         self.features = self._feature_transform(graph, X)
         self._base_docs = self._create_base_docs()
         self.embeddings = [self._create_single_embedding(self._base_docs)]
-        self._learn_musae_embedding()
+        self._learn_ae_embedding()
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
