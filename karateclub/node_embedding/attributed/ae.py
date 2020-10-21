@@ -85,7 +85,7 @@ class AE(Estimator):
     def _learn_ae_embedding(self):
 
         features = self._setup_ae_features()
-        self.embedding = self._create_single_embedding(features)
+        self._embedding = self._create_single_embedding(features)
 
     def _create_base_docs(self):
         features_out = [TaggedDocument(words=[str(fet) for fet in feats], tags = [str(n)]) for n, feats in self.features.items()]
@@ -93,7 +93,7 @@ class AE(Estimator):
 
     def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
         """
-        Fitting a MUSAE model.
+        Fitting an AE model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
@@ -115,5 +115,4 @@ class AE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate(self.embeddings, axis=1)
-        return embedding
+        return self._embedding
