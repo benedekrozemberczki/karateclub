@@ -88,7 +88,7 @@ class AE(Estimator):
         self.embedding = self._create_single_embedding(features)
 
     def _create_base_docs(self):
-        features_out = [TaggedDocument(words=[str(feature) for feature in features], tags = [str(node)]) for node, features in self.features.items()]
+        features_out = [TaggedDocument(words=[str(fet) for fet in feats], tags = [str(n)]) for n, feats in self.features.items()]
         return features_out 
 
     def fit(self, graph: nx.classes.graph.Graph, X: Union[np.array, coo_matrix]):
