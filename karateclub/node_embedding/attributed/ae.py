@@ -70,7 +70,7 @@ class AE(Estimator):
         features_out = [TaggedDocument(words=[str(feat) for feat_elems in feature_set for feat in feat_elems], tags = [str(node)]) for node, feature_set in features.items()]
         return features_out
 
-    def _setup_musae_features(self):
+    def _setup_ae_features(self):
         features = {str(node): [] for node in self.graph.nodes()}
         for walk in self._walker.walks:
             for approximation in range(1, self.window_size+1):
