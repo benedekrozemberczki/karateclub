@@ -20,7 +20,7 @@ class ASNE(Estimator):
         seed (int): Random seed value. Default is 42.
     """
     def __init__(self, dimensions: int=128, workers: int=4,
-                 epochs: int=10, down_sampling: float=0.0001,
+                 epochs: int=100, down_sampling: float=0.0001,
                  learning_rate: float=0.05, min_count: int=1, seed: int=42):
 
         self.dimensions = dimensions
