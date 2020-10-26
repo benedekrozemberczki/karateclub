@@ -13,7 +13,7 @@ class ASNE(Estimator):
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
-        epochs (int): Number of epochs. Default is 1.
+        epochs (int): Number of epochs. Default is 100.
         down_sampling (float): Down sampling frequency. Default is 0.0001.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurrences. Default is 1.
