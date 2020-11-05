@@ -85,7 +85,7 @@ class NNSED(Estimator):
             * **A** *(Scipy COO matrix)* - The normalized adjacency matrix.
         """
         enum = (A.dot(self._W)).transpose()
-        denom = np.dot(np.dot(self._W.T, self._W), self._Z) + self._Z
+        denom = np.dot(np.dot(self._W.T, self._W), self._Z) + self._Z + self.noise
         self._Z = self._Z*(enum/denom)
 
     def get_embedding(self) -> np.array:
