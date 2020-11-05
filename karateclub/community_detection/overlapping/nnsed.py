@@ -17,7 +17,8 @@ class NNSED(Estimator):
         iterations (int): Number of training epochs. Default 10.
         seed (int): Random seed for weight initializations. Default 42.
     """
-    def __init__(self, dimensions: int=32, iterations: int=10, seed: int=42):
+    def __init__(self, dimensions: int=32, iterations: int=10,
+                 seed: int=42, noise: float=10**-6):
         self.dimensions = dimensions
         self.iterations = iterations
         self.seed = seed
