@@ -23,6 +23,7 @@ class NNSED(Estimator):
         self.dimensions = dimensions
         self.iterations = iterations
         self.seed = seed
+        self.noise = noise
 
     def _create_D_inverse(self, graph):
         """
