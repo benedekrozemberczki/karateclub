@@ -16,6 +16,7 @@ class NNSED(Estimator):
         layers (int): Embedding layer size. Default is 32.
         iterations (int): Number of training epochs. Default 10.
         seed (int): Random seed for weight initializations. Default 42.
+        noise (float): Random noise for normalization stability. Default is 10**-6.
     """
     def __init__(self, dimensions: int=32, iterations: int=10,
                  seed: int=42, noise: float=10**-6):
