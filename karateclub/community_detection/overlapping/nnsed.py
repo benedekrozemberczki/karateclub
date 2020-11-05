@@ -74,7 +74,7 @@ class NNSED(Estimator):
         enum = A.dot(self._Z.T)
         denom_1 = self._W.dot(self._Z).dot(self._Z.T)
         denom_2 = (A.dot(A.transpose())).dot(self._W)
-        denom = denom_1 + denom_2
+        denom = denom_1 + denom_2 + self.noise
         self._W = self._W*(enum/denom)
 
     def _update_Z(self, A):
