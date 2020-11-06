@@ -45,8 +45,8 @@ class MNMF(Estimator):
         modularity_mat_shape = (n_count, n_count)
         indices_1 = np.array([edge[0] for edge in self._graph.edges()] + [edge[1] for edge in self._graph.edges()])
         indices_2 = np.array([edge[1] for edge in self._graph.edges()] + [edge[0] for edge in self._graph.edges()])
-        scores = [1.0-(float(degs[e[0]]*degs[e[1]])/(2*e_count)) for e in self._graph.edges()]
-        scores = scores + [1.0-(float(degs[e[1]]*degs[e[0]])/(2*e_count)) for e in self._graph.edges()]
+        scores = [float(degs[e[0]]*degs[e[1]])/(2*e_count) for e in self._graph.edges()]
+        scores = scores + [float(degs[e[1]]*degs[e[0]])/(2*e_count) for e in self._graph.edges()]
         mod_matrix = coo_matrix((scores, (indices_1, indices_2)), shape=modularity_mat_shape)
         return mod_matrix
 
