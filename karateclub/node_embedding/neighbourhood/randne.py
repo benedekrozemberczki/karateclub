@@ -4,7 +4,7 @@ from scipy import sparse
 from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
-class NetMF(Estimator):
+class RandNE(Estimator):
     r"""An implementation of `"NetMF" <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
     from the WSDM '18 paper "Network Embedding as Matrix Factorization: Unifying
     DeepWalk, LINE, PTE, and Node2Vec". The procedure uses sparse truncated SVD to
