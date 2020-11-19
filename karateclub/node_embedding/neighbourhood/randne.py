@@ -4,24 +4,17 @@ from scipy import sparse
 from karateclub.estimator import Estimator
 
 class RandNE(Estimator):
-    r"""An implementation of `"RandNE" <https://zw-zhang.github.io/files/2018_ICDM_RandNE.pdf>`_ from the ICDM '18 paper "Network Embedding as Matrix Factorization: Unifying
-    DeepWalk, LINE, PTE, and Node2Vec". The procedure uses sparse truncated SVD to
-    learn embeddings for the pooled powers of the PMI matrix computed from powers
-    of the normalized adjacency matrix.
+    r"""An implementation of `"RandNE" <https://zw-zhang.github.io/files/2018_ICDM_RandNE.pdf>`_ from the ICDM '18 paper "Billion-scale Network Embedding with Iterative Random Projection". The procedure uses normalized adjacency matrix based
+    smoothing on an orthogonalized random normally generate base node embedding matrix.
 
     Args:
         dimensions (int): Number of embedding dimension. Default is 32.
-        iteration (int): Number of SVD iterations. Default is 10.
-        order (int): Number of PMI matrix powers. Default is 2.
-        negative_samples (in): Number of negative samples. Default is 1.
-        seed (int): SVD random seed. Default is 42.
+        alphas (list): Smoothing weights for adjacency matrix powers. Default is [0.5, 0.5].
+        seed (int): Random seed. Default is 42.
     """
-    def __init__(self, dimensions: int=128, alphas: list=[0.5,0.4,0.3,0.2,0.1], 
-                 seed: int=42):
+    def __init__(self, dimensions: int=128, alphas: list=[0.5, 0.5], seed: int=42):
         self.dimensions = dimensions
-        self.iterations = iteration
-        self.order = order
-        self.negative_samples = negative_samples
+        self.alphas = alphas
         self.seed = seed
 
     def _create_D_inverse(self, graph):
