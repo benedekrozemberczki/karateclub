@@ -4,8 +4,7 @@ from scipy import sparse
 from karateclub.estimator import Estimator
 
 class RandNE(Estimator):
-    r"""An implementation of `"NetMF" <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
-    from the WSDM '18 paper "Network Embedding as Matrix Factorization: Unifying
+    r"""An implementation of `"RandNE" <https://zw-zhang.github.io/files/2018_ICDM_RandNE.pdf>`_ from the ICDM '18 paper "Network Embedding as Matrix Factorization: Unifying
     DeepWalk, LINE, PTE, and Node2Vec". The procedure uses sparse truncated SVD to
     learn embeddings for the pooled powers of the PMI matrix computed from powers
     of the normalized adjacency matrix.
