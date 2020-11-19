@@ -8,7 +8,7 @@ class RandNE(Estimator):
     smoothing on an orthogonalized random normally generate base node embedding matrix.
 
     Args:
-        dimensions (int): Number of embedding dimension. Default is 32.
+        dimensions (int): Number of embedding dimension. Default is 128.
         alphas (list): Smoothing weights for adjacency matrix powers. Default is [0.5, 0.5].
         seed (int): Random seed. Default is 42.
     """
