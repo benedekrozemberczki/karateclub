@@ -1,7 +1,6 @@
 import numpy as np
 import networkx as nx
 from scipy import sparse
-from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
 class RandNE(Estimator):
@@ -18,8 +17,8 @@ class RandNE(Estimator):
         negative_samples (in): Number of negative samples. Default is 1.
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions: int=32, iteration: int=10, order: int=2,
-                 negative_samples: int=1, seed: int=42):
+    def __init__(self, dimensions: int=128, alphas: list=[0.5,0.4,0.3,0.2,0.1], 
+                 seed: int=42):
         self.dimensions = dimensions
         self.iterations = iteration
         self.order = order
