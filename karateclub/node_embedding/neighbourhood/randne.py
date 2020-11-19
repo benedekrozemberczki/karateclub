@@ -56,6 +56,11 @@ class RandNE(Estimator):
         base_embedding = np.random.normal(0, sd, (A_hat.shape[0], self.dimensions))
         base_embedding, _ = np.linalg.qr(base_embedding)
         embedding = np.zeros(base_embedding.shape)
+        alpha_sum = sum(self.alphas)
+        for alpha in self.alphas:
+            base_embedding = A_hat.dot(base_embedding)
+            embedding = embedding + alpha * base_embedding
+        embedding = embedding / alpha_sum
         return embedding
 
     def fit(self, graph: nx.classes.graph.Graph):
@@ -67,7 +72,7 @@ class RandNE(Estimator):
         """
         self._set_seed()
         self._check_graph(graph)
-        A_hat = self._create_target_matrix(graph)
+        A_hat = self._create_smoothing_matrix(graph)
         self._embedding = self._create_embedding(A_hat)
 
     def get_embedding(self) -> np.array:
