@@ -33,7 +33,7 @@ class RandNE(Estimator):
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
 
-    def _create_base_matrix(self, graph):
+    def _create_smoothing_matrix(self, graph):
         """
         Creating the normalized adjacency matrix.
 
@@ -46,39 +46,16 @@ class RandNE(Estimator):
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
         A_hat = D_inverse.dot(A)
-        return (A_hat, A_hat, A_hat, D_inverse)
+        return A_hat
 
-    def _create_target_matrix(self, graph):
+    def _create_embedding(self, A_hat):
         """
-        Creating a log transformed target matrix.
-
-        Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
-
-        Return types:
-            * **target_matrix** *(SciPy array)* - The shifted PMI matrix.
+        Using the random orthogonal smoothing.
         """
-        A_pool, A_tilde, A_hat, D_inverse = self._create_base_matrix(graph)
-        for _ in range(self.order-1):
-            A_tilde = sparse.coo_matrix(A_tilde.dot(A_hat))
-            A_pool = A_pool + A_tilde
-        A_pool = (graph.number_of_edges()*A_pool)/(self.order*self.negative_samples)
-        A_pool = sparse.coo_matrix(A_pool.dot(D_inverse))
-        A_pool.data[A_pool.data < 1.0] = 1.0
-        target_matrix = sparse.coo_matrix((np.log(A_pool.data), (A_pool.row, A_pool.col)),
-                                          shape=A_pool.shape,
-                                          dtype=np.float32)
-        return target_matrix
-
-    def _create_embedding(self, target_matrix):
-        """
-        Fitting a truncated SVD embedding of a PMI matrix.
-        """
-        svd = TruncatedSVD(n_components=self.dimensions,
-                           n_iter=self.iterations,
-                           random_state=self.seed)
-        svd.fit(target_matrix)
-        embedding = svd.transform(target_matrix)
+        sd = 1/self.dimensions
+        base_embedding = np.random.normal(0, sd, (A_hat.shape[0], self.dimensions))
+        base_embedding, _ = np.linalg.qr(base_embedding)
+        embedding = np.zeros(base_embedding.shape)
         return embedding
 
     def fit(self, graph: nx.classes.graph.Graph):
@@ -90,8 +67,8 @@ class RandNE(Estimator):
         """
         self._set_seed()
         self._check_graph(graph)
-        target_matrix = self._create_target_matrix(graph)
-        self._embedding = self._create_embedding(target_matrix)
+        A_hat = self._create_target_matrix(graph)
+        self._embedding = self._create_embedding(A_hat)
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
