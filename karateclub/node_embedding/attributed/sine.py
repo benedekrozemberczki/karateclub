@@ -77,7 +77,7 @@ class SINE(Estimator):
         model = Word2Vec(self._walklets,
                          hs=0,
                          alpha=self.learning_rate,
-                         iter=self.epochs,
+                         epochs=self.epochs,
                          size=self.dimensions,
                          window=1,
                          min_count=self.min_count,
