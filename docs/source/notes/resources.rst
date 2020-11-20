@@ -92,7 +92,7 @@ Whole Graph Embedding
 
 * Benedek Rozemberczki, Rik Sarkar: **Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models** `Paper <https://arxiv.org/abs/2005.07959>`_, `Code <https://github.com/benedekrozemberczki/FEATHER>`_
 
-* Chen Cai, Yusu Wang: **A Simple Yet Effective Baseline for Non-Attributed Graph Classification** `Paper <https://arxiv.org/abs/1811.03508>`_, `Code <https://github.com/benedekrozemberczki/FEATHER>`_
+* Chen Cai, Yusu Wang: **A Simple Yet Effective Baseline for Non-Attributed Graph Classification** `Paper <https://arxiv.org/abs/1811.03508>`_, `Code <https://github.com/Chen-Cai-OSU/LDP/>`_
 
 * Alexis Galland, Marc Lelarge: **Invariant Embedding for Graph Classification** `Paper <https://graphreason.github.io/papers/16.pdf>`_, `Code <https://github.com/agalland/invariant_embedding>`_
 
