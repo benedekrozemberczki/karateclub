@@ -55,7 +55,6 @@ class RandNE(Estimator):
         sd = 1/self.dimensions
         base_embedding = np.random.normal(0, sd, (A_hat.shape[0], self.dimensions))
         base_embedding, _ = np.linalg.qr(base_embedding)
-        print(base_embedding)
         embedding = np.zeros(base_embedding.shape)
         alpha_sum = sum(self.alphas)
         for alpha in self.alphas:

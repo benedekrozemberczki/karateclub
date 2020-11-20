@@ -61,7 +61,7 @@ class MUSAE(Estimator):
                         dm=0,
                         sample=self.down_sampling,
                         workers=self.workers,
-                        epochs=self.epochs,
+                        iter=self.epochs,
                         seed=self.seed)
 
         emb = np.array([model.docvecs[str(n)] for n in range(self.graph.number_of_nodes())])

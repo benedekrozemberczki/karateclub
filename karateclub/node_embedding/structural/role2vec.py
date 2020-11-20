@@ -108,7 +108,7 @@ class Role2Vec(Estimator):
                         dm=0,
                         workers=self.workers,
                         sample=self.down_sampling,
-                        epochs=self.epochs,
+                        iter=self.epochs,
                         alpha=self.learning_rate,
                         seed=self.seed)
 

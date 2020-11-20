@@ -62,7 +62,7 @@ class Graph2Vec(Estimator):
                         dm=0,
                         sample=self.down_sampling,
                         workers=self.workers,
-                        epochs=self.epochs,
+                        iter=self.epochs,
                         alpha=self.learning_rate,
                         seed=self.seed)
 
