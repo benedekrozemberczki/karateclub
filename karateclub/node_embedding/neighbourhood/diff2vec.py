@@ -51,7 +51,7 @@ class Diff2Vec(Estimator):
         model = Word2Vec(diffuser.diffusions,
                          hs=1,
                          alpha=self.learning_rate,
-                         iter=self.epochs,
+                         epochs=self.epochs,
                          size=self.dimensions,
                          window=self.window_size,
                          min_count=self.min_count,
