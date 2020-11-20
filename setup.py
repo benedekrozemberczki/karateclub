@@ -7,7 +7,7 @@ install_requires = ["numpy",
                     "scikit-learn",
                     "scipy",
                     "pygsp",
-                    "gensim",
+                    "gensim==3.8.3",
                     "pandas",
                     "six"]
 
