@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, IGE
+from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, IGE, LDP
 from karateclub.graph_embedding import NetLSD, GeoScattering, FeatherGraph
 
 
@@ -151,6 +151,34 @@ def test_gl2vec():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
+
+def test_ldp():
+    """
+    Test the SF embedding.
+    """
+    graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
+    model = LDP(bins=8)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == 5*model.bins
+    assert type(embedding) == np.ndarray
+
+    graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(1000)]
+
+    model = LDP(bins=128)
+
+    model.fit(graphs)
+    embedding = model.get_embedding()
+    
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == 5*model.bins
+    assert type(embedding) == np.ndarray
+
 
 
 def test_sf():
