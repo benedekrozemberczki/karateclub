@@ -155,7 +155,7 @@ def test_gl2vec():
 
 def test_ldp():
     """
-    Test the SF embedding.
+    Test the LDP embedding.
     """
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
