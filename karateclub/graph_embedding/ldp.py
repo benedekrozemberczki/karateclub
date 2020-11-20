@@ -26,7 +26,7 @@ class LDP(Estimator):
             * **embedding** *(Numpy array)* - The embedding of a single graph.
         """
         degrees = np.log(np.array([graph.degree[n] for n in range(graph.number_of_nodes())]))
-        embedding = np.hist(degrees, bins=self.bins)
+        embedding = np.hist(degrees, bins=self.bins, range=(0.0,10.0))
         return embedding
 
     def fit(self, graphs):
