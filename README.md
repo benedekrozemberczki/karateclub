@@ -149,6 +149,8 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[IGE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.ige.IGE)** from Galland *et al.*: [Invariant Embedding for Graph Classification](https://graphreason.github.io/papers/16.pdf) (ICML 2019 LRGSD Workshop)
 
+* **[LDP](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.ldp.LDP)** from Cai *et al.*: [A Simple Yet Effective Baseline for Non-Attributed Graph Classification](https://arxiv.org/abs/1811.03508) (ICLR 2019)
+
 * **[GeoScattering](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.geoscattering.GeoScattering)** from Gao *et al.*: [Geometric Scattering for Graph Data Analysis](http://proceedings.mlr.press/v97/gao19e.html) (ICML 2019)
 
 * **[GL2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.gl2vec.GL2Vec)** from Chen and Koga: [GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICONIP 2019)
