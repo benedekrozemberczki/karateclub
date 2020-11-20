@@ -11,10 +11,9 @@ class LDP(Estimator):
     If the graph has a lower number of eigenvalues than k the representation is padded with zeros.
 
     Args:
-        dimensions (int): Number of lowest eigenvalues. Default is 128.
-        seed (int): Random seed value. Default is 42.
+        bins (int): Number of histogram bins. Default is 32.
     """
-    def __init__(self, dimensions: int=128, seed: int=42):
+    def __init__(self, bins: int=32):
         self.dimensions = dimensions
         self.seed = seed
 
