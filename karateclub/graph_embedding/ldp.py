@@ -16,9 +16,9 @@ class LDP(Estimator):
     def __init__(self, bins: int=32):
         self.bins = bins
 
-    def _calculate_sf(self, graph):
+    def _calculate_ldp(self, graph):
         """
-        Calculating the features of a graph.
+        Calculating the local degree profile features of a graph.
 
         Arg types:
             * **graph** *(NetworkX graph)* - A graph to be embedded.
@@ -41,7 +41,7 @@ class LDP(Estimator):
 
     def fit(self, graphs):
         """
-        Fitting an SF model.
+        Fitting an LDP model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
