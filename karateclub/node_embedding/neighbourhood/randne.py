@@ -64,7 +64,7 @@ class RandNE(Estimator):
         return embedding
 
     def fit(self, graph: nx.classes.graph.Graph):
-        """
+    ma     """
         Fitting a NetMF model.
     
         Arg types:

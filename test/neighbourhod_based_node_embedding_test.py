@@ -9,7 +9,7 @@ def test_randne():
     """
     model = RandNE()
 
-    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+    graph = nx.watts_strogatz_graph(200, 10, 0.5)
 
     model.fit(graph)
 
@@ -21,7 +21,7 @@ def test_randne():
 
     model = RandNE(dimensions=32)
 
-    graph = nx.watts_strogatz_graph(150, 10, 0.5)
+    graph = nx.watts_strogatz_graph(100, 10, 0.5)
 
     model.fit(graph)
 
