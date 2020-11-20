@@ -14,8 +14,7 @@ class LDP(Estimator):
         bins (int): Number of histogram bins. Default is 32.
     """
     def __init__(self, bins: int=32):
-        self.dimensions = dimensions
-        self.seed = seed
+        self.bins = bins
 
     def _calculate_sf(self, graph):
         """
