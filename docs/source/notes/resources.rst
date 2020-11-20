@@ -38,7 +38,7 @@ Neighbourhood-Based Node Embedding
 
 * Jiezhong Qiu, Yuxiao Dong, Hao Ma, Jian Li, Kuansan Wang, and Jie Tang: **Network Embedding as Matrix Factorization: Unifying DeepWalk, LINE, PTE, and Node2Vec** `Paper <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
 
-* Ziwei Zhang, Peng Cui, Haoyang Li, Xiao Wang, Wenwu Zhu: **Billion-scale Network Embedding with Iterative Random Projection** `Paper <https://arxiv.org/abs/1805.02396>`_
+* Ziwei Zhang, Peng Cui, Haoyang Li, Xiao Wang, Wenwu Zhu: **Billion-scale Network Embedding with Iterative Random Projection** `Paper <https://arxiv.org/abs/1805.02396>`_, `Code <https://github.com/ZW-ZHANG/RandNE>`_
 
 * Benedek Rozemberczki and Rik Sarkar: **Fast Sequence Based Embedding with Diffusion Graphs** `Paper <https://arxiv.org/abs/2001.07463>`_, `Code <https://github.com/benedekrozemberczki/diff2vec>`_
 
