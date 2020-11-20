@@ -6,9 +6,8 @@ from karateclub.estimator import Estimator
 
 class LDP(Estimator):
     r"""An implementation of `"LDP" <A Simple Baseline Algorithm for Graph Classification>`_
-    from the NeurIPS Relational Representation Learning Workshop '18 paper "A Simple Baseline Algorithm for Graph Classification".
-    The procedure calculates the k lowest egeinvalues of the normalized Laplacian.
-    If the graph has a lower number of eigenvalues than k the representation is padded with zeros.
+    from the ICLR Representation Learning on Graphs and Manifolds Workshop '19 paper "A Simple Yet
+    Effective Baseline for Non-Attributed Graph Classification".
 
     Args:
         bins (int): Number of histogram bins. Default is 32.
