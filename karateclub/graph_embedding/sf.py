@@ -5,7 +5,7 @@ from scipy.sparse.linalg import eigsh
 from karateclub.estimator import Estimator
 
 class SF(Estimator):
-    r"""An implementation of `"SF" <A Simple Baseline Algorithm for Graph Classification>`_
+    r"""An implementation of `"SF" <https://arxiv.org/abs/1810.09155>`_
     from the NeurIPS Relational Representation Learning Workshop '18 paper "A Simple Baseline Algorithm for Graph Classification".
     The procedure calculates the k lowest egeinvalues of the normalized Laplacian.
     If the graph has a lower number of eigenvalues than k the representation is padded with zeros.
