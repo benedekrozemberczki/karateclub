@@ -1,7 +1,5 @@
 import numpy as np
 import networkx as nx
-from typing import List
-from scipy.sparse.linalg import eigsh
 from karateclub.estimator import Estimator
 
 class LDP(Estimator):
