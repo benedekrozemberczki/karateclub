@@ -6,3 +6,4 @@ from .netlsd import NetLSD
 from .geoscattering import GeoScattering
 from .feathergraph import FeatherGraph
 from .ige import IGE
+from .ldp import LDP
