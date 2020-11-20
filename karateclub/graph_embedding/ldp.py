@@ -26,7 +26,17 @@ class LDP(Estimator):
             * **embedding** *(Numpy array)* - The embedding of a single graph.
         """
         degrees = np.log(np.array([graph.degree[n] for n in range(graph.number_of_nodes())]))
-        embedding = np.hist(degrees, bins=self.bins, range=(0.0,10.0))
+        features = []
+        for n in range(graph.number_of_nodes()):
+            nebs = [neb for neb in graph.neighbors(n)]
+            degs = degrees[nebs]
+            features.append([np.min(degs),np.max(degs),np.std(degs),np.mean(degs)])
+        features = np.concatenate([degrees.reshape(-1,1),np.array(features)],axis=1)
+        embedding = []
+        for i in range(features.shape[1]):
+            x = features[:, i]
+            embedding.append(np.histogram(x, bins=self.bins, range=(0.0, 10.0))[0])
+        embedding = np.concatenate(embedding).reshape(-1)
         return embedding
 
     def fit(self, graphs):
@@ -36,9 +46,8 @@ class LDP(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        self._set_seed()
         self._check_graphs(graphs)
-        self._embedding = [self._calculate_sf(graph) for graph in graphs]
+        self._embedding = [self._calculate_ldp(graph) for graph in graphs]
 
 
     def get_embedding(self) -> np.array:
