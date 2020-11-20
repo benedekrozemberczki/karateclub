@@ -161,6 +161,10 @@ Meta node embedding
 Whole graph embedding
 --------------------
 
+.. automodule:: karateclub.graph_embedding.ldp
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.graph_embedding.feathergraph
     :members:
     :undoc-members:
