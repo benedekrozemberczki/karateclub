@@ -5,7 +5,7 @@ from scipy.sparse.linalg import eigsh
 from karateclub.estimator import Estimator
 
 class LDP(Estimator):
-    r"""An implementation of `"SF" <A Simple Baseline Algorithm for Graph Classification>`_
+    r"""An implementation of `"LDP" <A Simple Baseline Algorithm for Graph Classification>`_
     from the NeurIPS Relational Representation Learning Workshop '18 paper "A Simple Baseline Algorithm for Graph Classification".
     The procedure calculates the k lowest egeinvalues of the normalized Laplacian.
     If the graph has a lower number of eigenvalues than k the representation is padded with zeros.
@@ -26,17 +26,8 @@ class LDP(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of a single graph.
         """
-        number_of_nodes = graph.number_of_nodes()
-        L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
-        if number_of_nodes <= self.dimensions:
-            embedding = eigsh(L_tilde, k=number_of_nodes-1, which='LM',
-                              ncv=10*self.dimensions, return_eigenvectors=False)
-
-            shape_diff = self.dimensions - embedding.shape[0] - 1
-            embedding = np.pad(embedding, (1, shape_diff), 'constant', constant_values=0)
-        else:
-            embedding = eigsh(L_tilde, k=self.dimensions, which='LM',
-                              ncv=10*self.dimensions, return_eigenvectors=False)
+        degrees = np.log(np.array([graph.degree[n] for n in range(graph.number_of_nodes())]))
+        embedding = np.hist(degrees, bins=self.bins)
         return embedding
 
     def fit(self, graphs):
