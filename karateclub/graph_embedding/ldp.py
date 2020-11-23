@@ -32,8 +32,15 @@ class LDP(Estimator):
         for n in range(graph.number_of_nodes()):
             nebs = [neb for neb in graph.neighbors(n)]
             degs = degrees[nebs]
-            features.append([np.min(degs),np.max(degs),np.std(degs),np.mean(degs)])
-        features = np.concatenate([degrees.reshape(-1,1),np.array(features)],axis=1)
+
+            features.append([np.min(degs),
+                             np.max(degs),
+                             np.std(degs),
+                             np.mean(degs)])
+
+        features = np.concatenate([degrees.reshape(-1, 1), 
+                                   np.array(features)],
+                                   axis=1)
         embedding = []
         for i in range(features.shape[1]):
             x = features[:, i]
