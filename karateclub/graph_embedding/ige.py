@@ -1,3 +1,5 @@
+"""Invariant Graph Embedding model class."""
+
 from typing import List
 import numpy as np
 import networkx as nx
