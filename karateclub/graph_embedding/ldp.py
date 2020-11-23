@@ -7,8 +7,8 @@ from karateclub.estimator import Estimator
 class LDP(Estimator):
     r"""An implementation of `"LDP" <https://arxiv.org/abs/1811.03508>`_ from the
     ICLR Representation Learning on Graphs and Manifolds Workshop '19 paper "A
-    Simple Yet Effective Baseline for Non-Attributed Graph Classification". The 
-    procedure calculates histograms of degree profiles. These concatenated 
+    Simple Yet Effective Baseline for Non-Attributed Graph Classification". The
+    procedure calculates histograms of degree profiles. These concatenated
     histograms form the graph representations.
 
     Args:
