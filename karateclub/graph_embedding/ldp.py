@@ -38,9 +38,8 @@ class LDP(Estimator):
                              np.std(degs),
                              np.mean(degs)])
 
-        features = np.concatenate([degrees.reshape(-1, 1), 
-                                   np.array(features)],
-                                   axis=1)
+        features = np.concatenate([degrees.reshape(-1, 1),
+                                   np.array(features)], axis=1)
         embedding = []
         for i in range(features.shape[1]):
             x = features[:, i]
