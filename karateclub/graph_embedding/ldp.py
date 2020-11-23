@@ -44,7 +44,8 @@ class LDP(Estimator):
         embedding = []
         for i in range(features.shape[1]):
             x = features[:, i]
-            embedding.append(np.histogram(x, bins=self.bins, range=(0.0, 10.0))[0])
+            emb = np.histogram(x, bins=self.bins, range=(0.0, 10.0))[0]
+            embedding.append(emb)
         embedding = np.concatenate(embedding).reshape(-1)
         return embedding
 
