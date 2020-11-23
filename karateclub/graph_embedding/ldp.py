@@ -1,3 +1,5 @@
+"""Local Degree Profile based embedding."""
+
 import numpy as np
 import networkx as nx
 from karateclub.estimator import Estimator
