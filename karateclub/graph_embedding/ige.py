@@ -107,7 +107,7 @@ class IGE(Estimator):
             emb_eig = np.zeros(emb_dim)
             min_dim = min(graph.number_of_nodes()-1, emb_dim)
             eigenvalues = sps.linalg.eigsh(L, min_dim, which="SM",
-                                           ncv=5*min_dim, return_eigenvectors=False)
+                                           ncv=25*min_dim, return_eigenvectors=False)
             emb_eig[-min_dim:] = eigenvalues[:min_dim]
             features.append(emb_eig)
         return features
