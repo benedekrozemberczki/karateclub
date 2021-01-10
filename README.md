@@ -1,6 +1,6 @@
 
  ![Version](https://badge.fury.io/py/karateclub.svg?style=plastic)
- ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg?color=blue&style=plastic)
+ ![License](https://img.shields.io/github/license/benedekrozemberczki/karateclub.svg)
 [![repo size](https://img.shields.io/github/repo-size/benedekrozemberczki/karateclub.svg)](https://github.com/benedekrozemberczki/karateclub/archive/master.zip)
  [![Arxiv](https://img.shields.io/badge/ArXiv-2003.04819-orange.svg)](https://arxiv.org/abs/2003.04819)
 [![build badge](https://github.com/benedekrozemberczki/karateclub/workflows/CI/badge.svg)](https://github.com/benedekrozemberczki/karateclub/actions?query=workflow%3ACI)
