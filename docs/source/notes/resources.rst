@@ -30,6 +30,8 @@ Non-Overlapping Community Detection
 Neighbourhood-Based Node Embedding
 --------------------
 
+* Leo Torres, Kevin S Chan, Tina Eliassi-Rad: **Relational Learning via Latent Social Dimensions** `Paper <https://arxiv.org/abs/1905.09763>`_
+
 * Leo Torres, Kevin S Chan, Tina Eliassi-Rad: **GLEE: Geometric Laplacian Eigenmap Embedding** `Paper <https://arxiv.org/abs/1905.09763>`_, `Code <https://github.com/leotrs/glee>`_
 
 * Jundong Li, Liang Wu, and Huan Liu: **Multi-Level Network Embedding with Boosted Low-Rank Matrix Approximation** `Paper <https://arxiv.org/abs/1808.08627>`_
