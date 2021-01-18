@@ -9,5 +9,6 @@ from .boostne import BoostNE
 from .netmf import NetMF
 from .laplacianeigenmaps import LaplacianEigenmaps
 from .hope import HOPE
+from .sociodim import SocioDim
 from .nodesketch import NodeSketch
 from .geometriclaplacianeigenmaps import GLEE
