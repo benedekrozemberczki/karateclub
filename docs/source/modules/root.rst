@@ -52,7 +52,7 @@ Non-overlapping community detection
 
 Neighbourhood-based node embedding
 --------------------
-.. automodule:: karateclub.node_embedding.neighbourhood.socdim
+.. automodule:: karateclub.node_embedding.neighbourhood.sociodim
     :members:
     :undoc-members:
 
