@@ -20,7 +20,7 @@ class SocDim(Estimator):
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
-        Fitting a Geometric Laplacian EigenMaps model.
+        Fitting a Social Dimensions model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
