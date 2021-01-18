@@ -29,7 +29,7 @@ class SocioDim(Estimator):
         self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.modularity_matrix(graph, nodelist=range(number_of_nodes))
-        _, self._embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions+1,
+        _, self._embedding = sps.linalg.eigsh(L_tilde, k=self.dimensions,
                                               which='LM', return_eigenvectors=True)
 
 
