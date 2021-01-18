@@ -4,7 +4,7 @@ import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
 class SocDim(Estimator):
-    r"""An implementation of `"SocDim" <https://arxiv.org/abs/1905.09763>`_
+    r"""An implementation of `"SocDim" <https://dl.acm.org/doi/abs/10.1145/1557019.1557109>`_
     from the KDD '09 paper "Relational learning via latent social dimensions".
     The procedure extracts the eigenvectors corresponding to the largest eigenvalues 
     of the graph modularity matrix. These vectors are used as the node embedding.
