@@ -30,6 +30,35 @@ def test_randne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    
+def test_sociodim():
+    """
+    Testing the SocioDim class.
+    """
+    model = SocioDim()
+
+    graph = nx.watts_strogatz_graph(200, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
+    model = RandNE(dimensions=32)
+
+    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
 
 
 def test_deepwalk():
