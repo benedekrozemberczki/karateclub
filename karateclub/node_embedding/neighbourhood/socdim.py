@@ -4,10 +4,10 @@ import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
 class SocDim(Estimator):
-    r"""An implementation of `"Geometric Laplacian Eigenmaps" <https://arxiv.org/abs/1905.09763>`_
-    from the KDD '09 paper "GLEE: Geometric Laplacian Eigenmap Embedding".
+    r"""An implementation of `"SocDim" <https://arxiv.org/abs/1905.09763>`_
+    from the KDD '09 paper "Relational learning via latent social dimensions".
     The procedure extracts the eigenvectors corresponding to the largest eigenvalues 
-    of the graph Laplacian. These vectors are used as the node embedding.
+    of the graph modularity matrix. These vectors are used as the node embedding.
 
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
