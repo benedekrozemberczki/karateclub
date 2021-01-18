@@ -88,7 +88,7 @@ In detail, the following community detection and embedding methods were implemen
 
 **Neighbourhood-Based Node Level Embedding**
 
-* **[SocioDim](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.sociodim.SocioDim)** from Torres *et al.*: [GLEE: Geometric Laplacian Eigenmap Embedding](https://arxiv.org/abs/1905.09763) (Journal of Complex Networks 2020)
+* **[SocioDim](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.sociodim.SocioDim)** from Torres *et al.*: [GLEE: Geometric Laplacian Eigenmap Embedding](ttp://www.public.asu.edu/~huanliu/papers/kdd09.pdf) (KDD 2009)
 
 * **[GLEE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.geometriclaplacianeigenmaps.GLEE)** from Torres *et al.*: [GLEE: Geometric Laplacian Eigenmap Embedding](https://arxiv.org/abs/1905.09763) (Journal of Complex Networks 2020)
 
