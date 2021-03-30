@@ -10,7 +10,7 @@ class Estimator(object):
 
     def __init__(self):
         """Creatinng an estimator."""
-        pass
+        self.allow_disjoint = False
 
 
     def fit(self):
@@ -41,7 +41,7 @@ class Estimator(object):
     def _check_connectivity(self, graph: nx.classes.graph.Graph):
         """Checking the connected nature of a single graph."""
         connected = nx.is_connected(graph)
-        assert connected, "Graph is not connected."
+        assert connected or self.allow_disjoint, "Graph is not connected."
 
 
     def _check_directedness(self, graph: nx.classes.graph.Graph):
