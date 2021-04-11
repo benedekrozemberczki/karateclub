@@ -9,7 +9,7 @@
   <img width="90%" src="https://github.com/benedekrozemberczki/karateclub/blob/master/karatelogo.jpg?sanitize=true" />
 </p>
 
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 
 **Karate Club** is an unsupervised machine learning extension library for [NetworkX](https://networkx.github.io/).
@@ -21,7 +21,7 @@ Please look at the **[Documentation](https://karateclub.readthedocs.io/)**, rele
 
 The newly introduced graph classification datasets are available at [SNAP](https://snap.stanford.edu/data/#disjointgraphs), [TUD Graph Kernel Datasets](https://ls11-www.cs.tu-dortmund.de/staff/morris/graphkerneldatasets), and [GraphLearning.io](https://chrsmrrs.github.io/datasets/).
 
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 **Citing**
 
