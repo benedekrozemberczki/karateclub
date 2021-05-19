@@ -64,14 +64,14 @@ class Walklets(Estimator):
             model = Word2Vec(walklets,
                              hs=0,
                              alpha=self.learning_rate,
-                             iter=self.epochs,
-                             size=self.dimensions,
+                             epochs=self.epochs,
+                             vector_size=self.dimensions,
                              window=1,
                              min_count=self.min_count,
                              workers=self.workers,
                              seed=self.seed)
 
-            embedding = np.array([model[str(n)] for n in range(num_of_nodes)])
+            embedding = np.array([model.wv[str(n)] for n in range(num_of_nodes)])
             self._embedding.append(embedding)
 
 
