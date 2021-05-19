@@ -51,15 +51,15 @@ class DeepWalk(Estimator):
         model = Word2Vec(walker.walks,
                          hs=1,
                          alpha=self.learning_rate,
-                         iter=self.epochs,
-                         size=self.dimensions,
+                         epochs=self.epochs,
+                         vector_size=self.dimensions,
                          window=self.window_size,
                          min_count=self.min_count,
                          workers=self.workers,
                          seed=self.seed)
 
         num_of_nodes = graph.number_of_nodes()
-        self._embedding = [model[str(n)] for n in range(num_of_nodes)]
+        self._embedding = [model.wv[str(n)] for n in range(num_of_nodes)]
 
 
     def get_embedding(self) -> np.array:
