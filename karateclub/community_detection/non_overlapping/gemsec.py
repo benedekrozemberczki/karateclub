@@ -179,7 +179,7 @@ class GEMSEC(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graphs = self._check_graph(graph)
         self._setup_sampling_weights(graph)
         self._walker = RandomWalker(self.walk_length, self.walk_number)
         self._walker.do_walks(graph)

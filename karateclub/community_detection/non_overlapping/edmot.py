@@ -67,7 +67,7 @@ class EdMot(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graphs = self._check_graph(graph)
         self._graph = graph
         self._calculate_motifs()
         self._extract_components()

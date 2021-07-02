@@ -54,7 +54,7 @@ class LabelPropagation(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graphs = self._check_graph(graph)
         self._graph = graph
         self._nodes = [node for node in self._graph.nodes()]
         self._labels = {node: i for i, node in enumerate(self._graph.nodes())}
