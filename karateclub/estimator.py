@@ -10,7 +10,7 @@ class Estimator(object):
 
     def __init__(self):
         """Creatinng an estimator."""
-        self.allow_disjoint = False
+        pass
 
 
     def fit(self):
@@ -38,17 +38,11 @@ class Estimator(object):
         random.seed(self.seed)
         np.random.seed(self.seed)
 
-    def _check_connectivity(self, graph: nx.classes.graph.Graph):
-        """Checking the connected nature of a single graph."""
-        connected = nx.is_connected(graph)
-        assert connected or self.allow_disjoint, "Graph is not connected."
-
-
-    def _check_directedness(self, graph: nx.classes.graph.Graph):
-        """Checking the undirected nature of a single graph."""
-        directed = nx.is_directed(graph)
-        assert directed == False, "Graph is directed."
-
+    def _ensure_integrity(self, graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
+        """Ensure walk traversal conditions."""
+        edge_list = [(index, index) for index in range(graph.number_of_nodes())]
+        graph = graph.add_edges_from(edge_list)
+        return graph
 
     def _check_indexing(self, graph: nx.classes.graph.Graph):
         """Checking the consecutive numeric indexing."""
@@ -57,15 +51,15 @@ class Estimator(object):
         assert numeric_indices == node_indices, "The node indexing is wrong."
 
 
-    def _check_graph(self, graph: nx.classes.graph.Graph):
+    def _check_graph(self, graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
         """Check the Karate Club assumptions about the graph."""
-        self._check_connectivity(graph)
-        self._check_directedness(graph)
         self._check_indexing(graph)
+        self._ensure_integrity(graph)
+        return graph
 
 
     def _check_graphs(self, graphs: List[nx.classes.graph.Graph]):
         """Check the Karate Club assumptions for a list of graphs."""
-        for graph in graphs:
-            self._check_graph(graph)
+        graphs = [self._check_graph(graph) for graph in graphs]
+        return graphs
 
