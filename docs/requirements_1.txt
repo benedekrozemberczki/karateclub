@@ -9,3 +9,4 @@ pygsp
 gensim
 pandas
 six
+json
