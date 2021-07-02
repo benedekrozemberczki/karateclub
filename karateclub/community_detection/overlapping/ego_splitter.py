@@ -97,7 +97,7 @@ class EgoNetSplitter(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self.graph = graph
         self._create_egonets()
         self._map_personalities()

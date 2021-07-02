@@ -146,7 +146,7 @@ class MNMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._graph = graph
         self._setup_matrices()
         for _ in range(self.iterations):

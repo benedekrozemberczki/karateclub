@@ -106,7 +106,7 @@ class SymmNMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be clustered.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         graph.remove_edges_from(nx.selfloop_edges(graph))
         A_hat = self._create_base_matrix(graph)
         self._setup_embeddings(A_hat)
