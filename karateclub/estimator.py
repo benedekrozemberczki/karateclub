@@ -54,7 +54,7 @@ class Estimator(object):
     def _check_graph(self, graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
         """Check the Karate Club assumptions about the graph."""
         self._check_indexing(graph)
-        self._ensure_integrity(graph)
+        graph = self._ensure_integrity(graph)
         return graph
 
 
