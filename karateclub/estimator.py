@@ -41,7 +41,7 @@ class Estimator(object):
     def _ensure_integrity(self, graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
         """Ensure walk traversal conditions."""
         edge_list = [(index, index) for index in range(graph.number_of_nodes())]
-        graph = graph.add_edges_from(edge_list)
+        graph.add_edges_from(edge_list)
         return graph
 
     def _check_indexing(self, graph: nx.classes.graph.Graph):
