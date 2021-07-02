@@ -122,8 +122,7 @@ class GraphWave(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
-        graph.remove_edges_from(nx.selfloop_edges(graph))
+        graph = self._check_graph(graph)
         self._create_evaluation_points()
         self._check_size(graph)
         self._G = pygsp.graphs.Graph(nx.adjacency_matrix(graph))
