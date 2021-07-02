@@ -6,6 +6,6 @@ python-louvain
 sklearn
 scipy
 pygsp
-gensim
+gensim==4.0.0
 pandas
 six
