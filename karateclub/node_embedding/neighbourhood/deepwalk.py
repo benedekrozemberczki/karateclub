@@ -44,7 +44,7 @@ class DeepWalk(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
 

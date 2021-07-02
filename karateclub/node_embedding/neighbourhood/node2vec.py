@@ -48,7 +48,7 @@ class Node2Vec(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         walker = BiasedRandomWalker(self.walk_length, self.walk_number, self.p, self.q)
         walker.do_walks(graph)
 

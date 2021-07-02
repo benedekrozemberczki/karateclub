@@ -191,7 +191,7 @@ class BoostNE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._residuals = self._create_target_matrix(graph)
         self._setup_base_model()
         for _ in range(self.iterations):

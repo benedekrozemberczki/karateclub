@@ -44,7 +44,7 @@ class Diff2Vec(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         diffuser = EulerianDiffuser(self.diffusion_number, self.diffusion_cover)
         diffuser.do_diffusions(graph)
 

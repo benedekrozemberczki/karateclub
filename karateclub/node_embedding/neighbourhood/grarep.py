@@ -89,7 +89,7 @@ class GraRep(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._A_tilde, self._A_hat = self._create_base_matrix(graph)
         self._embeddings = []
         target_matrix = self._create_target_matrix()

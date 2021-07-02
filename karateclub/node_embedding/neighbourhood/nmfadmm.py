@@ -139,7 +139,7 @@ class NMFADMM(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._V = self._create_base_matrix(graph)
         self._init_weights()
         for _ in range(self.iterations):

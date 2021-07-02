@@ -72,7 +72,7 @@ class RandNE(Estimator):
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         A_hat = self._create_smoothing_matrix(graph)
         self._embedding = self._create_embedding(A_hat)
 
