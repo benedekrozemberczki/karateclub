@@ -115,7 +115,7 @@ class TADW(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._A = self._create_target_matrix(graph)
         self._T = self._create_reduced_features(X)
         self._init_weights()

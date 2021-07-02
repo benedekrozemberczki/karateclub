@@ -108,7 +108,7 @@ class FeatherNode(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         X = self._create_reduced_features(X)
         A_tilde = self._create_A_tilde(graph)
         theta = np.linspace(0.01, self.theta_max, self.eval_points)

@@ -60,7 +60,7 @@ class NEU(Estimator):
             * **model** *(KC embedding model)* - Karate Club embedding.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self.model = model
         self.model.fit(graph)
         original_embedding = self.model.get_embedding()

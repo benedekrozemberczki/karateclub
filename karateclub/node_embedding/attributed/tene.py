@@ -120,7 +120,7 @@ class TENE(Estimator):
             * **T** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._X = self._create_base_matrix(graph)
         self._T = T
         self._init_weights()

@@ -104,7 +104,7 @@ class MUSAE(Estimator):
             * **X** *(Scipy COO array)* - The binary matrix of node features.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self.graph = graph
         self._walker = RandomWalker(self.walk_length, self.walk_number)
         self._walker.do_walks(graph)

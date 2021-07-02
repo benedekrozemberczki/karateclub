@@ -59,7 +59,7 @@ class BANE(Estimator):
             * **X** *(Scipy COO or Numpy array)* - The matrix of node features.
         """
         self._set_seed()
-        self._check_graph(graph)
+        graph = self._check_graph(graph)
         self._P = self._create_target_matrix(graph)
         self._X = X
         self._fit_base_SVD_model()
