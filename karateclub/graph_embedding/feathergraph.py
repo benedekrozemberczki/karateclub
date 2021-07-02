@@ -119,7 +119,7 @@ class FeatherGraph(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         self._set_seed()
-        self._check_graphs(graphs)
+        graphs = self._check_graphs(graphs)
         self._embedding = [self._calculate_feather(graph) for graph in graphs]
 
 

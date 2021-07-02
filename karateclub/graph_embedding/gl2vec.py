@@ -64,7 +64,7 @@ class GL2Vec(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         self._set_seed()
-        self._check_graphs(graphs)
+        graphs = self._check_graphs(graphs)
         graphs = [self._create_line_graph(graph) for graph in graphs]
         documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, False, self.erase_base_features) for graph in graphs]
         documents = [TaggedDocument(words=doc.get_graph_features(), tags=[str(i)]) for i, doc in enumerate(documents)]

@@ -160,7 +160,7 @@ class IGE(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         self._set_seed()
-        self._check_graphs(graphs)
+        graphs = self._check_graphs(graphs)
         self.max_deg = max([max([graph.degree[n] for n in graph.nodes()]) for graph in graphs])
         self._embedding = [self._calculate_invariant_embedding(graph) for graph in graphs]
         self._embedding = np.concatenate(self._embedding)
