@@ -9,7 +9,7 @@
   <img width="90%" src="https://github.com/benedekrozemberczki/karateclub/blob/master/karatelogo.jpg?sanitize=true" />
 </p>
 
-------------------------------------------------------------------------------
+----------------------------------------------------------
 
 
 **Karate Club** is an unsupervised machine learning extension library for [NetworkX](https://networkx.github.io/).
