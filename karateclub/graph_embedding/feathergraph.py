@@ -110,9 +110,6 @@ class FeatherGraph(Estimator):
         Return types:
             * **X** *(NumPy array)* - The node features.
         """
-        self.n_nodes = graph.number_of_nodes()
-        self.degree_fn = _get_degree_fn(graph)
-
         log_degree = np.array([math.log(self.degree_fn(node) + 1)
                                for node in range(self.n_nodes)])
         log_degree = log_degree.reshape(-1, 1)
@@ -134,6 +131,9 @@ class FeatherGraph(Estimator):
         Return types:
             * **features** *(Numpy vector)* - The embedding of a single graph.
         """
+        self.n_nodes = graph.number_of_nodes()
+        self.degree_fn = _get_degree_fn(graph)
+
         A_tilde = self._get_normalized_adjacency(graph)
         X = self._create_node_feature_matrix(graph)
         theta = np.linspace(0.01, self.theta_max, self.eval_points)
