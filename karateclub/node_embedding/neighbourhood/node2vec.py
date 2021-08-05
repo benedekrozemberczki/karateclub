@@ -80,18 +80,3 @@ class Node2Vec(Estimator):
         """
         return np.array(self._embedding)
 
-
-if __name__ == '__main__':
-    G = nx.DiGraph()
-    nodes = [*range(2)]
-    adj_matrix = np.array([[0.8, 0.2],
-                           [0.1, 0.9]])
-    G.add_weighted_edges_from(
-            [(i, j, adj_matrix[i, j])
-             for i in nodes
-             for j in nodes]
-        )
-    model = Node2Vec()
-
-    model.fit(G)
-
