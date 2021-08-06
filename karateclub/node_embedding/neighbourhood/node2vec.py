@@ -1,8 +1,12 @@
-import numpy as np
+from typing import List
+
 import networkx as nx
+import numpy as np
 from gensim.models.word2vec import Word2Vec
-from karateclub.utils.walker import BiasedRandomWalker
+
 from karateclub.estimator import Estimator
+from karateclub.utils.walker import BiasedRandomWalker
+
 
 class Node2Vec(Estimator):
     r"""An implementation of `"Node2Vec" <https://cs.stanford.edu/~jure/pubs/node2vec-kdd16.pdf>`_
@@ -24,10 +28,13 @@ class Node2Vec(Estimator):
         min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, walk_number: int=10, walk_length: int=80, p: float=1.0, q: float=1.0,
-                 dimensions: int=128, workers: int=4, window_size: int=5, epochs: int=1,
-                 learning_rate: float=0.05, min_count: int=1, seed: int=42):
+    _embedding: List[np.ndarray]
 
+    def __init__(self, walk_number: int = 10, walk_length: int = 80, p: float = 1.0, q: float = 1.0,
+                 dimensions: int = 128, workers: int = 4, window_size: int = 5, epochs: int = 1,
+                 learning_rate: float = 0.05, min_count: int = 1, seed: int = 42):
+        super(Node2Vec, self).__init__()
+        
         self.walk_number = walk_number
         self.walk_length = walk_length
         self.p = p
@@ -62,9 +69,8 @@ class Node2Vec(Estimator):
                          workers=self.workers,
                          seed=self.seed)
 
-        num_of_nodes = graph.number_of_nodes()
-        self._embedding = [model.wv[str(n)] for n in range(num_of_nodes)]
-
+        n_nodes = graph.number_of_nodes()
+        self._embedding = [model.wv[str(n)] for n in range(n_nodes)]
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
@@ -73,3 +79,4 @@ class Node2Vec(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return np.array(self._embedding)
+
