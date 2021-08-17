@@ -6,10 +6,11 @@ import networkx as nx
 import scipy.sparse as sps
 from karateclub.estimator import Estimator
 
+
 class IGE(Estimator):
     r"""An implementation of `"Invariant Graph Embedding" <https://graphreason.github.io/papers/16.pdf>`_
-    from the ICML 2019 Workshop on Learning and Reasoning with Graph-Structured 
-    Data paper "Invariant Embedding for Graph Classification". The procedure 
+    from the ICML 2019 Workshop on Learning and Reasoning with Graph-Structured
+    Data paper "Invariant Embedding for Graph Classification". The procedure
     computes a mixture of spectral and node embedding based features. Specifically,
     it uses scattering, eigenvalues and pooled node feature embeddings to create
     graph descriptors.
@@ -20,15 +21,18 @@ class IGE(Estimator):
         histogram_bins (list): Number of histogram bins. Default is [10, 20].
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, feature_embedding_dimensions: List[int]=[3, 5],
-                 spectral_embedding_dimensions: List[int]=[10, 20],
-                 histogram_bins: List[int]=[10, 20],
-                 seed: int=42):
+
+    def __init__(
+        self,
+        feature_embedding_dimensions: List[int] = [3, 5],
+        spectral_embedding_dimensions: List[int] = [10, 20],
+        histogram_bins: List[int] = [10, 20],
+        seed: int = 42,
+    ):
         self.feature_embedding_dimensions = feature_embedding_dimensions
         self.spectral_embedding_dimensions = spectral_embedding_dimensions
         self.histogram_bins = histogram_bins
         self.seed = seed
-
 
     def _create_D_inverse(self, graph):
         """
@@ -41,11 +45,12 @@ class IGE(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sps.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
-
 
     def _get_normalized_adjacency(self, graph):
         """
@@ -86,7 +91,9 @@ class IGE(Estimator):
             Q = self._get_normalized_adjacency(graph)
             for i in range(emb_dim):
                 P = P.dot(Q)
-                embed_space[i * feature_dim:(i + 1) * feature_dim, :] = P.dot(sub_features).T
+                embed_space[i * feature_dim : (i + 1) * feature_dim, :] = P.dot(
+                    sub_features
+                ).T
 
             features.append(np.mean(embed_space, axis=1).T)
         return features
@@ -105,9 +112,10 @@ class IGE(Estimator):
         L = nx.laplacian_matrix(graph).asfptype()
         for emb_dim in self.spectral_embedding_dimensions:
             emb_eig = np.zeros(emb_dim)
-            min_dim = min(graph.number_of_nodes()-1, emb_dim)
-            eigenvalues = sps.linalg.eigsh(L, min_dim, which="SM",
-                                           ncv=25*min_dim, return_eigenvectors=False)
+            min_dim = min(graph.number_of_nodes() - 1, emb_dim)
+            eigenvalues = sps.linalg.eigsh(
+                L, min_dim, which="SM", ncv=25 * min_dim, return_eigenvectors=False
+            )
             emb_eig[-min_dim:] = eigenvalues[:min_dim]
             features.append(emb_eig)
         return features
@@ -126,8 +134,9 @@ class IGE(Estimator):
         L = nx.laplacian_matrix(graph).asfptype()
         eigenvalues, eigenvectors = sps.linalg.eigsh(L)
 
-        eigenvectors_norm = np.dot(np.diag(np.sqrt(1 / eigenvalues[1:])),
-                                   eigenvectors.T[1:, :])
+        eigenvectors_norm = np.dot(
+            np.diag(np.sqrt(1 / eigenvalues[1:])), eigenvectors.T[1:, :]
+        )
         sim = np.dot(eigenvectors_norm.T, eigenvectors_norm)
         sim = np.reshape(sim, (1, -1))
         for bins in self.histogram_bins:
@@ -161,8 +170,12 @@ class IGE(Estimator):
         """
         self._set_seed()
         graphs = self._check_graphs(graphs)
-        self.max_deg = max([max([graph.degree[n] for n in graph.nodes()]) for graph in graphs])
-        self._embedding = [self._calculate_invariant_embedding(graph) for graph in graphs]
+        self.max_deg = max(
+            [max([graph.degree[n] for n in graph.nodes()]) for graph in graphs]
+        )
+        self._embedding = [
+            self._calculate_invariant_embedding(graph) for graph in graphs
+        ]
         self._embedding = np.concatenate(self._embedding)
 
     def get_embedding(self) -> np.array:

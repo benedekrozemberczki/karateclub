@@ -5,6 +5,7 @@ from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
+
 class Graph2Vec(Estimator):
     r"""An implementation of `"Graph2Vec" <https://arxiv.org/abs/1707.05005>`_
     from the MLGWorkshop '17 paper "Graph2Vec: Learning Distributed Representations of Graphs".
@@ -28,9 +29,20 @@ class Graph2Vec(Estimator):
         seed (int): Random seed for the model. Default is 42.
         erase_base_features (bool): Erasing the base features. Default is False.
     """
-    def __init__(self, wl_iterations: int=2, attributed: bool=False, dimensions: int=128,
-                 workers: int=4, down_sampling: float=0.0001, epochs: int=10, 
-                 learning_rate: float=0.025, min_count: int=5, seed: int=42, erase_base_features: bool=False):
+
+    def __init__(
+        self,
+        wl_iterations: int = 2,
+        attributed: bool = False,
+        dimensions: int = 128,
+        workers: int = 4,
+        down_sampling: float = 0.0001,
+        epochs: int = 10,
+        learning_rate: float = 0.025,
+        min_count: int = 5,
+        seed: int = 42,
+        erase_base_features: bool = False,
+    ):
 
         self.wl_iterations = wl_iterations
         self.attributed = attributed
@@ -52,22 +64,31 @@ class Graph2Vec(Estimator):
         """
         self._set_seed()
         graphs = self._check_graphs(graphs)
-        documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, self.attributed, self.erase_base_features) for graph in graphs]
-        documents = [TaggedDocument(words=doc.get_graph_features(), tags=[str(i)]) for i, doc in enumerate(documents)]
+        documents = [
+            WeisfeilerLehmanHashing(
+                graph, self.wl_iterations, self.attributed, self.erase_base_features
+            )
+            for graph in graphs
+        ]
+        documents = [
+            TaggedDocument(words=doc.get_graph_features(), tags=[str(i)])
+            for i, doc in enumerate(documents)
+        ]
 
-        model = Doc2Vec(documents,
-                        vector_size=self.dimensions,
-                        window=0,
-                        min_count=self.min_count,
-                        dm=0,
-                        sample=self.down_sampling,
-                        workers=self.workers,
-                        epochs=self.epochs,
-                        alpha=self.learning_rate,
-                        seed=self.seed)
+        model = Doc2Vec(
+            documents,
+            vector_size=self.dimensions,
+            window=0,
+            min_count=self.min_count,
+            dm=0,
+            sample=self.down_sampling,
+            workers=self.workers,
+            epochs=self.epochs,
+            alpha=self.learning_rate,
+            seed=self.seed,
+        )
 
         self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
-
 
     def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.

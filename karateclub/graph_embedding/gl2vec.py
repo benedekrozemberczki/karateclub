@@ -5,6 +5,7 @@ from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
 
+
 class GL2Vec(Estimator):
     r"""An implementation of `"GL2Vec" <https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1>`_
     from the ICONIP '19 paper "GL2vec: Graph Embedding Enriched by Line Graphs with Edge Features".
@@ -27,9 +28,19 @@ class GL2Vec(Estimator):
         min_count (int): Minimal count of graph feature occurrences. Default is 5.
         seed (int): Random seed for the model. Default is 42.
     """
-    def __init__(self, wl_iterations: int=2, dimensions: int=128, workers: int=4,
-                 down_sampling: float=0.0001, epochs: int=10, learning_rate: float=0.025,
-                 min_count: int=5, seed: int=42, erase_base_features: bool=False):
+
+    def __init__(
+        self,
+        wl_iterations: int = 2,
+        dimensions: int = 128,
+        workers: int = 4,
+        down_sampling: float = 0.0001,
+        epochs: int = 10,
+        learning_rate: float = 0.025,
+        min_count: int = 5,
+        seed: int = 42,
+        erase_base_features: bool = False,
+    ):
 
         self.wl_iterations = wl_iterations
         self.dimensions = dimensions
@@ -66,19 +77,29 @@ class GL2Vec(Estimator):
         self._set_seed()
         graphs = self._check_graphs(graphs)
         graphs = [self._create_line_graph(graph) for graph in graphs]
-        documents = [WeisfeilerLehmanHashing(graph, self.wl_iterations, False, self.erase_base_features) for graph in graphs]
-        documents = [TaggedDocument(words=doc.get_graph_features(), tags=[str(i)]) for i, doc in enumerate(documents)]
+        documents = [
+            WeisfeilerLehmanHashing(
+                graph, self.wl_iterations, False, self.erase_base_features
+            )
+            for graph in graphs
+        ]
+        documents = [
+            TaggedDocument(words=doc.get_graph_features(), tags=[str(i)])
+            for i, doc in enumerate(documents)
+        ]
 
-        model = Doc2Vec(documents,
-                        vector_size=self.dimensions,
-                        window=0,
-                        min_count=self.min_count,
-                        dm=0,
-                        sample=self.down_sampling,
-                        workers=self.workers,
-                        epochs=self.epochs,
-                        alpha=self.learning_rate,
-                        seed=self.seed)
+        model = Doc2Vec(
+            documents,
+            vector_size=self.dimensions,
+            window=0,
+            min_count=self.min_count,
+            dm=0,
+            sample=self.down_sampling,
+            workers=self.workers,
+            epochs=self.epochs,
+            alpha=self.learning_rate,
+            seed=self.seed,
+        )
 
         self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 

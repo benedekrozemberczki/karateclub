@@ -5,11 +5,12 @@ from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 
+
 class ASNE(Estimator):
     r"""An implementation of `"ASNE" <https://arxiv.org/abs/1705.04969>`_
-    from the TKDE '18 paper "Attributed Social Network Embedding". The 
+    from the TKDE '18 paper "Attributed Social Network Embedding". The
     procedure implicitly factorizes a concatenated adjacency matrix and feature matrix.
-       
+
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
@@ -19,9 +20,17 @@ class ASNE(Estimator):
         min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions: int=128, workers: int=4,
-                 epochs: int=100, down_sampling: float=0.0001,
-                 learning_rate: float=0.05, min_count: int=1, seed: int=42):
+
+    def __init__(
+        self,
+        dimensions: int = 128,
+        workers: int = 4,
+        epochs: int = 100,
+        down_sampling: float = 0.0001,
+        learning_rate: float = 0.05,
+        min_count: int = 1,
+        seed: int = 42,
+    ):
 
         self.dimensions = dimensions
         self.workers = workers
@@ -31,14 +40,16 @@ class ASNE(Estimator):
         self.min_count = min_count
         self.seed = seed
 
-
     def _feature_transform(self, graph, X):
-        features = {node: ["neb_" + str(neb) for neb in graph.neighbors(node)] for node in graph.nodes()}
+        features = {
+            node: ["neb_" + str(neb) for neb in graph.neighbors(node)]
+            for node in graph.nodes()
+        }
         nodes = X.row
         for i, node in enumerate(nodes):
-            features[node].append("feature_"+ str(X.col[i]))
+            features[node].append("feature_" + str(X.col[i]))
         return features
-        
+
     def fit(self, graph: nx.classes.graph.Graph, X: coo_matrix):
         """
         Fitting an ASNE model.
@@ -50,22 +61,27 @@ class ASNE(Estimator):
         self._set_seed()
         graph = self._check_graph(graph)
         features = self._feature_transform(graph, X)
-        documents = [TaggedDocument(words=features[node], tags=[str(node)]) for node in range(len(features))]
+        documents = [
+            TaggedDocument(words=features[node], tags=[str(node)])
+            for node in range(len(features))
+        ]
 
-        model = Doc2Vec(documents,
-                        vector_size=self.dimensions,
-                        window=0,
-                        min_count=self.min_count,
-                        dm=0,
-                        sample=self.down_sampling,
-                        workers=self.workers,
-                        epochs=self.epochs,
-                        alpha=self.learning_rate,
-                        seed=self.seed)
+        model = Doc2Vec(
+            documents,
+            vector_size=self.dimensions,
+            window=0,
+            min_count=self.min_count,
+            dm=0,
+            sample=self.down_sampling,
+            workers=self.workers,
+            epochs=self.epochs,
+            alpha=self.learning_rate,
+            seed=self.seed,
+        )
 
-        self._embedding = np.array([model.docvecs[str(i)] for i, _ in enumerate(documents)])
-
-
+        self._embedding = np.array(
+            [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+        )
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.

@@ -57,8 +57,9 @@ def _check_value(value, name):
         _ = 1 / value
 
     except ZeroDivisionError:
-        raise ValueError(f"The value of {name} is too small "
-                         f"or zero to be used in 1/{name}.")
+        raise ValueError(
+            f"The value of {name} is too small " f"or zero to be used in 1/{name}."
+        )
 
 
 def _undirected(node, graph) -> List[tuple]:
@@ -74,8 +75,7 @@ def _directed(node, graph) -> List[tuple]:
 
 
 def _get_edge_fn(graph) -> Callable:
-    fn = _directed if nx.classes.function.is_directed(graph) \
-        else _undirected
+    fn = _directed if nx.classes.function.is_directed(graph) else _undirected
 
     fn = partial(fn, graph=graph)
     return fn
@@ -86,14 +86,13 @@ def _unweighted(edges: List[tuple]) -> np.ndarray:
 
 
 def _weighted(edges: List[tuple]) -> np.ndarray:
-    weights = map(lambda edge: edge[-1]['weight'], edges)
+    weights = map(lambda edge: edge[-1]["weight"], edges)
 
     return np.array([*weights])
 
 
 def _get_weight_fn(graph) -> Callable:
-    fn = _weighted if nx.classes.function.is_weighted(graph) \
-        else _unweighted
+    fn = _weighted if nx.classes.function.is_weighted(graph) else _unweighted
 
     return fn
 
@@ -108,6 +107,7 @@ class BiasedRandomWalker:
         p (float): Return parameter (1/p transition probability) to move towards previous node.
         q (float): In-out parameter (1/q transition probability) to move away from previous node.
     """
+
     walks: list
     graph: nx.classes.graph.Graph
     edge_fn: Callable
@@ -117,10 +117,10 @@ class BiasedRandomWalker:
         self.walk_length = walk_length
         self.walk_number = walk_number
 
-        _check_value(p, 'p')
+        _check_value(p, "p")
         self.p = p
 
-        _check_value(q, 'q')
+        _check_value(q, "q")
         self.q = q
 
     def do_walk(self, node: int) -> List[str]:
@@ -142,16 +142,19 @@ class BiasedRandomWalker:
             current_node_neighbors = np.array([edge[1] for edge in edges])
 
             weights = self.weight_fn(edges)
-            probability = np.piecewise(weights,
-                                       [current_node_neighbors == previous_node,
-                                        np.isin(current_node_neighbors, previous_node_neighbors)],
-                                       [lambda w: w / self.p,
-                                        lambda w: w / 1,
-                                        lambda w: w / self.q]
-                                       )
+            probability = np.piecewise(
+                weights,
+                [
+                    current_node_neighbors == previous_node,
+                    np.isin(current_node_neighbors, previous_node_neighbors),
+                ],
+                [lambda w: w / self.p, lambda w: w / 1, lambda w: w / self.q],
+            )
 
             norm_probability = probability / sum(probability)
-            selected = np.random.choice(current_node_neighbors, 1, p=norm_probability)[0]
+            selected = np.random.choice(current_node_neighbors, 1, p=norm_probability)[
+                0
+            ]
             walk.append(selected)
 
             previous_node_neighbors = current_node_neighbors
@@ -177,4 +180,3 @@ class BiasedRandomWalker:
             for _ in range(self.walk_number):
                 walk_from_node = self.do_walk(node)
                 self.walks.append(walk_from_node)
-

@@ -5,6 +5,7 @@ import networkx as nx
 from typing import Dict
 from karateclub.estimator import Estimator
 
+
 class BigClam(Estimator):
     r"""An implementation of `"BigClam" <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_
     from the WSDM '13 paper "Overlapping Community Detection at Scale: A Non-negative Matrix
@@ -17,7 +18,14 @@ class BigClam(Estimator):
         learning_rate (float): Gradient ascent learning rate. Default is 0.005.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions: int=8, iterations: int=50, learning_rate: int=0.005, seed: int=42):
+
+    def __init__(
+        self,
+        dimensions: int = 8,
+        iterations: int = 50,
+        learning_rate: int = 0.005,
+        seed: int = 42,
+    ):
         self.dimensions = dimensions
         self.iterations = iterations
         self.learning_rate = learning_rate
@@ -43,11 +51,13 @@ class BigClam(Estimator):
         """
         raw_scores = node_feature.dot(neb_features.T)
         raw_scores = np.clip(raw_scores, -15, 15)
-        scores = np.exp(-raw_scores)/(1-np.exp(-raw_scores))
+        scores = np.exp(-raw_scores) / (1 - np.exp(-raw_scores))
         scores = scores.reshape(-1, 1)
         neb_grad = np.sum(scores * neb_features, axis=0)
-        without_grad = self._global_features-node_feature-np.sum(neb_features, axis=0)
-        grad = neb_grad-without_grad
+        without_grad = (
+            self._global_features - node_feature - np.sum(neb_features, axis=0)
+        )
+        grad = neb_grad - without_grad
         return grad
 
     def _do_updates(self, node, gradient, node_feature):
@@ -59,9 +69,11 @@ class BigClam(Estimator):
             * **gradient** *(Numpy array)* - The gradient of the node representation.
             * **node_feature** *(Numpy array)* - The node representation.
         """
-        self._embedding[node] = self._embedding[node]+self.learning_rate*gradient
+        self._embedding[node] = self._embedding[node] + self.learning_rate * gradient
         self._embedding[node] = np.clip(self._embedding[node], 0.00001, 10)
-        self._global_features = self._global_features - node_feature + self._embedding[node]
+        self._global_features = (
+            self._global_features - node_feature + self._embedding[node]
+        )
 
     def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.

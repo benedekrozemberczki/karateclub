@@ -30,11 +30,22 @@ class Node2Vec(Estimator):
     """
     _embedding: List[np.ndarray]
 
-    def __init__(self, walk_number: int = 10, walk_length: int = 80, p: float = 1.0, q: float = 1.0,
-                 dimensions: int = 128, workers: int = 4, window_size: int = 5, epochs: int = 1,
-                 learning_rate: float = 0.05, min_count: int = 1, seed: int = 42):
+    def __init__(
+        self,
+        walk_number: int = 10,
+        walk_length: int = 80,
+        p: float = 1.0,
+        q: float = 1.0,
+        dimensions: int = 128,
+        workers: int = 4,
+        window_size: int = 5,
+        epochs: int = 1,
+        learning_rate: float = 0.05,
+        min_count: int = 1,
+        seed: int = 42,
+    ):
         super(Node2Vec, self).__init__()
-        
+
         self.walk_number = walk_number
         self.walk_length = walk_length
         self.p = p
@@ -59,15 +70,17 @@ class Node2Vec(Estimator):
         walker = BiasedRandomWalker(self.walk_length, self.walk_number, self.p, self.q)
         walker.do_walks(graph)
 
-        model = Word2Vec(walker.walks,
-                         hs=1,
-                         alpha=self.learning_rate,
-                         epochs=self.epochs,
-                         vector_size=self.dimensions,
-                         window=self.window_size,
-                         min_count=self.min_count,
-                         workers=self.workers,
-                         seed=self.seed)
+        model = Word2Vec(
+            walker.walks,
+            hs=1,
+            alpha=self.learning_rate,
+            epochs=self.epochs,
+            vector_size=self.dimensions,
+            window=self.window_size,
+            min_count=self.min_count,
+            workers=self.workers,
+            seed=self.seed,
+        )
 
         n_nodes = graph.number_of_nodes()
         self._embedding = [model.wv[str(n)] for n in range(n_nodes)]
@@ -79,4 +92,3 @@ class Node2Vec(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return np.array(self._embedding)
-

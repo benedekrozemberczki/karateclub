@@ -6,12 +6,13 @@ from scipy import sparse
 from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
 
+
 class BoostNE(Estimator):
     r"""An implementation of `"BoostNE" <https://arxiv.org/abs/1808.08627>`_
     from the ASONAM '19 paper "Multi-Level Network Embedding with Boosted Low-Rank
-    Matrix Approximation". The procedure uses non-negative matrix factorization 
+    Matrix Approximation". The procedure uses non-negative matrix factorization
     iteratively to decompose the residuals obtained by previous factorization models.
-    The base target matrix is a pooled sum of adjacency matrix powers. 
+    The base target matrix is a pooled sum of adjacency matrix powers.
 
     Args:
         dimensions (int): Number of individual embedding dimensions. Default is 8.
@@ -20,8 +21,15 @@ class BoostNE(Estimator):
         alpha (float): NMF regularization parameter. Default is 0.01.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions: int=8, iterations: int=16,
-                 order: int=2, alpha: float=0.01, seed: int=42):
+
+    def __init__(
+        self,
+        dimensions: int = 8,
+        iterations: int = 16,
+        order: int = 2,
+        alpha: float = 0.01,
+        seed: int = 42,
+    ):
         self.dimensions = dimensions
         self.iterations = iterations
         self.order = order
@@ -39,7 +47,9 @@ class BoostNE(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
@@ -64,12 +74,11 @@ class BoostNE(Estimator):
             * **target_matrix** *(SciPy array)* - The PMI matrix.
         """
         A_tilde, A_hat, A_accum = self._create_base_matrix(graph)
-        for _ in range(self.order-1):
+        for _ in range(self.order - 1):
             A_tilde = sparse.coo_matrix(A_tilde.dot(A_hat))
             A_accum = A_accum + A_tilde
         A_accum = A_accum / self.order
         return A_accum
-
 
     def _sampler(self, index):
         """
@@ -86,7 +95,7 @@ class BoostNE(Estimator):
             row_weights = row_weights.reshape(-1)
         sums = np.sum(np.sum(row_weights))
         to_pick_from = row_weights.reshape(-1)
-        to_pick_from = (to_pick_from/np.sum(to_pick_from)).tolist()[0]
+        to_pick_from = (to_pick_from / np.sum(to_pick_from)).tolist()[0]
         sample = self._binary_search(to_pick_from)
         return sample
 
@@ -119,19 +128,22 @@ class BoostNE(Estimator):
             * **scores** *(COO Scipy matrix)* - The residual scores.
             * **W** *(Numpy array)* - The embedding matrix.
         """
-        model = NMF(n_components=self.dimensions,
-                    init="random",
-                    verbose=False,
-                    alpha=self.alpha)
+        model = NMF(
+            n_components=self.dimensions, init="random", verbose=False, alpha=self.alpha
+        )
 
         W = model.fit_transform(new_residuals)
         H = model.components_
 
-        sub_scores = np.sum(np.multiply(W[self._index_1, :], H[:, self._index_2].T), axis=1)
-        scores = np.maximum(self._residuals.data-sub_scores, 0)
-        scores = sparse.csr_matrix((scores, (self._index_1, self._index_2)),
-                                   shape=self._shape,
-                                   dtype=np.float32)
+        sub_scores = np.sum(
+            np.multiply(W[self._index_1, :], H[:, self._index_2].T), axis=1
+        )
+        scores = np.maximum(self._residuals.data - sub_scores, 0)
+        scores = sparse.csr_matrix(
+            (scores, (self._index_1, self._index_2)),
+            shape=self._shape,
+            dtype=np.float32,
+        )
         return scores, W
 
     def _setup_base_model(self):
@@ -145,7 +157,6 @@ class BoostNE(Estimator):
         base_score, embedding = self._fit_and_score_NMF(self._residuals)
         self._embeddings = [embedding]
 
-
     def _binary_search(self, weights):
         """
         Weighted search procedure. Choosing a random index.
@@ -157,7 +168,7 @@ class BoostNE(Estimator):
             * **low/mid** *(int)* - Sampled index.
         """
         running_totals = np.cumsum(weights)
-        target_distance = np.random.uniform(0,1)
+        target_distance = np.random.uniform(0, 1)
         low, high = 0, len(weights)
         while low < high:
             mid = int((low + high) / 2)

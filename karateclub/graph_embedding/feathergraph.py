@@ -10,7 +10,7 @@ from karateclub.estimator import Estimator
 
 
 def _weighted_directed_degree(node: int, graph: nx.classes.graph.Graph) -> float:
-    out = graph.degree(node, weight='weight')
+    out = graph.degree(node, weight="weight")
 
     return out
 
@@ -23,8 +23,11 @@ def _unweighted_undirected_degree(node: int, graph: nx.classes.graph.Graph) -> f
 
 def _get_degree_fn(graph) -> Callable:
     """Gets the function to calculate the graph node degree"""
-    fn = _weighted_directed_degree if nx.classes.function.is_weighted(graph) \
+    fn = (
+        _weighted_directed_degree
+        if nx.classes.function.is_weighted(graph)
         else _unweighted_undirected_degree
+    )
     fn = partial(fn, graph=graph)
 
     return fn
@@ -50,8 +53,14 @@ class FeatherGraph(Estimator):
     degree_fn: Callable
     _embedding: List[np.ndarray]
 
-    def __init__(self, order: int = 5, eval_points: int = 25,
-                 theta_max: float = 2.5, seed: int = 42, pooling: str = "mean"):
+    def __init__(
+        self,
+        order: int = 5,
+        eval_points: int = 25,
+        theta_max: float = 2.5,
+        seed: int = 42,
+        pooling: str = "mean",
+    ):
         super(FeatherGraph, self).__init__()
 
         self.order = order
@@ -62,7 +71,7 @@ class FeatherGraph(Estimator):
         try:
             pool_fn = getattr(np, pooling)
         except AttributeError:
-            raise ValueError(f'{pooling.__repr__()} is not a valid pooling function')
+            raise ValueError(f"{pooling.__repr__()} is not a valid pooling function")
 
         self.pooling = pooling
         self.pool_fn = partial(pool_fn, axis=0)
@@ -78,13 +87,17 @@ class FeatherGraph(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(self.n_nodes)
-        values = np.array([1.0 / self.degree_fn(node) for node in range(self.n_nodes)])  # <- ?
+        values = np.array(
+            [1.0 / self.degree_fn(node) for node in range(self.n_nodes)]
+        )  # <- ?
 
         shape = (self.n_nodes, self.n_nodes)
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
 
-    def _get_normalized_adjacency(self, graph: nx.classes.graph.Graph) -> sparse.coo_matrix:
+    def _get_normalized_adjacency(
+        self, graph: nx.classes.graph.Graph
+    ) -> sparse.coo_matrix:
         """
         Calculating the normalized adjacency matrix.
 
@@ -110,12 +123,14 @@ class FeatherGraph(Estimator):
         Return types:
             * **X** *(NumPy array)* - The node features.
         """
-        log_degree = np.array([math.log(self.degree_fn(node) + 1)
-                               for node in range(self.n_nodes)])
+        log_degree = np.array(
+            [math.log(self.degree_fn(node) + 1) for node in range(self.n_nodes)]
+        )
         log_degree = log_degree.reshape(-1, 1)
 
-        clustering_coefficient = np.array([nx.clustering(graph, node)
-                                           for node in range(self.n_nodes)])
+        clustering_coefficient = np.array(
+            [nx.clustering(graph, node) for node in range(self.n_nodes)]
+        )
         clustering_coefficient = clustering_coefficient.reshape(-1, 1)
 
         X = np.concatenate([log_degree, clustering_coefficient], axis=1)
@@ -170,4 +185,3 @@ class FeatherGraph(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
-

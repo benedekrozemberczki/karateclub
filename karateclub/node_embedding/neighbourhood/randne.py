@@ -3,6 +3,7 @@ import networkx as nx
 from scipy import sparse
 from karateclub.estimator import Estimator
 
+
 class RandNE(Estimator):
     r"""An implementation of `"RandNE" <https://zw-zhang.github.io/files/2018_ICDM_RandNE.pdf>`_ from the ICDM '18 paper "Billion-scale Network Embedding with Iterative Random Projection". The procedure uses normalized adjacency matrix based
     smoothing on an orthogonalized random normally generate base node embedding matrix.
@@ -12,7 +13,10 @@ class RandNE(Estimator):
         alphas (list): Smoothing weights for adjacency matrix powers. Default is [0.5, 0.5].
         seed (int): Random seed. Default is 42.
     """
-    def __init__(self, dimensions: int=128, alphas: list=[0.5, 0.5], seed: int=42):
+
+    def __init__(
+        self, dimensions: int = 128, alphas: list = [0.5, 0.5], seed: int = 42
+    ):
         self.dimensions = dimensions
         self.alphas = alphas
         self.seed = seed
@@ -28,7 +32,9 @@ class RandNE(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
@@ -52,7 +58,7 @@ class RandNE(Estimator):
         """
         Using the random orthogonal smoothing.
         """
-        sd = 1/self.dimensions
+        sd = 1 / self.dimensions
         base_embedding = np.random.normal(0, sd, (A_hat.shape[0], self.dimensions))
         base_embedding, _ = np.linalg.qr(base_embedding)
         embedding = np.zeros(base_embedding.shape)
@@ -61,13 +67,13 @@ class RandNE(Estimator):
             base_embedding = A_hat.dot(base_embedding)
             embedding = embedding + alpha * base_embedding
         embedding = embedding / alpha_sum
-        embedding = (embedding-embedding.mean(0))/embedding.std(0)
+        embedding = (embedding - embedding.mean(0)) / embedding.std(0)
         return embedding
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a NetMF model.
-    
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
@@ -78,7 +84,7 @@ class RandNE(Estimator):
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
-    
+
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """

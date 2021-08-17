@@ -8,6 +8,7 @@ from typing import List
 
 class Estimator(object):
     """Estimator base class with constructor and public methods."""
+
     seed: int
 
     def __init__(self):
@@ -63,4 +64,3 @@ class Estimator(object):
         graphs = [self._check_graph(graph) for graph in graphs]
 
         return graphs
-

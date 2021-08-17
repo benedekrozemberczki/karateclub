@@ -6,6 +6,7 @@ import scipy.stats.mstats
 import scipy.sparse as sparse
 from karateclub.estimator import Estimator
 
+
 class GeoScattering(Estimator):
     r"""An implementation of `"GeoScattering" <http://proceedings.mlr.press/v97/gao19e.html>`_
     from the ICML '19 paper "Geometric Scattering for Graph Data Analysis". The procedure
@@ -17,11 +18,11 @@ class GeoScattering(Estimator):
         moments (int): Unnormalized moments considered. Default is 4.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, order: int=4, moments: int=4, seed: int=42):
+
+    def __init__(self, order: int = 4, moments: int = 4, seed: int = 42):
         self.order = order
         self.moments = moments
         self.seed = seed
-
 
     def _create_D_inverse(self, graph):
         """
@@ -34,11 +35,12 @@ class GeoScattering(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
-
 
     def _get_normalized_adjacency(self, graph):
         """
@@ -53,9 +55,8 @@ class GeoScattering(Estimator):
         A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
         D_inverse = self._create_D_inverse(graph)
         A_hat = sparse.identity(graph.number_of_nodes()) + D_inverse.dot(A)
-        A_hat = 0.5*A_hat
+        A_hat = 0.5 * A_hat
         return A_hat
-
 
     def _calculate_wavelets(self, A_hat):
         """
@@ -67,9 +68,11 @@ class GeoScattering(Estimator):
         Return types:
             * **Psi** *(List of Scipy arrays)* - The wavelet matrices.
         """
-        Psi = [A_hat.power(2**power) - A_hat.power(2**(power+1)) for power in range(self.order+1)]
+        Psi = [
+            A_hat.power(2 ** power) - A_hat.power(2 ** (power + 1))
+            for power in range(self.order + 1)
+        ]
         return Psi
-
 
     def _create_node_feature_matrix(self, graph):
         """
@@ -81,12 +84,20 @@ class GeoScattering(Estimator):
         Return types:
             * **X** *(NumPy array)* - The node features.
         """
-        log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
-        eccentricity = np.array([nx.eccentricity(graph, node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
-        clustering_coefficient = np.array([nx.clustering(graph, node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        log_degree = np.array(
+            [
+                math.log(graph.degree(node) + 1)
+                for node in range(graph.number_of_nodes())
+            ]
+        ).reshape(-1, 1)
+        eccentricity = np.array(
+            [nx.eccentricity(graph, node) for node in range(graph.number_of_nodes())]
+        ).reshape(-1, 1)
+        clustering_coefficient = np.array(
+            [nx.clustering(graph, node) for node in range(graph.number_of_nodes())]
+        ).reshape(-1, 1)
         X = np.concatenate([log_degree, eccentricity, clustering_coefficient], axis=1)
         return X
-
 
     def _get_zero_order_features(self, X):
         """
@@ -102,11 +113,10 @@ class GeoScattering(Estimator):
         X = np.abs(X)
         for col in range(X.shape[1]):
             x = np.abs(X[:, col])
-            for power in range(1, self.order+1):
+            for power in range(1, self.order + 1):
                 features.append(np.sum(np.power(x, power)))
         features = np.array(features).reshape(-1)
         return features
-
 
     def _get_first_order_features(self, Psi, X):
         """
@@ -130,7 +140,6 @@ class GeoScattering(Estimator):
         features = np.array(features).reshape(-1)
         return features
 
-
     def _get_second_order_features(self, Psi, X):
         """
         Calculating the second order graph features.
@@ -146,17 +155,16 @@ class GeoScattering(Estimator):
         X = np.abs(X)
         for col in range(X.shape[1]):
             x = np.abs(X[:, col])
-            for i in range(self.order-1):
-                for j in range(i+1, self.order):
+            for i in range(self.order - 1):
+                for j in range(i + 1, self.order):
                     psi_j = Psi[i]
-                    psi_j_prime = Psi[j]     
+                    psi_j_prime = Psi[j]
                     filtered_x = np.abs(psi_j_prime.dot(np.abs(psi_j.dot(x))))
                     for q in range(1, self.moments):
                         features.append(np.sum(np.power(np.abs(filtered_x), q)))
 
         features = np.array(features).reshape(-1)
         return features
-
 
     def _calculate_geoscattering(self, graph):
         """
@@ -174,9 +182,10 @@ class GeoScattering(Estimator):
         zero_order_features = self._get_zero_order_features(X)
         first_order_features = self._get_first_order_features(Psi, X)
         second_order_features = self._get_second_order_features(Psi, X)
-        features = np.concatenate([zero_order_features, first_order_features, second_order_features], axis=0)
+        features = np.concatenate(
+            [zero_order_features, first_order_features, second_order_features], axis=0
+        )
         return features
-
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
         """
@@ -188,7 +197,6 @@ class GeoScattering(Estimator):
         self._set_seed()
         graphs = self._check_graphs(graphs)
         self._embedding = [self._calculate_geoscattering(graph) for graph in graphs]
-
 
     def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.

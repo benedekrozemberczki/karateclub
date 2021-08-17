@@ -4,6 +4,7 @@ from gensim.models.word2vec import Word2Vec
 from karateclub.utils.walker import RandomWalker
 from karateclub.estimator import Estimator
 
+
 class DeepWalk(Estimator):
     r"""An implementation of `"DeepWalk" <https://arxiv.org/abs/1403.6652>`_
     from the KDD '14 paper "DeepWalk: Online Learning of Social Representations".
@@ -22,9 +23,19 @@ class DeepWalk(Estimator):
         min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, walk_number: int=10, walk_length: int=80, dimensions: int=128,
-                 workers: int=4, window_size: int=5, epochs: int=1,
-                 learning_rate: float=0.05, min_count: int=1, seed: int=42):
+
+    def __init__(
+        self,
+        walk_number: int = 10,
+        walk_length: int = 80,
+        dimensions: int = 128,
+        workers: int = 4,
+        window_size: int = 5,
+        epochs: int = 1,
+        learning_rate: float = 0.05,
+        min_count: int = 1,
+        seed: int = 42,
+    ):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -48,19 +59,20 @@ class DeepWalk(Estimator):
         walker = RandomWalker(self.walk_length, self.walk_number)
         walker.do_walks(graph)
 
-        model = Word2Vec(walker.walks,
-                         hs=1,
-                         alpha=self.learning_rate,
-                         epochs=self.epochs,
-                         vector_size=self.dimensions,
-                         window=self.window_size,
-                         min_count=self.min_count,
-                         workers=self.workers,
-                         seed=self.seed)
+        model = Word2Vec(
+            walker.walks,
+            hs=1,
+            alpha=self.learning_rate,
+            epochs=self.epochs,
+            vector_size=self.dimensions,
+            window=self.window_size,
+            min_count=self.min_count,
+            workers=self.workers,
+            seed=self.seed,
+        )
 
         num_of_nodes = graph.number_of_nodes()
         self._embedding = [model.wv[str(n)] for n in range(num_of_nodes)]
-
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.

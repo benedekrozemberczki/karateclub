@@ -10,10 +10,10 @@ class EulerianDiffuser:
         diffusion_number (int): Number of diffusions
         diffusion_cover (int): Number of nodes in diffusion.
     """
+
     def __init__(self, diffusion_number: int, diffusion_cover: int):
         self.diffusion_number = diffusion_number
         self.diffusion_cover = diffusion_cover
-
 
     def _run_diffusion_process(self, node):
         """
@@ -41,7 +41,6 @@ class EulerianDiffuser:
                     break
         euler = [str(u) for u, v in nx.eulerian_circuit(sub_graph, infected[0])]
         return euler
-
 
     def do_diffusions(self, graph: nx.classes.graph.Graph):
         """

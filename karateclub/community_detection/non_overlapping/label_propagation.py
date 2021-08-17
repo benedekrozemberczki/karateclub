@@ -3,6 +3,7 @@ import networkx as nx
 from typing import Dict
 from karateclub.estimator import Estimator
 
+
 class LabelPropagation(Estimator):
     r"""An implementation of `"Label Propagation Clustering" <https://arxiv.org/abs/0709.2938>`_
     from the Physical Review '07 paper "Near Linear Time Algorithm to Detect Community Structures
@@ -13,7 +14,8 @@ class LabelPropagation(Estimator):
         seed (int): Random seed. Default is 42.
         iterations (int): Propagation iterations. Default is 100.
     """
-    def __init__(self, seed: int=42, iterations: int=100):
+
+    def __init__(self, seed: int = 42, iterations: int = 100):
         self.seed = seed
         self.iterations = iterations
 

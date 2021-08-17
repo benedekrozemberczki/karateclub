@@ -6,13 +6,14 @@ from typing import Union
 from numpy.linalg import inv
 from karateclub.estimator import Estimator
 
+
 class FSCNMF(Estimator):
     r"""An implementation of `"FCNMF" <https://arxiv.org/pdf/1804.05313.pdf.>`_
     from the Arxiv '18 paper "Fusing Structure and Content via Non-negative Matrix
-    Factorization for Embedding Information Networks". The procedure uses a joint 
+    Factorization for Embedding Information Networks". The procedure uses a joint
     matrix factorization technique on the adjacency and feature matrices. The node
     and feature embeddings are co-regularized for alignment of the embedding spaces.
-       
+
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
         lower_control (float): Embedding score minimal value. Default is 10**-15.
@@ -25,9 +26,20 @@ class FSCNMF(Estimator):
         beta_3 (float): Attribute basis regularization. Default is 1.0.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions: int=32, lower_control: float=10**-15, iterations: int=500,
-                 alpha_1: float=1000.0, alpha_2: float=1.0, alpha_3: float=1.0,
-                 beta_1: float=1000.0, beta_2: float=1.0, beta_3: float=1.0, seed: int=42):
+
+    def __init__(
+        self,
+        dimensions: int = 32,
+        lower_control: float = 10 ** -15,
+        iterations: int = 500,
+        alpha_1: float = 1000.0,
+        alpha_2: float = 1.0,
+        alpha_3: float = 1.0,
+        beta_1: float = 1000.0,
+        beta_2: float = 1.0,
+        beta_3: float = 1.0,
+        seed: int = 42,
+    ):
 
         self.dimensions = dimensions
         self.lower_control = lower_control
@@ -53,10 +65,10 @@ class FSCNMF(Estimator):
         """
         Update node bases.
         """
-        simi_term = self._A.dot(np.transpose(self._B_2)) + self.alpha_1*self._U
-        regul = self.alpha_1*np.eye(self.dimensions)
-        regul = regul + self.alpha_2*np.eye(self.dimensions)
-        covar_term = inv(np.dot(self._B_2, np.transpose(self._B_2))+regul)
+        simi_term = self._A.dot(np.transpose(self._B_2)) + self.alpha_1 * self._U
+        regul = self.alpha_1 * np.eye(self.dimensions)
+        regul = regul + self.alpha_2 * np.eye(self.dimensions)
+        covar_term = inv(np.dot(self._B_2, np.transpose(self._B_2)) + regul)
         self._B_1 = np.dot(simi_term, covar_term)
         self._B_1[self._B_1 < self.lower_control] = self.lower_control
 
@@ -65,7 +77,7 @@ class FSCNMF(Estimator):
         Update node features.
         """
         to_inv = np.dot(np.transpose(self._B_1), self._B_1)
-        to_inv = to_inv + self.alpha_3*np.eye(self.dimensions)
+        to_inv = to_inv + self.alpha_3 * np.eye(self.dimensions)
         covar_term = inv(to_inv)
         simi_term = self._A.dot(self._B_1).transpose()
         self._B_2 = covar_term.dot(simi_term)
@@ -75,10 +87,10 @@ class FSCNMF(Estimator):
         """
         Update feature basis.
         """
-        simi_term = self._X.dot(np.transpose(self._V)) + self.beta_1*self._B_1
-        regul = self.beta_1*np.eye(self.dimensions)
-        regul = regul + self.beta_2*np.eye(self.dimensions)
-        covar_term = inv(np.dot(self._V, np.transpose(self._V))+regul)
+        simi_term = self._X.dot(np.transpose(self._V)) + self.beta_1 * self._B_1
+        regul = self.beta_1 * np.eye(self.dimensions)
+        regul = regul + self.beta_2 * np.eye(self.dimensions)
+        covar_term = inv(np.dot(self._V, np.transpose(self._V)) + regul)
         self._U = np.dot(simi_term, covar_term)
         self._U[self._U < self.lower_control] = self.lower_control
 
@@ -87,7 +99,7 @@ class FSCNMF(Estimator):
         Update features.
         """
         to_inv = np.dot(np.transpose(self._U), self._U)
-        to_inv = to_inv + self.beta_3*np.eye(self.dimensions)
+        to_inv = to_inv + self.beta_3 * np.eye(self.dimensions)
         covar_term = inv(to_inv)
         simi_term = self._X.transpose().dot(self._U)
         self._V = np.dot(simi_term, covar_term).transpose()
@@ -104,7 +116,9 @@ class FSCNMF(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse

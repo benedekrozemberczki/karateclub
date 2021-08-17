@@ -4,11 +4,12 @@ from typing import List, Dict
 from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
 
+
 class DANMF(Estimator):
     r"""An implementation of `"DANMF" <https://smartyfh.com/Documents/18DANMF.pdf>`_
     from the CIKM '18 paper "Deep Autoencoder-like Nonnegative Matrix Factorization for
     Community Detection". The procedure uses telescopic non-negative matrix factorization
-    in order to learn a cluster membership distribution over nodes. The method can be 
+    in order to learn a cluster membership distribution over nodes. The method can be
     used in an overlapping and non-overlapping way.
 
     Args:
@@ -19,8 +20,15 @@ class DANMF(Estimator):
         lamb (float): Regularization parameter. Default 0.01.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, layers: List[int]=[32, 8], pre_iterations: int=100,
-                 iterations: int=100, seed: int=42, lamb: float=0.01):
+
+    def __init__(
+        self,
+        layers: List[int] = [32, 8],
+        pre_iterations: int = 100,
+        iterations: int = 100,
+        seed: int = 42,
+        lamb: float = 0.01,
+    ):
         self.layers = layers
         self.pre_iterations = pre_iterations
         self.iterations = iterations
@@ -28,7 +36,6 @@ class DANMF(Estimator):
         self.lamb = lamb
         self._p = len(self.layers)
         self.seed = seed
-
 
     def _setup_target_matrices(self, graph):
         """
@@ -38,9 +45,13 @@ class DANMF(Estimator):
             * **graph** *(NetworkX graph)* - The graph being clustered.
         """
         self._graph = graph
-        self._A = nx.adjacency_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
-        self._L = nx.laplacian_matrix(self._graph, nodelist=range(self._graph.number_of_nodes()))
-        self._D = self._L+self._A
+        self._A = nx.adjacency_matrix(
+            self._graph, nodelist=range(self._graph.number_of_nodes())
+        )
+        self._L = nx.laplacian_matrix(
+            self._graph, nodelist=range(self._graph.number_of_nodes())
+        )
+        self._D = self._L + self._A
 
     def _setup_z(self, i):
         """
@@ -52,7 +63,7 @@ class DANMF(Estimator):
         if i == 0:
             self._Z = self._A
         else:
-            self._Z = self._V_s[i-1]
+            self._Z = self._V_s[i - 1]
 
     def _sklearn_pretrain(self, i):
         """
@@ -61,10 +72,12 @@ class DANMF(Estimator):
         Arg types:
             * **i** *(int)* - The layer index.
         """
-        nmf_model = NMF(n_components=self.layers[i],
-                        init="random",
-                        random_state=self.seed,
-                        max_iter=self.pre_iterations)
+        nmf_model = NMF(
+            n_components=self.layers[i],
+            init="random",
+            random_state=self.seed,
+            max_iter=self.pre_iterations,
+        )
 
         U = nmf_model.fit_transform(self._Z)
         V = nmf_model.components_
@@ -86,10 +99,10 @@ class DANMF(Estimator):
         """
         Setting up Q matrices.
         """
-        self._Q_s = [None for _ in range(self._p+1)]
-        self._Q_s[self._p] = np.eye(self.layers[self._p-1])
-        for i in range(self._p-1, -1, -1):
-            self._Q_s[i] = np.dot(self._U_s[i], self._Q_s[i+1])
+        self._Q_s = [None for _ in range(self._p + 1)]
+        self._Q_s[self._p] = np.eye(self.layers[self._p - 1])
+        for i in range(self._p - 1, -1, -1):
+            self._Q_s[i] = np.dot(self._U_s[i], self._Q_s[i + 1])
 
     def _update_U(self, i):
         """
@@ -100,14 +113,24 @@ class DANMF(Estimator):
         """
         if i == 0:
             R = self._U_s[0].dot(self._Q_s[1].dot(self._VpVpT).dot(self._Q_s[1].T))
-            R = R+self._A_sq.dot(self._U_s[0].dot(self._Q_s[1].dot(self._Q_s[1].T)))
-            Ru = 2*self._A.dot(self._V_s[self._p-1].T.dot(self._Q_s[1].T))
-            self._U_s[0] = (self._U_s[0]*Ru)/np.maximum(R, 10**-10)
+            R = R + self._A_sq.dot(self._U_s[0].dot(self._Q_s[1].dot(self._Q_s[1].T)))
+            Ru = 2 * self._A.dot(self._V_s[self._p - 1].T.dot(self._Q_s[1].T))
+            self._U_s[0] = (self._U_s[0] * Ru) / np.maximum(R, 10 ** -10)
         else:
-            R = self._P.T.dot(self._P).dot(self._U_s[i]).dot(self._Q_s[i+1]).dot(self._VpVpT).dot(self._Q_s[i+1].T)
-            R = R+self._A_sq.dot(self._P).T.dot(self._P).dot(self._U_s[i]).dot(self._Q_s[i+1]).dot(self._Q_s[i+1].T)
-            Ru = 2*self._A.dot(self._P).T.dot(self._V_s[self._p-1].T).dot(self._Q_s[i+1].T)
-            self._U_s[i] = (self._U_s[i]*Ru)/np.maximum(R, 10**-10)
+            R = (
+                self._P.T.dot(self._P)
+                .dot(self._U_s[i])
+                .dot(self._Q_s[i + 1])
+                .dot(self._VpVpT)
+                .dot(self._Q_s[i + 1].T)
+            )
+            R = R + self._A_sq.dot(self._P).T.dot(self._P).dot(self._U_s[i]).dot(
+                self._Q_s[i + 1]
+            ).dot(self._Q_s[i + 1].T)
+            Ru = 2 * self._A.dot(self._P).T.dot(self._V_s[self._p - 1].T).dot(
+                self._Q_s[i + 1].T
+            )
+            self._U_s[i] = (self._U_s[i] * Ru) / np.maximum(R, 10 ** -10)
 
     def _update_P(self, i):
         """
@@ -128,18 +151,20 @@ class DANMF(Estimator):
         Arg types:
             * **i** *(int)* - The layer index.
         """
-        if i < self._p-1:
-            Vu = 2*self._A.dot(self._P).T
-            Vd = self._P.T.dot(self._P).dot(self._V_s[i])+self._V_s[i]
-            self._V_s[i] = self._V_s[i] * Vu/np.maximum(Vd, 10**-10)
+        if i < self._p - 1:
+            Vu = 2 * self._A.dot(self._P).T
+            Vd = self._P.T.dot(self._P).dot(self._V_s[i]) + self._V_s[i]
+            self._V_s[i] = self._V_s[i] * Vu / np.maximum(Vd, 10 ** -10)
         else:
-            Vu = 2*self._A.dot(self._P).T+(self.lamb*self._A.dot(self._V_s[i].T)).T
+            Vu = (
+                2 * self._A.dot(self._P).T + (self.lamb * self._A.dot(self._V_s[i].T)).T
+            )
             Vd = self._P.T.dot(self._P).dot(self._V_s[i])
-            Vd = Vd + self._V_s[i]+(self.lamb*self._D.dot(self._V_s[i].T)).T
-            self._V_s[i] = self._V_s[i] * Vu/np.maximum(Vd, 10**-10)
+            Vd = Vd + self._V_s[i] + (self.lamb * self._D.dot(self._V_s[i].T)).T
+            self._V_s[i] = self._V_s[i] * Vu / np.maximum(Vd, 10 ** -10)
 
     def _setup_VpVpT(self):
-        self._VpVpT = self._V_s[self._p-1].dot(self._V_s[self._p-1].T)
+        self._VpVpT = self._V_s[self._p - 1].dot(self._V_s[self._p - 1].T)
 
     def _setup_Asq(self):
         self._A_sq = self._A.dot(self._A.T)

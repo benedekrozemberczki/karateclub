@@ -6,5 +6,5 @@ from karateclub.dataset import *
 from karateclub.estimator import Estimator
 
 __all__ = [
-    'karateclub',
+    "karateclub",
 ]

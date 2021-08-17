@@ -3,6 +3,7 @@ import networkx as nx
 from typing import Dict, Optional
 from karateclub.estimator import Estimator
 
+
 class EgoNetSplitter(Estimator):
     r"""An implementation of `"Ego-Splitting" <https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf>`_
     from the KDD '17 paper "Ego-Splitting Framework: from Non-Overlapping to Overlapping Clusters". The tool first creates
@@ -14,7 +15,10 @@ class EgoNetSplitter(Estimator):
         seed (int): Random seed value. Default is 42.
         weight (str): the key in the graph to use as weight. Default to 'weight'. Specify None to force using an unweighted version of the graph.
     """
-    def __init__(self, resolution: float=1.0, seed: int=42, weight: Optional[str]='weight'):
+
+    def __init__(
+        self, resolution: float = 1.0, seed: int = 42, weight: Optional[str] = "weight"
+    ):
         self.resolution = resolution
         self.seed = seed
         self.weight = weight
@@ -27,14 +31,16 @@ class EgoNetSplitter(Estimator):
             * **node** *(int)* - Node ID for ego-net (ego node).
         """
         ego_net_minus_ego = self.graph.subgraph(self.graph.neighbors(node))
-        components = {i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))}
+        components = {
+            i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))
+        }
         new_mapping = {}
         personalities = []
         for k, v in components.items():
             personalities.append(self.index)
             for other_node in v:
                 new_mapping[other_node] = self.index
-            self.index = self.index+1
+            self.index = self.index + 1
         self.components[node] = new_mapping
         self.personalities[node] = personalities
 
@@ -52,7 +58,9 @@ class EgoNetSplitter(Estimator):
         """
         Mapping the personas to new nodes.
         """
-        self.personality_map = {p: n for n in self.graph.nodes() for p in self.personalities[n]}
+        self.personality_map = {
+            p: n for n in self.graph.nodes() for p in self.personalities[n]
+        }
 
     def _get_new_edge_ids(self, edge):
         """
@@ -62,18 +70,30 @@ class EgoNetSplitter(Estimator):
             * **edge** *(list of ints)* - Edge being mapped to the new identifiers.
         """
         if self.weight is None or edge[2] is None:
-            return (self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]])
+            return (
+                self.components[edge[0]][edge[1]],
+                self.components[edge[1]][edge[0]],
+            )
         else:
-            return (self.components[edge[0]][edge[1]], self.components[edge[1]][edge[0]], {self.weight: edge[2]})
+            return (
+                self.components[edge[0]][edge[1]],
+                self.components[edge[1]][edge[0]],
+                {self.weight: edge[2]},
+            )
 
     def _create_persona_graph(self):
         """
         Create a persona graph using the ego-net components.
         """
         if self.weight is None:
-            self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in self.graph.edges()]
+            self.persona_graph_edges = [
+                self._get_new_edge_ids(edge) for edge in self.graph.edges()
+            ]
         else:
-            self.persona_graph_edges = [self._get_new_edge_ids(edge) for edge in self.graph.edges(data=self.weight)]
+            self.persona_graph_edges = [
+                self._get_new_edge_ids(edge)
+                for edge in self.graph.edges(data=self.weight)
+            ]
 
         self.persona_graph = nx.from_edgelist(self.persona_graph_edges)
 
@@ -82,9 +102,13 @@ class EgoNetSplitter(Estimator):
         Creating a non-overlapping clustering of nodes in the persona graph.
         """
         if self.weight is None:
-            self.partitions = community.best_partition(self.persona_graph, resolution=self.resolution)
+            self.partitions = community.best_partition(
+                self.persona_graph, resolution=self.resolution
+            )
         else:
-            self.partitions = community.best_partition(self.persona_graph, resolution=self.resolution, weight=self.weight)
+            self.partitions = community.best_partition(
+                self.persona_graph, resolution=self.resolution, weight=self.weight
+            )
         self.overlapping_partitions = {node: [] for node in self.graph.nodes()}
         for node, membership in self.partitions.items():
             self.overlapping_partitions[self.personality_map[node]].append(membership)

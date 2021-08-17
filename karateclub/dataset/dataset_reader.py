@@ -13,11 +13,19 @@ class GraphReader(object):
     r"""Class to read benchmark datasets for the community detection or node embedding task.
 
     Args:
-        dataset (str): Dataset of interest, one of: 
+        dataset (str): Dataset of interest, one of:
             (:obj:`"facebook"`, :obj:`"twitch"`, :obj:`"wikipedia"`, :obj:`"github"`, :obj:`"lastfm"`, :obj:`"deezer"`). Default is 'wikipedia'.
     """
-    def __init__(self, dataset: str="wikipedia"):
-        assert dataset in ["wikipedia", "twitch", "github", "facebook", "lastfm", "deezer"], "Wrong dataset."
+
+    def __init__(self, dataset: str = "wikipedia"):
+        assert dataset in [
+            "wikipedia",
+            "twitch",
+            "github",
+            "facebook",
+            "lastfm",
+            "deezer",
+        ], "Wrong dataset."
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/node_level/"
 
@@ -25,10 +33,9 @@ class GraphReader(object):
         """
         Reading bytes as a Pandas dataframe.
         """
-        tab = pd.read_csv(io.BytesIO(bytes),
-                          encoding="utf8",
-                          sep=",",
-                          dtype={"switch": np.int32})
+        tab = pd.read_csv(
+            io.BytesIO(bytes), encoding="utf8", sep=",", dtype={"switch": np.int32}
+        )
         return tab
 
     def _dataset_reader(self, end):
@@ -39,7 +46,7 @@ class GraphReader(object):
         data = urllib.request.urlopen(path).read()
         data = self._pandas_reader(data)
         return data
-   
+
     def get_graph(self) -> nx.classes.graph.Graph:
         r"""Getting the graph.
 
@@ -76,13 +83,15 @@ class GraphReader(object):
         target = np.array(data["target"])
         return target
 
+
 class GraphSetReader(object):
     r"""Class to read benchmark datasets for the graph level embedding task.
 
     Args:
         dataset (str): Dataset of interest one of reddit10k. Default is 'reddit10k'.
     """
-    def __init__(self, dataset: str="reddit10k"):
+
+    def __init__(self, dataset: str = "reddit10k"):
         self.dataset = dataset
         self.base_url = "https://github.com/benedekrozemberczki/karateclub/raw/master/dataset/graph_level/"
 
@@ -90,10 +99,9 @@ class GraphSetReader(object):
         """
         Reading bytes as a Pandas dataframe.
         """
-        tab = pd.read_csv(io.BytesIO(bytes),
-                          encoding="utf8",
-                          sep=",",
-                          dtype={"switch": np.int32})
+        tab = pd.read_csv(
+            io.BytesIO(bytes), encoding="utf8", sep=",", dtype={"switch": np.int32}
+        )
         return tab
 
     def _dataset_reader(self, end):

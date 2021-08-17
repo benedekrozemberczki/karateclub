@@ -4,6 +4,7 @@ from typing import Dict
 from scipy import sparse
 from karateclub.estimator import Estimator
 
+
 class SymmNMF(Estimator):
 
     r"""An implementation of `"Symm-NMF" <https://www.cc.gatech.edu/~hpark/papers/DaDingParkSDM12.pdf>`_
@@ -18,7 +19,14 @@ class SymmNMF(Estimator):
         rho (float): Regularization tuning parameter. Default is 100.0.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions: int=32, iterations: int=200, rho: float=100.0, seed: int=42):
+
+    def __init__(
+        self,
+        dimensions: int = 32,
+        iterations: int = 200,
+        rho: float = 100.0,
+        seed: int = 42,
+    ):
 
         self.dimensions = dimensions
         self.iterations = iterations
@@ -36,7 +44,9 @@ class SymmNMF(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
@@ -62,7 +72,11 @@ class SymmNMF(Estimator):
         """
         number_of_nodes = graph.shape[0]
         non_zero = graph.nonzero()[0].shape[0]
-        self._H = np.random.uniform(0, non_zero/(number_of_nodes**2), size=(number_of_nodes, self.dimensions))
+        self._H = np.random.uniform(
+            0,
+            non_zero / (number_of_nodes ** 2),
+            size=(number_of_nodes, self.dimensions),
+        )
         self._H_gamma = np.zeros((number_of_nodes, self.dimensions))
         self._I = np.identity(self.dimensions)
 
@@ -88,15 +102,19 @@ class SymmNMF(Estimator):
     def _do_admm_update(self, A_hat):
         """
         Doing a single ADMM update with the adjacency matrix.
-        
+
         """
-        H_covar = np.linalg.inv(self._H.T.dot(self._H) + self.rho*self._I)
-        self._W = (A_hat.dot(A_hat.T.dot(self._H)) + self.rho*self._H - self._H_gamma).dot(H_covar)
+        H_covar = np.linalg.inv(self._H.T.dot(self._H) + self.rho * self._I)
+        self._W = (
+            A_hat.dot(A_hat.T.dot(self._H)) + self.rho * self._H - self._H_gamma
+        ).dot(H_covar)
         self._W = np.maximum(self._W, 0)
-        W_covar = np.linalg.inv(self._W.T.dot(self._W) + self.rho*self._I)
-        self._H = (A_hat.dot(A_hat.T.dot(self._W)) + self.rho*self._W + self._H_gamma).dot(W_covar)
+        W_covar = np.linalg.inv(self._W.T.dot(self._W) + self.rho * self._I)
+        self._H = (
+            A_hat.dot(A_hat.T.dot(self._W)) + self.rho * self._W + self._H_gamma
+        ).dot(W_covar)
         self._H = np.maximum(self._H, 0)
-        self._H_gamma = self._H_gamma + self.rho*(self._W-self._H)
+        self._H_gamma = self._H_gamma + self.rho * (self._W - self._H)
 
     def fit(self, graph: nx.classes.graph.Graph):
         """

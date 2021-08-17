@@ -5,22 +5,31 @@ from scipy import sparse
 from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 
+
 class TENE(Estimator):
     r"""An implementation of `"TENE" <https://ieeexplore.ieee.org/document/8545577>`_
-    from the ICPR '18 paper "Enhanced Network Embedding with Text Information". The 
+    from the ICPR '18 paper "Enhanced Network Embedding with Text Information". The
     procedure jointly factorizes the adjacency and node feature matrices using alternating
     least squares.
-       
+
     Args:
         dimensions (int): Number of embedding dimensions. Default is 32.
         lower_control (float): Embedding score minimal value. Default is 10**-15.
-        alpha (float): Adjacency matrix regularization coefficient. Default is 0.1. 
+        alpha (float): Adjacency matrix regularization coefficient. Default is 0.1.
         beta (float): Feature matrix regularization coefficient. Default is 0.1.
         iterations (int): ALS iterations. Default is 200.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, dimensions=32, lower_control=10**-15,
-                 alpha=0.1, beta=0.1, iterations=200, seed=42):
+
+    def __init__(
+        self,
+        dimensions=32,
+        lower_control=10 ** -15,
+        alpha=0.1,
+        beta=0.1,
+        iterations=200,
+        seed=42,
+    ):
         self.dimensions = dimensions
         self.lower_control = lower_control
         self.alpha = alpha
@@ -44,7 +53,7 @@ class TENE(Estimator):
         """
         enum = self._X.dot(self._U)
         denom = self._M.dot(self._U.T.dot(self._U))
-        self._M = np.multiply(self._M, enum/denom)
+        self._M = np.multiply(self._M, enum / denom)
         self._M[self._M < self.lower_control] = self.lower_control
 
     def _update_V(self):
@@ -53,7 +62,7 @@ class TENE(Estimator):
         """
         enum = self._T.T.dot(self._Q)
         denom = self._V.dot(self._Q.T.dot(self._Q))
-        self._V = np.multiply(self._V, enum/denom)
+        self._V = np.multiply(self._V, enum / denom)
         self._V[self._V < self.lower_control] = self.lower_control
 
     def _update_C(self):
@@ -62,25 +71,27 @@ class TENE(Estimator):
         """
         enum = self._Q.T.dot(self._U)
         denom = self._C.dot(self._U.T.dot(self._U))
-        self._C = np.multiply(self._C, enum/denom)
+        self._C = np.multiply(self._C, enum / denom)
         self._C[self._C < self.lower_control] = self.lower_control
 
     def _update_U(self):
         """
         Update features.
         """
-        enum = self._X.T.dot(self._M)+self.alpha*self._Q.dot(self._C)
-        denom = self._U.dot((self._M.T.dot(self._M)+self.alpha*self._C.T.dot(self._C)))
-        self._U = np.multiply(self._U, enum/denom)
+        enum = self._X.T.dot(self._M) + self.alpha * self._Q.dot(self._C)
+        denom = self._U.dot(
+            (self._M.T.dot(self._M) + self.alpha * self._C.T.dot(self._C))
+        )
+        self._U = np.multiply(self._U, enum / denom)
         self._U[self._U < self.lower_control] = self.lower_control
 
     def _update_Q(self):
         """
         Update feature bases.
         """
-        enum = self.alpha*self._U.dot(self._C.T)+self.beta*self._T.dot(self._V)
-        denom = self.alpha*self._Q+self.beta*self._Q.dot(self._V.T.dot(self._V))
-        self._Q = np.multiply(self._Q, enum/denom)
+        enum = self.alpha * self._U.dot(self._C.T) + self.beta * self._T.dot(self._V)
+        denom = self.alpha * self._Q + self.beta * self._Q.dot(self._V.T.dot(self._V))
+        self._Q = np.multiply(self._Q, enum / denom)
         self._Q[self._Q < self.lower_control] = self.lower_control
 
     def _create_D_inverse(self, graph):
@@ -94,7 +105,9 @@ class TENE(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse

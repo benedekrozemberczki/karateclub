@@ -5,6 +5,7 @@ from scipy.sparse import coo_matrix
 from karateclub.estimator import Estimator
 from sklearn.decomposition import TruncatedSVD
 
+
 class TADW(Estimator):
     r"""An implementation of `"TADW" <https://www.ijcai.org/Proceedings/15/Papers/299.pdf>`_
     from the IJCAI '15 paper "Network Representation Learning with Rich Text Information". The
@@ -16,12 +17,21 @@ class TADW(Estimator):
         reduction_dimensions (int): SVD reduction dimensions. Default is 64.
         svd_iterations (int): SVD iteration count. Default is 20.
         seed (int): Random seed. Default is 42.
-        alpha (float): Learning rate. Default is 0.01. 
+        alpha (float): Learning rate. Default is 0.01.
         iterations (int): Matrix decomposition iterations. Default is 10.
         lambd (float): Regularization coefficient. Default is 10.0.
     """
-    def __init__(self, dimensions: int=32, reduction_dimensions: int=64, svd_iterations: int=20,
-                 seed: int=42, alpha: float=0.01, iterations: int=10, lambd: float=10.0):
+
+    def __init__(
+        self,
+        dimensions: int = 32,
+        reduction_dimensions: int = 64,
+        svd_iterations: int = 20,
+        seed: int = 42,
+        alpha: float = 0.01,
+        iterations: int = 10,
+        lambd: float = 10.0,
+    ):
 
         self.dimensions = dimensions
         self.reduction_dimensions = reduction_dimensions
@@ -44,10 +54,11 @@ class TADW(Estimator):
         """
         weighted_graph = nx.Graph()
         for (u, v) in graph.edges():
-            weighted_graph.add_edge(u, v, weight=1.0/graph.degree(u))
-            weighted_graph.add_edge(v, u, weight=1.0/graph.degree(v))
-        A_hat = nx.adjacency_matrix(weighted_graph,
-                                    nodelist=range(graph.number_of_nodes()))
+            weighted_graph.add_edge(u, v, weight=1.0 / graph.degree(u))
+            weighted_graph.add_edge(v, u, weight=1.0 / graph.degree(v))
+        A_hat = nx.adjacency_matrix(
+            weighted_graph, nodelist=range(graph.number_of_nodes())
+        )
 
         A_tilde = A_hat.dot(A_hat)
         return coo_matrix(A_tilde)
@@ -63,31 +74,41 @@ class TADW(Estimator):
         """
         A single update of the node embedding matrix.
         """
-        penalty = (self.lambd/np.linalg.norm(self._W))*self._W
+        penalty = (self.lambd / np.linalg.norm(self._W)) * self._W
         transformed_features = self._H.dot(self._T)
         scores = 0
         for i in range(self.dimensions):
-            scores = scores + transformed_features[i,self._A.row] * self._W[i,self._A.col]
-        score_matrix = coo_matrix((scores, (self._A.row, self._A.col)), shape=self._A.shape)
-        diff_matrix = self._A-score_matrix
-        main_grad = diff_matrix.dot(transformed_features.T).T/np.sum(np.square(scores))
-        grad = penalty-main_grad
-        self._W = self._W-self.alpha*grad
+            scores = (
+                scores + transformed_features[i, self._A.row] * self._W[i, self._A.col]
+            )
+        score_matrix = coo_matrix(
+            (scores, (self._A.row, self._A.col)), shape=self._A.shape
+        )
+        diff_matrix = self._A - score_matrix
+        main_grad = diff_matrix.dot(transformed_features.T).T / np.sum(
+            np.square(scores)
+        )
+        grad = penalty - main_grad
+        self._W = self._W - self.alpha * grad
 
     def _update_H(self):
         """
         A single update of the feature basis matrix.
         """
-        penalty = (self.lambd/np.linalg.norm(self._H))*self._H
+        penalty = (self.lambd / np.linalg.norm(self._H)) * self._H
         transformed_features = self._H.dot(self._T)
         scores = 0
         for i in range(self.dimensions):
-            scores = scores + transformed_features[i,self._A.col] * self._W[i,self._A.row]
-        score_matrix = coo_matrix((scores, (self._A.row, self._A.col)), shape=self._A.shape)
-        diff_matrix = self._A-score_matrix
-        main_grad = self._W.dot(diff_matrix.dot(self._T.T))/np.sum(np.square(scores))
-        grad = penalty-main_grad
-        self._H = self._H-self.alpha*grad
+            scores = (
+                scores + transformed_features[i, self._A.col] * self._W[i, self._A.row]
+            )
+        score_matrix = coo_matrix(
+            (scores, (self._A.row, self._A.col)), shape=self._A.shape
+        )
+        diff_matrix = self._A - score_matrix
+        main_grad = self._W.dot(diff_matrix.dot(self._T.T)) / np.sum(np.square(scores))
+        grad = penalty - main_grad
+        self._H = self._H - self.alpha * grad
 
     def _create_reduced_features(self, X):
         """
@@ -99,9 +120,11 @@ class TADW(Estimator):
         Return types:
             * **T** *(Numpy array)* - The reduced feature matrix of nodes.
         """
-        svd = TruncatedSVD(n_components=self.reduction_dimensions,
-                           n_iter=self.svd_iterations,
-                           random_state=self.seed)
+        svd = TruncatedSVD(
+            n_components=self.reduction_dimensions,
+            n_iter=self.svd_iterations,
+            random_state=self.seed,
+        )
         svd.fit(X)
         T = svd.transform(X)
         return T.T
@@ -129,6 +152,7 @@ class TADW(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        embedding = np.concatenate([np.transpose(self._W), np.transpose(np.dot(self._H, self._T))], axis=1)
+        embedding = np.concatenate(
+            [np.transpose(self._W), np.transpose(np.dot(self._H, self._T))], axis=1
+        )
         return embedding
-

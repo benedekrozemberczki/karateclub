@@ -4,6 +4,7 @@ from scipy import sparse
 from sklearn.decomposition import TruncatedSVD
 from karateclub.estimator import Estimator
 
+
 class NetMF(Estimator):
     r"""An implementation of `"NetMF" <https://keg.cs.tsinghua.edu.cn/jietang/publications/WSDM18-Qiu-et-al-NetMF-network-embedding.pdf>`_
     from the WSDM '18 paper "Network Embedding as Matrix Factorization: Unifying
@@ -18,8 +19,15 @@ class NetMF(Estimator):
         negative_samples (in): Number of negative samples. Default is 1.
         seed (int): SVD random seed. Default is 42.
     """
-    def __init__(self, dimensions: int=32, iteration: int=10, order: int=2,
-                 negative_samples: int=1, seed: int=42):
+
+    def __init__(
+        self,
+        dimensions: int = 32,
+        iteration: int = 10,
+        order: int = 2,
+        negative_samples: int = 1,
+        seed: int = 42,
+    ):
         self.dimensions = dimensions
         self.iterations = iteration
         self.order = order
@@ -37,7 +45,9 @@ class NetMF(Estimator):
             * **D_inverse** *(Scipy array)* - Diagonal inverse degree matrix.
         """
         index = np.arange(graph.number_of_nodes())
-        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        values = np.array(
+            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+        )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
         return D_inverse
@@ -68,24 +78,28 @@ class NetMF(Estimator):
             * **target_matrix** *(SciPy array)* - The shifted PMI matrix.
         """
         A_pool, A_tilde, A_hat, D_inverse = self._create_base_matrix(graph)
-        for _ in range(self.order-1):
+        for _ in range(self.order - 1):
             A_tilde = sparse.coo_matrix(A_tilde.dot(A_hat))
             A_pool = A_pool + A_tilde
-        A_pool = (graph.number_of_edges()*A_pool)/(self.order*self.negative_samples)
+        A_pool = (graph.number_of_edges() * A_pool) / (
+            self.order * self.negative_samples
+        )
         A_pool = sparse.coo_matrix(A_pool.dot(D_inverse))
         A_pool.data[A_pool.data < 1.0] = 1.0
-        target_matrix = sparse.coo_matrix((np.log(A_pool.data), (A_pool.row, A_pool.col)),
-                                          shape=A_pool.shape,
-                                          dtype=np.float32)
+        target_matrix = sparse.coo_matrix(
+            (np.log(A_pool.data), (A_pool.row, A_pool.col)),
+            shape=A_pool.shape,
+            dtype=np.float32,
+        )
         return target_matrix
 
     def _create_embedding(self, target_matrix):
         """
         Fitting a truncated SVD embedding of a PMI matrix.
         """
-        svd = TruncatedSVD(n_components=self.dimensions,
-                           n_iter=self.iterations,
-                           random_state=self.seed)
+        svd = TruncatedSVD(
+            n_components=self.dimensions, n_iter=self.iterations, random_state=self.seed
+        )
         svd.fit(target_matrix)
         embedding = svd.transform(target_matrix)
         return embedding
@@ -93,7 +107,7 @@ class NetMF(Estimator):
     def fit(self, graph: nx.classes.graph.Graph):
         """
         Fitting a NetMF model.
-    
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
         """
@@ -104,7 +118,7 @@ class NetMF(Estimator):
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
-    
+
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """

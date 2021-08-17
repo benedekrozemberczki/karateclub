@@ -3,6 +3,7 @@ import numpy as np
 import networkx as nx
 from karateclub.estimator import Estimator
 
+
 class GraphWave(Estimator):
     r"""An implementation of `"GraphWave" <https://dl.acm.org/citation.cfm?id=2806512>`_
     from the KDD '18 paper "Learning Structural Node Embeddings Via Diffusion Wavelets".
@@ -16,13 +17,22 @@ class GraphWave(Estimator):
         step_size (float): Grid point step size. Default is 0.1.
         heat_coefficient (float): Heat kernel coefficient. Default is 1.0.
         approximation (int): Chebyshev polynomial order. Default is 100.
-        mechanism (str): Wavelet calculation method one of: 
+        mechanism (str): Wavelet calculation method one of:
                          (:obj:`"exact"`, :obj:`"approximate"`). Default is 'approximate'.
         switch (int): Vertex cardinality when the wavelet calculation method switches to approximation. Default is 1000.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, sample_number: int=200, step_size: float=0.1, heat_coefficient: float=1.0,
-                 approximation: int=100, mechanism: str="approximate", switch: int=1000, seed: int=42):
+
+    def __init__(
+        self,
+        sample_number: int = 200,
+        step_size: float = 0.1,
+        heat_coefficient: float = 1.0,
+        approximation: int = 100,
+        mechanism: str = "approximate",
+        switch: int = 1000,
+        seed: int = 42,
+    ):
 
         self.sample_number = sample_number
         self.step_size = step_size
@@ -36,12 +46,12 @@ class GraphWave(Estimator):
         """
         Calculating the grid points.
         """
-        self._steps = [x*self.step_size for x in range(self.sample_number)]
+        self._steps = [x * self.step_size for x in range(self.sample_number)]
 
     def _check_size(self, graph):
         """
         Checking the size of the target graph. Switching based on size and settings.
-        
+
         Arg types:
             * **graph** *(NetworkX graph)* - The graph being embedded.
         """
@@ -52,7 +62,7 @@ class GraphWave(Estimator):
     def _single_wavelet_generator(self, node):
         """
         Calculating the characteristic function for a given node, using the eigen decomposition.
-        
+
         Arg types:
             * **node** *(int)* - The node being embedded.
 
@@ -61,7 +71,7 @@ class GraphWave(Estimator):
         """
         impulse = np.zeros((self._number_of_nodes))
         impulse[node] = 1.0
-        diags = np.diag(np.exp(-self.heat_coefficient*self._eigen_values))
+        diags = np.diag(np.exp(-self.heat_coefficient * self._eigen_values))
         eigen_diag = np.dot(self._eigen_vectors, diags)
         waves = np.dot(eigen_diag, np.transpose(self._eigen_vectors))
         wavelet_coefficients = np.dot(waves, impulse)
@@ -74,7 +84,9 @@ class GraphWave(Estimator):
         self._real_and_imaginary = []
         for node in range(self._number_of_nodes):
             wave = self._single_wavelet_generator(node)
-            wavelet_coefficients = [np.mean(np.exp(wave*1.0*step*1j)) for step in self._steps]
+            wavelet_coefficients = [
+                np.mean(np.exp(wave * 1.0 * step * 1j)) for step in self._steps
+            ]
             self._real_and_imaginary.append(wavelet_coefficients)
         self._real_and_imaginary = np.array(self._real_and_imaginary)
 
@@ -87,7 +99,6 @@ class GraphWave(Estimator):
         self._eigen_vectors = self._G.U
         self._exact_wavelet_calculator()
 
-
     def _approximate_wavelet_calculator(self):
         """
         Given the Chebyshev polynomial and graph the approximate embedding is calculated.
@@ -96,11 +107,14 @@ class GraphWave(Estimator):
         for node in range(self._number_of_nodes):
             impulse = np.zeros((self._number_of_nodes))
             impulse[node] = 1
-            wave_coeffs = pygsp.filters.approximations.cheby_op(self._G, self._chebyshev, impulse)
-            real_imag = [np.mean(np.exp(wave_coeffs*1*step*1j)) for step in self._steps]
+            wave_coeffs = pygsp.filters.approximations.cheby_op(
+                self._G, self._chebyshev, impulse
+            )
+            real_imag = [
+                np.mean(np.exp(wave_coeffs * 1 * step * 1j)) for step in self._steps
+            ]
             self._real_and_imaginary.append(real_imag)
         self._real_and_imaginary = np.array(self._real_and_imaginary)
-
 
     def _approximate_structural_wavelet_embedding(self):
         """
@@ -110,8 +124,9 @@ class GraphWave(Estimator):
         """
         self._G.estimate_lmax()
         self._heat_filter = pygsp.filters.Heat(self._G, tau=[self.heat_coefficient])
-        self._chebyshev = pygsp.filters.approximations.compute_cheby_coeff(self._heat_filter,
-                                                                           m=self.approximation)
+        self._chebyshev = pygsp.filters.approximations.compute_cheby_coeff(
+            self._heat_filter, m=self.approximation
+        )
         self._approximate_wavelet_calculator()
 
     def fit(self, graph: nx.classes.graph.Graph):
@@ -133,7 +148,6 @@ class GraphWave(Estimator):
             self._approximate_structural_wavelet_embedding()
         else:
             raise NameError("Unknown method.")
-
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.

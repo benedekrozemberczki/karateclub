@@ -5,6 +5,7 @@ from typing import Dict
 from karateclub.estimator import Estimator
 from karateclub.utils.walker import RandomWalker
 
+
 class GEMSEC(Estimator):
     r"""An implementation of `"GEMSEC" <https://arxiv.org/abs/1802.03997>`_
     from the ASONAM '19 paper "GEMSEC: Graph Embedding with Self Clustering".
@@ -25,9 +26,19 @@ class GEMSEC(Estimator):
         gamma (float): Clustering cost weight coefficient. Default is 0.1.
         seed (int): Random seed value. Default is 42.
     """
-    def __init__(self, walk_number: int=5, walk_length: int=80, dimensions: int=32,
-                 negative_samples: int=5, window_size: int=5, learning_rate: float=0.1,
-                 clusters: int=10, gamma: float=0.1, seed: int=42):
+
+    def __init__(
+        self,
+        walk_number: int = 5,
+        walk_length: int = 80,
+        dimensions: int = 32,
+        negative_samples: int = 5,
+        window_size: int = 5,
+        learning_rate: float = 0.1,
+        clusters: int = 10,
+        gamma: float = 0.1,
+        seed: int = 42,
+    ):
 
         self.walk_number = walk_number
         self.walk_length = walk_length
@@ -38,7 +49,6 @@ class GEMSEC(Estimator):
         self.clusters = clusters
         self.gamma = gamma
         self.seed = seed
-
 
     def _setup_sampling_weights(self, graph):
         """
@@ -53,8 +63,7 @@ class GEMSEC(Estimator):
             for _ in range(graph.degree(node)):
                 self._sampler[index] = node
                 index = index + 1
-        self._global_index = index-1
-
+        self._global_index = index - 1
 
     def _initialize_node_embeddings(self, graph):
         """
@@ -64,8 +73,7 @@ class GEMSEC(Estimator):
             * **graph** *(NetworkX graph)* - The graph for negative sampling.
         """
         shape = (graph.number_of_nodes(), self.dimensions)
-        self._base_embedding = np.random.normal(0, 1.0/self.dimensions, shape)
-
+        self._base_embedding = np.random.normal(0, 1.0 / self.dimensions, shape)
 
     def _initialize_cluster_centers(self, graph):
         """
@@ -75,8 +83,7 @@ class GEMSEC(Estimator):
             * **graph** *(NetworkX graph)* - The graph for negative sampling.
         """
         shape = (self.dimensions, self.clusters)
-        self._cluster_centers = np.random.normal(0, 1.0/self.dimensions, shape)
-
+        self._cluster_centers = np.random.normal(0, 1.0 / self.dimensions, shape)
 
     def _sample_negative_samples(self):
         """
@@ -85,9 +92,11 @@ class GEMSEC(Estimator):
         Return types:
             * **negative_samples** *(list)*: List of negative sampled nodes.
         """
-        negative_samples = [self._sampler[random.randint(0,self._global_index)] for _ in range(self.negative_samples)]
+        negative_samples = [
+            self._sampler[random.randint(0, self._global_index)]
+            for _ in range(self.negative_samples)
+        ]
         return negative_samples
-
 
     def _calculcate_noise_vector(self, negative_samples, source_node):
         """
@@ -104,11 +113,10 @@ class GEMSEC(Estimator):
         source_vector = self._base_embedding[int(source_node), :]
         raw_scores = noise_vectors.dot(source_vector.T)
         raw_scores = np.exp(np.clip(raw_scores, -15, 15))
-        scores = raw_scores/np.sum(raw_scores)
-        scores = scores.reshape(-1,1)
-        noise_vector = np.sum(scores*noise_vectors,axis=0)
+        scores = raw_scores / np.sum(raw_scores)
+        scores = scores.reshape(-1, 1)
+        noise_vector = np.sum(scores * noise_vectors, axis=0)
         return noise_vector
-
 
     def _calculate_cluster_vector(self, source_node):
         """
@@ -121,12 +129,14 @@ class GEMSEC(Estimator):
             * **cluster_vector** *(NumPy array) - Cluster update vector.
             * **cluster_index** *(int)*: Node cluster membership index.
         """
-        distances = self._base_embedding[int(source_node), :].reshape(-1,1) - self._cluster_centers
-        scores = np.power(np.sum(np.power(distances,2),axis=0),0.5)
+        distances = (
+            self._base_embedding[int(source_node), :].reshape(-1, 1)
+            - self._cluster_centers
+        )
+        scores = np.power(np.sum(np.power(distances, 2), axis=0), 0.5)
         cluster_index = np.argmin(scores)
-        cluster_vector = distances[:,cluster_index]/scores[cluster_index]
+        cluster_vector = distances[:, cluster_index] / scores[cluster_index]
         return cluster_vector, cluster_index
-
 
     def _do_descent_for_pair(self, negative_samples, source_node, target_node):
         """
@@ -140,11 +150,12 @@ class GEMSEC(Estimator):
         noise_vector = self._calculcate_noise_vector(negative_samples, source_node)
         target_vector = self._base_embedding[int(target_node), :]
         cluster_vector, cluster_index = self._calculate_cluster_vector(source_node)
-        node_gradient = noise_vector - target_vector + self.gamma*cluster_vector
+        node_gradient = noise_vector - target_vector + self.gamma * cluster_vector
         node_gradient = node_gradient / np.linalg.norm(node_gradient)
-        self._base_embedding[int(source_node), :] += -self.learning_rate*node_gradient
-        self._cluster_centers[:, cluster_index] += self.learning_rate*self.gamma*cluster_vector 
-
+        self._base_embedding[int(source_node), :] += -self.learning_rate * node_gradient
+        self._cluster_centers[:, cluster_index] += (
+            self.learning_rate * self.gamma * cluster_vector
+        )
 
     def _update_a_weight(self, source_node, target_node):
         """
@@ -158,18 +169,18 @@ class GEMSEC(Estimator):
         self._do_descent_for_pair(negative_samples, source_node, target_node)
         self._do_descent_for_pair(negative_samples, target_node, source_node)
 
-
     def _do_gradient_descent(self):
         """
         Updating the embedding weights and cluster centers with gradient descent.
         """
         random.shuffle(self._walker.walks)
         for walk in self._walker.walks:
-            for i, source_node in enumerate(walk[:self.walk_length-self.window_size]):
-                for step in range(1, self.window_size+1):
-                    target_node = walk[i+step]
+            for i, source_node in enumerate(
+                walk[: self.walk_length - self.window_size]
+            ):
+                for step in range(1, self.window_size + 1):
+                    target_node = walk[i + step]
                     self._update_a_weight(source_node, target_node)
-
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
@@ -187,7 +198,6 @@ class GEMSEC(Estimator):
         self._initialize_cluster_centers(graph)
         self._do_gradient_descent()
 
-
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
 
@@ -195,7 +205,6 @@ class GEMSEC(Estimator):
             * **embedding** *(Numpy array)*: The embedding of nodes.
         """
         return np.array(self._base_embedding)
-
 
     def _get_membership(self, node):
         """Getting the cluster membership of a node.
@@ -207,10 +216,9 @@ class GEMSEC(Estimator):
             * **cluster_index** *(int)*: Node cluster membership index.
         """
         distances = self._base_embedding[node, :].reshape(-1, 1) - self._cluster_centers
-        scores = np.power(np.sum(np.power(distances,2), axis=0), 0.5)
-        cluster_index = np.argmin(scores)   
+        scores = np.power(np.sum(np.power(distances, 2), axis=0), 0.5)
+        cluster_index = np.argmin(scores)
         return cluster_index
-
 
     def get_memberships(self) -> Dict[int, int]:
         r"""Getting the cluster membership of nodes.
@@ -218,5 +226,8 @@ class GEMSEC(Estimator):
         Return types:
             * **memberships** *(dict)*: Node cluster memberships.
         """
-        memberships = {node:self._get_membership(node) for node in range(self._base_embedding.shape[0])}
-        return memberships 
+        memberships = {
+            node: self._get_membership(node)
+            for node in range(self._base_embedding.shape[0])
+        }
+        return memberships
