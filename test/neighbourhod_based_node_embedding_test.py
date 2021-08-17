@@ -3,6 +3,7 @@ import networkx as nx
 from karateclub import DeepWalk, Walklets, HOPE, NetMF, Diff2Vec, GraRep, Node2Vec
 from karateclub import NodeSketch, LaplacianEigenmaps, NMFADMM, GLEE, RandNE, SocioDim
 
+
 def test_randne():
     """
     Testing the RandNE class.
@@ -30,7 +31,8 @@ def test_randne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-    
+
+
 def test_sociodim():
     """
     Testing the SocioDim class.
@@ -58,7 +60,6 @@ def test_sociodim():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-
 
 
 def test_deepwalk():
@@ -89,6 +90,7 @@ def test_deepwalk():
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
 
+
 def test_node2vec():
     """
     Testing the Node2Vec class.
@@ -117,6 +119,7 @@ def test_node2vec():
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
 
+
 def test_walklets():
     """
     Testing the Walklets class.
@@ -130,7 +133,7 @@ def test_walklets():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*model.window_size
+    assert embedding.shape[1] == model.dimensions * model.window_size
     assert type(embedding) == np.ndarray
 
     model = Walklets(dimensions=32)
@@ -142,7 +145,7 @@ def test_walklets():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*model.window_size
+    assert embedding.shape[1] == model.dimensions * model.window_size
     assert type(embedding) == np.ndarray
 
 
@@ -233,7 +236,6 @@ def test_diff2vec():
     assert type(embedding) == np.ndarray
 
 
-
 def test_grarep():
     """
     Testing the GraRep class.
@@ -247,7 +249,7 @@ def test_grarep():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*model.order
+    assert embedding.shape[1] == model.dimensions * model.order
     assert type(embedding) == np.ndarray
 
     model = GraRep(dimensions=16)
@@ -259,7 +261,7 @@ def test_grarep():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*model.order
+    assert embedding.shape[1] == model.dimensions * model.order
     assert type(embedding) == np.ndarray
 
 
@@ -290,8 +292,7 @@ def test_nodesketch():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-   
-   
+
 
 def test_laplacianeigenmaps():
     """
@@ -335,7 +336,7 @@ def test_geometriclaplacianeigenmaps():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions+1
+    assert embedding.shape[1] == model.dimensions + 1
     assert type(embedding) == np.ndarray
 
     model = GLEE(dimensions=16)
@@ -347,7 +348,7 @@ def test_geometriclaplacianeigenmaps():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions+1
+    assert embedding.shape[1] == model.dimensions + 1
     assert type(embedding) == np.ndarray
 
 
@@ -364,7 +365,7 @@ def test_nmf_admm():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*2
+    assert embedding.shape[1] == model.dimensions * 2
     assert type(embedding) == np.ndarray
 
     model = NMFADMM(dimensions=32)
@@ -376,5 +377,5 @@ def test_nmf_admm():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*2
+    assert embedding.shape[1] == model.dimensions * 2
     assert type(embedding) == np.ndarray

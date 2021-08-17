@@ -1,6 +1,14 @@
 import numpy as np
 import networkx as nx
-from karateclub.community_detection.overlapping import EgoNetSplitter, NNSED, DANMF, MNMF, BigClam, SymmNMF
+from karateclub.community_detection.overlapping import (
+    EgoNetSplitter,
+    NNSED,
+    DANMF,
+    MNMF,
+    BigClam,
+    SymmNMF,
+)
+
 
 def test_egonet_splitter():
     """
@@ -12,7 +20,7 @@ def test_egonet_splitter():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -26,7 +34,7 @@ def test_egonet_splitter():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -37,10 +45,10 @@ def test_egonet_splitter():
     # Test weighted graph
     graph = nx.les_miserables_graph()
     graph = nx.convert_node_labels_to_integers(graph)
-    model = EgoNetSplitter(weight='weight')
+    model = EgoNetSplitter(weight="weight")
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -54,14 +62,13 @@ def test_egonet_splitter():
     model = EgoNetSplitter(weight=None)
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
     assert graph.number_of_nodes() == len(memberships)
     assert indices == nodes
     assert type(memberships) == dict
-
 
 
 def test_nnsed():
@@ -74,7 +81,7 @@ def test_nnsed():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -94,7 +101,7 @@ def test_nnsed():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -119,7 +126,7 @@ def test_danmf():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -130,9 +137,8 @@ def test_danmf():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.layers[-1]
+    assert embedding.shape[1] == 2 * model.layers[-1]
     assert type(embedding) == np.ndarray
-
 
     graph = nx.newman_watts_strogatz_graph(200, 5, 0.3)
 
@@ -140,7 +146,7 @@ def test_danmf():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -151,7 +157,7 @@ def test_danmf():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.layers[-1]
+    assert embedding.shape[1] == 2 * model.layers[-1]
     assert type(embedding) == np.ndarray
 
 
@@ -165,7 +171,7 @@ def test_bigclam():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -185,7 +191,7 @@ def test_bigclam():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -210,7 +216,7 @@ def test_mnmf():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -236,7 +242,7 @@ def test_mnmf():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -267,7 +273,7 @@ def test_symmnmf():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -287,7 +293,7 @@ def test_symmnmf():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 

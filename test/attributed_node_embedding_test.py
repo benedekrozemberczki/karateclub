@@ -2,7 +2,17 @@ import random
 import numpy as np
 import networkx as nx
 from scipy.sparse import coo_matrix
-from karateclub.node_embedding.attributed import BANE, TENE, TADW, FSCNMF, SINE, MUSAE, FeatherNode, ASNE, AE
+from karateclub.node_embedding.attributed import (
+    BANE,
+    TENE,
+    TADW,
+    FSCNMF,
+    SINE,
+    MUSAE,
+    FeatherNode,
+    ASNE,
+    AE,
+)
 
 
 def test_asne():
@@ -14,7 +24,7 @@ def test_asne():
     features = {i: random.sample(range(150), 50) for i in range(100)}
     row = np.array([k for k, v in features.items() for val in v])
     col = np.array([val for k, v in features.items() for val in v])
-    data = np.ones(100*50)
+    data = np.ones(100 * 50)
     shape = (100, 150)
 
     features = coo_matrix((data, (row, col)), shape=shape)
@@ -26,6 +36,7 @@ def test_asne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
 
 def test_feather_node():
     """
@@ -39,7 +50,10 @@ def test_feather_node():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.order*model.eval_points*model.reduction_dimensions
+    assert (
+        embedding.shape[1]
+        == 2 * model.order * model.eval_points * model.reduction_dimensions
+    )
     assert type(embedding) == np.ndarray
 
     features = np.random.uniform(0, 1, (250, 16))
@@ -48,14 +62,14 @@ def test_feather_node():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.order*model.eval_points*features.shape[1]
+    assert embedding.shape[1] == 2 * model.order * model.eval_points * features.shape[1]
     assert type(embedding) == np.ndarray
 
-    features = {i: random.sample(range(150),50) for i in range(250)}
+    features = {i: random.sample(range(150), 50) for i in range(250)}
 
     row = np.array([k for k, v in features.items() for val in v])
     col = np.array([val for k, v in features.items() for val in v])
-    data = np.ones(250*50)
+    data = np.ones(250 * 50)
     shape = (250, 150)
 
     features = coo_matrix((data, (row, col)), shape=shape)
@@ -64,7 +78,10 @@ def test_feather_node():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.order*model.eval_points*model.reduction_dimensions
+    assert (
+        embedding.shape[1]
+        == 2 * model.order * model.eval_points * model.reduction_dimensions
+    )
     assert type(embedding) == np.ndarray
 
 
@@ -107,8 +124,7 @@ def test_fscnmf():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.dimensions
-
+    assert embedding.shape[1] == 2 * model.dimensions
 
     graph = nx.newman_watts_strogatz_graph(150, 10, 0.2)
 
@@ -118,7 +134,7 @@ def test_fscnmf():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.dimensions
+    assert embedding.shape[1] == 2 * model.dimensions
 
 
 def test_tene():
@@ -133,7 +149,7 @@ def test_tene():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.dimensions
+    assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
 
     graph = nx.newman_watts_strogatz_graph(150, 10, 0.2)
@@ -144,7 +160,7 @@ def test_tene():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.dimensions
+    assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
 
 
@@ -160,7 +176,7 @@ def test_tadw():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.dimensions
+    assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
 
     graph = nx.newman_watts_strogatz_graph(150, 10, 0.2)
@@ -171,7 +187,7 @@ def test_tadw():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == 2*model.dimensions
+    assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
 
 
@@ -184,7 +200,7 @@ def test_musae():
     features = {i: random.sample(range(150), 50) for i in range(50)}
     row = np.array([k for k, v in features.items() for val in v])
     col = np.array([val for k, v in features.items() for val in v])
-    data = np.ones(50*50)
+    data = np.ones(50 * 50)
     shape = (50, 150)
     features = coo_matrix((data, (row, col)), shape=shape)
 
@@ -193,7 +209,7 @@ def test_musae():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*(1+model.window_size)
+    assert embedding.shape[1] == model.dimensions * (1 + model.window_size)
     assert type(embedding) == np.ndarray
 
 
@@ -206,7 +222,7 @@ def test_sine():
     features = {i: random.sample(range(150), 50) for i in range(100)}
     row = np.array([k for k, v in features.items() for val in v])
     col = np.array([val for k, v in features.items() for val in v])
-    data = np.ones(100*50)
+    data = np.ones(100 * 50)
     shape = (100, 150)
 
     features = coo_matrix((data, (row, col)), shape=shape)
@@ -229,7 +245,7 @@ def test_ae():
     features = {i: random.sample(range(150), 50) for i in range(50)}
     row = np.array([k for k, v in features.items() for val in v])
     col = np.array([val for k, v in features.items() for val in v])
-    data = np.ones(50*50)
+    data = np.ones(50 * 50)
     shape = (50, 150)
     features = coo_matrix((data, (row, col)), shape=shape)
 
@@ -238,6 +254,5 @@ def test_ae():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions*2
+    assert embedding.shape[1] == model.dimensions * 2
     assert type(embedding) == np.ndarray
-

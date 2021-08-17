@@ -17,7 +17,6 @@ def test_neu():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert type(embedding) == np.ndarray
 
-
     graph = nx.newman_watts_strogatz_graph(200, 20, 0.05)
 
     model = DeepWalk()

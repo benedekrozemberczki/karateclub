@@ -14,9 +14,9 @@ def test_feather_graph():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert embedding.shape[1] == 4 * model.order * model.eval_points
     assert type(embedding) == np.ndarray
 
     graphs = [nx.newman_watts_strogatz_graph(150, 5, 0.3) for _ in range(100)]
@@ -25,36 +25,36 @@ def test_feather_graph():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert embedding.shape[1] == 4 * model.order * model.eval_points
     assert type(embedding) == np.ndarray
 
     model = FeatherGraph(pooling="mean")
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert embedding.shape[1] == 4 * model.order * model.eval_points
     assert type(embedding) == np.ndarray
 
     model = FeatherGraph(pooling="max")
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert embedding.shape[1] == 4 * model.order * model.eval_points
     assert type(embedding) == np.ndarray
 
     model = FeatherGraph(pooling="min")
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 4*model.order*model.eval_points
+    assert embedding.shape[1] == 4 * model.order * model.eval_points
     assert type(embedding) == np.ndarray
 
 
@@ -68,7 +68,7 @@ def test_fgsd():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.hist_bins
     assert type(embedding) == np.ndarray
@@ -79,7 +79,7 @@ def test_fgsd():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.hist_bins
     assert type(embedding) == np.ndarray
@@ -95,7 +95,7 @@ def test_graph2vec():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
 
@@ -105,7 +105,7 @@ def test_graph2vec():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
 
@@ -120,7 +120,7 @@ def test_graph2vec():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
@@ -136,7 +136,7 @@ def test_gl2vec():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
@@ -147,7 +147,7 @@ def test_gl2vec():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
@@ -163,9 +163,9 @@ def test_ldp():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 5*model.bins
+    assert embedding.shape[1] == 5 * model.bins
     assert type(embedding) == np.ndarray
 
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(1000)]
@@ -174,11 +174,10 @@ def test_ldp():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
-    assert embedding.shape[0] == len(graphs)
-    assert embedding.shape[1] == 5*model.bins
-    assert type(embedding) == np.ndarray
 
+    assert embedding.shape[0] == len(graphs)
+    assert embedding.shape[1] == 5 * model.bins
+    assert type(embedding) == np.ndarray
 
 
 def test_sf():
@@ -191,7 +190,7 @@ def test_sf():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
@@ -202,7 +201,7 @@ def test_sf():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
@@ -218,7 +217,7 @@ def test_netlsd():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.scale_steps
     assert type(embedding) == np.ndarray
@@ -229,7 +228,7 @@ def test_netlsd():
 
     model.fit(graphs)
     embedding = model.get_embedding()
-    
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.scale_steps
     assert type(embedding) == np.ndarray
@@ -249,15 +248,16 @@ def test_geoscattering():
             model.fit(graphs)
             embedding = model.get_embedding()
 
-            first_block = 3*model.order
-            second_block = 3*(model.order+1)*(model.moments-1)
-            third_block = 3*(model.order-1)*model.order*(model.moments-1)/2
+            first_block = 3 * model.order
+            second_block = 3 * (model.order + 1) * (model.moments - 1)
+            third_block = 3 * (model.order - 1) * model.order * (model.moments - 1) / 2
 
-            feature_count = first_block+second_block+third_block
-    
+            feature_count = first_block + second_block + third_block
+
             assert embedding.shape[0] == len(graphs)
             assert embedding.shape[1] == feature_count
             assert type(embedding) == np.ndarray
+
 
 def test_ige():
     """
@@ -272,6 +272,6 @@ def test_ige():
 
             model.fit(graphs)
             embedding = model.get_embedding()
-    
+
             assert embedding.shape[0] == len(graphs)
             assert type(embedding) == np.ndarray

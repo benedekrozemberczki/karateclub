@@ -1,6 +1,12 @@
 import numpy as np
 import networkx as nx
-from karateclub.community_detection.non_overlapping import EdMot, LabelPropagation, SCD, GEMSEC
+from karateclub.community_detection.non_overlapping import (
+    EdMot,
+    LabelPropagation,
+    SCD,
+    GEMSEC,
+)
+
 
 def test_edmot():
     """
@@ -12,7 +18,7 @@ def test_edmot():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -26,7 +32,7 @@ def test_edmot():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -45,7 +51,7 @@ def test_label_propagation():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -59,14 +65,13 @@ def test_label_propagation():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
     assert graph.number_of_nodes() == len(memberships)
     assert indices == nodes
     assert type(memberships) == dict
-
 
 
 def test_scd():
@@ -79,7 +84,7 @@ def test_scd():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -93,7 +98,7 @@ def test_scd():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -112,7 +117,7 @@ def test_GEMSEC():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
@@ -132,7 +137,7 @@ def test_GEMSEC():
 
     model.fit(graph)
     memberships = model.get_memberships()
-    
+
     indices = [k for k, v in memberships.items()].sort()
     nodes = [node for node in graph.nodes()].sort()
 
