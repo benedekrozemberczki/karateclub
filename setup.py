@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 install_requires = [
-    "numpy",
+    "numpy==1.19.2",
     "networkx",
     "decorator==4.4.2",
     "tqdm",
