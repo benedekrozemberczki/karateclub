@@ -9,7 +9,7 @@ from karateclub.estimator import Estimator
 
 
 
-class WaveCharacteristic(Estimator):
+class WaveletCharacteristic(Estimator):
     r"""An implementation of `"WaveCharacteristic" <https://arxiv.org/abs/2005.07959>`_
     from the CIKM '21 paper "Graph Embedding via Diffusion-Wavelets-Based Node Feature 
     Distribution Characterization". The procedure uses characteristic functions of 
@@ -21,7 +21,7 @@ class WaveCharacteristic(Estimator):
     """
 
     def __init__(self, order: int = 5):
-        super(WaveCharacteristic, self).__init__()
+        super(WaveletCharacteristic, self).__init__()
 
         self.order = 2
 
