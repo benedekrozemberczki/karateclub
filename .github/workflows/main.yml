@@ -30,6 +30,7 @@ jobs:
          python setup.py install
       - name: Test coverage.
         run: |
+         pip install pytest
          pytest
          codecov
       - name: Code Coverage
