@@ -148,6 +148,8 @@ In detail, the following community detection and embedding methods were implemen
 
 **Graph Level Embedding**
 
+* **[WaveletCharacteristic](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.waveletcharacteristic.WaveletCharacteristic)** from Wang *et al.*: [Graph2Vec: Learning Distributed Representations of Graphs](https://arxiv.org/abs/1707.05005) (CIKM 2021)
+
 * **[FEATHER-G](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.feathergraph.FeatherGraph)** from Rozemberczki *et al.*: [Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models](https://arxiv.org/abs/2005.07959) (CIKM 2020)
 
 * **[IGE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.ige.IGE)** from Galland *et al.*: [Invariant Embedding for Graph Classification](https://graphreason.github.io/papers/16.pdf) (ICML 2019 LRGSD Workshop)
