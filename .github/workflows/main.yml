@@ -30,7 +30,7 @@ jobs:
          python setup.py install
       - name: Test coverage.
         run: |
-         python setup.py test
+         pytest
          codecov
       - name: Code Coverage
         uses: codecov/codecov-action@v1
