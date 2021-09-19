@@ -164,6 +164,10 @@ Meta node embedding
 Whole graph embedding
 --------------------
 
+.. automodule:: karateclub.graph_embedding.waveletcharacteristic
+    :members:
+    :undoc-members:
+
 .. automodule:: karateclub.graph_embedding.ldp
     :members:
     :undoc-members:
