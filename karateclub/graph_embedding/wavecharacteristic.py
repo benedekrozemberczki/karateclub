@@ -11,11 +11,10 @@ from karateclub.estimator import Estimator
 
 class WaveCharacteristic(Estimator):
     r"""An implementation of `"WaveCharacteristic" <https://arxiv.org/abs/2005.07959>`_
-    from the CIKM '20 paper "Characteristic Functions on Graphs: Birds of a Feather,
-    from Statistical Descriptors to Parametric Models". The procedure
-    uses characteristic functions of node features with wavelet function weights to describe
-    node neighborhoods. These node level features are pooled by mean pooling to
-    create graph level statistics.
+    from the CIKM '21 paper "Graph Embedding via Diffusion-Wavelets-Based Node Feature 
+    Distribution Characterization". The procedure uses characteristic functions of 
+    node features with wavelet function weights to describe node neighborhoods. 
+    These node level features are pooled by mean pooling to create graph level statistics.
 
     Args:
         order (int): Adjacency matrix powers. Default is 5.
