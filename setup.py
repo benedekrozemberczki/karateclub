@@ -12,6 +12,7 @@ install_requires = [
     "gensim>=4.0.0",
     "pandas",
     "six",
+    "python-Levenshtein"
 ]
 
 

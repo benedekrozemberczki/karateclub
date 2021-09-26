@@ -1,11 +1,27 @@
 import math
-from typing import List
+from typing import List, Tuple
 import numpy as np
 import networkx as nx
 import scipy.sparse as sparse
+import scipy
+from sklearn.preprocessing import normalize
 
 from karateclub.estimator import Estimator
 
+from tqdm import tqdm
+
+
+
+def heat_diffusion_ind(graph, tau= 1):
+
+    # Compute Laplacian
+    a = nx.adjacency_matrix(graph)
+    lap = nx.laplacian_matrix(graph, nodelist=range(graph.number_of_nodes()))
+    n_nodes, _ = a.shape
+    thres = np.vectorize(lambda x : x if x > 1e-4 * 1.0 / n_nodes else 0)
+    lamb, U = np.linalg.eigh(lap.todense())
+    heat = U.dot(np.diagflat(np.exp(- tau * lamb).flatten())).dot(U.T)
+    return heat
 
 
 
@@ -20,38 +36,99 @@ class WaveletCharacteristic(Estimator):
         order (int): Adjacency matrix powers. Default is 5.
     """
 
-    def __init__(self, order: int = 5):
-        super(WaveletCharacteristic, self).__init__()
+    def __init__(self, order: int=5, eval_points: int=25,
+                 theta_max: float=2.5, tau:float=0.5,seed: int=42, pooling: str="mean"):
+        self.order = order
+        self.eval_points = eval_points
+        self.theta_max = theta_max
+        self.seed = seed
+        self.pooling = pooling
+        self.tau=tau
 
-        self.order = 2
 
-    def _calculate_feather(self, graph: nx.classes.graph.Graph) -> np.ndarray:
-        """
-        Calculating the characteristic function features of a graph.
+    def _create_D_inverse(self, graph):
 
-        Arg types:
-            * **graph** *(NetworkX graph)* - A graph to be embedded.
+        index = np.arange(graph.number_of_nodes())
+        values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
+        shape = (graph.number_of_nodes(), graph.number_of_nodes())
+        D_inverse = sparse.coo_matrix((values, (index, index)), shape=shape)
+        return D_inverse
 
-        Return types:
-            * **features** *(Numpy vector)* - The embedding of a single graph.
-        """
-        return np.array([0.1,0.2,0.3])
 
-    def fit(self, graphs: List[nx.classes.graph.Graph]) -> None:
-        """
-        Fitting a graph level FEATHER model.
+    def _get_normalized_adjacency(self, graph):
 
-        Arg types:
-            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
-        """
+        A = nx.adjacency_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        D_inverse = self._create_D_inverse(graph)
+        A_hat = D_inverse.dot(A)
+        return A_hat
+
+
+    def _create_node_feature_matrix(self, graph):
+        log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        clustering_coefficient = np.array([nx.clustering(graph, node) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
+        X = np.concatenate([log_degree, clustering_coefficient], axis=1)
+        return X
+
+
+    def _calculate_WaveletC(self, graph):
+
+        A_tilde = self._get_normalized_adjacency(graph)
+        X = self._create_node_feature_matrix(graph)
+        theta = np.linspace(0.01, self.theta_max, self.eval_points)
+        X = np.outer(X, theta)
+        X = X.reshape(graph.number_of_nodes(), -1)
+        X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
+        X1=np.copy(X)
+        X2=np.copy(X)
+        feature_blocks = []
+        A_tilde=A_tilde.toarray()
+        tmp=np.copy(A_tilde)
+        
+        heat = heat_diffusion_ind(graph)
+        diff=np.copy(heat)
+        
+        for i in range(len(A_tilde)):
+            heat[i].sort()
+        for i in range(len(A_tilde)):
+            for j in range(len(A_tilde)):
+                diff[i][j]=np.exp(-np.sum(abs(heat[i]-heat[j])) )
+
+        
+        for _ in range(self.order):
+            A_tilde2=np.copy(A_tilde)
+            A_tilde3=np.copy(A_tilde)
+            for i in range(len(A_tilde2)):
+                for j in range(len(A_tilde2[i])):
+                    if(A_tilde2[i][j]>0):
+                        A_tilde2[i][j]=graph.degree(j)
+                        A_tilde3[i][j]=diff[i][j]
+            A_tilde2=normalize(A_tilde2, axis=1, norm='l1')
+            A_tilde3=normalize(A_tilde3, axis=1, norm='l1')
+
+            X1 = A_tilde2.dot(X)
+            X2 = A_tilde3.dot(X)
+            feature_blocks.append(X1)
+            feature_blocks.append(X2)
+            A_tilde=A_tilde.dot(tmp)
+        feature_blocks = np.concatenate(feature_blocks, axis=1)
+        if self.pooling == "mean":
+            feature_blocks = np.mean(feature_blocks, axis=0)
+        elif self.pooling == "min":
+            feature_blocks = np.min(feature_blocks, axis=0)
+        elif self.pooling == "max":
+            feature_blocks = np.max(feature_blocks, axis=0)
+        else:
+            raise ValueError("Wrong pooling function.")
+        return feature_blocks
+
+
+    def fit(self, graphs: List[nx.classes.graph.Graph]):
+
         self._set_seed()
-        graphs = self._check_graphs(graphs)
-        self._embedding = [self._calculate_feather(graph) for graph in graphs]
+        self._check_graphs(graphs)
+        self._embedding = [self._calculate_WaveletC(graph) for graph in tqdm(graphs)]
+
 
     def get_embedding(self) -> np.array:
-        r"""Getting the embedding of graphs.
 
-        Return types:
-            * **embedding** *(Numpy array)* - The embedding of graphs.
-        """
         return np.array(self._embedding)
