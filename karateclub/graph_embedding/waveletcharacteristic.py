@@ -8,7 +8,6 @@ from sklearn.preprocessing import normalize
 
 from karateclub.estimator import Estimator
 
-from tqdm import tqdm
 
 
 
@@ -126,7 +125,7 @@ class WaveletCharacteristic(Estimator):
 
         self._set_seed()
         self._check_graphs(graphs)
-        self._embedding = [self._calculate_WaveletC(graph) for graph in tqdm(graphs)]
+        self._embedding = [self._calculate_WaveletC(graph) for graph in graphs]
 
 
     def get_embedding(self) -> np.array:
