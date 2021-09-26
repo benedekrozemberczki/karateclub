@@ -11,16 +11,7 @@ from karateclub.estimator import Estimator
 
 
 
-def heat_diffusion_ind(graph, tau= 1):
 
-    # Compute Laplacian
-    a = nx.adjacency_matrix(graph)
-    lap = nx.laplacian_matrix(graph, nodelist=range(graph.number_of_nodes()))
-    n_nodes, _ = a.shape
-    thres = np.vectorize(lambda x : x if x > 1e-4 * 1.0 / n_nodes else 0)
-    lamb, U = np.linalg.eigh(lap.todense())
-    heat = U.dot(np.diagflat(np.exp(- tau * lamb).flatten())).dot(U.T)
-    return heat
 
 
 
@@ -61,6 +52,16 @@ class WaveletCharacteristic(Estimator):
         A_hat = D_inverse.dot(A)
         return A_hat
 
+    def _heat_diffusion_ind(self, graph):
+
+        # Compute Laplacian
+        a = nx.adjacency_matrix(graph)
+        lap = nx.laplacian_matrix(graph, nodelist=range(graph.number_of_nodes()))
+        n_nodes, _ = a.shape
+        thres = np.vectorize(lambda x : x if x > 1e-4 * 1.0 / n_nodes else 0)
+        lamb, U = np.linalg.eigh(lap.todense())
+        heat = U.dot(np.diagflat(np.exp(- self.tau * lamb).flatten())).dot(U.T)
+        return heat
 
     def _create_node_feature_matrix(self, graph):
         log_degree = np.array([math.log(graph.degree(node)+1) for node in range(graph.number_of_nodes())]).reshape(-1, 1)
@@ -83,7 +84,7 @@ class WaveletCharacteristic(Estimator):
         A_tilde=A_tilde.toarray()
         tmp=np.copy(A_tilde)
         
-        heat = heat_diffusion_ind(graph)
+        heat = self._heat_diffusion_ind(graph)
         diff=np.copy(heat)
         
         for i in range(len(A_tilde)):
