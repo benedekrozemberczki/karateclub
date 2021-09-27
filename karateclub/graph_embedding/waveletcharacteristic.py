@@ -3,16 +3,9 @@ from typing import List, Tuple
 import numpy as np
 import networkx as nx
 import scipy.sparse as sparse
-import scipy
 from sklearn.preprocessing import normalize
 
 from karateclub.estimator import Estimator
-
-
-
-
-
-
 
 
 class WaveletCharacteristic(Estimator):
@@ -27,13 +20,12 @@ class WaveletCharacteristic(Estimator):
     """
 
     def __init__(self, order: int=5, eval_points: int=25,
-                 theta_max: float=2.5, tau:float=0.5,seed: int=42, pooling: str="mean"):
+                 theta_max: float=2.5, tau:float=0.5, pooling: str="mean"):
         self.order = order
         self.eval_points = eval_points
         self.theta_max = theta_max
-        self.seed = seed
+        self.tau = tau
         self.pooling = pooling
-        self.tau=tau
 
 
     def _create_D_inverse(self, graph):
