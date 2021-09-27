@@ -119,12 +119,21 @@ class WaveletCharacteristic(Estimator):
 
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):
+        """
+        Fitting a Geometric-Scattering model.
 
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+        """
         self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_WaveletC(graph) for graph in graphs]
 
 
     def get_embedding(self) -> np.array:
+        r"""Getting the embedding of graphs.
 
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
         return np.array(self._embedding)
