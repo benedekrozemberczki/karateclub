@@ -17,10 +17,14 @@ class WaveletCharacteristic(Estimator):
 
     Args:
         order (int): Adjacency matrix powers. Default is 5.
+        eval_points (int): Number of characteristic function evaluations. Default is 5.
+        theta_max (float): Largest characteristic function time value. Default is 2.5.
+        tau (float): Wave function heat - time diffusion. Default is 1.0.
+        pooling (str): Pooling function appliead to the characteristic functions. Default is "mean".
     """
 
     def __init__(self, order: int=5, eval_points: int=25,
-                 theta_max: float=2.5, tau:float=0.5, pooling: str="mean"):
+                 theta_max: float=2.5, tau: float=1.0, pooling: str="mean"):
         self.order = order
         self.eval_points = eval_points
         self.theta_max = theta_max

@@ -2,8 +2,8 @@ from karateclub.dataset import GraphSetReader
 
 reader = GraphSetReader("reddit10k")
 
-graphs = reader.get_graphs()[0:2000]
-y = reader.get_target()[0:2000]
+graphs = reader.get_graphs()[0:200]
+y = reader.get_target()[0:200]
 
 from karateclub import WaveletCharacteristic
 
