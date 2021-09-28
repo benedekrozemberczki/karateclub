@@ -4,7 +4,6 @@ import numpy as np
 import networkx as nx
 import scipy.sparse as sparse
 from sklearn.preprocessing import normalize
-
 from karateclub.estimator import Estimator
 
 
@@ -73,22 +72,18 @@ class WaveletCharacteristic(Estimator):
         tmp = np.copy(A_tilde)
         
         heat = self._heat_diffusion_ind(graph)
-        diffusion = np.copy(heat)
-
-        for i in range(len(A_tilde)):
-            for j in range(len(A_tilde)):
-                diffusion[i][j]=np.exp(-np.sum(abs(heat[i]-heat[j])) )
-
+        
+        diffusion  = np.exp(np.sum(np.abs(heat[:, np.newaxis] - heat), axis=2))
         
         for _ in range(self.order):
             A_tilde2 = np.copy(A_tilde)
             A_tilde3 = np.copy(A_tilde)
-            A_tilde3[A_tilde2>0] = diffusion[A_tilde2>0]
             
-            for i in range(len(A_tilde2)):
-                for j in range(len(A_tilde2[i])):
-                    if A_tilde2[i][j]>0 :
-                        A_tilde2[i][j]=graph.degree(j)
+            A_tilde3[A_tilde2>0] = diffusion[A_tilde2>0]
+            degree_vector = np.array([graph.degree(node) for node in range(graph.number_of_nodes())])
+            D_rep = np.outer(degree_vector, np.ones((graph.number_of_nodes(),)))
+            A_tilde2[A_tilde2>0] = D_rep[A_tilde2>0]       
+            
             A_tilde2 = normalize(A_tilde2, axis=1, norm='l1')
             A_tilde3 = normalize(A_tilde3, axis=1, norm='l1')
 
