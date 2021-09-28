@@ -68,38 +68,35 @@ class WaveletCharacteristic(Estimator):
         X = np.outer(X, theta)
         X = X.reshape(graph.number_of_nodes(), -1)
         X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
-        X1=np.copy(X)
-        X2=np.copy(X)
         feature_blocks = []
         A_tilde=A_tilde.toarray()
-        tmp=np.copy(A_tilde)
+        tmp = np.copy(A_tilde)
         
         heat = self._heat_diffusion_ind(graph)
         diffusion = np.copy(heat)
-        
-        for i in range(len(A_tilde)):
-            heat[i].sort()
+
         for i in range(len(A_tilde)):
             for j in range(len(A_tilde)):
                 diffusion[i][j]=np.exp(-np.sum(abs(heat[i]-heat[j])) )
 
         
         for _ in range(self.order):
-            A_tilde2=np.copy(A_tilde)
-            A_tilde3=np.copy(A_tilde)
+            A_tilde2 = np.copy(A_tilde)
+            A_tilde3 = np.copy(A_tilde)
+            A_tilde3[A_tilde2>0] = diffusion[A_tilde2>0]
+            
             for i in range(len(A_tilde2)):
                 for j in range(len(A_tilde2[i])):
                     if A_tilde2[i][j]>0 :
                         A_tilde2[i][j]=graph.degree(j)
-                        A_tilde3[i][j]=diffusion[i][j]
-            A_tilde2=normalize(A_tilde2, axis=1, norm='l1')
-            A_tilde3=normalize(A_tilde3, axis=1, norm='l1')
+            A_tilde2 = normalize(A_tilde2, axis=1, norm='l1')
+            A_tilde3 = normalize(A_tilde3, axis=1, norm='l1')
 
             X1 = A_tilde2.dot(X)
             X2 = A_tilde3.dot(X)
             feature_blocks.append(X1)
             feature_blocks.append(X2)
-            A_tilde=A_tilde.dot(tmp)
+            A_tilde = A_tilde.dot(tmp)
         feature_blocks = np.concatenate(feature_blocks, axis=1)
         if self.pooling == "mean":
             feature_blocks = np.mean(feature_blocks, axis=0)
@@ -119,7 +116,6 @@ class WaveletCharacteristic(Estimator):
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
-        self._set_seed()
         self._check_graphs(graphs)
         self._embedding = [self._calculate_WaveletC(graph) for graph in graphs]
 
