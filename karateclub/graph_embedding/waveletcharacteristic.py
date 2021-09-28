@@ -72,8 +72,9 @@ class WaveletCharacteristic(Estimator):
         tmp = np.copy(A_tilde)
         
         heat = self._heat_diffusion_ind(graph)
-        
-        diffusion  = np.exp(np.sum(np.abs(heat[:, np.newaxis] - heat), axis=2))
+        diffusion = np.copy(heat)
+        diffusion  = np.exp(np.sum(np.abs(diffusion[:, np.newaxis] - diffusion), axis=2))
+
         
         for _ in range(self.order):
             A_tilde2 = np.copy(A_tilde)
