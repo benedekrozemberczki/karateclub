@@ -60,7 +60,7 @@ class WaveletCharacteristic(Estimator):
         return X
 
 
-    def _calculate_WaveletC(self, graph):
+    def _calculate_wavelet_characteristic(self, graph):
 
         A_tilde = self._get_normalized_adjacency(graph)
         X = self._create_node_feature_matrix(graph)
@@ -117,7 +117,7 @@ class WaveletCharacteristic(Estimator):
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
         """
         self._check_graphs(graphs)
-        self._embedding = [self._calculate_WaveletC(graph) for graph in graphs]
+        self._embedding = [self._calculate_wavelet_characteristic(graph) for graph in graphs]
 
 
     def get_embedding(self) -> np.array:
