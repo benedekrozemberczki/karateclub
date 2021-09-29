@@ -69,7 +69,7 @@ class WaveletCharacteristic(Estimator):
         X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
         feature_blocks = []
         A_tilde=A_tilde.toarray()
-        tmp = np.copy(A_tilde)
+        A_tilde_p = np.copy(A_tilde)
         
         heat = self._heat_diffusion_ind(graph)
         diffusion = np.copy(heat)
@@ -93,7 +93,7 @@ class WaveletCharacteristic(Estimator):
             X_2 = A_tilde_3.dot(X)
             feature_blocks.append(X_1)
             feature_blocks.append(X_2)
-            A_tilde = A_tilde.dot(tmp)
+            A_tilde = A_tilde.dot(A_tilde_p)
         feature_blocks = np.concatenate(feature_blocks, axis=1)
         if self.pooling == "mean":
             feature_blocks = np.mean(feature_blocks, axis=0)
