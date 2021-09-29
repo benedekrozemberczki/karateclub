@@ -32,7 +32,6 @@ class WaveletCharacteristic(Estimator):
 
 
     def _create_D_inverse(self, graph):
-
         index = np.arange(graph.number_of_nodes())
         values = np.array([1.0/graph.degree[node] for node in range(graph.number_of_nodes())])
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
@@ -83,7 +82,6 @@ class WaveletCharacteristic(Estimator):
             A_tilde_3 = np.copy(A_tilde)
             
             A_tilde_3[A_tilde_2>0] = diffusion[A_tilde_2>0]
-
             A_tilde_2[A_tilde_2>0] = D_rep[A_tilde_2>0]       
             
             A_tilde_2 = normalize(A_tilde_2, axis=1, norm='l1')
@@ -91,9 +89,11 @@ class WaveletCharacteristic(Estimator):
 
             X_1 = A_tilde_2.dot(X)
             X_2 = A_tilde_3.dot(X)
+            
             feature_blocks.append(X_1)
             feature_blocks.append(X_2)
             A_tilde = A_tilde.dot(A_tilde_p)
+
         feature_blocks = np.concatenate(feature_blocks, axis=1)
         if self.pooling == "mean":
             feature_blocks = np.mean(feature_blocks, axis=0)
