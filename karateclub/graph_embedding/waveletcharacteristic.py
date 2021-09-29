@@ -68,7 +68,7 @@ class WaveletCharacteristic(Estimator):
         X = X.reshape(graph.number_of_nodes(), -1)
         X = np.concatenate([np.cos(X), np.sin(X)], axis=1)
         feature_blocks = []
-        A_tilde=A_tilde.toarray()
+        A_tilde = A_tilde.toarray()
         A_tilde_p = np.copy(A_tilde)
         
         heat = self._heat_diffusion_ind(graph)
