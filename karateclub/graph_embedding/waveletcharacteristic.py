@@ -75,23 +75,24 @@ class WaveletCharacteristic(Estimator):
         diffusion = np.copy(heat)
         diffusion  = np.exp(np.sum(np.abs(diffusion[:, np.newaxis] - diffusion), axis=2))
 
+        degree_vector = np.array([graph.degree(node) for node in range(graph.number_of_nodes())])
+        D_rep = np.outer(degree_vector, np.ones((graph.number_of_nodes(),)))
         
         for _ in range(self.order):
-            A_tilde2 = np.copy(A_tilde)
-            A_tilde3 = np.copy(A_tilde)
+            A_tilde_2 = np.copy(A_tilde)
+            A_tilde_3 = np.copy(A_tilde)
             
-            A_tilde3[A_tilde2>0] = diffusion[A_tilde2>0]
-            degree_vector = np.array([graph.degree(node) for node in range(graph.number_of_nodes())])
-            D_rep = np.outer(degree_vector, np.ones((graph.number_of_nodes(),)))
-            A_tilde2[A_tilde2>0] = D_rep[A_tilde2>0]       
-            
-            A_tilde2 = normalize(A_tilde2, axis=1, norm='l1')
-            A_tilde3 = normalize(A_tilde3, axis=1, norm='l1')
+            A_tilde_3[A_tilde_2>0] = diffusion[A_tilde_2>0]
 
-            X1 = A_tilde2.dot(X)
-            X2 = A_tilde3.dot(X)
-            feature_blocks.append(X1)
-            feature_blocks.append(X2)
+            A_tilde_2[A_tilde_2>0] = D_rep[A_tilde_2>0]       
+            
+            A_tilde_2 = normalize(A_tilde_2, axis=1, norm='l1')
+            A_tilde_3 = normalize(A_tilde_3, axis=1, norm='l1')
+
+            X_1 = A_tilde_2.dot(X)
+            X_2 = A_tilde_3.dot(X)
+            feature_blocks.append(X_1)
+            feature_blocks.append(X_2)
             A_tilde = A_tilde.dot(tmp)
         feature_blocks = np.concatenate(feature_blocks, axis=1)
         if self.pooling == "mean":
