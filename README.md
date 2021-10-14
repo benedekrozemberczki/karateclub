@@ -96,7 +96,16 @@ In detail, the following community detection and embedding methods were implemen
 
 </details>
 
-**Neighbourhood-Based Node Level Embedding**
+**Proximity Preserving Node Embedding**
+
+* **[GraRep](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.grarep.GraRep)** from Cao *et al.*: [GraRep: Learning Graph Representations with Global Structural Information](https://dl.acm.org/citation.cfm?id=2806512) (CIKM 2015)
+
+* **[DeepWalk](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.deepwalk.DeepWalk)** from Perozzi *et al.*: [DeepWalk: Online Learning of Social Representations](https://arxiv.org/abs/1403.6652) (KDD 2014)
+
+* **[Node2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.node2vec.Node2Vec)** from Grover *et al.*: [node2vec: Scalable Feature Learning for Networks](https://cs.stanford.edu/~jure/pubs/node2vec-kdd16.pdf) (KDD 2016)
+
+<details>
+<summary><b>Expand to see all proximity preserving node embedding methods...</b></summary>
 
 * **[SocioDim](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.sociodim.SocioDim)** from Tang *et al.*: [Relational Learning via Latent Social Dimensions](ttp://www.public.asu.edu/~huanliu/papers/kdd09.pdf) (KDD 2009)
 
@@ -116,16 +125,12 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[HOPE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.hope.HOPE)** from Ou *et al.*: [Asymmetric Transitivity Preserving Graph Embedding](https://dl.acm.org/doi/abs/10.1145/2939672.2939751) (KDD 2016)
 
-* **[GraRep](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.grarep.GraRep)** from Cao *et al.*: [GraRep: Learning Graph Representations with Global Structural Information](https://dl.acm.org/citation.cfm?id=2806512) (CIKM 2015)
-
-* **[DeepWalk](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.deepwalk.DeepWalk)** from Perozzi *et al.*: [DeepWalk: Online Learning of Social Representations](https://arxiv.org/abs/1403.6652) (KDD 2014)
-
-* **[Node2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.node2vec.Node2Vec)** from Grover *et al.*: [node2vec: Scalable Feature Learning for Networks](https://cs.stanford.edu/~jure/pubs/node2vec-kdd16.pdf) (KDD 2016)
-
 * **[NMF-ADMM](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nmfadmm.NMFADMM)** from Sun and Févotte: [Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence](http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf) (ICASSP 2014)
 
 * **[Laplacian Eigenmaps](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.laplacianeigenmaps.LaplacianEigenmaps)** from Belkin and Niyogi: [Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering](https://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering) (NIPS 2001)
 
+</details>
+ 
 **Structural Node Level Embedding**
 
 * **[GraphWave](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.structural.graphwave.GraphWave)** from Donnat *et al.*: [Learning Structural Node Embeddings via Diffusion Wavelets](https://arxiv.org/abs/1710.10321) (KDD 2018)
