@@ -141,7 +141,7 @@ In detail, the following community detection and embedding methods were implemen
 * **[MUSAE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.musae.MUSAE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019)
 
 <details>
-<summary><b>Expand to see all overlapping implemented community detection method...</b></summary>
+<summary><b>Expand to see all attributed node embedding methods...</b></summary>
 
 * **[AE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.ae.AE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019) 
 
@@ -163,9 +163,17 @@ In detail, the following community detection and embedding methods were implemen
 
 **Graph Level Embedding**
 
-* **[WaveletCharacteristic](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.waveletcharacteristic.WaveletCharacteristic)** from Wang *et al.*: [Graph Embedding via Diffusion-Wavelets-Based Node Feature Distribution Characterization](https://arxiv.org/abs/2109.07016) (CIKM 2021)
-
 * **[FEATHER-G](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.feathergraph.FeatherGraph)** from Rozemberczki *et al.*: [Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models](https://arxiv.org/abs/2005.07959) (CIKM 2020)
+
+* **[Graph2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.graph2vec.Graph2Vec)** from Narayanan *et al.*: [Graph2Vec: Learning Distributed Representations of Graphs](https://arxiv.org/abs/1707.05005) (MLGWorkshop 2017)
+
+* **[NetLSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.netlsd.NetLSD)** from Tsitsulin *et al.*: [NetLSD: Hearing the Shape of a Graph](https://arxiv.org/abs/1805.10712) (KDD 2018)
+
+
+<details>
+<summary><b>Expand to see all whole graph embedding methods...</b></summary>
+
+* **[WaveletCharacteristic](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.waveletcharacteristic.WaveletCharacteristic)** from Wang *et al.*: [Graph Embedding via Diffusion-Wavelets-Based Node Feature Distribution Characterization](https://arxiv.org/abs/2109.07016) (CIKM 2021)
 
 * **[IGE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.ige.IGE)** from Galland *et al.*: [Invariant Embedding for Graph Classification](https://graphreason.github.io/papers/16.pdf) (ICML 2019 LRGSD Workshop)
 
@@ -175,14 +183,11 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[GL2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.gl2vec.GL2Vec)** from Chen and Koga: [GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICONIP 2019)
 
-* **[NetLSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.netlsd.NetLSD)** from Tsitsulin *et al.*: [NetLSD: Hearing the Shape of a Graph](https://arxiv.org/abs/1805.10712) (KDD 2018)
-
 * **[SF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.sf.SF)** from de Lara and Pineau: [A Simple Baseline Algorithm for Graph Classification](https://arxiv.org/abs/1810.09155) (NeurIPS RRL Workshop 2018) 
 
 * **[FGSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.fgsd.FGSD)** from Verma and Zhang: [Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs](https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs.pdf) (NeurIPS 2017)
 
-* **[Graph2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.graph2vec.Graph2Vec)** from Narayanan *et al.*: [Graph2Vec: Learning Distributed Representations of Graphs](https://arxiv.org/abs/1707.05005) (MLGWorkshop 2017)
-
+</details>
 
 Head over to our [documentation](https://karateclub.readthedocs.io) to find out more about installation and data handling, a full list of implemented methods, and datasets. For a quick start, check out our [examples](https://github.com/benedekrozemberczki/karateclub/tree/master/examples.py).
 
