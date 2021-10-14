@@ -70,12 +70,17 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[Ego-Splitting](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.ego_splitter.EgoNetSplitter)** from Epasto *et al.*: [Ego-splitting Framework: from Non-Overlapping to Overlapping Clusters](https://www.eecs.yorku.ca/course_archive/2017-18/F/6412/reading/kdd17p145.pdf) (KDD 2017)
 
+<details>
+<summary><b>Expand to see all overlapping implemented community detection method...</b></summary>
+
 * **[NNSED](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.nnsed.NNSED)** from Sun *et al.*: [A Non-negative Symmetric Encoder-Decoder Approach for Community Detection](http://www.bigdatalab.ac.cn/~shenhuawei/publications/2017/cikm-sun.pdf) (CIKM 2017)
 
 * **[BigClam](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.bigclam.BigClam)** from Yang and Leskovec: [Overlapping Community Detection at Scale: A Nonnegative Matrix Factorization Approach](http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf) (WSDM 2013)
 
 * **[SymmNMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.symmnmf.SymmNMF)** from Kuang *et al.*: [Symmetric Nonnegative Matrix Factorization for Graph Clustering](https://www.cc.gatech.edu/~hpark/papers/DaDingParkSDM12.pdf) (SDM 2012)
 
+</details>
+ 
 **Non-Overlapping Community Detection**
 
 * **[GEMSEC](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.non_overlapping.gemsec.GEMSEC)** from Rozemberczki *et al.*: [GEMSEC: Graph Embedding with Self Clustering](https://arxiv.org/abs/1802.03997) (ASONAM 2019)
@@ -84,7 +89,12 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[SCD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.non_overlapping.scd.SCD)** from Prat-Perez *et al.*: [High Quality, Scalable and Parallel Community Detectionfor Large Real Graphs](http://wwwconference.org/proceedings/www2014/proceedings/p225.pdf) (WWW 2014)
 
+<details>
+<summary><b>Expand to see all non-overlapping implemented community detection methods...</b></summary>
+
 * **[Label Propagation](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.non_overlapping.label_propagation.LabelPropagation)** from Raghavan *et al.*: [Near Linear Time Algorithm to Detect Community Structures in Large-Scale Networks](https://arxiv.org/abs/0709.2938) (Physics Review E 2007)
+
+</details>
 
 **Neighbourhood-Based Node Level Embedding**
 
