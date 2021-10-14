@@ -136,9 +136,14 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[FEATHER-N](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.feathernode.FeatherNode)** from Rozemberczki *et al.*: [Characteristic Functions on Graphs: Birds of a Feather, from Statistical Descriptors to Parametric Models](https://arxiv.org/abs/2005.07959) (CIKM 2020)
 
-* **[AE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.ae.AE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019)
+* **[TADW](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tadw.TADW)** from Yang *et al.*: [Network Representation Learning with Rich Text Information](https://www.ijcai.org/Proceedings/15/Papers/299.pdf) (IJCAI 2015)
 
 * **[MUSAE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.musae.MUSAE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019)
+
+<details>
+<summary><b>Expand to see all overlapping implemented community detection method...</b></summary>
+
+* **[AE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.ae.AE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019) 
 
 * **[FSCNMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.fscnmf.FSCNMF)** from Bandyopadhyay *et al.*: [Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks](https://arxiv.org/pdf/1804.05313.pdf) (ArXiV 2018)
 
@@ -150,8 +155,8 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[ASNE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.asne.ASNE)** from Liao *et al.*: [Attributed Social Network Embedding](https://arxiv.org/abs/1705.04969) (TKDE 2018)
 
-* **[TADW](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tadw.TADW)** from Yang *et al.*: [Network Representation Learning with Rich Text Information](https://www.ijcai.org/Proceedings/15/Papers/299.pdf) (IJCAI 2015)
-
+</details>
+ 
 **Meta Node Embedding**
 
 * **[NEU](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.meta.neu.NEU)** from Yang *et al.*: [Fast Network Embedding Enhancement via High Order Proximity Approximation](https://www.ijcai.org/Proceedings/2017/0544.pdf) (IJCAI 2017)
