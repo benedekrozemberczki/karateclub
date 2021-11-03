@@ -8,7 +8,7 @@ from karateclub.estimator import Estimator
 
 
 class WaveletCharacteristic(Estimator):
-    r"""An implementation of `"WaveCharacteristic" <https://arxiv.org/abs/2005.07959>`_
+    r"""An implementation of `"WaveCharacteristic" <https://arxiv.org/abs/2109.07016>`_
     from the CIKM '21 paper "Graph Embedding via Diffusion-Wavelets-Based Node Feature 
     Distribution Characterization". The procedure uses characteristic functions of 
     node features with wavelet function weights to describe node neighborhoods. 
