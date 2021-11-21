@@ -27,11 +27,22 @@ jobs:
         run: |
          conda install -y scipy
          pip install codecov
-         python setup.py install
-      - name: Test coverage.
-        run: |
          pip install pytest
-         pytest
-         codecov
-      - name: Code Coverage
+         python setup.py install
+      - name: Install main package
+        run: |
+          pip install -e .[test]
+      - name: Run test-suite
+        run: |
+          python -m pytest
+      - name: Generate coverage report
+        if: success()
+        run: |
+          pip install coverage
+          coverage run -m pytest
+          coverage xml
+      - name: Upload coverage report to codecov
         uses: codecov/codecov-action@v1
+        if: success()
+        with:
+          file: coverage.xml
