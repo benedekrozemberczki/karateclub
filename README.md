@@ -21,7 +21,7 @@ Please look at the **[Documentation](https://karateclub.readthedocs.io/)**, rele
 
 The newly introduced graph classification datasets are available at [SNAP](https://snap.stanford.edu/data/#disjointgraphs), [TUD Graph Kernel Datasets](https://ls11-www.cs.tu-dortmund.de/staff/morris/graphkerneldatasets), and [GraphLearning.io](https://chrsmrrs.github.io/datasets/).
 
-------------------------------------------------------------------------------
+--------------------------------------------------------------
 
 **Citing**
 
@@ -37,7 +37,7 @@ If you find *Karate Club* and the new datasets useful in your research, please c
        organization = {ACM},
 }
 ```
---------------------------------------------------------------------------------
+----------------------------------------------------------------
 
 **A simple example**
 
@@ -56,7 +56,7 @@ splitter.fit(g)
 print(splitter.get_memberships())
 ```
 
---------------------------------------------------------------------------------
+----------------------------------------------------------------
 
 **Models included**
 
