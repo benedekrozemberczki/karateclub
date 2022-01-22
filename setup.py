@@ -10,7 +10,7 @@ install_requires = [
     "scipy",
     "pygsp",
     "gensim>=4.0.0",
-    "pandas",
+    "pandas<=1.3.5",
     "six",
     "python-Levenshtein"
 ]
