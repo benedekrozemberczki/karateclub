@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 install_requires = [
     "numpy",
-    "networkx",
+    "networkx<=2.8",
     "decorator==4.4.2",
     "tqdm",
     "python-louvain",
