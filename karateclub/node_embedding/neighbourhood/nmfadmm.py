@@ -36,7 +36,7 @@ class NMFADMM(Estimator):
         """
         self._W = np.random.uniform(-0.1, 0.1, (self._V.shape[0], self.dimensions))
         self._H = np.random.uniform(-0.1, 0.1, (self.dimensions, self._V.shape[1]))
-        X_i, Y_i = sp.nonzero(self._V)
+        X_i, Y_i = np.nonzero(self._V)
         scores = self._W[X_i] * self._H[:, Y_i].T + np.random.uniform(
             0, 1, (self.dimensions,)
         )
@@ -72,7 +72,7 @@ class NMFADMM(Estimator):
         """
         Updating user_1-user_2 matrix.
         """
-        iX, iY = sp.nonzero(self._V)
+        iX, iY = np.nonzero(self._V)
         values = np.sum(self._W[iX] * self._H[:, iY].T, axis=-1)
         scores = sp.sparse.coo_matrix((values - 1, (iX, iY)), shape=self._V.shape)
         left = self.rho * scores - self._alpha_X
@@ -95,7 +95,7 @@ class NMFADMM(Estimator):
         """
         Updating target matrix dual.
         """
-        iX, iY = sp.nonzero(self._V)
+        iX, iY = np.nonzero(self._V)
         values = np.sum(self._W[iX] * self._H[:, iY].T, axis=-1)
         scores = sp.sparse.coo_matrix((values, (iX, iY)), shape=self._V.shape)
         self._alpha_X = self._alpha_X + self.rho * (self._X - scores)
