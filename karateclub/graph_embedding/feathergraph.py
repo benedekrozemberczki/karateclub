@@ -186,7 +186,7 @@ class FeatherGraph(Estimator):
         """
         return np.array(self._embedding)
 
-    def fit(self, graphs: List[nx.classes.graph.Graph]) -> np.array:
+    def infer(self, graphs: List[nx.classes.graph.Graph]) -> np.array:
         """
         Inferring graph embeddings with a graph level FEATHER model.
 
