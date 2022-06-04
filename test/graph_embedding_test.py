@@ -21,6 +21,8 @@ def test_feather_graph():
 
     graphs = [nx.newman_watts_strogatz_graph(150, 5, 0.3) for _ in range(100)]
 
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(75)]
+
     model = FeatherGraph(order=3)
 
     model.fit(graphs)
@@ -57,6 +59,12 @@ def test_feather_graph():
     assert embedding.shape[1] == 4 * model.order * model.eval_points
     assert type(embedding) == np.ndarray
 
+    new_embedding = model.infer(new_graphs)
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == 4 * model.order * model.eval_points
+    assert type(new_embedding) == np.ndarray
+
 
 def test_fgsd():
     """
@@ -84,20 +92,35 @@ def test_fgsd():
     assert embedding.shape[1] == model.hist_bins
     assert type(embedding) == np.ndarray
 
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(75)]
+
+    new_embedding = model.infer(new_graphs)
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == model.hist_bins
+    assert type(new_embedding) == np.ndarray
+
 
 def test_graph2vec():
     """
     Test the Graph2Vec embedding.
     """
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(130)]
 
     model = Graph2Vec()
 
     model.fit(graphs)
     embedding = model.get_embedding()
 
+    new_embedding = model.infer(new_graphs)
+
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == model.dimensions
 
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
@@ -116,6 +139,13 @@ def test_graph2vec():
         nx.set_node_attributes(graph, {j: str(j) for j in range(50)}, "feature")
         graphs.append(graph)
 
+    new_graphs = []
+
+    for _ in range(50):
+        graph = nx.newman_watts_strogatz_graph(75, 10, 0.2)
+        nx.set_node_attributes(graph, {j: str(j) for j in range(75)}, "feature")
+        new_graphs.append(graph)
+
     model = Graph2Vec(attributed=True)
 
     model.fit(graphs)
@@ -124,6 +154,12 @@ def test_graph2vec():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
+    new_embedding = model.infer(new_graphs)
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == model.dimensions
+    assert type(new_embedding) == np.ndarray
 
 
 def test_gl2vec():
@@ -143,14 +179,23 @@ def test_gl2vec():
 
     graphs = [nx.newman_watts_strogatz_graph(150, 5, 0.3) for _ in range(100)]
 
+    new_graphs = [nx.newman_watts_strogatz_graph(30, 5, 0.3) for _ in range(100)]
+
     model = GL2Vec(dimensions=16)
 
     model.fit(graphs)
     embedding = model.get_embedding()
 
+    new_embedding = model.infer(new_graphs)
+
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == model.dimensions
+    assert type(new_embedding) == np.ndarray
+
 
 
 def test_ldp():
@@ -178,6 +223,15 @@ def test_ldp():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == 5 * model.bins
     assert type(embedding) == np.ndarray
+
+
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(75)]
+    
+    new_embedding = model.infer(new_graphs)
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == 5 * model.bins
+    assert type(new_embedding) == np.ndarray
 
 
 def test_sf():
