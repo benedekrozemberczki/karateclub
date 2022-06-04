@@ -75,7 +75,7 @@ class Graph2Vec(Estimator):
             for i, doc in enumerate(documents)
         ]
 
-        model = Doc2Vec(
+        self.model = Doc2Vec(
             documents,
             vector_size=self.dimensions,
             window=0,
@@ -88,7 +88,7 @@ class Graph2Vec(Estimator):
             seed=self.seed,
         )
 
-        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+        self._embedding = [self.model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
     def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.
@@ -97,3 +97,29 @@ class Graph2Vec(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
+
+    def infer(self, graphs) -> np.array:
+        """Infer the graph embeddings.
+    
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
+        self._set_seed()
+        graphs = self._check_graphs(graphs)
+        documents = [
+            WeisfeilerLehmanHashing(
+                graph, self.wl_iterations, self.attributed, self.erase_base_features
+            )
+            for graph in graphs
+        ]
+
+        documents = [
+            doc.get_graph_features() for doc in enumerate(documents)
+        ]
+
+        embedding = np.array([self.model.infer_vector(doc, alpha=self.learning_rate, min_alpha=0.0001, epochs=self.epochs) for doc in documents])
+        return embedding
+
