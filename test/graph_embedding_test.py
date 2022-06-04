@@ -251,6 +251,8 @@ def test_sf():
 
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
 
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(100)]
+
     model = SF(dimensions=128)
 
     model.fit(graphs)
@@ -259,6 +261,13 @@ def test_sf():
     assert embedding.shape[0] == len(graphs)
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+
+    new_embedding = model.infer(new_graphs)
+
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == model.dimensions
+    assert type(new_embedding) == np.ndarray
+
 
 
 def test_netlsd():
@@ -277,6 +286,8 @@ def test_netlsd():
     assert type(embedding) == np.ndarray
 
     graphs = [nx.newman_watts_strogatz_graph(500, 5, 0.3) for _ in range(100)]
+    new_graphs = [nx.newman_watts_strogatz_graph(500, 5, 0.3) for _ in range(100)]
+
 
     model = NetLSD()
 
@@ -287,12 +298,18 @@ def test_netlsd():
     assert embedding.shape[1] == model.scale_steps
     assert type(embedding) == np.ndarray
 
+    new_embedding = model.infer(new_graphs)
+    assert new_embedding.shape[0] == len(new_graphs)
+    assert new_embedding.shape[1] == model.scale_steps
+    assert type(new_embedding) == np.ndarray
+
 
 def test_geoscattering():
     """
     Test the GeoScattering embedding.
     """
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(10)]
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(10)]
 
     for order in range(4, 20):
         for moment in range(4, 7):
@@ -312,20 +329,29 @@ def test_geoscattering():
             assert embedding.shape[1] == feature_count
             assert type(embedding) == np.ndarray
 
+            new_embedding = model.infer(new_graphs)
+
+            assert new_embedding.shape[0] == len(new_graphs)
+            assert new_embedding.shape[1] == feature_count
+            assert type(new_embedding) == np.ndarray
+
 
 def test_ige():
     """
     Test the IGE embedding.
     """
     graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(10)]
+    new_graphs = [nx.newman_watts_strogatz_graph(50, 5, 0.3) for _ in range(10)]
 
-    for order in range(4, 20):
-        for moment in range(4, 7):
+    model = IGE()
 
-            model = IGE()
+    model.fit(graphs)
+    embedding = model.get_embedding()
 
-            model.fit(graphs)
-            embedding = model.get_embedding()
+    new_embedding = model.infer(new_graphs)
 
-            assert embedding.shape[0] == len(graphs)
-            assert type(embedding) == np.ndarray
+    assert embedding.shape[0] == len(graphs)
+    assert type(embedding) == np.ndarray
+
+    assert new_embedding.shape[0] == len(graphs)
+    assert type(new_embedding) == np.ndarray
