@@ -121,11 +121,10 @@ class Graph2Vec(Estimator):
         embedding = np.array(
             [
                 self.model.infer_vector(
-                    doc, alpha=self.learning_rate, min_alpha=0.0001, epochs=self.epochs
+                    doc, alpha=self.learning_rate, min_alpha=0.00001, epochs=self.epochs
                 )
                 for doc in documents
             ]
         )
 
         return embedding
-
