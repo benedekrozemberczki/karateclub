@@ -116,7 +116,9 @@ class Graph2Vec(Estimator):
             for graph in graphs
         ]
 
-        documents = [doc.get_graph_features() for doc in enumerate(documents)]
+        documents = [doc.get_graph_features() for _, doc in enumerate(documents)]
+
+        print(documents)
 
         embedding = np.array(
             [

@@ -125,12 +125,12 @@ class GL2Vec(Estimator):
         graphs = [self._create_line_graph(graph) for graph in graphs]
         documents = [
             WeisfeilerLehmanHashing(
-                graph, self.wl_iterations, self.attributed, self.erase_base_features
+                graph, self.wl_iterations, False, self.erase_base_features
             )
             for graph in graphs
         ]
 
-        documents = [doc.get_graph_features() for doc in enumerate(documents)]
+        documents = [doc.get_graph_features() for _, doc in enumerate(documents)]
 
         embedding = np.array(
             [
