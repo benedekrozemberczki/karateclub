@@ -185,3 +185,18 @@ class FeatherGraph(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
+
+    def fit(self, graphs: List[nx.classes.graph.Graph]) -> np.array:
+        """
+        Inferring graph embeddings with a graph level FEATHER model.
+
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
+        self._set_seed()
+        graphs = self._check_graphs(graphs)
+        embedding = np.array([self._calculate_feather(graph) for graph in graphs])
+        return embedding
