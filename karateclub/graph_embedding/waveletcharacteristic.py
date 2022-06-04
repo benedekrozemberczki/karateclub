@@ -141,7 +141,7 @@ class WaveletCharacteristic(Estimator):
 
     def infer(self, graphs: List[nx.classes.graph.Graph]) -> np.array:
         """Infer the graph embeddings.
-    
+
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
 
@@ -149,7 +149,7 @@ class WaveletCharacteristic(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         self._check_graphs(graphs)
-        embedding = np.array([
-            self._calculate_wavelet_characteristic(graph) for graph in graphs
-        ])
+        embedding = np.array(
+            [self._calculate_wavelet_characteristic(graph) for graph in graphs]
+        )
         return embedding

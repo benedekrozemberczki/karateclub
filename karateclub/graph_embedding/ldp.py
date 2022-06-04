@@ -5,6 +5,7 @@ import networkx as nx
 from karateclub.estimator import Estimator
 from typing import List
 
+
 class LDP(Estimator):
     r"""An implementation of `"LDP" <https://arxiv.org/abs/1811.03508>`_ from the
     ICLR Representation Learning on Graphs and Manifolds Workshop '19 paper "A
