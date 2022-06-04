@@ -36,7 +36,7 @@ class FGSD(Estimator):
         fL = np.linalg.pinv(L)
         ones = np.ones(L.shape[0])
         S = np.outer(np.diag(fL), ones) + np.outer(ones, np.diag(fL)) - 2 * fL
-        hist, bin_edges = np.histogram(
+        hist, _ = np.histogram(
             S.flatten(), bins=self.hist_bins, range=self.hist_range
         )
         return hist
@@ -59,3 +59,17 @@ class FGSD(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
+
+    def infer(self, graphs: List[nx.classes.graph.Graph]) -> np.array:
+        """
+        Inferring the embedding for a list of graphs.
+
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
+        self._set_seed()
+        graphs = self._check_graphs(graphs)
+        embedding = np.array([self._calculate_fgsd(graph) for graph in graphs])
+        return embedding
