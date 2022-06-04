@@ -1,8 +1,9 @@
 """Local Degree Profile based embedding."""
 
 import numpy as np
+import networkx as nx
 from karateclub.estimator import Estimator
-
+from typing import List
 
 class LDP(Estimator):
     r"""An implementation of `"LDP" <https://arxiv.org/abs/1811.03508>`_ from the
@@ -64,3 +65,16 @@ class LDP(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
+
+    def infer(self, graphs: List[nx.classes.graph.Graph]):
+        r"""Infer the embedding of graphs.
+
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
+        graphs = self._check_graphs(graphs)
+        embedding = np.array([self._calculate_ldp(graph) for graph in graphs])
+        return embedding
