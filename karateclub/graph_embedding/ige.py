@@ -185,3 +185,19 @@ class IGE(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return self._embedding
+
+    def infer(self, graphs: List[nx.classes.graph.Graph]) -> np.array:
+        r"""Infer the embedding of graphs.
+
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
+        self._set_seed()
+        graphs = self._check_graphs(graphs)
+        embedding = np.array([
+            self._calculate_invariant_embedding(graph) for graph in graphs
+        ])
+        return embedding
