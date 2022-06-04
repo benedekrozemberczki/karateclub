@@ -32,7 +32,7 @@ class MNMF(Estimator):
         alpha: float = 0.05,
         beta: float = 0.05,
         iterations: int = 200,
-        lower_control: float = 10 ** -15,
+        lower_control: float = 10**-15,
         eta: float = 5.0,
         seed: int = 42,
     ):

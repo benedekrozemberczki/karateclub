@@ -30,7 +30,7 @@ class FSCNMF(Estimator):
     def __init__(
         self,
         dimensions: int = 32,
-        lower_control: float = 10 ** -15,
+        lower_control: float = 10**-15,
         iterations: int = 500,
         alpha_1: float = 1000.0,
         alpha_2: float = 1.0,

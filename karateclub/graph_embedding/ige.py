@@ -197,7 +197,7 @@ class IGE(Estimator):
         """
         self._set_seed()
         graphs = self._check_graphs(graphs)
-        embedding = np.array([
-            self._calculate_invariant_embedding(graph) for graph in graphs
-        ])
+        embedding = np.array(
+            [self._calculate_invariant_embedding(graph) for graph in graphs]
+        )
         return embedding

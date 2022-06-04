@@ -24,7 +24,7 @@ class TENE(Estimator):
     def __init__(
         self,
         dimensions=32,
-        lower_control=10 ** -15,
+        lower_control=10**-15,
         alpha=0.1,
         beta=0.1,
         iterations=200,

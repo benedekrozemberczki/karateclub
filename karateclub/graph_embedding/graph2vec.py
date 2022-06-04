@@ -88,8 +88,7 @@ class Graph2Vec(Estimator):
             seed=self.seed,
         )
 
-        self._embedding = [model.docvecs[str(i)]
-                           for i, _ in enumerate(documents)]
+        self._embedding = [model.docvecs[str(i)] for i, _ in enumerate(documents)]
 
     def get_embedding(self) -> np.array:
         r"""Getting the embedding of graphs.

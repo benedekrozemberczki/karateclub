@@ -36,9 +36,7 @@ class FGSD(Estimator):
         fL = np.linalg.pinv(L)
         ones = np.ones(L.shape[0])
         S = np.outer(np.diag(fL), ones) + np.outer(ones, np.diag(fL)) - 2 * fL
-        hist, _ = np.histogram(
-            S.flatten(), bins=self.hist_bins, range=self.hist_range
-        )
+        hist, _ = np.histogram(S.flatten(), bins=self.hist_bins, range=self.hist_range)
         return hist
 
     def fit(self, graphs: List[nx.classes.graph.Graph]):

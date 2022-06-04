@@ -74,7 +74,7 @@ class SymmNMF(Estimator):
         non_zero = graph.nonzero()[0].shape[0]
         self._H = np.random.uniform(
             0,
-            non_zero / (number_of_nodes ** 2),
+            non_zero / (number_of_nodes**2),
             size=(number_of_nodes, self.dimensions),
         )
         self._H_gamma = np.zeros((number_of_nodes, self.dimensions))

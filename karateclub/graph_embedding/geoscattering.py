@@ -69,7 +69,7 @@ class GeoScattering(Estimator):
             * **Psi** *(List of Scipy arrays)* - The wavelet matrices.
         """
         Psi = [
-            A_hat.power(2 ** power) - A_hat.power(2 ** (power + 1))
+            A_hat.power(2**power) - A_hat.power(2 ** (power + 1))
             for power in range(self.order + 1)
         ]
         return Psi

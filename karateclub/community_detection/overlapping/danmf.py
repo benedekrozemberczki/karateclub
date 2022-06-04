@@ -115,7 +115,7 @@ class DANMF(Estimator):
             R = self._U_s[0].dot(self._Q_s[1].dot(self._VpVpT).dot(self._Q_s[1].T))
             R = R + self._A_sq.dot(self._U_s[0].dot(self._Q_s[1].dot(self._Q_s[1].T)))
             Ru = 2 * self._A.dot(self._V_s[self._p - 1].T.dot(self._Q_s[1].T))
-            self._U_s[0] = (self._U_s[0] * Ru) / np.maximum(R, 10 ** -10)
+            self._U_s[0] = (self._U_s[0] * Ru) / np.maximum(R, 10**-10)
         else:
             R = (
                 self._P.T.dot(self._P)
@@ -130,7 +130,7 @@ class DANMF(Estimator):
             Ru = 2 * self._A.dot(self._P).T.dot(self._V_s[self._p - 1].T).dot(
                 self._Q_s[i + 1].T
             )
-            self._U_s[i] = (self._U_s[i] * Ru) / np.maximum(R, 10 ** -10)
+            self._U_s[i] = (self._U_s[i] * Ru) / np.maximum(R, 10**-10)
 
     def _update_P(self, i):
         """
@@ -154,14 +154,14 @@ class DANMF(Estimator):
         if i < self._p - 1:
             Vu = 2 * self._A.dot(self._P).T
             Vd = self._P.T.dot(self._P).dot(self._V_s[i]) + self._V_s[i]
-            self._V_s[i] = self._V_s[i] * Vu / np.maximum(Vd, 10 ** -10)
+            self._V_s[i] = self._V_s[i] * Vu / np.maximum(Vd, 10**-10)
         else:
             Vu = (
                 2 * self._A.dot(self._P).T + (self.lamb * self._A.dot(self._V_s[i].T)).T
             )
             Vd = self._P.T.dot(self._P).dot(self._V_s[i])
             Vd = Vd + self._V_s[i] + (self.lamb * self._D.dot(self._V_s[i].T)).T
-            self._V_s[i] = self._V_s[i] * Vu / np.maximum(Vd, 10 ** -10)
+            self._V_s[i] = self._V_s[i] * Vu / np.maximum(Vd, 10**-10)
 
     def _setup_VpVpT(self):
         self._VpVpT = self._V_s[self._p - 1].dot(self._V_s[self._p - 1].T)

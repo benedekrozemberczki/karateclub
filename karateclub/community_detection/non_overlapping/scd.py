@@ -17,7 +17,7 @@ class SCD(Estimator):
         seed (int): Random seed value. Default is 42.
     """
 
-    def __init__(self, iterations: int = 25, eps: float = 10 ** -6, seed: int = 42):
+    def __init__(self, iterations: int = 25, eps: float = 10**-6, seed: int = 42):
         self.iterations = iterations
         self.eps = eps
         self.seed = seed
@@ -40,7 +40,7 @@ class SCD(Estimator):
         """
         self._clustering_coefficient = nx.clustering(self._graph)
         self._cc_pairs = [
-            (node_cc ** 0.5, node)
+            (node_cc**0.5, node)
             for node, node_cc in self._clustering_coefficient.items()
         ]
         self._cc_pairs = sorted(self._cc_pairs, key=lambda tup: tup[0])[::-1]
@@ -102,7 +102,7 @@ class SCD(Estimator):
         """
         theta_1_enum = (r - 1) * d + 1 + q
         theta_1_denom = (r + q) * (
-            (r - 1) * (r - 2) * (d ** 3)
+            (r - 1) * (r - 2) * (d**3)
             + (d_in - 1) * d
             + q * (q - 1) * (d + 1) * self._omega
             + d_out * self._omega
@@ -115,7 +115,7 @@ class SCD(Estimator):
         """
         Calculating the 2nd WCC component.
         """
-        theta_2_left_enum = (r - 1) * (r - 2) * (d ** 3)
+        theta_2_left_enum = (r - 1) * (r - 2) * (d**3)
         theta_2_left_denom = (
             theta_2_left_enum
             + q * (q - 1) * self._omega

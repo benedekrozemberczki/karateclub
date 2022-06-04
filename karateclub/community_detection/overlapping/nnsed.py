@@ -25,7 +25,7 @@ class NNSED(Estimator):
         dimensions: int = 32,
         iterations: int = 10,
         seed: int = 42,
-        noise: float = 10 ** -6,
+        noise: float = 10**-6,
     ):
         self.dimensions = dimensions
         self.iterations = iterations
