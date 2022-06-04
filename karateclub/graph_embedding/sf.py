@@ -56,8 +56,7 @@ class SF(Estimator):
         return embedding
 
     def fit(self, graphs):
-        """
-        Fitting an SF model.
+        """Fitting an SF model.
 
         Arg types:
             * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
@@ -73,3 +72,16 @@ class SF(Estimator):
             * **embedding** *(Numpy array)* - The embedding of graphs.
         """
         return np.array(self._embedding)
+
+    def infer(self, graphs) -> np.array:
+        """Inferring the embedding vectors.
+
+        Arg types:
+            * **graphs** *(List of NetworkX graphs)* - The graphs to be embedded.
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of graphs.
+        """
+        self._set_seed()
+        graphs = self._check_graphs(graphs)
+        embedding = np.array([self._calculate_sf(graph) for graph in graphs])
+        return embedding
