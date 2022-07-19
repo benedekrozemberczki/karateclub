@@ -7,12 +7,12 @@ from karateclub.estimator import Estimator
 class NEU(Estimator):
     r"""An implementation of `"NEU" <https://www.ijcai.org/Proceedings/2017/0544.pdf>`_
     from the IJCAI 17 paper "Fast Network Embedding Enhancement via High Order Proximity Approximation".
-    The procedure uses an arbitrary embedding and augments it by higher order proximities wiht a recursive
+    The procedure uses an arbitrary embedding and augments it by higher order proximities with a recursive
     meta learning algorithm.
 
     Args:
         L1 (float): Weight of lower order proximities. Defauls is 0.5
-        L2 (float): Weight of higer order proximities. Default is 0.25.
+        L2 (float): Weight of higher order proximities. Default is 0.25.
         T (int): Number of iterations. Default is 1.
         seed (int): Random seed value. Default is 42.
     """

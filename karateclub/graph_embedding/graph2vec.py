@@ -10,7 +10,7 @@ class Graph2Vec(Estimator):
     r"""An implementation of `"Graph2Vec" <https://arxiv.org/abs/1707.05005>`_
     from the MLGWorkshop '17 paper "Graph2Vec: Learning Distributed Representations of Graphs".
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
-    these features a document (graph) - feature co-occurence matrix is decomposed in order
+    these features a document (graph) - feature co-occurrence matrix is decomposed in order
     to generate representations for the graphs.
 
     The procedure assumes that nodes have no string feature present and the WL-hashing
