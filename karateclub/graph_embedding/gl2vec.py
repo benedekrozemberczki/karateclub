@@ -11,7 +11,7 @@ class GL2Vec(Estimator):
     from the ICONIP '19 paper "GL2vec: Graph Embedding Enriched by Line Graphs with Edge Features".
     First, the algorithm creates the line graph of each graph in the graph dataset.
     The procedure creates Weisfeiler-Lehman tree features for nodes in graphs. Using
-    these features a document (graph) - feature co-occurence matrix is decomposed in order
+    these features a document (graph) - feature co-occurrence matrix is decomposed in order
     to generate representations for the graphs.
 
     The procedure assumes that nodes have no string feature present and the WL-hashing
