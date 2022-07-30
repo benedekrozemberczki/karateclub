@@ -41,7 +41,7 @@ class LaplacianEigenmaps(Estimator):
             L_tilde,
             k=self.dimensions,
             which="SM",
-            maxiter=self.maximum_number_of_iterations,
+            maxiter=self.maximum_number_of_iterations * number_of_nodes,
             return_eigenvectors=True
         )
 
