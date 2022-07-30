@@ -12,12 +12,18 @@ class LaplacianEigenmaps(Estimator):
 
     Args:
         dimensions (int): Dimensionality of embedding. Default is 128.
+        maximum_number_of_iterations (int): Maximum number of iterations to execute with ARPACK. The value will be multiplied by the number of nodes.
         seed (int): Random seed value. Default is 42.
     """
 
-    def __init__(self, dimensions: int = 128, seed: int = 42):
-
+    def __init__(
+        self,
+        dimensions: int = 128,
+        maximum_number_of_iterations: int = 100,
+        seed: int = 42
+    ):
         self.dimensions = dimensions
+        self.maximum_number_of_iterations = maximum_number_of_iterations
         self.seed = seed
 
     def fit(self, graph: nx.classes.graph.Graph):
@@ -32,7 +38,11 @@ class LaplacianEigenmaps(Estimator):
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
         _, self._embedding = sps.linalg.eigsh(
-            L_tilde, k=self.dimensions, which="SM", return_eigenvectors=True
+            L_tilde,
+            k=self.dimensions,
+            which="SM",
+            maxiter=self.maximum_number_of_iterations,
+            return_eigenvectors=True
         )
 
     def get_embedding(self) -> np.array:
