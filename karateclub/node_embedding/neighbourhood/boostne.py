@@ -1,4 +1,3 @@
-from sqlite3 import NotSupportedError
 import numpy as np
 import networkx as nx
 from scipy import sparse
@@ -146,7 +145,7 @@ class BoostNE(Estimator):
                 verbose=False,
             )
         else:
-            raise NotSupportedError(
+            raise NotImplementedError(
                 "The version of Scikit-learn installed "
                 "on this device is not currently supported. "
                 "More specifically, in older version of the NMF "
