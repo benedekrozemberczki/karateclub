@@ -23,7 +23,7 @@ class BigClam(Estimator):
         self,
         dimensions: int = 8,
         iterations: int = 50,
-        learning_rate: int = 0.005,
+        learning_rate: float = 0.005,
         seed: int = 42,
     ):
         self.dimensions = dimensions
