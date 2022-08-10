@@ -1,10 +1,9 @@
-import math
-import random
 import numpy as np
 import networkx as nx
 from scipy import sparse
 from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
+from inspect import getfullargspec
 
 
 class BoostNE(Estimator):
@@ -128,9 +127,34 @@ class BoostNE(Estimator):
             * **scores** *(COO Scipy matrix)* - The residual scores.
             * **W** *(Numpy array)* - The embedding matrix.
         """
-        model = NMF(
-            n_components=self.dimensions, init="random", verbose=False, alpha=self.alpha
-        )
+        
+        parameter_names = getfullargspec(NMF).args
+
+        if "alpha" in parameter_names:
+            model = NMF(
+                n_components=self.dimensions,
+                init="random",
+                alpha=self.alpha,
+                verbose=False,
+            )
+        elif "alpha_W" in parameter_names:
+            model = NMF(
+                n_components=self.dimensions,
+                init="random",
+                alpha_W=self.alpha,
+                verbose=False,
+            )
+        else:
+            raise NotImplementedError(
+                "The version of Scikit-learn installed "
+                "on this device is not currently supported. "
+                "More specifically, in older version of the NMF "
+                "method a parameter called `alpha` was available "
+                "and it has been replaced with a second parameter "
+                "called `alpha_W`. In the installed version neither "
+                "parameters were found, and it is therefore unclear "
+                "as to how we should proceed."
+            )
 
         W = model.fit_transform(new_residuals)
         H = model.components_
