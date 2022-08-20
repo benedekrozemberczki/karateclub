@@ -3,7 +3,7 @@ import networkx as nx
 from scipy import sparse
 from sklearn.decomposition import NMF
 from karateclub.estimator import Estimator
-from inspect import getfullargspec
+from inspect import signature
 
 
 class BoostNE(Estimator):
@@ -128,7 +128,7 @@ class BoostNE(Estimator):
             * **W** *(Numpy array)* - The embedding matrix.
         """
         
-        parameter_names = getfullargspec(NMF).args
+        parameter_names = signature(NMF).parameters
 
         if "alpha" in parameter_names:
             model = NMF(
