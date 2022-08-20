@@ -2,6 +2,7 @@ import random
 import numpy as np
 import networkx as nx
 from typing import List
+import re
 
 """General Estimator base class."""
 
@@ -30,6 +31,13 @@ class Estimator(object):
     def get_cluster_centers(self):
         """Getting the cluster centers."""
         pass
+    
+    def get_params(self):
+        """Get parameter dictionary for this estimator.."""
+        rx = re.compile(r'^\_')
+        params = self.__dict__
+        params = {key: params[key] for key in params if not rx.search(key)}
+        return params
 
     def _set_seed(self):
         """Creating the initial random seed."""
