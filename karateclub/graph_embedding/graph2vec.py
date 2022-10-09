@@ -118,8 +118,6 @@ class Graph2Vec(Estimator):
 
         documents = [doc.get_graph_features() for _, doc in enumerate(documents)]
 
-        print(documents)
-
         embedding = np.array(
             [
                 self.model.infer_vector(
