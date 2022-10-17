@@ -12,3 +12,5 @@ from .hope import HOPE
 from .sociodim import SocioDim
 from .nodesketch import NodeSketch
 from .geometriclaplacianeigenmaps import GLEE
+from .first_order_line import FirstOrderLINE
+from .second_order_line import SecondOrderLINE

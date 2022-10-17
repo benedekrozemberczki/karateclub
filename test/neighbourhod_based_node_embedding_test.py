@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from karateclub import DeepWalk, Walklets, HOPE, NetMF, Diff2Vec, GraRep, Node2Vec
+from karateclub import DeepWalk, Walklets, HOPE, NetMF, Diff2Vec, GraRep, Node2Vec, FirstOrderLINE, SecondOrderLINE
 from karateclub import NodeSketch, LaplacianEigenmaps, NMFADMM, GLEE, RandNE, SocioDim
 
 
@@ -79,6 +79,62 @@ def test_deepwalk():
     assert type(embedding) == np.ndarray
 
     model = DeepWalk(dimensions=32)
+
+    graph = nx.watts_strogatz_graph(150, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
+def test_first_order_line():
+    """
+    Testing the First-order LINE class.
+    """
+    model = FirstOrderLINE()
+
+    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
+    model = FirstOrderLINE(dimensions=32)
+
+    graph = nx.watts_strogatz_graph(150, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
+def test_second_order_line():
+    """
+    Testing the Second-order LINE class.
+    """
+    model = SecondOrderLINE()
+
+    graph = nx.watts_strogatz_graph(100, 10, 0.5)
+
+    model.fit(graph)
+
+    embedding = model.get_embedding()
+
+    assert embedding.shape[0] == graph.number_of_nodes()
+    assert embedding.shape[1] == model.dimensions
+    assert type(embedding) == np.ndarray
+
+    model = SecondOrderLINE(dimensions=32)
 
     graph = nx.watts_strogatz_graph(150, 10, 0.5)
 
