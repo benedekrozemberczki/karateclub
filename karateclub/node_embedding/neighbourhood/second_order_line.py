@@ -4,8 +4,8 @@ from karateclub.estimator import Estimator
 from tqdm.auto import trange
 
 
-class FirstOrderLINE(Estimator):
-    r"""An implementation of `"First-order LINE" <https://arxiv.org/abs/1503.03578>`_
+class SecondOrderLINE(Estimator):
+    r"""An implementation of `"Second-order LINE" <https://arxiv.org/abs/1503.03578>`_
     from the paper "LINE: Large-scale Information Network Embedding".
 
     Args:
@@ -35,22 +35,25 @@ class FirstOrderLINE(Estimator):
         self.learning_rate_decay = learning_rate_decay
         self.seed = seed
         self.verbose = verbose
-        self.embedding = None
+        self.src_embedding = None
+        self.dst_embedding = None
 
     def _update(
         self,
-        embedding: np.ndarray,
+        src_embedding: np.ndarray,
+        dst_embedding: np.ndarray,
         edges: np.ndarray,
-        gradient: np.ndarray,
+        src_gradient: np.ndarray,
+        dst_gradient: np.ndarray,
         label: int
     ) -> np.ndarray:
         """Updates the provided gradient."""
-        src_embedding = embedding[edges[:, 0]]
-        dst_embedding = embedding[edges[:, 1]]
+        src_embedding = src_embedding[edges[:, 0]]
+        dst_embedding = dst_embedding[edges[:, 1]]
         dots = (src_embedding * dst_embedding).sum(axis=1)
         activations = (1.0 / (1.0 + np.exp(-dots)) - label)
-        gradient[edges[:, 0]] += activations.reshape(-1, 1) * dst_embedding
-        gradient[edges[:, 1]] += activations.reshape(-1, 1) * src_embedding
+        src_gradient[edges[:, 0]] += activations.reshape(-1, 1) * dst_embedding
+        dst_gradient[edges[:, 1]] += activations.reshape(-1, 1) * src_embedding
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
@@ -66,11 +69,13 @@ class FirstOrderLINE(Estimator):
         edges = np.array(graph.edges(data=False))
         number_of_edges = edges.shape[0]
 
-        self.embedding = np.random.uniform(size=(number_of_nodes, self.dimensions))
+        self.src_embedding = np.random.uniform(size=(number_of_nodes, self.dimensions // 2))
+        self.dst_embedding = np.random.uniform(size=(number_of_nodes, self.dimensions // 2))
 
         for epoch in trange(self.epochs, desc="Epochs", disable=not self.verbose):
             for _ in range(number_of_edges // self.mini_batch_size):
-                gradient = np.zeros_like(self.embedding)
+                src_gradient = np.zeros_like(self.src_embedding)
+                dst_gradient = np.zeros_like(self.dst_embedding)
 
                 positive_batch = edges[
                     np.random.randint(
@@ -78,15 +83,16 @@ class FirstOrderLINE(Estimator):
                         size=self.mini_batch_size//2
                     )
                 ]
-                self._update(self.embedding, positive_batch, gradient, label=1)
+                self._update(self.src_embedding, self.dst_embedding, positive_batch, src_gradient, dst_gradient, label=1)
                 
                 negative_batch = np.random.randint(
                     number_of_nodes,
                     size=(self.mini_batch_size//2, 2)
                 )
-                self._update(self.embedding, negative_batch, gradient, label=0)
+                self._update(self.src_embedding, self.dst_embedding, negative_batch, src_gradient, dst_gradient, label=0)
 
-                self.embedding -= (self.learning_rate * self.learning_rate_decay**epoch)*gradient
+                self.src_embedding -= (self.learning_rate * self.learning_rate_decay**epoch)*src_gradient
+                self.dst_embedding -= (self.learning_rate * self.learning_rate_decay**epoch)*dst_gradient
 
 
     def get_embedding(self) -> np.array:
@@ -95,4 +101,7 @@ class FirstOrderLINE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        return self.embedding
+        return np.hstack([
+            self.src_embedding,
+            self.dst_embedding
+        ])
