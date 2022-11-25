@@ -116,7 +116,7 @@ In detail, the following community detection and embedding methods were implemen
 * **[NMF-ADMM](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.nmfadmm.NMFADMM)** from Sun and Févotte: [Alternating Direction Method of Multipliers for Non-Negative Matrix Factorization with the Beta-Divergence](http://statweb.stanford.edu/~dlsun/papers/nmf_admm.pdf) (ICASSP 2014)
 
 * **[Laplacian Eigenmaps](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.neighbourhood.laplacianeigenmaps.LaplacianEigenmaps)** from Belkin and Niyogi: [Laplacian Eigenmaps and Spectral Techniques for Embedding and Clustering](https://papers.nips.cc/paper/1961-laplacian-eigenmaps-and-spectral-techniques-for-embedding-and-clustering) (NIPS 2001)
- 
+
 **Structural Node Level Embedding**
 
 * **[GraphWave](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.structural.graphwave.GraphWave)** from Donnat *et al.*: [Learning Structural Node Embeddings via Diffusion Wavelets](https://arxiv.org/abs/1710.10321) (KDD 2018)
@@ -131,7 +131,7 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[MUSAE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.musae.MUSAE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019)
 
-* **[AE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.ae.AE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019) 
+* **[AE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.ae.AE)** from Rozemberczki *et al.*: [Multi-Scale Attributed Node Embedding](https://arxiv.org/abs/1909.13021) (Arxiv 2019)
 
 * **[FSCNMF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.fscnmf.FSCNMF)** from Bandyopadhyay *et al.*: [Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks](https://arxiv.org/pdf/1804.05313.pdf) (ArXiV 2018)
 
@@ -142,7 +142,7 @@ In detail, the following community detection and embedding methods were implemen
 * **[TENE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.tene.TENE)** from Yang *et al.*: [Enhanced Network Embedding with Text Information](https://ieeexplore.ieee.org/document/8545577) (ICPR 2018)
 
 * **[ASNE](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.attributed.asne.ASNE)** from Liao *et al.*: [Attributed Social Network Embedding](https://arxiv.org/abs/1705.04969) (TKDE 2018)
- 
+
 **Meta Node Embedding**
 
 * **[NEU](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.node_embedding.meta.neu.NEU)** from Yang *et al.*: [Fast Network Embedding Enhancement via High Order Proximity Approximation](https://www.ijcai.org/Proceedings/2017/0544.pdf) (IJCAI 2017)
@@ -165,7 +165,7 @@ In detail, the following community detection and embedding methods were implemen
 
 * **[GL2Vec](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.gl2vec.GL2Vec)** from Chen and Koga: [GL2Vec: Graph Embedding Enriched by Line Graphs with Edge Features](https://link.springer.com/chapter/10.1007/978-3-030-36718-3_1) (ICONIP 2019)
 
-* **[SF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.sf.SF)** from de Lara and Pineau: [A Simple Baseline Algorithm for Graph Classification](https://arxiv.org/abs/1810.09155) (NeurIPS RRL Workshop 2018) 
+* **[SF](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.sf.SF)** from de Lara and Pineau: [A Simple Baseline Algorithm for Graph Classification](https://arxiv.org/abs/1810.09155) (NeurIPS RRL Workshop 2018)
 
 * **[FGSD](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.graph_embedding.fgsd.FGSD)** from Verma and Zhang: [Hunt For The Unique, Stable, Sparse And Fast Feature Learning On Graphs](https://papers.nips.cc/paper/6614-hunt-for-the-unique-stable-sparse-and-fast-feature-learning-on-graphs.pdf) (NeurIPS 2017)
 
@@ -209,8 +209,10 @@ $ python graph2vec_example.py
 
 **Running tests**
 
+From the project's root-level directory:
+
 ```sh
-$ python setup.py test
+$ pytest
 ```
 
 --------------------------------------------------------------------------------
