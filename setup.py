@@ -1,16 +1,16 @@
 from setuptools import find_packages, setup
 
 install_requires = [
-    "numpy<1.23.0",
-    "networkx<2.7",
-    "decorator==4.4.2",
+    "numpy==1.23.*",
+    "networkx==2.8.*",
+    "decorator==5.1.*",
+    "pandas==1.5.*",
+    "gensim>=4.0.0",
     "tqdm",
     "python-louvain",
     "scikit-learn",
     "scipy",
     "pygsp",
-    "gensim>=4.0.0",
-    "pandas<=1.3.5",
     "six",
     "python-Levenshtein"
 ]
