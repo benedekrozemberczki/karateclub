@@ -22,6 +22,7 @@ class SINE(Estimator):
         workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 5.
         epochs (int): Number of epochs. Default is 1.
+        number_of_negative_samples (int): Number of negative nodes to sample (usually between 5-20). If set to 0, no negative sampling is used. Default is 5.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
@@ -35,6 +36,7 @@ class SINE(Estimator):
         workers: int = 4,
         window_size: int = 5,
         epochs: int = 1,
+        number_of_negative_samples: int = 5,
         learning_rate: float = 0.05,
         min_count: int = 1,
         seed: int = 42,
@@ -46,6 +48,7 @@ class SINE(Estimator):
         self.workers = workers
         self.window_size = window_size
         self.epochs = epochs
+        self.number_of_negative_samples = number_of_negative_samples
         self.learning_rate = learning_rate
         self.min_count = min_count
         self.seed = seed
@@ -91,6 +94,7 @@ class SINE(Estimator):
         model = Word2Vec(
             self._walklets,
             hs=0,
+            negative=self.number_of_negative_samples,
             alpha=self.learning_rate,
             vector_size=self.dimensions,
             window=1,
