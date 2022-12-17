@@ -20,6 +20,8 @@ class Walklets(Estimator):
         workers (int): Number of cores. Default is 4.
         window_size (int): Matrix power order. Default is 4.
         epochs (int): Number of epochs. Default is 1.
+        use_hierarchical_softmax (bool): Whether to use hierarchical softmax or negative sampling to train the model. Default is False.
+        number_of_negative_samples (int): Number of negative nodes to sample (usually between 5-20). If set to 0, no negative sampling is used. Default is 5.
         learning_rate (float): HogWild! learning rate. Default is 0.05.
         min_count (int): Minimal count of node occurrences. Default is 1.
         seed (int): Random seed value. Default is 42.
@@ -33,6 +35,8 @@ class Walklets(Estimator):
         workers: int = 4,
         window_size: int = 4,
         epochs: int = 1,
+        use_hierarchical_softmax: bool = True,
+        number_of_negative_samples: int = 5,
         learning_rate: float = 0.05,
         min_count: int = 1,
         seed: int = 42,
@@ -44,6 +48,8 @@ class Walklets(Estimator):
         self.workers = workers
         self.window_size = window_size
         self.epochs = epochs
+        self.use_hierarchical_softmax = use_hierarchical_softmax
+        self.number_of_negative_samples = number_of_negative_samples
         self.learning_rate = learning_rate
         self.min_count = min_count
         self.seed = seed
@@ -74,7 +80,8 @@ class Walklets(Estimator):
             walklets = self._select_walklets(walker.walks, power)
             model = Word2Vec(
                 walklets,
-                hs=0,
+                hs=1 if self.use_hierarchical_softmax else 0,
+                negative=self.number_of_negative_samples,
                 alpha=self.learning_rate,
                 epochs=self.epochs,
                 vector_size=self.dimensions,
