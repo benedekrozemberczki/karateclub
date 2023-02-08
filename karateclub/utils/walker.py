@@ -19,7 +19,7 @@ class RandomWalker:
         self.walk_length = walk_length
         self.walk_number = walk_number
 
-    def do_walk(self, node):
+    def do_walk(self, node: int) -> List[str]:
         """
         Doing a single truncated random walk from a source node.
 
@@ -29,7 +29,7 @@ class RandomWalker:
         Return types:
             * **walk** *(list of strings)* - A single truncated random walk.
         """
-        walk = [node]
+        walk: List[int] = [node]
         for _ in range(self.walk_length - 1):
             nebs = [node for node in self.graph.neighbors(walk[-1])]
             if len(nebs) > 0:
@@ -44,7 +44,7 @@ class RandomWalker:
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to run the random walks on.
         """
-        self.walks = []
+        self.walks: List[List[str]] = []
         self.graph = graph
         for node in self.graph.nodes():
             for _ in range(self.walk_number):

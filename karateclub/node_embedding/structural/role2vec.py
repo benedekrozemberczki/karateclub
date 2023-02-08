@@ -1,3 +1,4 @@
+from typing import Dict, List
 import numpy as np
 import networkx as nx
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
@@ -58,7 +59,7 @@ class Role2Vec(Estimator):
         self.seed = seed
         self.erase_base_features = erase_base_features
 
-    def _transform_walks(self, walks):
+    def _transform_walks(self, walks: List[List[str]]) -> List[List[int]]:
         """
         Transforming the random walks.
 
@@ -70,7 +71,11 @@ class Role2Vec(Estimator):
         """
         return [[int(node) for node in walk] for walk in walks]
 
-    def _create_documents(self, walks, features):
+    def _create_documents(
+        self,
+        walks: List[List[str]],
+        features: Dict[int, List[str]]
+    ) -> List[TaggedDocument]:
         """
         Accumulating the WL feature in neighbourhoods.
 
@@ -80,8 +85,12 @@ class Role2Vec(Estimator):
         Return types:
             * **new_features** *(list of TaggedDocument objects)* - The pooled features of nodes.
         """
-        new_features = {node: [] for node, feature in features.items()}
-        walks = self._transform_walks(walks)
+        new_features: Dict[int, List[str]] = {
+            node: []
+            for node, _ in features.items()
+        }
+        walks: List[List[int]] = self._transform_walks(walks)
+
         for walk in walks:
             for i in range(self.walk_length - self.window_size):
                 for j in range(self.window_size):
@@ -94,10 +103,12 @@ class Role2Vec(Estimator):
             node: [feature for features in new_features[node] for feature in features]
             for node, _ in new_features.items()
         }
+
         new_features = [
             TaggedDocument(words=feature, tags=[str(node)])
             for node, feature in new_features.items()
         ]
+
         return new_features
 
     def fit(self, graph: nx.classes.graph.Graph):
@@ -119,8 +130,8 @@ class Role2Vec(Estimator):
             erase_base_features=self.erase_base_features,
         )
 
-        node_features = hasher.get_node_features()
-        documents = self._create_documents(walker.walks, node_features)
+        node_features: Dict[int, List[str]] = hasher.get_node_features()
+        documents: List[TaggedDocument] = self._create_documents(walker.walks, node_features)
 
         model = Doc2Vec(
             documents,
@@ -135,7 +146,10 @@ class Role2Vec(Estimator):
             seed=self.seed,
         )
 
-        self._embedding = [model.dv[str(i)] for i, _ in enumerate(documents)]
+        self._embedding = [
+            model.dv[str(document_number)]
+            for document_number in range(len(documents))
+        ]
 
     def get_embedding(self) -> np.array:
         r"""Getting the node embedding.
