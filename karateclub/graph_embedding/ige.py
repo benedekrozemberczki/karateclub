@@ -46,7 +46,8 @@ class IGE(Estimator):
         """
         index = np.arange(graph.number_of_nodes())
         values = np.array(
-            [1.0 / graph.degree[node] for node in range(graph.number_of_nodes())]
+            [1.0 / graph.degree[node]
+                for node in range(graph.number_of_nodes())]
         )
         shape = (graph.number_of_nodes(), graph.number_of_nodes())
         D_inverse = sps.coo_matrix((values, (index, index)), shape=shape)
@@ -91,7 +92,7 @@ class IGE(Estimator):
             Q = self._get_normalized_adjacency(graph)
             for i in range(emb_dim):
                 P = P.dot(Q)
-                embed_space[i * feature_dim : (i + 1) * feature_dim, :] = P.dot(
+                embed_space[i * feature_dim: (i + 1) * feature_dim, :] = P.dot(
                     sub_features
                 ).T
 
@@ -112,6 +113,11 @@ class IGE(Estimator):
         L = nx.laplacian_matrix(graph).asfptype()
         for emb_dim in self.spectral_embedding_dimensions:
             emb_eig = np.zeros(emb_dim)
+            # The default value of `k` in `sps.linalg.eigsh`
+            # is equal to `emb_dim`. In graphs with less than `emb_dim` nodes,
+            # which may be small molecules, this would break the
+            # model. For this reason, in those cases, we proceed
+            # instead with `k=graph.number_of_nodes() - 1`.
             min_dim = min(graph.number_of_nodes() - 1, emb_dim)
             eigenvalues = sps.linalg.eigsh(
                 L, min_dim, which="SM", ncv=25 * min_dim, return_eigenvectors=False
@@ -132,7 +138,16 @@ class IGE(Estimator):
             * **features** *(list)* - The list of graph feature NumPy arrays.
         """
         L = nx.laplacian_matrix(graph).asfptype()
-        eigenvalues, eigenvectors = sps.linalg.eigsh(L)
+
+        # The default value of `k` in `sps.linalg.eigsh`
+        # is equal to six. In graphs with less than 6 nodes,
+        # which may be small molecules, this would break the
+        # model. For this reason, in those cases, we proceed
+        # instead with `k=graph.number_of_nodes() - 1`.
+        eigenvalues, eigenvectors = sps.linalg.eigsh(
+            L,
+            k=min(graph.number_of_nodes() - 1, 6)
+        )
 
         eigenvectors_norm = np.dot(
             np.diag(np.sqrt(1 / eigenvalues[1:])), eigenvectors.T[1:, :]
