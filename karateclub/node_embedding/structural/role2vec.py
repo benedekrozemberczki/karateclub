@@ -126,7 +126,7 @@ class Role2Vec(Estimator):
         hasher = WeisfeilerLehmanHashing(
             graph=graph,
             wl_iterations=self.wl_iterations,
-            attributed=False,
+            use_node_attribute=None,
             erase_base_features=self.erase_base_features,
         )
 

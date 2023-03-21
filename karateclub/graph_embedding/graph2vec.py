@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-from typing import List
+from typing import List, Optional
 from karateclub.estimator import Estimator
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from karateclub.utils.treefeatures import WeisfeilerLehmanHashing
@@ -14,12 +14,12 @@ class Graph2Vec(Estimator):
     to generate representations for the graphs.
 
     The procedure assumes that nodes have no string feature present and the WL-hashing
-    defaults to the degree centrality. However, if a node feature with the key "feature"
-    is supported for the nodes the feature extraction happens based on the values of this key.
+    defaults to the degree centrality. However, if the parameter `use_node_attribute` is
+    provided, the feature extraction happens based on the values of this key.
 
     Args:
         wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
-        attributed (bool): Presence of graph attributes. Default is False.
+        use_node_attribute (Optional[str]): The optional parameter from which to load node features. Default is None..
         dimensions (int): Dimensionality of embedding. Default is 128.
         workers (int): Number of cores. Default is 4.
         down_sampling (float): Down sampling frequency. Default is 0.0001.
@@ -33,7 +33,7 @@ class Graph2Vec(Estimator):
     def __init__(
         self,
         wl_iterations: int = 2,
-        attributed: bool = False,
+        use_node_attribute: Optional[str] = None,
         dimensions: int = 128,
         workers: int = 4,
         down_sampling: float = 0.0001,
@@ -45,7 +45,7 @@ class Graph2Vec(Estimator):
     ):
 
         self.wl_iterations = wl_iterations
-        self.attributed = attributed
+        self.use_node_attribute = use_node_attribute
         self.dimensions = dimensions
         self.workers = workers
         self.down_sampling = down_sampling
@@ -66,7 +66,10 @@ class Graph2Vec(Estimator):
         graphs = self._check_graphs(graphs)
         documents = [
             WeisfeilerLehmanHashing(
-                graph, self.wl_iterations, self.attributed, self.erase_base_features
+                graph=graph,
+                wl_iterations=self.wl_iterations,
+                use_node_attribute=self.use_node_attribute,
+                erase_base_features=self.erase_base_features,
             )
             for graph in graphs
         ]
@@ -111,7 +114,10 @@ class Graph2Vec(Estimator):
         graphs = self._check_graphs(graphs)
         documents = [
             WeisfeilerLehmanHashing(
-                graph, self.wl_iterations, self.attributed, self.erase_base_features
+                graph=graph,
+                wl_iterations=self.wl_iterations,
+                use_node_attribute=self.use_node_attribute,
+                erase_base_features=self.erase_base_features,
             )
             for graph in graphs
         ]

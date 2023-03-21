@@ -1,6 +1,7 @@
 import hashlib
 import networkx as nx
-from typing import List, Dict
+from tqdm.auto import tqdm
+from typing import List, Dict, Optional
 
 
 class WeisfeilerLehmanHashing(object):
@@ -10,7 +11,7 @@ class WeisfeilerLehmanHashing(object):
     Args:
         graph (NetworkX graph): NetworkX graph for which we do WL hashing.
         wl_iterations (int): Number of WL iterations.
-        attributed (bool): Presence of attributes.
+        use_node_attribute (Optional[str]): Optional attribute name to be used.
         erase_base_feature (bool): Deleting the base features.
     """
 
@@ -18,7 +19,7 @@ class WeisfeilerLehmanHashing(object):
         self,
         graph: nx.classes.graph.Graph,
         wl_iterations: int,
-        attributed: bool,
+        use_node_attribute: Optional[str],
         erase_base_features: bool,
     ):
         """
@@ -26,7 +27,7 @@ class WeisfeilerLehmanHashing(object):
         """
         self.wl_iterations = wl_iterations
         self.graph = graph
-        self.attributed = attributed
+        self.use_node_attribute = use_node_attribute
         self.erase_base_features = erase_base_features
         self._set_features()
         self._do_recursions()
@@ -35,13 +36,54 @@ class WeisfeilerLehmanHashing(object):
         """
         Creating the features.
         """
-        if self.attributed:
-            self.features = nx.get_node_attributes(self.graph, "feature")
+        if self.use_node_attribute is not None:
+            # We retrieve the features of the nodes with the attribute name
+            # `feature` and assign them into a dictionary with structure:
+            # {node_a_name: feature_of_node_a}
+            # Nodes without this feature will not appear in the dictionary.
+            features = nx.get_node_attributes(self.graph, self.use_node_attribute)
+
+            # We check whether all nodes have the requested feature
+            if len(features) != self.graph.number_of_nodes():
+                missing_nodes = []
+                # We find up to five missing nodes so to make
+                # a more informative error message.
+                for node in tqdm(
+                    self.graph.nodes,
+                    total=self.graph.number_of_nodes(),
+                    leave=False,
+                    dynamic_ncols=True,
+                    desc="Searching for missing nodes"
+                ):
+                    if node not in features:
+                        missing_nodes.append(node)
+                    if len(missing_nodes) > 5:
+                        break
+                raise ValueError(
+                    (
+                        "We expected for ALL graph nodes to have a node "
+                        "attribute name `{}` to be used as part of "
+                        "the requested embedding algorithm, but only {} "
+                        "out of {} nodes has the correct attribute. "
+                        "Consider checking for typos and missing values, "
+                        "and use some imputation technique as necessary. "
+                        "Some of the nodes without the requested attribute "
+                        "are: {}"
+                    ).format(
+                        self.use_node_attribute,
+                        len(features),
+                        self.graph.number_of_nodes(),
+                        missing_nodes
+                    )
+                )
+            # If so, we assign the feature set.
+            self.features = features
         else:
             self.features = {
                 node: self.graph.degree(node) for node in self.graph.nodes()
             }
-        self.extracted_features = {k: [str(v)] for k, v in self.features.items()}
+        self.extracted_features = {k: [str(v)]
+                                   for k, v in self.features.items()}
 
     def _erase_base_features(self):
         """
@@ -61,7 +103,8 @@ class WeisfeilerLehmanHashing(object):
         for node in self.graph.nodes():
             nebs = self.graph.neighbors(node)
             degs = [self.features[neb] for neb in nebs]
-            features = [str(self.features[node])] + sorted([str(deg) for deg in degs])
+            features = [str(self.features[node])] + \
+                sorted([str(deg) for deg in degs])
             features = "_".join(features)
             hash_object = hashlib.md5(features.encode())
             hashing = hash_object.hexdigest()
