@@ -1,3 +1,4 @@
+from typing import Optional
 import numpy as np
 import networkx as nx
 from typing import List
@@ -14,10 +15,6 @@ class GL2Vec(Estimator):
     these features a document (graph) - feature co-occurrence matrix is decomposed in order
     to generate representations for the graphs.
 
-    The procedure assumes that nodes have no string feature present and the WL-hashing
-    defaults to the degree centrality. However, if a node feature with the key "feature"
-    is supported for the nodes the feature extraction happens based on the values of this key.
-
     Args:
         wl_iterations (int): Number of Weisfeiler-Lehman iterations. Default is 2.
         dimensions (int): Dimensionality of embedding. Default is 128.
@@ -27,6 +24,7 @@ class GL2Vec(Estimator):
         learning_rate (float): HogWild! learning rate. Default is 0.025.
         min_count (int): Minimal count of graph feature occurrences. Default is 5.
         seed (int): Random seed for the model. Default is 42.
+        erase_base_features: (bool): Whether to delete the base features.
     """
 
     def __init__(
@@ -79,7 +77,10 @@ class GL2Vec(Estimator):
         graphs = [self._create_line_graph(graph) for graph in graphs]
         documents = [
             WeisfeilerLehmanHashing(
-                graph, self.wl_iterations, False, self.erase_base_features
+                graph=graph,
+                wl_iterations=self.wl_iterations,
+                use_node_attribute=None,
+                erase_base_features=self.erase_base_features,
             )
             for graph in graphs
         ]
@@ -125,7 +126,10 @@ class GL2Vec(Estimator):
         graphs = [self._create_line_graph(graph) for graph in graphs]
         documents = [
             WeisfeilerLehmanHashing(
-                graph, self.wl_iterations, False, self.erase_base_features
+                graph=graph,
+                wl_iterations=self.wl_iterations,
+                use_node_attribute=None,
+                erase_base_features=self.erase_base_features,
             )
             for graph in graphs
         ]

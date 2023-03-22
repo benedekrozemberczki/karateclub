@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+import pytest
 from karateclub.graph_embedding import Graph2Vec, FGSD, GL2Vec, SF, IGE, LDP
 from karateclub.graph_embedding import NetLSD, GeoScattering, FeatherGraph
 
@@ -146,7 +147,7 @@ def test_graph2vec():
         nx.set_node_attributes(graph, {j: str(j) for j in range(75)}, "feature")
         new_graphs.append(graph)
 
-    model = Graph2Vec(attributed=True)
+    model = Graph2Vec(use_node_attribute="feature")
 
     model.fit(graphs)
     embedding = model.get_embedding()
@@ -160,6 +161,13 @@ def test_graph2vec():
     assert new_embedding.shape[0] == len(new_graphs)
     assert new_embedding.shape[1] == model.dimensions
     assert type(new_embedding) == np.ndarray
+
+    with pytest.raises(ValueError):
+        model = Graph2Vec(
+            use_node_attribute="missing_feature",
+        )
+
+        model.fit(new_graphs)
 
 
 def test_gl2vec():
@@ -195,7 +203,6 @@ def test_gl2vec():
     assert new_embedding.shape[0] == len(new_graphs)
     assert new_embedding.shape[1] == model.dimensions
     assert type(new_embedding) == np.ndarray
-
 
 
 def test_ldp():
