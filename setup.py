@@ -4,7 +4,7 @@ install_requires = [
     "numpy==1.23.*",
     "networkx==2.8.*",
     "decorator==5.1.*",
-    "pandas==1.5.*",
+    "pandas>=1.2.0",
     "gensim>=4.0.0",
     "tqdm",
     "python-louvain",
