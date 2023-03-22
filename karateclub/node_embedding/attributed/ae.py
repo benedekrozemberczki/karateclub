@@ -75,7 +75,7 @@ class AE(Estimator):
         )
 
         emb = np.array(
-            [model.docvecs[str(n)] for n in range(self.graph.number_of_nodes())]
+            [model.dv[str(n)] for n in range(self.graph.number_of_nodes())]
         )
         return emb
 
