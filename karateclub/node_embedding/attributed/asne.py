@@ -80,7 +80,7 @@ class ASNE(Estimator):
         )
 
         self._embedding = np.array(
-            [model.docvecs[str(i)] for i, _ in enumerate(documents)]
+            [model.dv[str(i)] for i, _ in enumerate(documents)]
         )
 
     def get_embedding(self) -> np.array:
