@@ -68,7 +68,7 @@ class FirstOrderLINE(Estimator):
 
         self.embedding = np.random.uniform(size=(number_of_nodes, self.dimensions))
 
-        for epoch in trange(self.epochs, desc="Epochs", disable=not self.verbose):
+        for epoch in trange(self.epochs, desc="Epochs", disable=not self.verbose, leave=False):
             for _ in range(number_of_edges // self.mini_batch_size):
                 gradient = np.zeros_like(self.embedding)
 

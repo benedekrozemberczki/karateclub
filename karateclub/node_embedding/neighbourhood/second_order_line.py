@@ -72,7 +72,7 @@ class SecondOrderLINE(Estimator):
         self.src_embedding = np.random.uniform(size=(number_of_nodes, self.dimensions // 2))
         self.dst_embedding = np.random.uniform(size=(number_of_nodes, self.dimensions // 2))
 
-        for epoch in trange(self.epochs, desc="Epochs", disable=not self.verbose):
+        for epoch in trange(self.epochs, desc="Epochs", disable=not self.verbose, leave=False):
             for _ in range(number_of_edges // self.mini_batch_size):
                 src_gradient = np.zeros_like(self.src_embedding)
                 dst_gradient = np.zeros_like(self.dst_embedding)

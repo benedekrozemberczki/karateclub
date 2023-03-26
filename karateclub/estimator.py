@@ -1,7 +1,9 @@
 import random
 import numpy as np
 import networkx as nx
+import warnings
 from typing import List
+from tqdm.auto import trange
 import re
 
 """General Estimator base class."""
@@ -45,10 +47,48 @@ class Estimator(object):
         np.random.seed(self.seed)
 
     @staticmethod
-    def _ensure_integrity(graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
+    def _ensure_walk_traversal_conditions(graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
         """Ensure walk traversal conditions."""
-        edge_list = [(index, index) for index in range(graph.number_of_nodes())]
-        graph.add_edges_from(edge_list)
+        for node_index in trange(
+            graph.number_of_nodes(),
+            # We do not leave the bar.
+            leave=False,
+            # We only show this bar when we can expect
+            # for this process to take a bit of time.
+            disable=graph.number_of_nodes() < 10_000,
+            desc="Checking main diagonal existance",
+            dynamic_ncols=True
+        ):
+            if not graph.has_edge(node_index, node_index):
+                warnings.warn(
+                    (
+                        "Please do be advised that "
+                        "the graph you have provided does not "
+                        "contain (some) edges in the main "
+                        "diagonal, for instance the self-loop "
+                        "constitued of ({}, {}). These selfloops "
+                        "are necessary to ensure that the graph "
+                        "is traversable, and for this reason we "
+                        "create a copy of the graph and add therein "
+                        "the missing edges. Since we are creating "
+                        "a copy, this will immediately duplicate "
+                        "the memory requirements. To avoid this double "
+                        "allocation, you can provide the graph with the selfloops."
+                    ).format(
+                        node_index,
+                        node_index
+                    )
+                )
+                # We create a copy of the graph
+                graph = graph.copy()
+                # And we add the missing edges
+                # for filling the main diagonal
+                graph.add_edges_from((
+                    (index, index)
+                    for index in range(graph.number_of_nodes())
+                    if not graph.has_edge(index, index)
+                ))
+                break
 
         return graph
 
@@ -63,7 +103,7 @@ class Estimator(object):
     def _check_graph(self, graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
         """Check the Karate Club assumptions about the graph."""
         self._check_indexing(graph)
-        graph = self._ensure_integrity(graph)
+        graph = self._ensure_walk_traversal_conditions(graph)
 
         return graph
 
