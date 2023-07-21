@@ -66,7 +66,7 @@ class Estimator(object):
                         "the graph you have provided does not "
                         "contain (some) edges in the main "
                         "diagonal, for instance the self-loop "
-                        "constitued of ({}, {}). These selfloops "
+                        f"constitued of ({node_index}, {node_index}). These selfloops "
                         "are necessary to ensure that the graph "
                         "is traversable, and for this reason we "
                         "create a copy of the graph and add therein "
@@ -74,9 +74,6 @@ class Estimator(object):
                         "a copy, this will immediately duplicate "
                         "the memory requirements. To avoid this double "
                         "allocation, you can provide the graph with the selfloops."
-                    ).format(
-                        node_index,
-                        node_index
                     )
                 )
                 # We create a copy of the graph
