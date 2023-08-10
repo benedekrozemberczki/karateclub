@@ -110,6 +110,7 @@ class NetMF(Estimator):
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **y** *(None)* - Not used. For consistency with scikit-learn API.
         """
         self._set_seed()
         graph = self._check_graph(graph)
@@ -117,7 +118,7 @@ class NetMF(Estimator):
         self._embedding = self._create_embedding(target_matrix)
 
     def get_embedding(self) -> np.array:
-        r"""Getting the node embedding.
+        """Getting the node embedding.
 
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
