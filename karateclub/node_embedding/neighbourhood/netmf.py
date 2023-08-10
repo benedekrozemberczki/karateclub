@@ -136,4 +136,7 @@ class NetMF(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         self.fit(graph)
-        return self._embedding
+        if y is None:
+            return self._embedding
+        else:
+            return self._embedding, y
