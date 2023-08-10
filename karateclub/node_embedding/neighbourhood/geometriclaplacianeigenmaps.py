@@ -42,3 +42,19 @@ class GLEE(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return self._embedding
+
+    def fit_transform(self, graph: nx.classes.graph.Graph, y=None) -> np.array:
+        r"""Fits model to input graph and returns embeddings.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **y** *(None)* - Not used. For consistency with scikit-learn API.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
+        self.fit(graph)
+        if y is None:
+            return self._embedding
+        else:
+            return self._embedding, y
