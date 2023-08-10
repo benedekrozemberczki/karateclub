@@ -256,3 +256,4 @@ def test_ae():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * 2
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
