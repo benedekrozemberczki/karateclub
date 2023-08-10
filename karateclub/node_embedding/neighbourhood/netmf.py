@@ -104,7 +104,7 @@ class NetMF(Estimator):
         embedding = svd.transform(target_matrix)
         return embedding
 
-    def fit(self, graph: nx.classes.graph.Graph):
+    def fit(self, graph: nx.classes.graph.Graph, y=None):
         """
         Fitting a NetMF model.
 
