@@ -96,7 +96,7 @@ class FirstOrderLINE(Estimator):
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return self.embedding
-    
+
     def fit_transform(self, graph: nx.classes.graph.Graph, y=None) -> np.array:
         r"""Fits model to input graph and returns embeddings.
 
@@ -109,6 +109,6 @@ class FirstOrderLINE(Estimator):
         """
         self.fit(graph)
         if y is None:
-            return self._embedding
+            return self.embedding
         else:
-            return self._embedding, y
+            return self.embedding, y

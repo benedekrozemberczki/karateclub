@@ -31,6 +31,7 @@ def test_randne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_sociodim():
@@ -60,6 +61,7 @@ def test_sociodim():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_deepwalk():
@@ -89,6 +91,7 @@ def test_deepwalk():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 def test_first_order_line():
     """
@@ -117,6 +120,7 @@ def test_first_order_line():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 def test_second_order_line():
     """
@@ -145,6 +149,7 @@ def test_second_order_line():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_node2vec():
@@ -174,6 +179,7 @@ def test_node2vec():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_walklets():
@@ -203,6 +209,7 @@ def test_walklets():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * model.window_size
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_hope():
@@ -232,6 +239,7 @@ def test_hope():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_netmf():
@@ -291,6 +299,7 @@ def test_diff2vec():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_grarep():
@@ -320,6 +329,7 @@ def test_grarep():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * model.order
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_nodesketch():
@@ -349,6 +359,7 @@ def test_nodesketch():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_laplacianeigenmaps():
@@ -378,6 +389,7 @@ def test_laplacianeigenmaps():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_geometriclaplacianeigenmaps():
@@ -407,6 +419,7 @@ def test_geometriclaplacianeigenmaps():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions + 1
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
 
 
 def test_nmf_admm():
@@ -436,3 +449,4 @@ def test_nmf_admm():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * 2
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph), embedding)
