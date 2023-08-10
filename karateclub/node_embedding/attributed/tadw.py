@@ -156,19 +156,3 @@ class TADW(Estimator):
             [np.transpose(self._W), np.transpose(np.dot(self._H, self._T))], axis=1
         )
         return embedding
-
-    def fit_transform(self, graph: nx.classes.graph.Graph, y=None) -> np.array:
-        r"""Fits model to input graph and returns embeddings.
-
-        Arg types:
-            * **graph** *(NetworkX graph)* - The graph to be embedded.
-            * **y** *(None)* - Not used. For consistency with scikit-learn API.
-
-        Return types:
-            * **embedding** *(Numpy array)* - The embedding of nodes.
-        """
-        self.fit(graph)
-        if y is None:
-            return self.get_embedding()
-        else:
-            return self.get_embedding(), y
