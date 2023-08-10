@@ -155,7 +155,7 @@ class TENE(Estimator):
 
     def fit_transform(self,
                       graph: nx.classes.graph.Graph,
-                      X: Union[np.array, coo_matrix],
+                      T: Union[np.array, coo_matrix],
                       y=None) -> np.array:
         r"""Fits model to input graph and returns embeddings.
 
@@ -167,7 +167,7 @@ class TENE(Estimator):
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        self.fit(graph, X)
+        self.fit(graph, T)
         if y is None:
             return self.get_embedding()
         else:

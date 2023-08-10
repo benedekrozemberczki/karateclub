@@ -36,6 +36,7 @@ def test_asne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_feather_node():
@@ -83,6 +84,7 @@ def test_feather_node():
         == 2 * model.order * model.eval_points * model.reduction_dimensions
     )
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_bane():
@@ -110,6 +112,7 @@ def test_bane():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_fscnmf():
@@ -135,6 +138,7 @@ def test_fscnmf():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2 * model.dimensions
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_tene():
@@ -162,6 +166,7 @@ def test_tene():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_tadw():
@@ -189,6 +194,7 @@ def test_tadw():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_musae():
@@ -211,6 +217,7 @@ def test_musae():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * (1 + model.window_size)
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_sine():
@@ -234,6 +241,7 @@ def test_sine():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
 
 
 def test_ae():
