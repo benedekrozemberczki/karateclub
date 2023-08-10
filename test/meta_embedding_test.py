@@ -26,3 +26,4 @@ def test_neu():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
