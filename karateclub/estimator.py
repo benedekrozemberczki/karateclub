@@ -42,7 +42,8 @@ class Estimator(object):
         """Getting the cluster centers."""
         pass
 
-    def get_params(self):
+    def get_params(self, deep=True):
+        # Ignore deep=False, since we don't have nested estimators
         """Get parameter dictionary for this estimator.."""
         rx = re.compile(r'^\_')
         params = self.__dict__
