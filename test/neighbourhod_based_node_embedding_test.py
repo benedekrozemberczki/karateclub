@@ -62,7 +62,6 @@ def test_sociodim():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-    # ? stochastic, therefore test shape not equality
     assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
 
 
@@ -94,7 +93,6 @@ def test_deepwalk():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-    # ? stochastic, therefore test shape not equality
     assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
 
 def test_first_order_line():
@@ -183,7 +181,6 @@ def test_node2vec():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-    # ? stochastic, therefore test shape not equality
     assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
 
 
@@ -214,7 +211,6 @@ def test_walklets():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * model.window_size
     assert type(embedding) == np.ndarray
-    # ? stochastic, therefore test shape not equality
     assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
 
 

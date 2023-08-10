@@ -112,6 +112,6 @@ class Node2Vec(Estimator):
         """
         self.fit(graph)
         if y is None:
-            return self._embedding
+            return self.get_embedding()
         else:
-            return self._embedding, y
+            return self.get_embedding(), y
