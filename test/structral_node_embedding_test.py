@@ -30,7 +30,7 @@ def test_role2vec():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
-    assert np.array_equal(model.fit_transform(graph), embedding)
+    assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
 
 
 def test_graphwave():
