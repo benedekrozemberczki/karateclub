@@ -32,6 +32,11 @@ def test_role2vec():
     assert type(embedding) == np.ndarray
     assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
 
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
+
 
 def test_graphwave():
     """
@@ -75,3 +80,8 @@ def test_graphwave():
     assert embedding.shape[1] == 2 * model.sample_number
     assert type(embedding) == np.ndarray
     assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
