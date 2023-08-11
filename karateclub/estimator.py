@@ -50,6 +50,12 @@ class Estimator(object):
         params = {key: params[key] for key in params if not rx.search(key)}
         return params
 
+    def set_params(self, **parameters):
+        """Set the parameters of this estimator."""
+        for parameter, value in parameters.items():
+            setattr(self, parameter, value)
+        return self
+
     def _set_seed(self):
         """Creating the initial random seed."""
         random.seed(self.seed)
