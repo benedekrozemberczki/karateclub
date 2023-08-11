@@ -26,9 +26,10 @@ def test_neu():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert type(embedding) == np.ndarray
-    assert np.array_equal(model.fit_transform(graph).shape, embedding.shape)
+    assert np.array_equal(meta_model.fit_transform(graph, model).shape,
+                          embedding.shape)
 
     y = embedding[:, 0]
-    z, y_hat = model.fit_transform(graph, y)
+    z, y_hat = meta_model.fit_transform(graph, model, y)
     assert y_hat.shape[0] == graph.number_of_nodes()
     assert np.array_equal(y_hat, y)
