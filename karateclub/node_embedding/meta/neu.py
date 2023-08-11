@@ -78,17 +78,21 @@ class NEU(Estimator):
         """
         return self._embedding
 
-    def fit_transform(self, graph: nx.classes.graph.Graph, y=None) -> np.array:
+    def fit_transform(self,
+                      graph: nx.classes.graph.Graph,
+                      model: Estimator,
+                      y=None) -> np.array:
         r"""Fits model to input graph and returns embeddings.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **model** *(KC embedding model)* - Karate Club embedding.
             * **y** *(None)* - Not used. For consistency with scikit-learn API.
 
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
-        self.fit(graph)
+        self.fit(graph, model)
         if y is None:
             return self._embedding
         else:
