@@ -1,4 +1,3 @@
-import logging
 from typing import Dict, List
 
 import networkx as nx
@@ -6,8 +5,6 @@ import numpy as np
 from sklearn.decomposition import NMF
 
 from karateclub.estimator import Estimator
-
-logger = logging.getLogger(__name__)
 
 
 class DANMF(Estimator):
