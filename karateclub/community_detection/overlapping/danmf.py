@@ -1,6 +1,5 @@
-from typing import Dict, List
-
 import networkx as nx
+from typing import Dict, List
 import numpy as np
 from sklearn.decomposition import NMF
 
