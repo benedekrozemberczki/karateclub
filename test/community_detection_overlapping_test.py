@@ -1,12 +1,12 @@
-import networkx as nx
 import numpy as np
+import networkx as nx
 
 from karateclub.community_detection.overlapping import (
+    EgoNetSplitter,
+    NNSED,
     DANMF,
     MNMF,
-    NNSED,
     BigClam,
-    EgoNetSplitter,
     SymmNMF,
 )
 
