@@ -1,8 +1,7 @@
 import numpy as np
 import networkx as nx
-from typing import Dict, List
+from typing import List, Dict
 from sklearn.decomposition import NMF
-
 from karateclub.estimator import Estimator
 
 
