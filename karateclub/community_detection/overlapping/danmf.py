@@ -78,12 +78,6 @@ class DANMF(Estimator):
             * **i** *(int)* - The layer index.
         """
 
-        print(f"self._sklearn_pretrain: Pre-training layer {i}.")
-        print(f"self._sklearn_pretrain: n_components: {self.layers[i]}")
-        print(f"self._sklearn_pretrain: Random state: {self.seed}")
-        print(f"self._sklearn_pretrain: Number of iterations: {self.pre_iterations}")
-        print(f"self._sklearn_pretrain: Z shape: {self._Z.shape}")
-
         nmf_model = NMF(
             n_components=self.layers[i],
             init="random",
@@ -101,13 +95,9 @@ class DANMF(Estimator):
         """
         self._U_s = []
         self._V_s = []
-        print(f"self._pre_trainin: {self._p} layers.")
         for i in range(self._p):
-            print(f"self._pre_train: {i}th layer.")
             self._setup_z(i)
             U, V = self._sklearn_pretrain(i)
-            print(f"self._pre_training: U shape: {U.shape}")
-            print(f"self._pre_training: V shape: {V.shape}")
             self._U_s.append(U)
             self._V_s.append(V)
 
