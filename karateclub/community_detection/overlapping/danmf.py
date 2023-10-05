@@ -1,8 +1,13 @@
-import numpy as np
+import logging
+from typing import Dict, List
+
 import networkx as nx
-from typing import List, Dict
+import numpy as np
 from sklearn.decomposition import NMF
+
 from karateclub.estimator import Estimator
+
+logger = logging.getLogger(__name__)
 
 
 class DANMF(Estimator):
@@ -72,6 +77,12 @@ class DANMF(Estimator):
         Arg types:
             * **i** *(int)* - The layer index.
         """
+
+        print("Pre-training layer {}.".format(i))
+        print("Random state: {}".format(self.seed))
+        print("Number of iterations: {}".format(self.pre_iterations))
+        print("Z shape: {}".format(self._Z.shape))
+
         nmf_model = NMF(
             n_components=self.layers[i],
             init="random",
