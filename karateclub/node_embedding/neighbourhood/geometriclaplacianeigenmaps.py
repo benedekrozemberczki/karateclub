@@ -16,7 +16,6 @@ class GLEE(Estimator):
     """
 
     def __init__(self, dimensions: int = 128, seed: int = 42):
-
         self.dimensions = dimensions
         self.seed = seed
 
@@ -31,8 +30,9 @@ class GLEE(Estimator):
         graph = self._check_graph(graph)
         number_of_nodes = graph.number_of_nodes()
         L_tilde = nx.normalized_laplacian_matrix(graph, nodelist=range(number_of_nodes))
+        v0 = np.random.rand(min(L_tilde.shape))
         _, self._embedding = sps.linalg.eigsh(
-            L_tilde, k=self.dimensions + 1, which="LM", return_eigenvectors=True
+            L_tilde, k=self.dimensions + 1, v0=v0, which="LM", return_eigenvectors=True
         )
 
     def get_embedding(self) -> np.array:
