@@ -47,10 +47,10 @@ class DANMF(Estimator):
         self._graph = graph
         self._A = nx.adjacency_matrix(
             self._graph, nodelist=range(self._graph.number_of_nodes())
-        )
+        ).todense()
         self._L = nx.laplacian_matrix(
             self._graph, nodelist=range(self._graph.number_of_nodes())
-        )
+        ).todense()
         self._D = self._L + self._A
 
     def _setup_z(self, i):
@@ -72,6 +72,7 @@ class DANMF(Estimator):
         Arg types:
             * **i** *(int)* - The layer index.
         """
+
         nmf_model = NMF(
             n_components=self.layers[i],
             init="random",
