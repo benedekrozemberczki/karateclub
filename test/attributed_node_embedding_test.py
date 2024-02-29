@@ -36,6 +36,12 @@ def test_asne():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_feather_node():
@@ -83,6 +89,12 @@ def test_feather_node():
         == 2 * model.order * model.eval_points * model.reduction_dimensions
     )
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_bane():
@@ -110,6 +122,12 @@ def test_bane():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_fscnmf():
@@ -135,6 +153,12 @@ def test_fscnmf():
 
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2 * model.dimensions
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_tene():
@@ -162,6 +186,12 @@ def test_tene():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_tadw():
@@ -189,6 +219,12 @@ def test_tadw():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == 2 * model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features), embedding)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_musae():
@@ -211,6 +247,12 @@ def test_musae():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * (1 + model.window_size)
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features).shape, embedding.shape)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_sine():
@@ -234,6 +276,12 @@ def test_sine():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features).shape, embedding.shape)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)
 
 
 def test_ae():
@@ -256,3 +304,9 @@ def test_ae():
     assert embedding.shape[0] == graph.number_of_nodes()
     assert embedding.shape[1] == model.dimensions * 2
     assert type(embedding) == np.ndarray
+    assert np.array_equal(model.fit_transform(graph, features).shape, embedding.shape)
+
+    y = embedding[:, 0]
+    z, y_hat = model.fit_transform(graph, features, y)
+    assert y_hat.shape[0] == graph.number_of_nodes()
+    assert np.array_equal(y_hat, y)

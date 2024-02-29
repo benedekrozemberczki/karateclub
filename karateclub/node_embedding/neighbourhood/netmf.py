@@ -104,12 +104,13 @@ class NetMF(Estimator):
         embedding = svd.transform(target_matrix)
         return embedding
 
-    def fit(self, graph: nx.classes.graph.Graph):
+    def fit(self, graph: nx.classes.graph.Graph, y=None):
         """
         Fitting a NetMF model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **y** *(None)* - Not used. For consistency with scikit-learn API.
         """
         self._set_seed()
         graph = self._check_graph(graph)
@@ -117,9 +118,25 @@ class NetMF(Estimator):
         self._embedding = self._create_embedding(target_matrix)
 
     def get_embedding(self) -> np.array:
-        r"""Getting the node embedding.
+        """Getting the node embedding.
 
         Return types:
             * **embedding** *(Numpy array)* - The embedding of nodes.
         """
         return self._embedding
+
+    def fit_transform(self, graph: nx.classes.graph.Graph, y=None) -> np.array:
+        r"""Fits model to input graph and returns embeddings.
+
+        Arg types:
+            * **graph** *(NetworkX graph)* - The graph to be embedded.
+            * **y** *(None)* - Not used. For consistency with scikit-learn API.
+
+        Return types:
+            * **embedding** *(Numpy array)* - The embedding of nodes.
+        """
+        self.fit(graph)
+        if y is None:
+            return self._embedding
+        else:
+            return self._embedding, y

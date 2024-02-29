@@ -26,15 +26,24 @@ class Estimator(object):
         """Getting the embeddings (graph or node level)."""
         pass
 
+    def fit_transform(self):
+        """Fitting a model and getting the embeddings."""
+        pass
+
     def get_memberships(self):
         """Getting the membership dictionary."""
+        pass
+
+    def fit_predict(self):
+        """Fitting a model and getting the membership."""
         pass
 
     def get_cluster_centers(self):
         """Getting the cluster centers."""
         pass
 
-    def get_params(self):
+    def get_params(self, deep=True):
+        # Ignore deep=False, since we don't have nested estimators
         """Get parameter dictionary for this estimator.."""
         rx = re.compile(r'^\_')
         params = self.__dict__
