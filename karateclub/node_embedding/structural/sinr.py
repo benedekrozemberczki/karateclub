@@ -9,11 +9,13 @@ import numpy as np
 class SINr(Estimator):
     r"""An implementation of `"SINr" <https://inria.hal.science/hal-03197434/>`_
     from the IDA '21 best paper "SINr: Fast Computing of Sparse Interpretable Node Representations is not a Sin!".
-    The procedure computes community detection using Louvain algorithm, and calculates the distribution of edges of each node
-    across communities.
+    The procedure computes community detection using Louvain algorithm, and calculates the distribution of edges of each node across communities.
+    The algorithm is one of the fastest, because it relies mostly on Louvain community detection. It thus runs in 
+    quasi-linear time. Regarding space complexity, it requires to be able to store the adjacency matrix and the community membership matrix, it is also quasi-linear.
 
     Args:
-        gamma (int): modularity multi-resolution parameter. Default is 1. The higher it is, the more communities are detected, the higher the number of dimensions of the latent space uncovered.
+        gamma (int): modularity multi-resolution parameter. Default is 1. 
+        The dimensions parameter does not exist for SINr, gamma should be use instead: the numbers of dimensions of the embedding space is based on the number of communities uncovered. The higher gamma is, the more communities are detected, the higher the number of dimensions of the latent space uncovered. For small graphs, setting gamma to 1 is usually a good fit. For bigger graphs, it is recommended to increase gamma (5 or 10 for instance). For word co-occurrence graphs, to deal with word embedding, gamma is isually set to 50 to get a lot of small communities.
         seed (int): Random seed value. Default is 42.
     """
 
@@ -24,9 +26,7 @@ class SINr(Estimator):
     ):
 
         self.gamma = gamma
-        self.workers = workers
         self.seed = seed
-        self.erase_base_features = erase_base_features
 
 
     def fit(self, graph: nx.classes.graph.Graph):
@@ -43,9 +43,10 @@ class SINr(Estimator):
         norm_adjacency = normalize(adjacency, "l1") # Make rows of matrix sum at 1
         # Detect communities use louvain algorithm with the gamma resolution parameter
         communities = nx.community.louvain_communities(graph, resolution = self.gamma, seed = self.seed)
+        self.dimensions = len(communities)
         # Get the community membership of the graph
         membership_matrix = self._get_matrix_membership(communities)
-        
+        #Computes the node-recall: for each node, the distribution of links across communities 
         self._embedding = norm_adjacency.dot(membership_matrix)
         
     def _get_matrix_membership(self, list_of_communities:List[Set[int]]):
