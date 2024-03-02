@@ -1,5 +1,5 @@
 """SINr illustrative example.
-Nodes in both cliques will get the same embedding vectors, except for the one connected to the path.
+Nodes in both cliques (barbell graph) will get the same embedding vectors, except for the ones connected to the path.
 Nodes in the paths are in distinct communities with sufficient gamma, and get thus distinct vectors.
 """
 

@@ -15,7 +15,7 @@ class SINr(Estimator):
 
     Args:
         gamma (int): modularity multi-resolution parameter. Default is 1. 
-        The dimensions parameter does not exist for SINr, gamma should be use instead: the numbers of dimensions of the embedding space is based on the number of communities uncovered. The higher gamma is, the more communities are detected, the higher the number of dimensions of the latent space uncovered. For small graphs, setting gamma to 1 is usually a good fit. For bigger graphs, it is recommended to increase gamma (5 or 10 for instance). For word co-occurrence graphs, to deal with word embedding, gamma is isually set to 50 to get a lot of small communities.
+        The dimension parameter does not exist for SINr, gamma should be use instead: the number of dimensions of the embedding space is based on the number of communities uncovered. The higher gamma is, the more communities are detected, the higher the number of dimensions of the latent space uncovered. For small graphs, setting gamma to 1 is usually a good fit. For bigger graphs, it is recommended to increase gamma (5 or 10 for instance). For word co-occurrence graphs, to deal with word embedding, gamma is isually set to 50 to get a lot of small communities.
         seed (int): Random seed value. Default is 42.
     """
 
@@ -31,7 +31,7 @@ class SINr(Estimator):
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
-        Fitting a SINr model model.
+        Fitting a SINr model.
 
         Arg types:
             * **graph** *(NetworkX graph)* - The graph to be embedded.
