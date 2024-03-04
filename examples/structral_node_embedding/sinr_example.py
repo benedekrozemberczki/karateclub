@@ -1,6 +1,6 @@
 """SINr illustrative example.
-Nodes in both cliques (barbell graph) will get the same embedding vectors, except for the ones connected to the path.
-Nodes in the paths are in distinct communities with sufficient gamma, and get thus distinct vectors.
+Nodes in both cliques (barbell graph) will get the same embedding vectors, except for those connected to the path.
+Nodes in the path are in distinct communities with a high-enough gamma, and will thus get distinct vectors.
 """
 
 import networkx as nx

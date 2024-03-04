@@ -9,13 +9,12 @@ import numpy as np
 class SINr(Estimator):
     r"""An implementation of `"SINr" <https://inria.hal.science/hal-03197434/>`_
     from the IDA '21 best paper "SINr: Fast Computing of Sparse Interpretable Node Representations is not a Sin!".
-    The procedure computes community detection using Louvain algorithm, and calculates the distribution of edges of each node across communities.
-    The algorithm is one of the fastest, because it relies mostly on Louvain community detection. It thus runs in 
-    quasi-linear time. Regarding space complexity, it requires to be able to store the adjacency matrix and the community membership matrix, it is also quasi-linear.
+    The procedure performs community detection using the Louvain algorithm, and computes the distribution of edges of each node across all communities.
+    The algorithm is one of the fastest, because it mostly relies on Louvain community detection. It thus runs in quasi-linear time. Regarding space complexity, the adjacency matrix and the community membership matrix need to be stored, it is also quasi-linear.
 
     Args:
         gamma (int): modularity multi-resolution parameter. Default is 1. 
-        The dimension parameter does not exist for SINr, gamma should be use instead: the number of dimensions of the embedding space is based on the number of communities uncovered. The higher gamma is, the more communities are detected, the higher the number of dimensions of the latent space uncovered. For small graphs, setting gamma to 1 is usually a good fit. For bigger graphs, it is recommended to increase gamma (5 or 10 for instance). For word co-occurrence graphs, to deal with word embedding, gamma is isually set to 50 to get a lot of small communities.
+        The dimension parameter does not exist for SINr, gamma should be used instead: the number of dimensions of the embedding space is based on the number of communities uncovered. The higher gamma is, the more communities are detected, the higher the number of dimensions of the latent space are uncovered. For small graphs, setting gamma to 1 is usually sufficient. For bigger graphs, it is recommended to increase gamma (5 or 10 for example). For word co-occurrence graphs, to deal with word embedding, gamma is usually set to 50  in order to get many small communities.
         seed (int): Random seed value. Default is 42.
     """
 
@@ -50,7 +49,7 @@ class SINr(Estimator):
         self._embedding = norm_adjacency.dot(membership_matrix)
         
     def _get_matrix_membership(self, list_of_communities:List[Set[int]]):
-        r"""Getting the membership matrix describing for each node (rows), to which community (columns) it belongs.
+        r"""Getting the membership matrix describing for each node (rows), in which community (column) it belongs.
 
         Return types:
             * **Membership matrix** *(scipy sparse matrix csr)* - Size nodes, communities
