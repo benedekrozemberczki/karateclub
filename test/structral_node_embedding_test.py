@@ -89,8 +89,8 @@ def test_sinr():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions
-    assert type(embedding) == np.ndarray
+    assert embedding.shape[1] == model.number_of_communities
+    assert isinstance(embedding, np.ndarray)
 
     model = SINr(gamma=5)
 
@@ -101,8 +101,8 @@ def test_sinr():
     embedding = model.get_embedding()
 
     assert embedding.shape[0] == graph.number_of_nodes()
-    assert embedding.shape[1] == model.dimensions
+    assert embedding.shape[1] == model.number_of_communities
     model2 = SINr(gamma=10)
     model2.fit(graph)
-    assert model2.dimensions > model.dimensions
-    assert type(embedding) == np.ndarray
+    assert model2.number_of_communities > model.number_of_communities
+    assert isinstance(embedding, np.ndarray)
