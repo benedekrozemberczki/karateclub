@@ -1,12 +1,12 @@
+"""General Estimator base class."""
+
+import warnings
+from typing import List
+import re
 import random
 import numpy as np
 import networkx as nx
-import warnings
-from typing import List
 from tqdm.auto import trange
-import re
-
-"""General Estimator base class."""
 
 
 class Estimator(object):
@@ -16,30 +16,31 @@ class Estimator(object):
 
     def __init__(self):
         """Creating an estimator."""
-        pass
 
     def fit(self):
         """Fitting a model."""
-        pass
 
     def get_embedding(self):
         """Getting the embeddings (graph or node level)."""
-        pass
 
     def get_memberships(self):
         """Getting the membership dictionary."""
-        pass
 
     def get_cluster_centers(self):
         """Getting the cluster centers."""
-        pass
-    
+
     def get_params(self):
         """Get parameter dictionary for this estimator.."""
-        rx = re.compile(r'^\_')
+        rx = re.compile(r"^\_")
         params = self.__dict__
         params = {key: params[key] for key in params if not rx.search(key)}
         return params
+
+    def set_params(self, **parameters):
+        """Set the parameters of this estimator."""
+        for parameter, value in parameters.items():
+            setattr(self, parameter, value)
+        return self
 
     def _set_seed(self):
         """Creating the initial random seed."""
@@ -47,7 +48,9 @@ class Estimator(object):
         np.random.seed(self.seed)
 
     @staticmethod
-    def _ensure_walk_traversal_conditions(graph: nx.classes.graph.Graph) -> nx.classes.graph.Graph:
+    def _ensure_walk_traversal_conditions(
+        graph: nx.classes.graph.Graph,
+    ) -> nx.classes.graph.Graph:
         """Ensure walk traversal conditions."""
         for node_index in trange(
             graph.number_of_nodes(),
@@ -57,37 +60,34 @@ class Estimator(object):
             # for this process to take a bit of time.
             disable=graph.number_of_nodes() < 10_000,
             desc="Checking main diagonal existance",
-            dynamic_ncols=True
+            dynamic_ncols=True,
         ):
             if not graph.has_edge(node_index, node_index):
                 warnings.warn(
-                    (
-                        "Please do be advised that "
-                        "the graph you have provided does not "
-                        "contain (some) edges in the main "
-                        "diagonal, for instance the self-loop "
-                        "constitued of ({}, {}). These selfloops "
-                        "are necessary to ensure that the graph "
-                        "is traversable, and for this reason we "
-                        "create a copy of the graph and add therein "
-                        "the missing edges. Since we are creating "
-                        "a copy, this will immediately duplicate "
-                        "the memory requirements. To avoid this double "
-                        "allocation, you can provide the graph with the selfloops."
-                    ).format(
-                        node_index,
-                        node_index
-                    )
+                    "Please do be advised that "
+                    "the graph you have provided does not "
+                    "contain (some) edges in the main "
+                    "diagonal, for instance the self-loop "
+                    f"constitued of ({node_index}, {node_index}). These selfloops "
+                    "are necessary to ensure that the graph "
+                    "is traversable, and for this reason we "
+                    "create a copy of the graph and add therein "
+                    "the missing edges. Since we are creating "
+                    "a copy, this will immediately duplicate "
+                    "the memory requirements. To avoid this double "
+                    "allocation, you can provide the graph with the selfloops."
                 )
                 # We create a copy of the graph
                 graph = graph.copy()
                 # And we add the missing edges
                 # for filling the main diagonal
-                graph.add_edges_from((
-                    (index, index)
-                    for index in range(graph.number_of_nodes())
-                    if not graph.has_edge(index, index)
-                ))
+                graph.add_edges_from(
+                    (
+                        (index, index)
+                        for index in range(graph.number_of_nodes())
+                        if not graph.has_edge(index, index)
+                    )
+                )
                 break
 
         return graph
