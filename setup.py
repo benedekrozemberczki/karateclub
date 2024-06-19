@@ -9,7 +9,7 @@ install_requires = [
     "tqdm",
     "python-louvain",
     "scikit-learn",
-    "scipy",
+    "scipy<1.13",
     "pygsp",
     "six",
     "python-Levenshtein"
