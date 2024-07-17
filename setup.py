@@ -7,7 +7,6 @@ install_requires = [
     "pandas>=1.2.0",
     "gensim>=4.0.0",
     "tqdm",
-    "importlib-metadata>=8.0.0",
     "python-louvain",
     "scikit-learn",
     "scipy<1.13",
@@ -63,6 +62,6 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Build Tools",
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.10",
     ],
 )
