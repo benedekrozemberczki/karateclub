@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 install_requires = [
     "numpy>=1.22.0",
-    "networkx>3.3",
+    "networkx>=3.3",
     "decorator==5.1.*",
     "pandas>=1.2.0",
     "gensim>=4.0.0",
