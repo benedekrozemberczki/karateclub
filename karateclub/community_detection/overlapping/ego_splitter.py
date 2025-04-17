@@ -12,36 +12,57 @@ class EgoNetSplitter(Estimator):
 
     Args:
         resolution (float): Resolution parameter of Python Louvain. Default 1.0.
+        local_resolution (float): Local resolution parameter of Python Louvain. Default 2.0.
         seed (int): Random seed value. Default is 42.
         weight (str): the key in the graph to use as weight. Default to 'weight'. Specify None to force using an unweighted version of the graph.
     """
 
     def __init__(
-        self, resolution: float = 1.0, seed: int = 42, weight: Optional[str] = "weight"
+            self,
+            resolution: float = 1.0,
+            local_resolution: float = 2.0,
+            seed: int = 42,
+            weight: Optional[str] = "weight"
     ):
         self.resolution = resolution
+        self.local_resolution = local_resolution
         self.seed = seed
         self.weight = weight
 
     def _create_egonet(self, node):
         """
-        Creating an ego net, extracting personas and partitioning it.
+        Creating an ego net, extracting personas and partitioning it (using Louvain method).
 
         Arg types:
             * **node** *(int)* - Node ID for ego-net (ego node).
         """
-        ego_net_minus_ego = self.graph.subgraph(self.graph.neighbors(node))
-        components = {
-            i: n for i, n in enumerate(nx.connected_components(ego_net_minus_ego))
-        }
-        new_mapping = {}
+        neighbors = list(self.graph.neighbors(node))
+        ego_net = self.graph.subgraph(neighbors).copy()
+
+        if self.weight is None:
+            partition = community.best_partition(
+                ego_net,
+                resolution=self.local_resolution,
+                random_state=self.seed
+            )
+        else:
+            partition = community.best_partition(
+                ego_net,
+                resolution=self.local_resolution,
+                weight=self.weight,
+                random_state=self.seed
+            )
+
+        community_mapping = {}
         personalities = []
-        for k, v in components.items():
+        for comm_id in set(partition.values()):
             personalities.append(self.index)
-            for other_node in v:
-                new_mapping[other_node] = self.index
-            self.index = self.index + 1
-        self.components[node] = new_mapping
+            community_mapping[comm_id] = self.index
+            self.index += 1
+
+        self.components[node] = {
+            n: community_mapping[partition[n]] for n in ego_net.nodes()
+        }
         self.personalities[node] = personalities
 
     def _create_egonets(self):
@@ -109,9 +130,16 @@ class EgoNetSplitter(Estimator):
             self.partitions = community.best_partition(
                 self.persona_graph, resolution=self.resolution, weight=self.weight
             )
-        self.overlapping_partitions = {node: [] for node in self.graph.nodes()}
-        for node, membership in self.partitions.items():
-            self.overlapping_partitions[self.personality_map[node]].append(membership)
+
+        self.overlapping_partitions = {node: set() for node in self.graph.nodes()}
+        for persona_id, cluster_id in self.partitions.items():
+            original_node = self.personality_map[persona_id]
+            self.overlapping_partitions[original_node].add(cluster_id)
+
+        self.overlapping_partitions = {
+            node: sorted(list(clusters))
+            for node, clusters in self.overlapping_partitions.items()
+        }
 
     def fit(self, graph: nx.classes.graph.Graph):
         """
@@ -135,3 +163,17 @@ class EgoNetSplitter(Estimator):
             * **memberships** *(dictionary of lists)* - Cluster memberships.
         """
         return self.overlapping_partitions
+
+    def get_clusters(self) -> Dict[int, list[int]]:
+        r"""get clustering results, show how many clusters there are and which clients are included in each cluster.
+
+        Return types:
+            * **clusters** *(dictionary)* - Clustering results, where the key is the cluster ID and the value is the list of nodes included in that cluster.
+        """
+        clusters = {}
+        for node_id, cluster_ids in self.overlapping_partitions.items():
+            for cluster_id in cluster_ids:
+                if cluster_id not in clusters:
+                    clusters[cluster_id] = []
+                clusters[cluster_id].append(node_id)
+        return clusters
